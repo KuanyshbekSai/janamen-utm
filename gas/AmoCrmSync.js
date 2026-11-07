@@ -48,10 +48,18 @@ function syncAmoCrmDeals() {
 
     // Определяем статус и воронку
     var pipelineInfo = pipelineStatusMap[lead.status_id] || { pipeline: 'Воронка #' + lead.pipeline_id, status: 'Статус #' + lead.status_id };
+    var sName = (pipelineInfo.status || '').toUpperCase();
     var statusCategory = 'В работе';
-    if (CONFIG.AMOCRM.WON_STATUS_IDS.indexOf(lead.status_id) !== -1 || (pipelineInfo.status && pipelineInfo.status.toLowerCase().indexOf('успешно') !== -1)) {
-      statusCategory = 'Оплачено / Доставлено';
-    } else if (CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 || (pipelineInfo.status && pipelineInfo.status.toLowerCase().indexOf('закрыто и не') !== -1)) {
+
+    // Целевой статус: «ПРОВЕРКА ПРОЙДЕНА» (и подтвержденные заказы доставки)
+    if (lead.status_id === CONFIG.AMOCRM.STATUS_VERIFIED_CHECK_ID ||
+        sName.indexOf('ПРОВЕРКА ПРОЙДЕНА') !== -1 ||
+        CONFIG.AMOCRM.VERIFIED_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
+        sName.indexOf('ДОСТАВЛЕНО') !== -1) {
+      statusCategory = 'Проверка пройдена';
+    } else if (CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
+               sName.indexOf('ОТКАЗАНО') !== -1 ||
+               sName.indexOf('ЗАКРЫТО И НЕ') !== -1) {
       statusCategory = 'Отказ';
     }
 

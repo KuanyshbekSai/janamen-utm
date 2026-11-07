@@ -186,13 +186,13 @@ function setupRegistrySheet(sheet, taxonomySheet) {
     'Статус',                // L (12)
     'Бюджет / Расход (₸)',   // M (13)
     'Описание / Инфо',       // N (14)
-    'Лидов (CRM)',           // O (15) - автоформула
-    'Оплат (CRM)',           // P (16) - автоформула
-    'Выручка (₸)',           // Q (17) - автоформула
-    'Конверсия (%)',         // R (18) - автоформула
-    'CPL (₸)',               // S (19) - автоформула
-    'CAC (₸)',               // T (20) - автоформула
-    'ROMI (%)'               // U (21) - автоформула
+    'Лидов (CRM)',                     // O (15) - автоформула
+    'Прошли проверку (CRM)',           // P (16) - статус «ПРОВЕРКА ПРОЙДЕНА»
+    'Выручка подтвержденная (₸)',      // Q (17) - сумма подтвержденных чеков
+    'Конверсия (%)',                   // R (18) - Проверка пройдена / Лиды
+    'CPL (₸)',                         // S (19) - автоформула
+    'CAC (₸)',                         // T (20) - автоформула
+    'ROMI (%)'                         // U (21) - автоформула
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -216,8 +216,8 @@ function setupRegistrySheet(sheet, taxonomySheet) {
   sheet.setColumnWidth(13, 130); // Расход
   sheet.setColumnWidth(14, 180); // Описание
   sheet.setColumnWidth(15, 100); // Лиды
-  sheet.setColumnWidth(16, 100); // Оплаты
-  sheet.setColumnWidth(17, 130); // Выручка
+  sheet.setColumnWidth(16, 130); // Проверка пройдена
+  sheet.setColumnWidth(17, 150); // Выручка
   sheet.setColumnWidth(18, 110); // CR
   sheet.setColumnWidth(19, 100); // CPL
   sheet.setColumnWidth(20, 100); // CAC
@@ -257,7 +257,7 @@ function setupRegistrySheet(sheet, taxonomySheet) {
   sheet.getRange('S2:T1000').setNumberFormat('#,##0" ₸"');
   sheet.getRange('U2:U1000').setNumberFormat('0.0%');
 
-  // Добавим 2 примера для наглядности
+  // Добавим 2 примера для наглядности (ориентация на статус «Проверка пройдена»)
   var sampleRows = [
     [
       'UTM-001',
@@ -275,8 +275,8 @@ function setupRegistrySheet(sheet, taxonomySheet) {
       150000,
       'Блогер Даник — обзор витаминов',
       '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2))',
-      '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))',
-      '=IF(F2="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))',
+      '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
+      '=IF(F2="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
       '=IF(O2>0, P2/O2, 0)',
       '=IF(O2>0, M2/O2, 0)',
       '=IF(P2>0, M2/P2, 0)',
@@ -298,8 +298,8 @@ function setupRegistrySheet(sheet, taxonomySheet) {
       80000,
       'Тест креатива с энергетиком',
       '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3))',
-      '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))',
-      '=IF(F3="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))',
+      '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
+      '=IF(F3="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
       '=IF(O3>0, P3/O3, 0)',
       '=IF(O3>0, M3/O3, 0)',
       '=IF(P3>0, M3/P3, 0)',
@@ -342,10 +342,10 @@ function setupDashboardSheet(sheet) {
   // Плашки KPI (Строка 4-5)
   var kpis = [
     { title: 'ВСЕГО ЛИДОВ (CRM)', formula: '=COUNTA(\'📥 Сделки AmoCRM\'!A2:A)', format: '#,##0', col: 1 },
-    { title: 'ОПЛАЧЕННЫХ СДЕЛОК', formula: '=COUNTIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Оплачено / Доставлено")', format: '#,##0', col: 3 },
-    { title: 'ОБЩАЯ ВЫРУЧКА', formula: '=SUMIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Оплачено / Доставлено", \'📥 Сделки AmoCRM\'!$F$2:$F)', format: '#,##0" ₸"', col: 5 },
+    { title: 'ПРОВЕРКА ПРОЙДЕНА (ПОДТВЕРЖДЕНО)', formula: '=COUNTIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")', format: '#,##0', col: 3 },
+    { title: 'ПОДТВЕРЖДЕННАЯ ВЫРУЧКА', formula: '=SUMIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена", \'📥 Сделки AmoCRM\'!$F$2:$F)', format: '#,##0" ₸"', col: 5 },
     { title: 'ОБЩИЙ РАСХОД', formula: '=SUM(\'🎯 Реестр UTM\'!$M$2:$M)', format: '#,##0" ₸"', col: 7 },
-    { title: 'КОНВЕРСИЯ В ОПЛАТУ', formula: '=IF(A5>0, C5/A5, 0)', format: '0.0%', col: 9 }
+    { title: 'КОНВЕРСИЯ В ПОДТВЕРЖДЕНИЕ', formula: '=IF(A5>0, C5/A5, 0)', format: '0.0%', col: 9 }
   ];
 
   kpis.forEach(function(k) {
@@ -419,9 +419,9 @@ function setupDashboardSheet(sheet) {
   var sourceHeaders = [
     'Источник (utm_source)', // A (1)
     'Лидов всего',           // B (2)
-    'Оплачено',              // C (3)
+    'Прошли проверку',       // C (3)
     'Конверсия CR',          // D (4)
-    'Выручка (₸)',           // E (5)
+    'Выручка подтвержд. (₸)',// E (5)
     'Средний чек (₸)',       // F (6)
     'Маркетинг бюджет (₸)',  // G (7)
     'CPL (₸)',               // H (8)
@@ -449,9 +449,9 @@ function setupDashboardSheet(sheet) {
     return [
       src,
       '=COUNTIF(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ')',
-      '=COUNTIFS(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Оплачено / Доставлено")',
+      '=COUNTIFS(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")',
       '=IF(B' + r + '>0, C' + r + '/B' + r + ', 0)',
-      '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Оплачено / Доставлено")',
+      '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")',
       '=IF(C' + r + '>0, E' + r + '/C' + r + ', 0)',
       '=SUMIF(\'🎯 Реестр UTM\'!$D$2:$D, A' + r + ', \'🎯 Реестр UTM\'!$M$2:$M)',
       '=IF(B' + r + '>0, G' + r + '/B' + r + ', 0)',

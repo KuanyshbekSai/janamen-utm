@@ -105,8 +105,8 @@ function registerUtm(data) {
   // Формулы расчета для строки
   var formulaFullUrl = '=IF(C' + r + '="","", C' + r + ' & IF(ISNUMBER(FIND("?", C' + r + ')), "&", "?") & "utm_source=" & D' + r + ' & "&utm_medium=" & E' + r + ' & "&utm_campaign=" & F' + r + ' & IF(G' + r + '="","", "&utm_content=" & G' + r + ') & IF(H' + r + '="","", "&utm_term=" & H' + r + '))';
   var formulaLeads = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + '))';
-  var formulaWon = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))';
-  var formulaRevenue = '=IF(F' + r + '="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Оплачено / Доставлено"))';
+  var formulaWon = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))';
+  var formulaRevenue = '=IF(F' + r + '="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))';
   var formulaCr = '=IF(O' + r + '>0, P' + r + '/O' + r + ', 0)';
   var formulaCpl = '=IF(O' + r + '>0, M' + r + '/O' + r + ', 0)';
   var formulaCac = '=IF(P' + r + '>0, M' + r + '/P' + r + ', 0)';
@@ -240,7 +240,7 @@ function getAnalyticsSummary() {
     totalLeads++;
     var statusCategory = d[4];
     var price = Number(d[5]) || 0;
-    var isWon = (statusCategory === 'Оплачено / Доставлено');
+    var isWon = (statusCategory === 'Проверка пройдена');
 
     if (isWon) {
       wonLeads++;
