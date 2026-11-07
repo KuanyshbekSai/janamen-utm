@@ -123,8 +123,41 @@
           <span class="inline-block px-2.5 py-1 text-xs font-bold bg-blue-500/30 text-blue-200 rounded-md mb-2">Стандарт трекинга Jana Men</span>
           <h2 class="text-xl sm:text-2xl font-black">Создание новой UTM-метки с мгновенной регистрацией</h2>
           <p class="mt-2 text-sm text-blue-100 leading-relaxed">
-            Заполните параметры ниже. Система автоматически переведет текст в латиницу, удалит пробелы и спецсимволы, зафиксирует метку в едином реестре и присвоит уникальный ID для отслеживания окупаемости в AmoCRM.
+            Создавайте новые ссылки через форму ниже или воспользуйтесь быстрым импортом: вставьте уже готовую рекламную ссылку, и система мгновенно разложит её на параметры для фиксации в едином реестре.
           </p>
+        </div>
+      </div>
+
+      <!-- БЛОК БЫСТРОГО ИМПОРТА ГОТОВОЙ ССЫЛКИ -->
+      <div class="bg-indigo-50/80 border border-indigo-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              ⚡
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-indigo-950">Быстрое добавление уже готовой UTM-ссылки</h4>
+              <p class="text-xs text-indigo-700/80">Вставьте готовую ссылку с UTM (из рекламы или AmoCRM) — скрипт автоматически извлечет лэндинг, источник, канал, блогера и заполнит форму</p>
+            </div>
+          </div>
+          <span class="hidden sm:inline-block px-2.5 py-1 text-[11px] font-semibold bg-indigo-100 text-indigo-800 rounded-md">Авто-парсер URL</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2.5">
+          <div class="relative flex-1">
+            <input type="text" id="inputPasteUrl" oninput="handlePastedUrl(this.value, false)" placeholder="Вставьте сюда готовую ссылку (https://janamen1.kz/influence?utm_source=...&utm_campaign=...)" class="w-full px-4 py-3 text-xs sm:text-sm bg-white border border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none code-font text-slate-800 placeholder-slate-400 shadow-sm">
+            <button type="button" onclick="pasteFromClipboard()" class="absolute right-2.5 top-2.5 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold flex items-center space-x-1 transition">
+              <span>Вставить из буфера</span>
+            </button>
+          </div>
+          <button type="button" onclick="handlePastedUrl(document.getElementById('inputPasteUrl').value, true)" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shadow-sm shadow-indigo-600/20 transition">
+            Разобрать и заполнить
+          </button>
+        </div>
+
+        <div id="parseNotice" class="hidden text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-center justify-between">
+          <span id="parseNoticeText">✓ Ссылка успешно разобрана!</span>
+          <button type="button" onclick="document.getElementById('parseNotice').classList.add('hidden')" class="text-emerald-700 hover:text-emerald-900 font-bold ml-2">✕</button>
         </div>
       </div>
 
@@ -619,6 +652,96 @@
       const formatted = slugify(orig);
       if (orig !== formatted && !orig.endsWith(' ')) {
         input.value = formatted;
+      }
+    }
+
+    // Обработка и разбор вставленной готовой ссылки
+    function handlePastedUrl(rawUrl, showFeedback) {
+      if (!rawUrl || !rawUrl.trim()) return;
+      rawUrl = rawUrl.trim();
+
+      try {
+        let full = rawUrl;
+        if (!full.startsWith('http://') && !full.startsWith('https://')) {
+          full = 'https://' + full;
+        }
+
+        const parsed = new URL(full);
+        const baseUrl = parsed.origin + parsed.pathname;
+        const params = parsed.searchParams;
+
+        const source = params.get('utm_source') || '';
+        const medium = params.get('utm_medium') || '';
+        const campaign = params.get('utm_campaign') || '';
+        const content = params.get('utm_content') || '';
+        const term = params.get('utm_term') || '';
+
+        if (!source && !medium && !campaign) {
+          if (showFeedback) {
+            alert('В этой ссылке не найдены стандартные UTM-параметры (utm_source, utm_medium, utm_campaign)!');
+          }
+          return;
+        }
+
+        // Заполняем базовый URL
+        document.getElementById('inputBaseUrl').value = baseUrl;
+        document.getElementById('selectLanding').value = 'custom';
+
+        // Заполняем параметры ссылки
+        if (source) {
+          document.getElementById('inputSource').value = source.toLowerCase();
+          document.getElementById('selectSource').value = 'custom';
+        }
+        if (medium) {
+          document.getElementById('inputMedium').value = medium.toLowerCase();
+          document.getElementById('selectMedium').value = 'custom';
+        }
+        if (campaign) {
+          document.getElementById('inputCampaign').value = slugify(campaign) || campaign;
+        }
+        if (content) {
+          document.getElementById('inputContent').value = slugify(content) || content;
+        }
+        if (term) {
+          document.getElementById('inputTerm').value = slugify(term) || term;
+        }
+
+        // Авто-определение тега
+        const combined = (source + ' ' + medium + ' ' + campaign).toLowerCase();
+        if (combined.includes('блог') || combined.includes('айтым') || combined.includes('influenc')) {
+          document.getElementById('selectTag').value = 'Инфлюенс / Блогеры';
+        } else if (combined.includes('tiktok') || combined.includes('tt')) {
+          document.getElementById('selectTag').value = 'TikTok Ads';
+        } else if (combined.includes('fb') || combined.includes('facebook') || combined.includes('insta')) {
+          document.getElementById('selectTag').value = 'Таргет FB/Insta';
+        } else if (combined.includes('kaspi') || combined.includes('каспи')) {
+          document.getElementById('selectTag').value = 'Kaspi продвижение';
+        }
+
+        updateLiveLink();
+
+        const notice = document.getElementById('parseNotice');
+        const noticeText = document.getElementById('parseNoticeText');
+        noticeText.innerHTML = `<span><b>✓ Ссылка успешно разобрана!</b> Извлечено: <code>source=${source}</code>, <code>medium=${medium}</code>, <code>campaign=${campaign}</code>. Проверьте бюджет/тег и нажмите синюю кнопку <b>«Зарегистрировать в Реестр»</b>.</span>`;
+        notice.classList.remove('hidden');
+
+      } catch (err) {
+        if (showFeedback) {
+          alert('Ошибка при анализе URL: ' + err.message);
+        }
+      }
+    }
+
+    function pasteFromClipboard() {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(text => {
+          document.getElementById('inputPasteUrl').value = text;
+          handlePastedUrl(text, true);
+        }).catch(() => {
+          document.getElementById('inputPasteUrl').focus();
+        });
+      } else {
+        document.getElementById('inputPasteUrl').focus();
       }
     }
 
