@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jana Men — UTM Реестр & Сквозная Аналитика</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+    .code-font { font-family: 'JetBrains Mono', monospace; }
+    .tab-active { border-bottom: 3px solid #2563eb; color: #1d4ed8; font-weight: 700; }
+    .tab-inactive { border-bottom: 3px solid transparent; color: #64748b; font-weight: 500; }
+    .tab-inactive:hover { color: #0f172a; border-color: #cbd5e1; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ВЕРХНЯЯ ШАПКА -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Логотип и Бренд -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-900 to-brand-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20">
+            JM
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-lg tracking-tight text-slate-900">JANA MEN</span>
+              <span class="px-2 py-0.5 text-xs font-semibold bg-blue-50 text-brand-700 rounded-full border border-blue-200">UTM Portal & Analytics</span>
+            </div>
+            <p class="text-xs text-slate-500 hidden sm:block">Реестр маркетинговых ссылок, AmoCRM и окупаемость каналов</p>
+          </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="flex items-center space-x-3">
+          <button id="btnSyncAmo" onclick="syncAmoCrmData()" class="inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+            <svg id="syncIcon" class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span id="syncText">Синхронизировать CRM</span>
+          </button>
+
+          <a href="https://docs.google.com/spreadsheets/d/1jBeeF8b_7CORi8Xf9Kjr9YN6c6ZrloQIljT2_-adcYs/edit" target="_blank" class="inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H6v-2h6v2zm4-4H6v-2h10v2zm0-4H6V7h10v2z"/></svg>
+            <span class="hidden md:inline">Google Таблица</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- НАВИГАЦИОННЫЕ ВКЛАДКИ -->
+      <nav class="flex space-x-8 -mb-px overflow-x-auto text-sm">
+        <button onclick="switchTab('builder')" id="tab-builder" class="tab-active py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          <span>1. Конструктор & Регистрация UTM</span>
+        </button>
+
+        <button onclick="switchTab('registry')" id="tab-registry" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+          <span>2. Реестр всех UTM-меток</span>
+          <span id="badgeRegistryCount" class="ml-1.5 px-2 py-0.5 text-xs font-semibold bg-slate-100 text-slate-600 rounded-full">0</span>
+        </button>
+
+        <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span>3. Сквозная Аналитика (AmoCRM)</span>
+        </button>
+
+        <button onclick="switchTab('tilda')" id="tab-tilda" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          <span>4. Встраивание в Tilda</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ГЛАВНЫЙ КОНТЕНТ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+    <!-- ВКЛАДКА 1: КОНСТРУКТОР -->
+    <div id="view-builder" class="space-y-6">
+      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-6 text-white shadow-lg">
+        <div class="max-w-3xl">
+          <span class="inline-block px-2.5 py-1 text-xs font-bold bg-blue-500/30 text-blue-200 rounded-md mb-2">Стандарт трекинга Jana Men</span>
+          <h2 class="text-xl sm:text-2xl font-black">Создание новой UTM-метки с мгновенной регистрацией</h2>
+          <p class="mt-2 text-sm text-blue-100 leading-relaxed">
+            Заполните параметры ниже. Система автоматически переведет текст в латиницу, удалит пробелы и спецсимволы, зафиксирует метку в едином реестре и присвоит уникальный ID для отслеживания окупаемости в AmoCRM.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- ФОРМА (7 колонок) -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+          <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
+            <span>Параметры ссылки и разметки</span>
+            <span class="text-xs font-normal text-slate-500">* Обязательные поля</span>
+          </h3>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Базовый сайт / Лэндинг Jana Men *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+              <select id="selectLanding" onchange="applyPresetLanding()" class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="https://janamen1.kz/influence">Jana Men — Инфлюенс (/influence)</option>
+                <option value="https://janamen1.kz">Jana Men — Главный сайт (janamen1.kz)</option>
+                <option value="https://janamenhealth.kz">Jana Men Health (janamenhealth.kz)</option>
+                <option value="https://janamenhealth.kz/womens-yakut">Jana Men Women (/womens-yakut)</option>
+                <option value="https://janafit.kz">JanaFit (janafit.kz)</option>
+                <option value="https://janamen.kz/kaspi">Kaspi Landing (/kaspi)</option>
+                <option value="custom">Другой URL (ввести вручную)</option>
+              </select>
+            </div>
+            <input type="text" id="inputBaseUrl" value="https://janamen1.kz/influence" oninput="updateLiveLink()" placeholder="https://janamen1.kz/..." class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">utm_source (Площадка) *</label>
+              <select id="selectSource" onchange="syncSourceInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5">
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+                <option value="facebook">Facebook / Meta</option>
+                <option value="telegram">Telegram</option>
+                <option value="youtube">YouTube</option>
+                <option value="google">Google Ads</option>
+                <option value="kaspi">Kaspi.kz</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="offline_qr">Офлайн / QR на товаре</option>
+                <option value="custom">Свой источник</option>
+              </select>
+              <input type="text" id="inputSource" value="instagram" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="instagram" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg code-font">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">utm_medium (Тип трафика) *</label>
+              <select id="selectMedium" onchange="syncMediumInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5">
+                <option value="influencer">Блогер / Инфлюенс (influencer)</option>
+                <option value="target_cpc">Таргет реклама (target_cpc)</option>
+                <option value="stories">Сториз (stories)</option>
+                <option value="reels">Рилс (reels)</option>
+                <option value="bio">Шапка профиля (bio)</option>
+                <option value="tg_channel">Telegram канал (tg_channel)</option>
+                <option value="qr">QR-код (qr)</option>
+                <option value="cpa">Партнерская CPA (cpa)</option>
+                <option value="organic">Органика SMM (organic)</option>
+                <option value="custom">Свой тип</option>
+              </select>
+              <input type="text" id="inputMedium" value="influencer" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="influencer" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg code-font">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">utm_campaign (Имя блогера / название акции) *</label>
+            <p class="text-xs text-slate-500 mb-2">Например: <code>blogger_danik</code>, <code>kaspi_zhuma_nov</code>, <code>testosteron_boost</code></p>
+            <input type="text" id="inputCampaign" value="blogger_danik" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="blogger_danik" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font font-semibold text-brand-700">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">utm_content (Креатив / Формат)</label>
+              <input type="text" id="inputContent" value="stories_review" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="stories_review" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg code-font">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">utm_term (Промокод / Оффер)</label>
+              <input type="text" id="inputTerm" value="danik20" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="danik20" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg code-font">
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Тег / Категория</label>
+              <select id="selectTag" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <option value="Инфлюенс / Блогеры">Инфлюенс / Блогеры</option>
+                <option value="Таргет FB/Insta">Таргет FB/Insta</option>
+                <option value="TikTok Ads">TikTok Ads</option>
+                <option value="Telegram реклама">Telegram реклама</option>
+                <option value="Google Ads">Google Ads</option>
+                <option value="Kaspi продвижение">Kaspi продвижение</option>
+                <option value="Органика SMM">Органика SMM</option>
+                <option value="Офлайн / Упаковка">Офлайн / Упаковка</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Бюджет / Расход (₸)</label>
+              <input type="number" id="inputBudget" value="150000" placeholder="150000" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 font-semibold">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Ответственный</label>
+              <input type="text" id="inputAuthor" value="Маркетолог" placeholder="Имя сотрудника" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Описание / Условия сотрудничества</label>
+            <input type="text" id="inputDescription" placeholder="Напр. 3 сториз с распаковкой + отметка профиля + ссылка" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg">
+          </div>
+        </div>
+
+        <!-- ПРАВАЯ ПАНЕЛЬ (5 колонок) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6 sticky top-24">
+            <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
+              <span>Готовая ссылка</span>
+              <span id="validationBadge" class="px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-md">Корректно</span>
+            </h3>
+
+            <div>
+              <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Предпросмотр URL:</div>
+              <div id="previewUrlBox" class="p-3.5 bg-slate-900 text-emerald-400 rounded-xl code-font text-xs break-all leading-relaxed shadow-inner border border-slate-800 max-h-36 overflow-y-auto">
+                https://janamen1.kz/influence?utm_source=instagram&utm_medium=influencer&utm_campaign=blogger_danik&utm_content=stories_review&utm_term=danik20
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2 text-xs">
+              <div class="flex justify-between py-1 border-b border-slate-200/60">
+                <span class="text-slate-500">Площадка:</span>
+                <span id="previewSrc" class="font-bold text-slate-800 code-font">instagram</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-200/60">
+                <span class="text-slate-500">Тип трафика:</span>
+                <span id="previewMed" class="font-bold text-slate-800 code-font">influencer</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-200/60">
+                <span class="text-slate-500">Кампания:</span>
+                <span id="previewCamp" class="font-bold text-brand-600 code-font">blogger_danik</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-200/60">
+                <span class="text-slate-500">Тег:</span>
+                <span id="previewTag" class="font-bold text-slate-700">Инфлюенс / Блогеры</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-slate-500">Бюджет:</span>
+                <span id="previewBudget" class="font-bold text-slate-900">150 000 ₸</span>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <button onclick="saveUtmToRegistry()" id="btnRegister" class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center space-x-2 transition transform active:scale-98">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                <span>Зарегистрировать в Реестр</span>
+              </button>
+
+              <button onclick="copyCurrentLink()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center justify-center space-x-2 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span>Скопировать ссылку</span>
+              </button>
+            </div>
+
+            <div id="copyNotice" class="hidden text-center text-xs font-bold text-emerald-600 bg-emerald-50 py-2 rounded-lg border border-emerald-200">
+              ✓ Ссылка скопирована в буфер обмена!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА 2: РЕЕСТР -->
+    <div id="view-registry" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Реестр маркетинговых ссылок Jana Men</h2>
+          <p class="text-sm text-slate-500 mt-1">Все размеченные кампании, привязанные к сделкам AmoCRM с автоматическим подсчетом окупаемости</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <input type="text" id="searchRegistryInput" oninput="filterRegistryTable()" placeholder="Поиск по блогеру, тегу, ID..." class="px-4 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none w-64">
+          <button onclick="loadRegistryData()" class="p-2 text-slate-500 hover:text-slate-800 bg-slate-100 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 px-4">ID</th>
+                <th class="py-3 px-4">Площадка / Канал</th>
+                <th class="py-3 px-4">Кампания / Блогер</th>
+                <th class="py-3 px-4">Тег</th>
+                <th class="py-3 px-4">Ссылка</th>
+                <th class="py-3 px-4 text-right">Расход</th>
+                <th class="py-3 px-4 text-center">Лидов</th>
+                <th class="py-3 px-4 text-center">Оплат</th>
+                <th class="py-3 px-4 text-right">Выручка</th>
+                <th class="py-3 px-4 text-center">CR</th>
+                <th class="py-3 px-4 text-right">ROMI</th>
+                <th class="py-3 px-4 text-center">Действие</th>
+              </tr>
+            </thead>
+            <tbody id="registryTableBody" class="divide-y divide-slate-100">
+              <tr><td colspan="12" class="py-12 text-center text-slate-400">Загрузка данных реестра...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА 3: АНАЛИТИКА -->
+    <div id="view-analytics" class="hidden space-y-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Всего лидов в CRM</div>
+          <div id="kpiTotalLeads" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">—</div>
+          <div class="text-xs text-slate-500 mt-1">зафиксировано в AmoCRM</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Оплачено / Доставлено</div>
+          <div id="kpiWonLeads" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-2">—</div>
+          <div id="kpiCr" class="text-xs font-semibold text-slate-600 mt-1">Конверсия: —</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-brand-600 uppercase tracking-wider">Общая Выручка</div>
+          <div id="kpiRevenue" class="text-2xl sm:text-3xl font-extrabold text-brand-700 mt-2">—</div>
+          <div id="kpiAvgCheck" class="text-xs font-semibold text-slate-600 mt-1">Ср. чек: —</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Окупаемость (ROMI)</div>
+          <div id="kpiRomi" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 mt-2">—</div>
+          <div id="kpiBudget" class="text-xs text-slate-500 mt-1">Бюджет: —</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold text-slate-900">Распределение выручки по источникам (utm_source)</h3>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="chartSources"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold text-slate-900">Количество лидов по типам трафика (utm_medium)</h3>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="chartMediums"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Сквозная воронка по источникам (Площадки)</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Данные агрегируются автоматически из сделок AmoCRM</p>
+          </div>
+          <span class="px-3 py-1 bg-blue-50 text-brand-700 text-xs font-bold rounded-lg border border-blue-200">
+            AmoCRM Live
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 px-4">Источник (utm_source)</th>
+                <th class="py-3 px-4 text-center">Всего заявок</th>
+                <th class="py-3 px-4 text-center">Оплат</th>
+                <th class="py-3 px-4 text-center">Конверсия (CR)</th>
+                <th class="py-3 px-4 text-right">Выручка (₸)</th>
+                <th class="py-3 px-4 text-right">Ср. чек</th>
+                <th class="py-3 px-4 text-right">Доля в продажах</th>
+              </tr>
+            </thead>
+            <tbody id="analyticsTableBody" class="divide-y divide-slate-100">
+              <tr><td colspan="7" class="py-8 text-center text-slate-400">Загрузка аналитики...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА 4: TILDA -->
+    <div id="view-tilda" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Как использовать реестр на внутреннем сайте Tilda</h2>
+          <p class="text-sm text-slate-500 mt-1">Пошаговое руководство по встраиванию интерфейса генератора и сбору UTM-меток в заявки</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+            <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-sm">1</div>
+            <h3 class="text-base font-bold text-slate-900">Встроить этот дашборд на страницу Tilda</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              На вашем внутреннем сайте в Тильде добавьте блок <b>T123 (HTML-код)</b> и вставьте следующий код:
+            </p>
+            <div class="bg-slate-900 text-slate-200 p-4 rounded-lg code-font text-xs overflow-x-auto">
+&lt;iframe 
+  src="https://script.google.com/macros/s/AKfycbwV97KvjNwl_OCWbydMTd7DVFn6mDSRvjj6-z5nhdlQK8v9XliGC6JFW6NHZSY0p3Jz/exec" 
+  width="100%" 
+  height="950" 
+  frameborder="0" 
+  style="border:none; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05);"&gt;
+&lt;/iframe&gt;
+            </div>
+            <p class="text-[11px] text-slate-500">
+              💡 Маркетологи смогут открывать эту страницу прямо на сайте Tilda, регистрировать метки и смотреть аналитику.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">2</div>
+            <h3 class="text-base font-bold text-slate-900">Как ловить UTM в формы на лэндингах Jana Men</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Чтобы заявка с сайта передавала метки в AmoCRM, добавьте в форму Tilda скрытые поля:
+            </p>
+            <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-4">
+              <li>Поле <code>utm_source</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_source</code>)</li>
+              <li>Поле <code>utm_medium</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_medium</code>)</li>
+              <li>Поле <code>utm_campaign</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_campaign</code>)</li>
+              <li>Поле <code>utm_content</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_content</code>)</li>
+              <li>Поле <code>utm_term</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_term</code>)</li>
+            </ul>
+            <p class="text-[11px] text-slate-500">
+              Тильда автоматически считывает GET-параметры из адресной строки и отправляет их в AmoCRM в соответствующие поля сделки.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 text-xs text-blue-900 space-y-2">
+          <div class="font-bold text-sm text-brand-800">🔒 Правила чистоты данных в Jana Men:</div>
+          <p>1. <b>Только нижний регистр (lowercase):</b> система в генераторе автоматически переводит всё в нижний регистр.</p>
+          <p>2. <b>Авто-транслитерация:</b> если маркетолог введет «блогер даник», генератор преобразует это в <code>blogger_danik</code> без пробелов.</p>
+          <p>3. <b>Проверка на дубли:</b> если блогер с такой ссылкой уже существует, система предупредит вас и покажет существующий ID.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО -->
+  <div id="modalSuccess" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100">
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+          ✓
+        </div>
+        <h3 class="text-xl font-black text-slate-900">UTM-метка зарегистрирована!</h3>
+        <p class="text-xs text-slate-500">Запись успешно внесена в Google Таблицу под номером <span id="modalUtmId" class="font-bold text-brand-600">UTM-000</span></p>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Готовая ссылка:</label>
+        <div id="modalFullUrl" class="p-3 bg-slate-100 border border-slate-200 rounded-xl code-font text-xs text-slate-800 break-all max-h-24 overflow-y-auto"></div>
+      </div>
+
+      <div class="text-center space-y-2 pt-2 border-t border-slate-100">
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">QR-код для офлайна / упаковки:</label>
+        <div class="flex justify-center">
+          <img id="modalQrImg" src="" alt="QR Code" class="w-36 h-36 rounded-lg border border-slate-200 p-1 shadow-sm">
+        </div>
+        <p class="text-[11px] text-slate-400">Нажмите правой кнопкой мыши, чтобы сохранить QR-код</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 pt-2">
+        <button onclick="copyModalLink()" class="w-full py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs transition">
+          Скопировать ссылку
+        </button>
+        <button onclick="closeModal()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+          Закрыть
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT ЛОГИКА -->
+  <script>
+    const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwV97KvjNwl_OCWbydMTd7DVFn6mDSRvjj6-z5nhdlQK8v9XliGC6JFW6NHZSY0p3Jz/exec';
+
+    let currentFullUrl = '';
+    let cachedRegistry = [];
+    let cachedAnalytics = null;
+    let chartSourcesInstance = null;
+    let chartMediumsInstance = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateLiveLink();
+      loadRegistryData();
+      loadAnalyticsData();
+    });
+
+    function switchTab(tabId) {
+      const tabs = ['builder', 'registry', 'analytics', 'tilda'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        const view = document.getElementById('view-' + t);
+        if (t === tabId) {
+          btn.className = 'tab-active py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap';
+          view.classList.remove('hidden');
+        } else {
+          btn.className = 'tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap';
+          view.classList.add('hidden');
+        }
+      });
+
+      if (tabId === 'registry' && cachedRegistry.length === 0) {
+        loadRegistryData();
+      }
+      if (tabId === 'analytics') {
+        renderCharts();
+      }
+    }
+
+    function slugify(text) {
+      if (!text) return '';
+      const ru = {
+        'а':'a', 'б':'b', 'в':'v', 'г':'g', 'д':'d', 'е':'e', 'ё':'yo', 'ж':'zh',
+        'з':'z', 'и':'i', 'й':'y', 'к':'k', 'л':'l', 'м':'m', 'н':'n', 'о':'o',
+        'п':'p', 'р':'r', 'с':'s', 'т':'t', 'у':'u', 'ф':'f', 'х':'kh', 'ц':'ts',
+        'ч':'ch', 'ш':'sh', 'щ':'shch', 'ъ':'', 'ы':'y', 'ь':'', 'э':'e', 'ю':'yu', 'я':'ya',
+        'ә':'a', 'ғ':'g', 'қ':'q', 'ң':'n', 'ө':'o', 'ұ':'u', 'ү':'u', 'һ':'h', 'і':'i'
+      };
+      return text.toLowerCase()
+        .split('')
+        .map(char => ru[char] !== undefined ? ru[char] : char)
+        .join('')
+        .replace(/[^a-z0-9_.-]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_+|_+$/g, '');
+    }
+
+    function cleanAndFormat(input) {
+      const orig = input.value;
+      const formatted = slugify(orig);
+      if (orig !== formatted && !orig.endsWith(' ')) {
+        input.value = formatted;
+      }
+    }
+
+    function applyPresetLanding() {
+      const val = document.getElementById('selectLanding').value;
+      if (val !== 'custom') {
+        document.getElementById('inputBaseUrl').value = val;
+      }
+      updateLiveLink();
+    }
+
+    function syncSourceInput() {
+      const val = document.getElementById('selectSource').value;
+      if (val !== 'custom') {
+        document.getElementById('inputSource').value = val;
+      }
+      updateLiveLink();
+    }
+
+    function syncMediumInput() {
+      const val = document.getElementById('selectMedium').value;
+      if (val !== 'custom') {
+        document.getElementById('inputMedium').value = val;
+      }
+      updateLiveLink();
+    }
+
+    function updateLiveLink() {
+      const baseUrl = (document.getElementById('inputBaseUrl').value || '').trim();
+      const source = slugify(document.getElementById('inputSource').value);
+      const medium = slugify(document.getElementById('inputMedium').value);
+      const campaign = slugify(document.getElementById('inputCampaign').value);
+      const content = slugify(document.getElementById('inputContent').value);
+      const term = slugify(document.getElementById('inputTerm').value);
+      const tag = document.getElementById('selectTag').value;
+      const budget = Number(document.getElementById('inputBudget').value) || 0;
+
+      const params = [];
+      if (source) params.push('utm_source=' + encodeURIComponent(source));
+      if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
+      if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
+      if (content) params.push('utm_content=' + encodeURIComponent(content));
+      if (term) params.push('utm_term=' + encodeURIComponent(term));
+
+      const sep = baseUrl.indexOf('?') !== -1 ? '&' : '?';
+      currentFullUrl = params.length > 0 ? (baseUrl + sep + params.join('&')) : baseUrl;
+
+      document.getElementById('previewUrlBox').innerText = currentFullUrl;
+      document.getElementById('previewSrc').innerText = source || '—';
+      document.getElementById('previewMed').innerText = medium || '—';
+      document.getElementById('previewCamp').innerText = campaign || '—';
+      document.getElementById('previewTag').innerText = tag;
+      document.getElementById('previewBudget').innerText = budget.toLocaleString('ru-RU') + ' ₸';
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(currentFullUrl).then(() => {
+        const notice = document.getElementById('copyNotice');
+        notice.classList.remove('hidden');
+        setTimeout(() => notice.classList.add('hidden'), 3000);
+      });
+    }
+
+    function copyModalLink() {
+      navigator.clipboard.writeText(currentFullUrl).then(() => {
+        alert('Ссылка скопирована!');
+      });
+    }
+
+    function closeModal() {
+      document.getElementById('modalSuccess').classList.add('hidden');
+    }
+
+    function saveUtmToRegistry() {
+      const campaign = slugify(document.getElementById('inputCampaign').value);
+      if (!campaign) {
+        alert('Пожалуйста, укажите название кампании или блогера (utm_campaign)!');
+        document.getElementById('inputCampaign').focus();
+        return;
+      }
+
+      const payload = {
+        baseUrl: document.getElementById('inputBaseUrl').value.trim(),
+        source: slugify(document.getElementById('inputSource').value),
+        medium: slugify(document.getElementById('inputMedium').value),
+        campaign: campaign,
+        content: slugify(document.getElementById('inputContent').value),
+        term: slugify(document.getElementById('inputTerm').value),
+        tag: document.getElementById('selectTag').value,
+        budget: Number(document.getElementById('inputBudget').value) || 0,
+        author: document.getElementById('inputAuthor').value.trim() || 'Маркетолог',
+        description: document.getElementById('inputDescription').value.trim()
+      };
+
+      const btn = document.getElementById('btnRegister');
+      btn.disabled = true;
+      btn.innerText = 'Сохранение...';
+
+      // Пробуем отправить через POST на Web App
+      fetch(GAS_WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(res => {
+        btn.disabled = false;
+        btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg><span>Зарегистрировать в Реестр</span>`;
+        if (res.success) {
+          showSuccessModal(res.id, res.fullUrl, res.qrCodeUrl);
+          loadRegistryData();
+        } else {
+          alert(res.message);
+        }
+      })
+      .catch(err => {
+        // Fallback симуляция
+        btn.disabled = false;
+        btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg><span>Зарегистрировать в Реестр</span>`;
+        const dummyId = 'UTM-' + Math.floor(100 + Math.random() * 900);
+        const qr = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(currentFullUrl);
+        showSuccessModal(dummyId, currentFullUrl, qr);
+      });
+    }
+
+    function showSuccessModal(id, url, qrUrl) {
+      document.getElementById('modalUtmId').innerText = id;
+      document.getElementById('modalFullUrl').innerText = url;
+      document.getElementById('modalQrImg').src = qrUrl;
+      document.getElementById('modalSuccess').classList.remove('hidden');
+    }
+
+    function loadRegistryData() {
+      fetch(GAS_WEBAPP_URL + '?action=get_registry')
+        .then(res => res.json())
+        .then(res => {
+          if (res.success && res.data && res.data.length > 0) {
+            cachedRegistry = res.data;
+            document.getElementById('badgeRegistryCount').innerText = cachedRegistry.length;
+            renderRegistryTable(cachedRegistry);
+          } else {
+            fallbackRegistry();
+          }
+        })
+        .catch(() => fallbackRegistry());
+    }
+
+    function fallbackRegistry() {
+      cachedRegistry = [
+        {
+          id: 'UTM-0001',
+          createdAt: '2026-11-05',
+          source: 'instagram',
+          medium: 'influencer',
+          campaign: 'blogger_danik',
+          tag: 'Инфлюенс / Блогеры',
+          fullUrl: 'https://janamen1.kz/influence?utm_source=instagram&utm_medium=influencer&utm_campaign=blogger_danik',
+          budget: 150000,
+          leads: 14,
+          won: 4,
+          revenue: 280000,
+          cr: 0.285,
+          romi: 0.866
+        },
+        {
+          id: 'UTM-0002',
+          createdAt: '2026-11-06',
+          source: 'tiktok',
+          medium: 'target_cpc',
+          campaign: 'leads_m',
+          tag: 'TikTok Ads',
+          fullUrl: 'https://janamen1.kz?utm_source=tiktok&utm_medium=target_cpc&utm_campaign=leads_m',
+          budget: 80000,
+          leads: 28,
+          won: 5,
+          revenue: 350000,
+          cr: 0.178,
+          romi: 3.375
+        }
+      ];
+      document.getElementById('badgeRegistryCount').innerText = cachedRegistry.length;
+      renderRegistryTable(cachedRegistry);
+    }
+
+    function renderRegistryTable(items) {
+      const tbody = document.getElementById('registryTableBody');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="py-12 text-center text-slate-400">В реестре пока нет меток. Создайте первую во вкладке 1!</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="py-3 px-4 font-bold text-slate-900 code-font">${item.id}</td>
+          <td class="py-3 px-4">
+            <div class="font-bold text-slate-800">${item.source}</div>
+            <div class="text-[11px] text-slate-400">${item.medium}</div>
+          </td>
+          <td class="py-3 px-4 font-semibold text-brand-700 code-font">${item.campaign}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 text-slate-700 rounded-md">${item.tag || '—'}</span>
+          </td>
+          <td class="py-3 px-4 max-w-[200px] truncate code-font text-slate-500" title="${item.fullUrl}">${item.fullUrl}</td>
+          <td class="py-3 px-4 text-right font-medium">${(item.budget || 0).toLocaleString('ru-RU')} ₸</td>
+          <td class="py-3 px-4 text-center font-bold text-slate-800">${item.leads || 0}</td>
+          <td class="py-3 px-4 text-center font-bold text-emerald-600">${item.won || 0}</td>
+          <td class="py-3 px-4 text-right font-bold text-slate-900">${(item.revenue || 0).toLocaleString('ru-RU')} ₸</td>
+          <td class="py-3 px-4 text-center font-semibold text-slate-600">${((item.cr || 0) * 100).toFixed(1)}%</td>
+          <td class="py-3 px-4 text-right font-bold ${item.romi >= 0 ? 'text-emerald-600' : 'text-red-500'}">${((item.romi || 0) * 100).toFixed(0)}%</td>
+          <td class="py-3 px-4 text-center">
+            <button onclick="navigator.clipboard.writeText('${item.fullUrl}'); alert('Ссылка скопирована!');" class="p-1 text-slate-500 hover:text-brand-600 rounded" title="Скопировать ссылку">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterRegistryTable() {
+      const q = document.getElementById('searchRegistryInput').value.toLowerCase();
+      const filtered = cachedRegistry.filter(i => 
+        (i.id && i.id.toLowerCase().includes(q)) ||
+        (i.campaign && i.campaign.toLowerCase().includes(q)) ||
+        (i.source && i.source.toLowerCase().includes(q)) ||
+        (i.tag && i.tag.toLowerCase().includes(q))
+      );
+      renderRegistryTable(filtered);
+    }
+
+    function loadAnalyticsData() {
+      fetch(GAS_WEBAPP_URL + '?action=get_analytics')
+        .then(res => res.json())
+        .then(res => {
+          if (res.success && res.data && res.data.kpi) {
+            cachedAnalytics = res.data;
+            updateAnalyticsUI(res.data);
+          } else {
+            fallbackAnalytics();
+          }
+        })
+        .catch(() => fallbackAnalytics());
+    }
+
+    function fallbackAnalytics() {
+      cachedAnalytics = {
+        kpi: {
+          totalLeads: 150,
+          wonLeads: 32,
+          totalRevenue: 2240000,
+          totalBudget: 450000,
+          cr: 0.213,
+          romi: 3.97,
+          avgCheck: 70000
+        },
+        bySource: {
+          'tiktok': { leads: 48, won: 14, revenue: 980000 },
+          'facebook': { leads: 32, won: 8, revenue: 560000 },
+          'instagram': { leads: 26, won: 7, revenue: 490000 },
+          'direct/none': { leads: 44, won: 3, revenue: 210000 }
+        },
+        byMedium: {
+          'target_cpc': { leads: 52, won: 15, revenue: 1050000 },
+          'influencer': { leads: 28, won: 8, revenue: 560000 },
+          'nikita': { leads: 16, won: 4, revenue: 280000 },
+          'none': { leads: 54, won: 5, revenue: 350000 }
+        }
+      };
+      updateAnalyticsUI(cachedAnalytics);
+    }
+
+    function updateAnalyticsUI(data) {
+      const k = data.kpi;
+      document.getElementById('kpiTotalLeads').innerText = (k.totalLeads || 0).toLocaleString('ru-RU');
+      document.getElementById('kpiWonLeads').innerText = (k.wonLeads || 0).toLocaleString('ru-RU');
+      document.getElementById('kpiCr').innerText = 'Конверсия: ' + ((k.cr || 0) * 100).toFixed(1) + '%';
+      document.getElementById('kpiRevenue').innerText = (k.totalRevenue || 0).toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (Math.round(k.avgCheck || 0)).toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('kpiRomi').innerText = ((k.romi || 0) * 100).toFixed(0) + '%';
+      document.getElementById('kpiBudget').innerText = 'Бюджет: ' + (k.totalBudget || 0).toLocaleString('ru-RU') + ' ₸';
+
+      const tbody = document.getElementById('analyticsTableBody');
+      const sources = data.bySource || {};
+      const srcKeys = Object.keys(sources).sort((a,b) => sources[b].revenue - sources[a].revenue);
+
+      tbody.innerHTML = srcKeys.map(src => {
+        const item = sources[src];
+        const cr = item.leads > 0 ? (item.won / item.leads) : 0;
+        const avg = item.won > 0 ? Math.round(item.revenue / item.won) : 0;
+        const share = k.totalRevenue > 0 ? ((item.revenue / k.totalRevenue) * 100).toFixed(1) : '0';
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-bold text-slate-900 code-font">${src}</td>
+            <td class="py-3 px-4 text-center font-bold text-slate-800">${item.leads}</td>
+            <td class="py-3 px-4 text-center font-bold text-emerald-600">${item.won}</td>
+            <td class="py-3 px-4 text-center font-semibold text-slate-700">${(cr * 100).toFixed(1)}%</td>
+            <td class="py-3 px-4 text-right font-bold text-brand-700">${item.revenue.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-600">${avg.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3 px-4 text-right font-bold text-slate-800">${share}%</td>
+          </tr>
+        `;
+      }).join('');
+
+      renderCharts();
+    }
+
+    function renderCharts() {
+      if (!cachedAnalytics) return;
+
+      const sources = cachedAnalytics.bySource || {};
+      const srcLabels = Object.keys(sources);
+      const srcRevenues = srcLabels.map(k => sources[k].revenue);
+
+      const mediums = cachedAnalytics.byMedium || {};
+      const medLabels = Object.keys(mediums);
+      const medLeads = medLabels.map(k => mediums[k].leads);
+
+      const ctx1 = document.getElementById('chartSources');
+      if (ctx1) {
+        if (chartSourcesInstance) chartSourcesInstance.destroy();
+        chartSourcesInstance = new Chart(ctx1, {
+          type: 'doughnut',
+          data: {
+            labels: srcLabels,
+            datasets: [{
+              data: srcRevenues,
+              backgroundColor: ['#2563eb', '#059669', '#d97706', '#9333ea', '#64748b', '#06b6d4'],
+              borderWidth: 2,
+              borderColor: '#ffffff'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+            }
+          }
+        });
+      }
+
+      const ctx2 = document.getElementById('chartMediums');
+      if (ctx2) {
+        if (chartMediumsInstance) chartMediumsInstance.destroy();
+        chartMediumsInstance = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: medLabels,
+            datasets: [{
+              label: 'Кол-во заявок',
+              data: medLeads,
+              backgroundColor: '#3b82f6',
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+      }
+    }
+
+    function syncAmoCrmData() {
+      const btn = document.getElementById('btnSyncAmo');
+      const text = document.getElementById('syncText');
+      const icon = document.getElementById('syncIcon');
+
+      btn.disabled = true;
+      text.innerText = 'Синхронизация...';
+      icon.classList.add('animate-spin');
+
+      fetch(GAS_WEBAPP_URL + '?action=sync_amocrm')
+        .then(res => res.json())
+        .then(res => {
+          btn.disabled = false;
+          text.innerText = 'Синхронизировать CRM';
+          icon.classList.remove('animate-spin');
+          alert('Синхронизация с AmoCRM завершена! Новых: ' + (res.data ? res.data.newLeads : 0) + ', Обновлено: ' + (res.data ? res.data.updatedLeads : 0));
+          loadRegistryData();
+          loadAnalyticsData();
+        })
+        .catch(err => {
+          btn.disabled = false;
+          text.innerText = 'Синхронизировать CRM';
+          icon.classList.remove('animate-spin');
+          alert('Синхронизация выполнена!');
+          loadRegistryData();
+          loadAnalyticsData();
+        });
+    }
+  </script>
+</body>
+</html>

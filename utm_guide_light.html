@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Полное руководство: UTM-метки, сквозная аналитика и трекинг трафика</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --primary-dark: #1d4ed8;
+      --accent: #d97706;
+      --accent-light: #fffbeb;
+      --success: #059669;
+      --success-light: #ecfdf5;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --code-bg: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    
+    header { text-align: center; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
+    header h1 { font-size: 2.2rem; color: #1e3a8a; margin-bottom: 12px; font-weight: 800; }
+    header p { color: var(--text-muted); font-size: 1.15rem; max-width: 750px; margin: 0 auto; }
+
+    section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    h2 { font-size: 1.45rem; color: #1e293b; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid var(--primary-light); padding-bottom: 10px; }
+    h2 span.num { background: var(--primary); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: bold; }
+    h3 { font-size: 1.15rem; color: #334155; margin: 24px 0 12px; font-weight: 700; }
+
+    /* Flow blocks */
+    .flow-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+    .step-box { background: var(--bg); border: 1px solid var(--border); border-top: 4px solid var(--primary); padding: 18px; border-radius: 8px; }
+    .step-box .badge-num { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 6px; display: block; }
+    .step-box h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .step-box p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.92rem; }
+    th, td { padding: 12px 14px; text-align: left; border: 1px solid var(--border); }
+    th { background: #f8fafc; color: #334155; font-weight: 700; }
+    tr:nth-child(even) { background-color: #fbfcfe; }
+    tr:hover { background-color: #f1f5f9; }
+
+    /* Tags / Badges */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; }
+    .badge-req { background: var(--danger-light); color: var(--danger); }
+    .badge-opt { background: var(--primary-light); color: var(--primary); }
+
+    /* Interactive Generator */
+    .generator-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-top: 20px; }
+    .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #475569; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-dark); border-radius: 6px; color: var(--text); font-size: 0.95rem; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--primary); outline: 2px solid rgba(37,99,235,0.2); }
+    
+    .code-box { background: var(--code-bg); border: 1px solid var(--border-dark); border-radius: 6px; padding: 14px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.9rem; color: #0f172a; word-break: break-all; margin: 12px 0; }
+    
+    .btn { background: var(--primary); color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { background: var(--primary-dark); }
+    .btn-secondary { background: #e2e8f0; color: #334155; }
+    .btn-secondary:hover { background: #cbd5e1; }
+
+    /* Systems Comparison */
+    .system-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+    .system-card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; background: #fff; }
+    .system-card h4 { font-size: 1.05rem; color: #1e3a8a; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+    .system-card ul { padding-left: 20px; font-size: 0.88rem; color: #475569; }
+    .system-card li { margin-bottom: 6px; }
+
+    /* Callout */
+    .callout { border-left: 4px solid var(--primary); background: var(--primary-light); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+    .callout-title { font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; font-size: 0.95rem; }
+    .callout p { font-size: 0.9rem; color: #334155; }
+
+    .callout-warning { border-left-color: var(--accent); background: var(--accent-light); }
+    .callout-warning .callout-title { color: var(--accent); }
+
+    /* Copy notification */
+    #copyNotice { display: none; color: var(--success); font-weight: 600; margin-left: 12px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>Полное руководство по UTM-меткам и Сквозной Аналитике</h1>
+    <p>Пошаговый разбор: как правильно создавать ссылки, где и какими системами они отслеживаются, как связать сайт с CRM и как считать чистую окупаемость вложений.</p>
+  </header>
+
+  <!-- БЛОК 1: ЧТО ЭТО И АРХИТЕКТУРА -->
+  <section>
+    <h2><span class="num">1</span> Что такое UTM-метка и как она физически работает</h2>
+    <p><strong>UTM-метка (Urchin Tracking Module)</strong> — это стандартизированный набор параметров (переменных), которые дописываются к адресу страницы через вопросительный знак <code>?</code>. Они никак не ломают отображение страницы, но сообщают серверу и аналитике контекст визита.</p>
+
+    <div class="flow-steps">
+      <div class="step-box">
+        <span class="badge-num">Этап 1</span>
+        <h4>Размещение ссылки</h4>
+        <p>Маркетолог генерирует ссылку с UTM и передает блогеру, вешает в профиль Instagram или запускает в рекламу.</p>
+      </div>
+      <div class="step-box">
+        <span class="badge-num">Этап 2</span>
+        <h4>Переход клиента</h4>
+        <p>Пользователь кликает на ссылку. Браузер загружает страницу, удерживая все параметры в адресной строке.</p>
+      </div>
+      <div class="step-box">
+        <span class="badge-num">Этап 3</span>
+        <h4>Фиксация аналитикой</h4>
+        <p>Счетчики на сайте (GA4, Яндекс.Метрика) считывают URL и записывают сессию в свои базы данных.</p>
+      </div>
+      <div class="step-box">
+        <span class="badge-num">Этап 4</span>
+        <h4>Передача в CRM</h4>
+        <p>При заполнении формы скрытые поля подхватывают UTM и отправляют их в сделку AmoCRM вместе с контактами.</p>
+      </div>
+    </div>
+
+    <div class="code-box">
+      <strong>Пример полной ссылки:</strong><br>
+      https://janamen1.kz/influence<span style="color:var(--primary); font-weight:bold;">?utm_source=instagram</span><span style="color:var(--accent); font-weight:bold;">&utm_medium=influencer</span><span style="color:var(--success); font-weight:bold;">&utm_campaign=blogger_danik</span><span style="color:#7c3aed; font-weight:bold;">&utm_content=stories_promo</span>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: 5 ПАРАМЕТРОВ -->
+  <section>
+    <h2><span class="num">2</span> 5 параметров: за что отвечает каждый</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 18%;">Параметр</th>
+          <th style="width: 15%;">Статус</th>
+          <th style="width: 25%;">Смысл параметра</th>
+          <th>Примеры значений</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>utm_source</code></td>
+          <td><span class="badge badge-req">Обязательный</span></td>
+          <td><strong>Источник:</strong> откуда пришел человек (площадка, соцсеть, сервис).</td>
+          <td><code>instagram</code>, <code>telegram</code>, <code>tiktok</code>, <code>google</code>, <code>yandex</code>, <code>youtube</code></td>
+        </tr>
+        <tr>
+          <td><code>utm_medium</code></td>
+          <td><span class="badge badge-req">Обязательный</span></td>
+          <td><strong>Тип рекламы / Канал:</strong> модель оплаты или формат трафика.</td>
+          <td><code>influencer</code> (блогер), <code>stories</code>, <code>cpc</code> (клик/таргет), <code>cpa</code>, <code>organic</code>, <code>email</code></td>
+        </tr>
+        <tr>
+          <td><code>utm_campaign</code></td>
+          <td><span class="badge badge-req">Обязательный</span></td>
+          <td><strong>Кампания / Автор:</strong> имя блогера, название акции или продукта.</td>
+          <td><code>blogger_danik</code>, <code>blogger_asel</code>, <code>sale_november</code>, <code>testosteron_boost</code></td>
+        </tr>
+        <tr>
+          <td><code>utm_content</code></td>
+          <td><span class="badge badge-opt">Опциональный</span></td>
+          <td><strong>Формат / Креатив:</strong> дополнительное уточнение объявления.</td>
+          <td><code>stories_link</code>, <code>reels_bio</code>, <code>tg_post_morning</code>, <code>video_review</code></td>
+        </tr>
+        <tr>
+          <td><code>utm_term</code></td>
+          <td><span class="badge badge-opt">Опциональный</span></td>
+          <td><strong>Ключевое слово / Промокод:</strong> поисковая фраза или персональный код скидки.</td>
+          <td><code>danik20</code>, <code>janamen_sale</code>, <code>vitamin_d3</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">3 железных правила нейминга, чтобы база не сломалась</div>
+      <p>1. <strong>Только нижний регистр (lowercase):</strong> <code>Instagram</code> и <code>instagram</code> для базы данных — две разные сущности. Всегда пиши строчными.<br>
+      2. <strong>Никаких пробелов и кириллицы:</strong> используй латиницу и разделители дефис <code>-</code> или нижнее подчеркивание <code>_</code> (например, <code>blogger_danik</code> вместо <code>блогер даник</code>).<br>
+      3. <strong>Единый стандарт в компании:</strong> утверди реестр названий каналов (например, договоритесь всегда писать <code>instagram</code>, а не <code>insta</code> или <code>ig</code>).</p>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: ИНТЕРАКТИВНЫЙ КОНСТРУКТОР ССЫЛОК -->
+  <section>
+    <h2><span class="num">3</span> Генератор UTM-ссылок (настрой и скопируй)</h2>
+    <p>Заполни поля ниже — скрипт автоматически отформатирует текст (переведет в нижний регистр, уберет лишние пробелы) и соберет правильную ссылку.</p>
+
+    <div class="generator-card">
+      <div class="form-group">
+        <label>Базовый URL страницы:</label>
+        <input type="text" id="urlInput" value="https://janamen1.kz/influence" oninput="generateLink()">
+      </div>
+
+      <div class="input-grid">
+        <div class="form-group">
+          <label>utm_source (площадка):</label>
+          <input type="text" id="sourceInput" value="instagram" oninput="generateLink()" placeholder="instagram">
+        </div>
+        <div class="form-group">
+          <label>utm_medium (канал):</label>
+          <input type="text" id="mediumInput" value="influencer" oninput="generateLink()" placeholder="influencer">
+        </div>
+      </div>
+
+      <div class="input-grid">
+        <div class="form-group">
+          <label>utm_campaign (блогер или акция):</label>
+          <input type="text" id="campaignInput" value="blogger_danik" oninput="generateLink()" placeholder="blogger_danik">
+        </div>
+        <div class="form-group">
+          <label>utm_content (формат или креатив):</label>
+          <input type="text" id="contentInput" value="stories" oninput="generateLink()" placeholder="stories">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>utm_term (промокод, если есть):</label>
+        <input type="text" id="termInput" value="danik20" oninput="generateLink()" placeholder="danik20">
+      </div>
+
+      <div>
+        <label style="font-size: 0.85rem; font-weight: 600; color: #475569;">Готовая ссылка:</label>
+        <div class="code-box" id="resultLink"></div>
+        <button class="btn" onclick="copyToClipboard()">Скопировать ссылку</button>
+        <span id="copyNotice">Ссылка успешно скопирована!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: ГДЕ И КАК ОНИ ОТСЛЕЖИВАЮТСЯ -->
+  <section>
+    <h2><span class="num">4</span> Где и как дальше отслеживаются эти ссылки?</h2>
+    <p>Отслеживание происходит на <strong>трех независимых уровнях</strong>, каждый из которых отвечает за свой тип отчетов:</p>
+
+    <div class="system-grid">
+      <!-- Уровень 1: Веб-аналитика -->
+      <div class="system-card">
+        <h4>1. Веб-аналитика <span style="font-size:0.8rem; color:var(--primary); font-weight:normal;">(Трафик и клики)</span></h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;"><strong>Инструменты:</strong> Google Analytics 4, Яндекс.Метрика</p>
+        <ul>
+          <li><strong>Что отслеживают:</strong> Сколько людей кликнуло по ссылке, сколько дошло до сайта, какой процент отказов (ушли сразу), сколько времени провели на странице.</li>
+          <li><strong>Где смотреть:</strong> В GA4 раздел <em>«Отчеты → Источники трафика → Привлечение трафика»</em>. В Метрике раздел <em>«Отчеты → Источники → Метки UTM»</em>.</li>
+          <li><strong>Главная польза:</strong> Понять, действительно ли блогер дал живой трафик, или там накрученные боты, которые вышли за 1 секунду.</li>
+        </ul>
+      </div>
+
+      <!-- Уровень 2: AmoCRM -->
+      <div class="system-card">
+        <h4>2. AmoCRM <span style="font-size:0.8rem; color:var(--primary); font-weight:normal;">(Заявки и менеджеры)</span></h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;"><strong>Инструменты:</strong> Карточки сделок, Digital-воронка, теги</p>
+        <ul>
+          <li><strong>Что отслеживают:</strong> Конкретные заявки с именами и телефонами, привязанные к конкретному блогеру.</li>
+          <li><strong>Как попадают:</strong> Скрытые поля формы на сайте забирают параметры из ссылки и записывают их в поля сделки <code>UTM Source</code>, <code>UTM Campaign</code>, а также вешают тег (например, <code>инфлюенс</code>).</li>
+          <li><strong>Где смотреть:</strong> В карточке сделки слева в блоке полей «Статистика / UTM» и в фильтрах сделок по тегам.</li>
+        </ul>
+      </div>
+
+      <!-- Уровень 3: Таблицы и BI -->
+      <div class="system-card">
+        <h4>3. Фин. учет и Сквозная Аналитика <span style="font-size:0.8rem; color:var(--primary); font-weight:normal;">(Деньги и ROI)</span></h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;"><strong>Инструменты:</strong> Google Sheets, Looker Studio, Power BI</p>
+        <ul>
+          <li><strong>Что отслеживают:</strong> Реальные оплаты (выручка), себестоимость (COGS), чистая маржа и окупаемость вложений по каждому блогеру.</li>
+          <li><strong>Как попадают:</strong> Данные по оплаченным сделкам из AmoCRM выгружаются через API или вебхук в Google Таблицу и сводятся с расходами на блогеров.</li>
+          <li><strong>Где смотреть:</strong> В дашборде P&L маркетинга или сводной таблице юнит-экономики.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 5: КАК ПРАВИЛЬНО ОЦЕНИВАТЬ ОКУПАЕМОСТЬ -->
+  <section>
+    <h2><span class="num">5</span> Как оценивать эффективность и окупаемость (Финмодель)</h2>
+    <p>Анализ по UTM-меткам нельзя останавливать на кликах или лидах. Оценивать блогеров нужно по сквозной воронке до чистой прибыли.</p>
+
+    <h3>Ключевые метрики эффективности:</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0;">
+      <div style="background:var(--bg); border:1px solid var(--border); padding:16px; border-radius:8px;">
+        <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">КЛИКАБЕЛЬНОСТЬ И ЛИДЫ</div>
+        <div style="font-size:1.2rem; font-weight:800; color:var(--text); margin:4px 0;">CPL (Cost Per Lead)</div>
+        <div style="font-family:monospace; color:var(--primary); font-size:0.88rem;">Расход / Кол-во заявок</div>
+      </div>
+      <div style="background:var(--bg); border:1px solid var(--border); padding:16px; border-radius:8px;">
+        <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">СТОИМОСТЬ ПОКУПАТЕЛЯ</div>
+        <div style="font-size:1.2rem; font-weight:800; color:var(--text); margin:4px 0;">CAC (Acquisition Cost)</div>
+        <div style="font-family:monospace; color:var(--accent); font-size:0.88rem;">Расход / Кол-во оплат</div>
+      </div>
+      <div style="background:var(--bg); border:1px solid var(--border); padding:16px; border-radius:8px;">
+        <div style="font-size:0.8rem; color:var(--text-muted); font-weight:700;">ОКУПАЕМОСТЬ МАРКЕТИНГА</div>
+        <div style="font-size:1.2rem; font-weight:800; color:var(--text); margin:4px 0;">ROMI (%)</div>
+        <div style="font-family:monospace; color:var(--success); font-size:0.88rem;">(Валовая прибыль - Расход) / Расход * 100%</div>
+      </div>
+    </div>
+
+    <h3>Реальный пример когортного отчета по блогерам</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Кампания (utm_campaign)</th>
+          <th>Расход на блогера</th>
+          <th>Лиды (AmoCRM)</th>
+          <th>CPL</th>
+          <th>Оплаты</th>
+          <th>CAC</th>
+          <th>Выручка</th>
+          <th>ROMI</th>
+          <th>Решение бизнеса</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>blogger_danik</strong></td>
+          <td>150 000 ₸</td>
+          <td>50</td>
+          <td>3 000 ₸</td>
+          <td>12</td>
+          <td>12 500 ₸</td>
+          <td>480 000 ₸</td>
+          <td style="color:var(--success); font-weight:700;">+220%</td>
+          <td><span class="badge" style="background:var(--success-light); color:var(--success);">Масштабировать</span></td>
+        </tr>
+        <tr>
+          <td><strong>blogger_asel</strong></td>
+          <td>200 000 ₸</td>
+          <td>80</td>
+          <td>2 500 ₸</td>
+          <td>2</td>
+          <td>100 000 ₸</td>
+          <td>80 000 ₸</td>
+          <td style="color:var(--danger); font-weight:700;">-60%</td>
+          <td><span class="badge" style="background:var(--danger-light); color:var(--danger);">Отключить (нецелевые)</span></td>
+        </tr>
+        <tr>
+          <td><strong>blogger_timur</strong></td>
+          <td>100 000 ₸</td>
+          <td>10</td>
+          <td>10 000 ₸</td>
+          <td>0</td>
+          <td>—</td>
+          <td>0 ₸</td>
+          <td style="color:var(--danger); font-weight:700;">-100%</td>
+          <td><span class="badge" style="background:var(--danger-light); color:var(--danger);">Слив бюджета</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;"><em>Вывод из примера:</em> У блогера Asel было много дешевых лидов (CPL 2 500 ₸), но они почти не купили (CAC 100 000 ₸ при чеке 40 000 ₸) — интеграция убыточна. Без сквозных меток бизнес посчитал бы ее успешной только по числу кликов.</p>
+  </section>
+
+  <!-- БЛОК 6: ЧЕК-ЛИСТ ДЛЯ ИНТЕГРАТОРОВ -->
+  <section>
+    <h2><span class="num">6</span> Чек-лист для твоего созвона по лендингу /influence</h2>
+    <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+      <div style="margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start;">
+        <input type="checkbox" checked disabled style="margin-top: 4px;">
+        <div><strong>Скрытые поля формы (Hidden fields):</strong> Проверить на странице <code>/influence</code>, добавлены ли в код формы инпуты с именами <code>utm_source</code>, <code>utm_campaign</code> и <code>tags</code>.</div>
+      </div>
+      <div style="margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start;">
+        <input type="checkbox" checked disabled style="margin-top: 4px;">
+        <div><strong>Скрипт перехвата UTM:</strong> Убедиться, что на сайте работает JS-скрипт, который при открытии ссылки с метками автоматически копирует их значения в эти скрытые поля.</div>
+      </div>
+      <div style="margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start;">
+        <input type="checkbox" checked disabled style="margin-top: 4px;">
+        <div><strong>Пакет отправки (Payload):</strong> Проверить через Network, что при клике «Отправить» в уходящем JSON передается поле <code>tags: "инфлюенс"</code> (или массив <code>[{"name": "инфлюенс"}]</code>).</div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: flex-start;">
+        <input type="checkbox" checked disabled style="margin-top: 4px;">
+        <div><strong>Обработчик AmoCRM:</strong> Проверить, прописано ли в Digital-воронке AmoCRM авто-тегирование или создание сделки именно из формы новой страницы.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function sanitize(val) {
+    return val.trim().toLowerCase().replace(/\s+/g, '_');
+  }
+
+  function generateLink() {
+    const base = document.getElementById('urlInput').value.trim();
+    const source = sanitize(document.getElementById('sourceInput').value);
+    const medium = sanitize(document.getElementById('mediumInput').value);
+    const campaign = sanitize(document.getElementById('campaignInput').value);
+    const content = sanitize(document.getElementById('contentInput').value);
+    const term = sanitize(document.getElementById('termInput').value);
+
+    const params = [];
+    if (source) params.push('utm_source=' + encodeURIComponent(source));
+    if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
+    if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
+    if (content) params.push('utm_content=' + encodeURIComponent(content));
+    if (term) params.push('utm_term=' + encodeURIComponent(term));
+
+    const finalUrl = params.length > 0 ? (base.includes('?') ? base + '&' : base + '?') + params.join('&') : base;
+    document.getElementById('resultLink').innerText = finalUrl;
+  }
+
+  function copyToClipboard() {
+    const text = document.getElementById('resultLink').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const notice = document.getElementById('copyNotice');
+      notice.style.display = 'inline';
+      setTimeout(() => { notice.style.display = 'none'; }, 3000);
+    });
+  }
+
+  // Первоначальный запуск
+  generateLink();
+</script>
+
+</body>
+</html>
