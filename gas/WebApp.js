@@ -38,6 +38,12 @@ function doGet(e) {
     return createJsonResponse({ success: true, data: syncResult });
   }
 
+  // API: Инициализация листов таблицы
+  if (action === 'setup_sheets') {
+    var initResult = setupSpreadsheet();
+    return createJsonResponse({ success: true, message: initResult });
+  }
+
   // По умолчанию: возвращаем HTML-дашборд
   var template = HtmlService.createTemplateFromFile('Dashboard');
   return template.evaluate()

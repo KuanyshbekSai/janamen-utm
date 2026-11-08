@@ -51,51 +51,66 @@ function syncAmoCrmDeals() {
     var sName = (pipelineInfo.status || '').toUpperCase();
     var statusCategory = 'В работе';
 
-    // Целевой статус: «ПРОВЕРКА ПРОЙДЕНА» (и подтвержденные заказы доставки)
-    if (lead.status_id === CONFIG.AMOCRM.STATUS_VERIFIED_CHECK_ID ||
-        sName.indexOf('ПРОВЕРКА ПРОЙДЕНА') !== -1 ||
-        CONFIG.AMOCRM.VERIFIED_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
-        sName.indexOf('ДОСТАВЛЕНО') !== -1) {
-      statusCategory = 'Проверка пройдена';
-    } else if (CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
+    // Целевой статус: Этап 2, Воронка продаж — «Успешно реализовано» (Status ID 142)
+    if (lead.status_id === 142 || sName.indexOf('УСПЕШНО РЕАЛИЗОВАНО') !== -1) {
+      statusCategory = 'Успешно реализовано';
+    } else if (lead.status_id === 143 ||
+               CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
                sName.indexOf('ОТКАЗАНО') !== -1 ||
                sName.indexOf('ЗАКРЫТО И НЕ') !== -1) {
       statusCategory = 'Отказ';
     }
 
-    // Парсим кастомные поля UTM
+    // Парсим кастомные поля UTM и посадочной страницы
     var utmSource = '';
     var utmMedium = '';
     var utmCampaign = '';
     var utmContent = '';
     var utmTerm = '';
     var utmId = '';
+    var landingPage = '';
 
     var cfs = lead.custom_fields_values || [];
     for (var k = 0; k < cfs.length; k++) {
       var cf = cfs[k];
       var name = (cf.field_name || '').toLowerCase();
       var code = (cf.field_code || '').toLowerCase();
+      var fid = cf.field_id;
       var val = cf.values && cf.values[0] && cf.values[0].value ? String(cf.values[0].value).trim() : '';
 
-      if (name.indexOf('utm_source') !== -1 || code === 'utm_source') {
+      if (name.indexOf('utm_source') !== -1 || code === 'utm_source' || fid === 679639) {
         utmSource = val.toLowerCase();
-      } else if (name.indexOf('utm_medium') !== -1 || code === 'utm_medium') {
+      } else if (name.indexOf('utm_medium') !== -1 || code === 'utm_medium' || fid === 679635) {
         utmMedium = val.toLowerCase();
-      } else if (name.indexOf('utm_campaign') !== -1 || code === 'utm_campaign') {
+      } else if (name.indexOf('utm_campaign') !== -1 || code === 'utm_campaign' || fid === 679637) {
         utmCampaign = val.toLowerCase();
-      } else if (name.indexOf('utm_content') !== -1 || code === 'utm_content') {
+      } else if (name.indexOf('utm_content') !== -1 || code === 'utm_content' || fid === 679633) {
         utmContent = val.toLowerCase();
-      } else if (name.indexOf('utm_term') !== -1 || code === 'utm_term') {
+      } else if (name.indexOf('utm_term') !== -1 || code === 'utm_term' || fid === 679641) {
         utmTerm = val.toLowerCase();
-      } else if (name === 'utm_id' || code === 'utm_id') {
+      } else if (name === 'utm_id' || code === 'utm_id' || fid === 833139) {
         utmId = val;
+      } else if (fid === 849891 || name === 'страница' || fid === 833007 || name === 'referer') {
+        if (!landingPage && val) landingPage = val;
       }
     }
 
     if (!utmSource) utmSource = 'direct/none';
     if (!utmMedium) utmMedium = 'none';
     if (!utmCampaign) utmCampaign = 'none';
+
+    // Определение раздела маркетинга (janamen1.kz)
+    var marketingSection = 'Общий трафик';
+    if (landingPage.indexOf('janamen1.kz') !== -1) {
+      if (landingPage.indexOf('/influence') !== -1) marketingSection = 'janamen1.kz/influence (Инфлюенс)';
+      else if (landingPage.indexOf('/lidmagnit') !== -1) marketingSection = 'janamen1.kz/lidmagnit (Лидмагнит)';
+      else if (landingPage.indexOf('/kaspiform') !== -1) marketingSection = 'janamen1.kz/kaspiform (Kaspi-форма)';
+      else if (landingPage.indexOf('/inst-women') !== -1) marketingSection = 'janamen1.kz/inst-women (Inst Women)';
+      else if (landingPage.indexOf('/inst-men') !== -1) marketingSection = 'janamen1.kz/inst-men (Inst Men)';
+      else if (landingPage.indexOf('/fun') !== -1) marketingSection = 'janamen1.kz/fun (Квиз / Воронка)';
+      else if (landingPage.indexOf('/vitamins-inst') !== -1) marketingSection = 'janamen1.kz/vitamins-inst';
+      else marketingSection = 'janamen1.kz (Главная)';
+    }
 
     // Теги
     var tags = (lead._embedded && lead._embedded.tags) ? lead._embedded.tags.map(function(t) { return t.name; }).join(', ') : '';
@@ -120,7 +135,9 @@ function syncAmoCrmDeals() {
       utmTerm,
       utmId,
       tags,
-      leadUrl
+      leadUrl,
+      landingPage,
+      marketingSection
     ];
 
     if (existingRowIndexById[leadId]) {

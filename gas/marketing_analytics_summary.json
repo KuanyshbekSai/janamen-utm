@@ -1,0 +1,1317 @@
+{
+  "kpi": {
+    "totalLeads": 4497,
+    "wonLeads": 116,
+    "totalRevenue": 21590801,
+    "totalBudget": 0,
+    "cr": 0.02579497442739604,
+    "avgCheck": 186128
+  },
+  "janamen1_kpi": {
+    "totalLeads": 203,
+    "wonLeads": 5,
+    "totalRevenue": 894000,
+    "cr": 0.024630541871921183,
+    "avgCheck": 178800
+  },
+  "janamen1_subpages": {
+    "/vitamins-inst": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "/lidmagnit": {
+      "leads": 136,
+      "won": 1,
+      "revenue": 352000
+    },
+    "/kaspiform": {
+      "leads": 41,
+      "won": 3,
+      "revenue": 430000
+    },
+    "/inst-women": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "/fun": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "/inst-men": {
+      "leads": 6,
+      "won": 1,
+      "revenue": 112000
+    },
+    "/influence": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "bySource": {
+    "Yuralend": {
+      "leads": 516,
+      "won": 8,
+      "revenue": 952000
+    },
+    "direct / none": {
+      "leads": 2662,
+      "won": 75,
+      "revenue": 14711801
+    },
+    "yuratiktok": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "Nikita": {
+      "leads": 642,
+      "won": 11,
+      "revenue": 1831000
+    },
+    "Yuratiktok": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Roma2": {
+      "leads": 121,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Roma": {
+      "leads": 139,
+      "won": 1,
+      "revenue": 62000
+    },
+    "NikitaTikTok": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "ig": {
+      "leads": 20,
+      "won": 0,
+      "revenue": 0
+    },
+    "nikita": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "fb": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "yuralend": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "janamenfun": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "janafit_telegram": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "tiktok": {
+      "leads": 171,
+      "won": 9,
+      "revenue": 1851000
+    },
+    "facebook": {
+      "leads": 200,
+      "won": 11,
+      "revenue": 2007000
+    }
+  },
+  "byMedium": {
+    "04.04 статика2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "04,04 JM4 статика": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "none": {
+      "leads": 2811,
+      "won": 82,
+      "revenue": 16109801
+    },
+    "paid": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM yura 1 айтым видео 0966.1 &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads pohudenie7 10.03": {
+      "leads": 30,
+      "won": 1,
+      "revenue": 176000
+    },
+    "JM3 .womens 21 статика": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM yura 1 айтым видео 0966.1": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads retarget 05.12": {
+      "leads": 88,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads wide best creo 25.04": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "10,04JM4 статика 4.26": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 0400 M 19.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "09.05 JM4 yuraforma видео аудиро &mdash; Копия &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "09.05 womens-yakut видео аудиро ugs &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads static1 M 28.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "07.05 JM3 womens-yakut статика &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.05 30 women yakut &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads new fanpage 26.02": {
+      "leads": 86,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Instagram_Stories": {
+      "leads": 138,
+      "won": 1,
+      "revenue": 176000
+    },
+    "poxydeniya": {
+      "leads": 106,
+      "won": 2,
+      "revenue": 352000
+    },
+    "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "FB": {
+      "leads": 164,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Leads pohudenie5 11.03": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide 24.02": {
+      "leads": 61,
+      "won": 1,
+      "revenue": 176000
+    },
+    "12,03 Indira_ vid 9": {
+      "leads": 84,
+      "won": 2,
+      "revenue": 124000
+    },
+    "Instagram_Feed": {
+      "leads": 51,
+      "won": 1,
+      "revenue": 62000
+    },
+    "JM yura 1 айтым видео  0961": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6186 23.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "TikTok": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide STC1 06.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25,05 ГПТ https://janamenhealth.kz/womens-yakut &mdash; Копия": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6185 23.05 &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "12.03 Indira vid 7": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6186 12.03": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya4": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6184 10.03": {
+      "leads": 43,
+      "won": 0,
+      "revenue": 0
+    },
+    "Facebook_Mobile_Reels": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya2": {
+      "leads": 18,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Test - Leads pohudenie3 11.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads pohudenie4 11.03": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads slav_vid 06.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Instagram_Reels": {
+      "leads": 47,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads pohudenie2 08.03": {
+      "leads": 19,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Facebook_Mobile_Feed": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide WD4692 28.02": {
+      "leads": 15,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Leads pohudenie1 08.03": {
+      "leads": 20,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya6": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya3": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "12,03 Indira_ vid 10": {
+      "leads": 30,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads 6183 11.03": {
+      "leads": 36,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Test - Leads pohudenie6 10.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6207 13.03": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6185 10.03": {
+      "leads": 38,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Messages 4516 06.03": {
+      "leads": 35,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Poxydeniya5": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide WD4516 22.12": {
+      "leads": 23,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya1": {
+      "leads": 18,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+pohudenie2+08.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads Ramadan 21.02": {
+      "leads": 40,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6205 13.03": {
+      "leads": 8,
+      "won": 1,
+      "revenue": 299000
+    },
+    "leads+6185+10.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Facebook_Stories": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+w+wide+wd4692+28.02": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Threads_Feed": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "poxydeniya1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "social": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "Others": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+retarget+05.12": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 4692 15.03": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads WD4502 15.03": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+4692+15.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+new+fanpage+26.02": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6677": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "stories": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6673": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6668": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "nikita": {
+      "leads": 210,
+      "won": 13,
+      "revenue": 2460000
+    },
+    "qw": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "yura": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "{{campaign.name}}": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "mpb2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "byCampaign": {
+    "JM3 statica2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM4": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "none": {
+      "leads": 2679,
+      "won": 75,
+      "revenue": 14711801
+    },
+    "Айтым": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия &mdash; Копия": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Woman": {
+      "leads": 173,
+      "won": 4,
+      "revenue": 704000
+    },
+    "JM3 statica1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Копия 1 объекта &laquo;Айтым&raquo;": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE8560": {
+      "leads": 49,
+      "won": 0,
+      "revenue": 0
+    },
+    "54": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "6184": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Men": {
+      "leads": 12,
+      "won": 0,
+      "revenue": 0
+    },
+    "6418": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot;": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "6917": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "21.05 Айтым": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "21.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "2427, 2429, 2430, 2431, 2428": {
+      "leads": 33,
+      "won": 1,
+      "revenue": 62000
+    },
+    "4516": {
+      "leads": 54,
+      "won": 1,
+      "revenue": 176000
+    },
+    "ad17": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad1": {
+      "leads": 113,
+      "won": 2,
+      "revenue": 352000
+    },
+    "Group1": {
+      "leads": 69,
+      "won": 1,
+      "revenue": 176000
+    },
+    "RE8560 - 04.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Indiravid102": {
+      "leads": 22,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Indiravid9": {
+      "leads": 109,
+      "won": 1,
+      "revenue": 62000
+    },
+    "Reels2": {
+      "leads": 40,
+      "won": 1,
+      "revenue": 176000
+    },
+    "ad9": {
+      "leads": 65,
+      "won": 2,
+      "revenue": 124000
+    },
+    "Indiravid101": {
+      "leads": 33,
+      "won": 0,
+      "revenue": 0
+    },
+    "Group2": {
+      "leads": 88,
+      "won": 1,
+      "revenue": 62000
+    },
+    "RE7127": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Woman - Copy": {
+      "leads": 49,
+      "won": 0,
+      "revenue": 0
+    },
+    "24,05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Lead generation M 19.05": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Wide": {
+      "leads": 39,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Lead generation W 19.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad2": {
+      "leads": 12,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya4": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad10": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "KZ retarget M - Copy": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya2": {
+      "leads": 18,
+      "won": 2,
+      "revenue": 238000
+    },
+    "New Leads Ad Set - Copy 2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4 &mdash; 2": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad14": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya6": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya3": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad12": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy 3": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya5": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide - Copy": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4 &mdash; 1": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy 2": {
+      "leads": 16,
+      "won": 1,
+      "revenue": 176000
+    },
+    "6970025476721": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya1": {
+      "leads": 18,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide - Copy 2": {
+      "leads": 16,
+      "won": 1,
+      "revenue": 299000
+    },
+    "ad11": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "woman": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Static 27": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE1896": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad6 &mdash; 2": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4": {
+      "leads": 16,
+      "won": 0,
+      "revenue": 0
+    },
+    "Static 26": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad6": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE2220": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy": {
+      "leads": 10,
+      "won": 1,
+      "revenue": 62000
+    },
+    "Woman - Copy 2": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad5": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "poxydeniya1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "re8560": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Reels3 woman": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad15": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad16": {
+      "leads": 17,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad19": {
+      "leads": 6,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad18": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JMyura4": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "utm_campaign": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Group3": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "WD7163": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads M": {
+      "leads": 167,
+      "won": 9,
+      "revenue": 1851000
+    },
+    "Leads august11 / kaspiform": {
+      "leads": 22,
+      "won": 1,
+      "revenue": 179000
+    },
+    "Janamen yura 2": {
+      "leads": 75,
+      "won": 1,
+      "revenue": 179000
+    },
+    "JM Yura 3": {
+      "leads": 39,
+      "won": 2,
+      "revenue": 478000
+    },
+    "3.11": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "23,08 до после": {
+      "leads": 9,
+      "won": 1,
+      "revenue": 179000
+    },
+    "JM Nikita 3": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью \"Лиды\" &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 5442 / kaspiform": {
+      "leads": 17,
+      "won": 2,
+      "revenue": 251000
+    },
+    "04.11 каспи жума": {
+      "leads": 5,
+      "won": 1,
+      "revenue": 204000
+    },
+    "facebook": {
+      "leads": 3,
+      "won": 1,
+      "revenue": 179000
+    },
+    "11.09 fb_jm_kreo2 https://janamenhealth.kz/kz-yakut-weight &mdash; Копия &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "{{adset.name}}": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25.08 https://janamenhealth.kz/womens-yakut1": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Messages LAL 13.07": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "20,08 Весы КЗ яз": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "04.11 каспи жума — Копия": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide STC1 15.06": {
+      "leads": 2,
+      "won": 1,
+      "revenue": 179000
+    },
+    "27.05 4353": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 3797 / kaspiform": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Айтым форма — Копия": {
+      "leads": 3,
+      "won": 1,
+      "revenue": 179000
+    },
+    "acc_120244520434430580": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Форма — Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "✨ Каждая женщина заслуживает быть в ресурсе и чувствовать уверенность в себе. JanaWomen помогает восстановить баланс, улучшить настроение и поддержать женское здоровье каждый день.\n\nПопробуй — и почув": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "recentWonDeals": [
+    {
+      "id": 38604301,
+      "name": "Сделка #38604301",
+      "price": 1,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "janamen1.kz",
+      "date": 1779717227
+    },
+    {
+      "id": 37437137,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773330610
+    },
+    {
+      "id": 37437303,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773331277
+    },
+    {
+      "id": 37437675,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "Poxydeniya2",
+      "campaign": "Poxydeniya2",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773332927
+    },
+    {
+      "id": 37438091,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773335234
+    },
+    {
+      "id": 37453795,
+      "name": "ЗАЯВКА С 5-7 кг похудение",
+      "price": 62000,
+      "source": "Roma",
+      "medium": "Instagram_Feed",
+      "campaign": "Group2",
+      "page": "https://janamenhealth.kz/vitamincomplex",
+      "date": 1773381015
+    },
+    {
+      "id": 37454385,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773383711
+    },
+    {
+      "id": 37464561,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads pohudenie2 08.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773415923
+    },
+    {
+      "id": 37465359,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads 6185 10.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773419890
+    },
+    {
+      "id": 37468099,
+      "name": "Заявка от (sayeraibragimova)",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "janamen1.kz",
+      "date": 1773449431
+    },
+    {
+      "id": 37468477,
+      "name": "Заявка с Лид магнит Питание",
+      "price": 352000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "http://janamen1.kz/lidmagnit",
+      "date": 1773455217
+    },
+    {
+      "id": 37469075,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Messages 4516 06.03",
+      "campaign": "4516 - Copy 2",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773460728
+    },
+    {
+      "id": 37471437,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "Poxydeniya2",
+      "campaign": "Poxydeniya2",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773474645
+    },
+    {
+      "id": 37472579,
+      "name": "ЗАЯВКА С",
+      "price": 299000,
+      "source": "Nikita",
+      "medium": "Leads WD6205 13.03",
+      "campaign": "wide - Copy 2",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773480408
+    },
+    {
+      "id": 37478855,
+      "name": "ЗАЯВКА С",
+      "price": 299000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773505556
+    },
+    {
+      "id": 37482953,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads W wide WD4692 28.02",
+      "campaign": "Wide",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773532964
+    },
+    {
+      "id": 37484767,
+      "name": "Заявка с 5-7 кг похудение",
+      "price": 176000,
+      "source": "Roma2",
+      "medium": "Instagram_Stories",
+      "campaign": "Group1",
+      "page": "janamen1.kz",
+      "date": 1773554654
+    },
+    {
+      "id": 37487503,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "page": "https://janamenhealth.kz/forall",
+      "date": 1773570872
+    },
+    {
+      "id": 37491799,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Test - Leads 6183 11.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773595368
+    },
+    {
+      "id": 37495241,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773630213
+    },
+    {
+      "id": 37496817,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773640217
+    },
+    {
+      "id": 37504285,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773662465
+    },
+    {
+      "id": 37509097,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "4516",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773685245
+    },
+    {
+      "id": 37512393,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "FB",
+      "campaign": "Indiravid9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773721066
+    },
+    {
+      "id": 37521851,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads W wide 24.02",
+      "campaign": "Reels2",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773758664
+    }
+  ]
+}

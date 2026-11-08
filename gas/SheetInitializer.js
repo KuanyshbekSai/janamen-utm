@@ -14,16 +14,19 @@ function setupSpreadsheet() {
   var sheetTaxonomy = getOrCreateSheet(ss, CONFIG.SHEETS.TAXONOMY);
   var sheetDeals = getOrCreateSheet(ss, CONFIG.SHEETS.DEALS);
   var sheetRegistry = getOrCreateSheet(ss, CONFIG.SHEETS.REGISTRY);
+  var sheetMarketing = getOrCreateSheet(ss, CONFIG.SHEETS.MARKETING_DASHBOARD);
   var sheetDashboard = getOrCreateSheet(ss, CONFIG.SHEETS.DASHBOARD);
 
   // Упорядочим листы
   ss.setActiveSheet(sheetTaxonomy);
-  ss.moveActiveSheet(4);
+  ss.moveActiveSheet(5);
   ss.setActiveSheet(sheetDeals);
-  ss.moveActiveSheet(3);
+  ss.moveActiveSheet(4);
   ss.setActiveSheet(sheetRegistry);
-  ss.moveActiveSheet(2);
+  ss.moveActiveSheet(3);
   ss.setActiveSheet(sheetDashboard);
+  ss.moveActiveSheet(2);
+  ss.setActiveSheet(sheetMarketing);
   ss.moveActiveSheet(1);
 
   // 2. Настраиваем Справочники
@@ -35,7 +38,10 @@ function setupSpreadsheet() {
   // 4. Настраиваем лист Реестра UTM
   setupRegistrySheet(sheetRegistry, sheetTaxonomy);
 
-  // 5. Настраиваем Дашборд
+  // 5. Настраиваем Дашборд Отдела Маркетинга (janamen1.kz)
+  setupMarketingDashboardSheet(sheetMarketing);
+
+  // 6. Настраиваем Общий Дашборд
   setupDashboardSheet(sheetDashboard);
 
   SpreadsheetApp.flush();
@@ -122,7 +128,7 @@ function setupDealsSheet(sheet) {
     'Название сделки',    // B (2)
     'Воронка',            // C (3)
     'Этап сделки',        // D (4)
-    'Категория статуса',  // E (5) -> Оплачено / В работе / Отказ
+    'Категория статуса',  // E (5) -> Успешно реализовано / В работе / Отказ
     'Сумма (₸)',          // F (6)
     'Дата создания',      // G (7)
     'utm_source',         // H (8)
@@ -132,7 +138,9 @@ function setupDealsSheet(sheet) {
     'utm_term',           // L (12)
     'UTM ID',             // M (13)
     'Теги сделки',        // N (14)
-    'Ссылка в AmoCRM'     // O (15)
+    'Ссылка в AmoCRM',    // O (15)
+    'Посадочная страница',// P (16)
+    'Маркетинг janamen1.kz' // Q (17)
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -155,6 +163,8 @@ function setupDealsSheet(sheet) {
   sheet.setColumnWidth(13, 120);
   sheet.setColumnWidth(14, 180);
   sheet.setColumnWidth(15, 200);
+  sheet.setColumnWidth(16, 260);
+  sheet.setColumnWidth(17, 240);
 
   // Формат валюты
   sheet.getRange('F2:F').setNumberFormat('#,##0" ₸"');
@@ -187,9 +197,9 @@ function setupRegistrySheet(sheet, taxonomySheet) {
     'Бюджет / Расход (₸)',   // M (13)
     'Описание / Инфо',       // N (14)
     'Лидов (CRM)',                     // O (15) - автоформула
-    'Прошли проверку (CRM)',           // P (16) - статус «ПРОВЕРКА ПРОЙДЕНА»
-    'Выручка подтвержденная (₸)',      // Q (17) - сумма подтвержденных чеков
-    'Конверсия (%)',                   // R (18) - Проверка пройдена / Лиды
+    'Успешно реализовано (142)',       // P (16) - статус «Успешно реализовано» (Этап 2 / Воронка продаж)
+    'Выручка (₸)',                     // Q (17) - сумма подтвержденных чеков
+    'Конверсия (%)',                   // R (18) - Оплачено / Лиды
     'CPL (₸)',                         // S (19) - автоформула
     'CAC (₸)',                         // T (20) - автоформула
     'ROMI (%)'                         // U (21) - автоформула
@@ -216,7 +226,7 @@ function setupRegistrySheet(sheet, taxonomySheet) {
   sheet.setColumnWidth(13, 130); // Расход
   sheet.setColumnWidth(14, 180); // Описание
   sheet.setColumnWidth(15, 100); // Лиды
-  sheet.setColumnWidth(16, 130); // Проверка пройдена
+  sheet.setColumnWidth(16, 150); // Успешно реализовано
   sheet.setColumnWidth(17, 150); // Выручка
   sheet.setColumnWidth(18, 110); // CR
   sheet.setColumnWidth(19, 100); // CPL
@@ -257,7 +267,7 @@ function setupRegistrySheet(sheet, taxonomySheet) {
   sheet.getRange('S2:T1000').setNumberFormat('#,##0" ₸"');
   sheet.getRange('U2:U1000').setNumberFormat('0.0%');
 
-  // Добавим 2 примера для наглядности (ориентация на статус «Проверка пройдена»)
+  // Добавим примеры для наглядности (ориентация на статус «Успешно реализовано»)
   var sampleRows = [
     [
       'UTM-001',
@@ -275,8 +285,8 @@ function setupRegistrySheet(sheet, taxonomySheet) {
       150000,
       'Блогер Даник — обзор витаминов',
       '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2))',
-      '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
-      '=IF(F2="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
+      '=IF(F2="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))',
+      '=IF(F2="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D2, \'📥 Сделки AmoCRM\'!$J:$J, F2, \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))',
       '=IF(O2>0, P2/O2, 0)',
       '=IF(O2>0, M2/O2, 0)',
       '=IF(P2>0, M2/P2, 0)',
@@ -285,21 +295,21 @@ function setupRegistrySheet(sheet, taxonomySheet) {
     [
       'UTM-002',
       new Date(),
-      'https://janamen1.kz',
-      'tiktok',
-      'target_cpc',
-      'leads_m',
+      'https://janamen1.kz/lidmagnit',
+      'facebook',
+      'nikita',
+      'leads_5442',
       'video_energy_1',
       '',
       '=IF(C3="","", C3 & IF(ISNUMBER(FIND("?", C3)), "&", "?") & "utm_source=" & D3 & "&utm_medium=" & E3 & "&utm_campaign=" & F3 & IF(G3="","", "&utm_content=" & G3) & IF(H3="","", "&utm_term=" & H3))',
-      'TikTok Ads',
-      'Таргетолог',
+      'Таргет FB/Insta',
+      'Никита',
       'Активна',
-      80000,
-      'Тест креатива с энергетиком',
+      120000,
+      'Лид-магнит тест таргета',
       '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3))',
-      '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
-      '=IF(F3="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))',
+      '=IF(F3="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))',
+      '=IF(F3="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D3, \'📥 Сделки AmoCRM\'!$J:$J, F3, \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))',
       '=IF(O3>0, P3/O3, 0)',
       '=IF(O3>0, M3/O3, 0)',
       '=IF(P3>0, M3/P3, 0)',
@@ -308,6 +318,122 @@ function setupRegistrySheet(sheet, taxonomySheet) {
   ];
 
   sheet.getRange(2, 1, sampleRows.length, headers.length).setValues(sampleRows);
+}
+
+/**
+ * ────────────────────────────────────────────────────────────
+ * 3.5 Лист «Отдел Маркетинга (janamen1.kz)»
+ * ────────────────────────────────────────────────────────────
+ */
+function setupMarketingDashboardSheet(sheet) {
+  sheet.clear();
+  sheet.setTabColor('#2563eb');
+
+  // Заголовок
+  sheet.getRange('A1:J1').merge()
+       .setValue('🎯 JANA MEN — ДАШБОРД ОТДЕЛА МАРКЕТИНГА (janamen1.kz)')
+       .setBackground('#1e3a8a')
+       .setFontColor('#ffffff')
+       .setFontSize(14)
+       .setFontWeight('bold')
+       .setHorizontalAlignment('center')
+       .setVerticalAlignment('middle');
+  sheet.setRowHeight(1, 45);
+
+  sheet.getRange('A2:J2').merge()
+       .setValue('Выделенный домен: https://janamen1.kz | Целевая конверсия: Воронка продаж, Этап 2 — «Успешно реализовано» (Status 142)')
+       .setBackground('#1d4ed8')
+       .setFontColor('#eff6ff')
+       .setFontSize(10)
+       .setHorizontalAlignment('center');
+  sheet.setRowHeight(2, 24);
+
+  // Плашки KPI для janamen1.kz
+  var kpis = [
+    { title: 'ЛИДОВ janamen1.kz', formula: '=COUNTIF(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz*")', format: '#,##0', col: 1 },
+    { title: 'ОПЛАЧЕНО (СТАТУС 142)', formula: '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', format: '#,##0', col: 3 },
+    { title: 'ВЫРУЧКА janamen1.kz', formula: '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', format: '#,##0" ₸"', col: 5 },
+    { title: 'СРЕДНИЙ ЧЕК', formula: '=IF(C5>0, E5/C5, 0)', format: '#,##0" ₸"', col: 7 },
+    { title: 'КОНВЕРСИЯ CR (%)', formula: '=IF(A5>0, C5/A5, 0)', format: '0.0%', col: 9 }
+  ];
+
+  kpis.forEach(function(k) {
+    var c = k.col;
+    sheet.getRange(4, c, 1, 2).merge()
+         .setValue(k.title)
+         .setBackground('#f1f5f9')
+         .setFontColor('#475569')
+         .setFontWeight('bold')
+         .setFontSize(9)
+         .setHorizontalAlignment('center');
+
+    sheet.getRange(5, c, 1, 2).merge()
+         .setValue(k.formula)
+         .setBackground('#ffffff')
+         .setFontColor('#0f172a')
+         .setFontWeight('bold')
+         .setFontSize(16)
+         .setHorizontalAlignment('center')
+         .setNumberFormat(k.format);
+
+    sheet.getRange(4, c, 2, 2).setBorder(true, true, true, true, false, false, '#cbd5e1', SpreadsheetApp.BorderStyle.SOLID);
+  });
+  sheet.setRowHeight(4, 24);
+  sheet.setRowHeight(5, 36);
+
+  // Таблица 1: Посадочные страницы и поддомены janamen1.kz
+  sheet.getRange('A8:J8').merge()
+       .setValue('📄 ЭФФЕКТИВНОСТЬ ПОСАДОЧНЫХ СТРАНИЦ JANAMEN1.KZ')
+       .setBackground('#1e40af')
+       .setFontColor('#ffffff')
+       .setFontWeight('bold')
+       .setFontSize(11)
+       .setHorizontalAlignment('left')
+       .setVerticalAlignment('middle');
+  sheet.setRowHeight(8, 30);
+
+  var pageHeaders = [
+    'Страница / Раздел',     // A (1)
+    'Назначение',             // B (2)
+    'Лидов всего',            // C (3)
+    'Оплачено (142)',         // D (4)
+    'Конверсия CR (%)',       // E (5)
+    'Выручка (₸)',            // F (6)
+    'Средний чек (₸)',        // G (7)
+    'Топ источник',           // H (8)
+    'Статус страницы',        // I (9)
+    'Ссылка'                  // J (10)
+  ];
+  sheet.getRange(9, 1, 1, pageHeaders.length).setValues([pageHeaders]);
+  styleHeaderRange(sheet.getRange(9, 1, 1, pageHeaders.length), '#2563eb');
+  sheet.setRowHeight(9, 32);
+
+  var subpages = [
+    ['/influence', 'Инфлюенс / Блогеры', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/influence*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/influence*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C10>0, D10/C10, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/influence*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D10>0, F10/D10, 0)', 'instagram', 'Активна', 'https://janamen1.kz/influence'],
+    ['/lidmagnit', 'Лидмагнит (Гайд/Тест)', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/lidmagnit*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/lidmagnit*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C11>0, D11/C11, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/lidmagnit*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D11>0, F11/D11, 0)', 'facebook / direct', 'Активна', 'https://janamen1.kz/lidmagnit'],
+    ['/kaspiform', 'Kaspi-форма', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/kaspiform*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/kaspiform*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C12>0, D12/C12, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/kaspiform*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D12>0, F12/D12, 0)', 'facebook (Никита)', 'Активна (Лидер CR)', 'https://janamen1.kz/kaspiform'],
+    ['/inst-women', 'Instagram Women', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-women*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-women*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C13>0, D13/C13, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-women*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D13>0, F13/D13, 0)', 'instagram', 'Активна', 'https://janamen1.kz/inst-women'],
+    ['/inst-men', 'Instagram Men', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-men*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-men*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C14>0, D14/C14, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/inst-men*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D14>0, F14/D14, 0)', 'instagram bio', 'Активна', 'https://janamen1.kz/inst-men'],
+    ['/fun', 'Воронка / Квиз (/fun)', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/fun*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/fun*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C15>0, D15/C15, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/fun*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D15>0, F15/D15, 0)', 'quiz/bio', 'Активна', 'https://janamen1.kz/fun'],
+    ['/vitamins-inst', 'Витамины Instagram', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/vitamins-inst*")', '=COUNTIFS(\'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/vitamins-inst*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(C16>0, D16/C16, 0)', '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$P$2:$P, "*janamen1.kz/vitamins-inst*", \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', '=IF(D16>0, F16/D16, 0)', 'instagram', 'Активна', 'https://janamen1.kz/vitamins-inst']
+  ];
+  sheet.getRange(10, 1, subpages.length, pageHeaders.length).setValues(subpages);
+
+  sheet.getRange('C10:D16').setNumberFormat('#,##0');
+  sheet.getRange('E10:E16').setNumberFormat('0.0%');
+  sheet.getRange('F10:G16').setNumberFormat('#,##0" ₸"');
+
+  // Ширины колонок
+  sheet.setColumnWidth(1, 150);
+  sheet.setColumnWidth(2, 200);
+  sheet.setColumnWidth(3, 110);
+  sheet.setColumnWidth(4, 130);
+  sheet.setColumnWidth(5, 130);
+  sheet.setColumnWidth(6, 150);
+  sheet.setColumnWidth(7, 130);
+  sheet.setColumnWidth(8, 160);
+  sheet.setColumnWidth(9, 140);
+  sheet.setColumnWidth(10, 240);
 }
 
 /**
@@ -342,10 +468,10 @@ function setupDashboardSheet(sheet) {
   // Плашки KPI (Строка 4-5)
   var kpis = [
     { title: 'ВСЕГО ЛИДОВ (CRM)', formula: '=COUNTA(\'📥 Сделки AmoCRM\'!A2:A)', format: '#,##0', col: 1 },
-    { title: 'ПРОВЕРКА ПРОЙДЕНА (ПОДТВЕРЖДЕНО)', formula: '=COUNTIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")', format: '#,##0', col: 3 },
-    { title: 'ПОДТВЕРЖДЕННАЯ ВЫРУЧКА', formula: '=SUMIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена", \'📥 Сделки AmoCRM\'!$F$2:$F)', format: '#,##0" ₸"', col: 5 },
+    { title: 'УСПЕШНО РЕАЛИЗОВАНО (142)', formula: '=COUNTIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")', format: '#,##0', col: 3 },
+    { title: 'ВЫРУЧКА (СТАТУС 142)', formula: '=SUMIF(\'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано", \'📥 Сделки AmoCRM\'!$F$2:$F)', format: '#,##0" ₸"', col: 5 },
     { title: 'ОБЩИЙ РАСХОД', formula: '=SUM(\'🎯 Реестр UTM\'!$M$2:$M)', format: '#,##0" ₸"', col: 7 },
-    { title: 'КОНВЕРСИЯ В ПОДТВЕРЖДЕНИЕ', formula: '=IF(A5>0, C5/A5, 0)', format: '0.0%', col: 9 }
+    { title: 'КОНВЕРСИЯ CR (%)', formula: '=IF(A5>0, C5/A5, 0)', format: '0.0%', col: 9 }
   ];
 
   kpis.forEach(function(k) {
@@ -419,9 +545,9 @@ function setupDashboardSheet(sheet) {
   var sourceHeaders = [
     'Источник (utm_source)', // A (1)
     'Лидов всего',           // B (2)
-    'Прошли проверку',       // C (3)
+    'Оплачено (142)',        // C (3)
     'Конверсия CR',          // D (4)
-    'Выручка подтвержд. (₸)',// E (5)
+    'Выручка (₸)',           // E (5)
     'Средний чек (₸)',       // F (6)
     'Маркетинг бюджет (₸)',  // G (7)
     'CPL (₸)',               // H (8)
@@ -449,9 +575,9 @@ function setupDashboardSheet(sheet) {
     return [
       src,
       '=COUNTIF(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ')',
-      '=COUNTIFS(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")',
+      '=COUNTIFS(\'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")',
       '=IF(B' + r + '>0, C' + r + '/B' + r + ', 0)',
-      '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Проверка пройдена")',
+      '=SUMIFS(\'📥 Сделки AmoCRM\'!$F$2:$F, \'📥 Сделки AmoCRM\'!$H$2:$H, A' + r + ', \'📥 Сделки AmoCRM\'!$E$2:$E, "Успешно реализовано")',
       '=IF(C' + r + '>0, E' + r + '/C' + r + ', 0)',
       '=SUMIF(\'🎯 Реестр UTM\'!$D$2:$D, A' + r + ', \'🎯 Реестр UTM\'!$M$2:$M)',
       '=IF(B' + r + '>0, G' + r + '/B' + r + ', 0)',

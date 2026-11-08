@@ -3,3 +3,7 @@
 node_modules/
 .env
 .clasp.json
+analyzed_leads.json
+deals_sample.json
+janamen1_leads.json
+generate_portal_html.py

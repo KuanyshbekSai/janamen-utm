@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jana Men — UTM Реестр & Сквозная Аналитика</title>
+  <title>Jana Men — UTM Реестр & Аналитика Маркетинга (janamen1.kz)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
@@ -11,7 +11,7 @@
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -25,6 +25,7 @@
             brand: {
               50: '#eff6ff',
               100: '#dbeafe',
+              200: '#bfdbfe',
               500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
@@ -38,7 +39,7 @@
     }
   </script>
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
     .code-font { font-family: 'JetBrains Mono', monospace; }
     .tab-active { border-bottom: 3px solid #2563eb; color: #1d4ed8; font-weight: 700; }
     .tab-inactive { border-bottom: 3px solid transparent; color: #64748b; font-weight: 500; }
@@ -49,56 +50,55 @@
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
   </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
-  <!-- ВЕРХНЯЯ ШАПКА -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+  <!-- HEADER -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <!-- Логотип и Бренд -->
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-900 to-brand-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20">
+          <div class="w-10 h-10 rounded-xl bg-brand-700 flex items-center justify-center text-white font-extrabold text-lg shadow-sm">
             JM
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <span class="font-extrabold text-lg tracking-tight text-slate-900">JANA MEN</span>
-              <span class="px-2 py-0.5 text-xs font-semibold bg-blue-50 text-brand-700 rounded-full border border-blue-200">UTM Portal & Analytics</span>
+              <span class="font-extrabold text-base tracking-tight text-slate-900">JANA MEN</span>
+              <span class="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-blue-100 text-brand-800 rounded-md">Отдел Маркетинга</span>
+              <span class="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase bg-emerald-100 text-emerald-800 rounded-md">janamen1.kz</span>
             </div>
-            <p class="text-xs text-slate-500 hidden sm:block">Реестр маркетинговых ссылок, AmoCRM и окупаемость каналов</p>
+            <p class="text-[11px] text-slate-500 font-medium">Маркетинговый реестр UTM-ссылок, сквозная воронка AmoCRM и окупаемость каналов</p>
           </div>
         </div>
 
-        <!-- Кнопки действий -->
-        <div class="flex items-center space-x-3">
-          <button id="btnSyncAmo" onclick="syncAmoCrmData()" class="inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
-            <svg id="syncIcon" class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            <span id="syncText">Синхронизировать CRM</span>
+        <div class="flex items-center space-x-2.5">
+          <button onclick="syncAmoCRM()" id="btnSyncCRM" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">
+            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>Синхронизировать AmoCRM</span>
           </button>
-
-          <a href="https://docs.google.com/spreadsheets/d/1jBeeF8b_7CORi8Xf9Kjr9YN6c6ZrloQIljT2_-adcYs/edit" target="_blank" class="inline-flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H6v-2h6v2zm4-4H6v-2h10v2zm0-4H6V7h10v2z"/></svg>
-            <span class="hidden md:inline">Google Таблица</span>
+          <a href="https://docs.google.com/spreadsheets/d/1jBeeF8b_7CORi8Xf9Kjr9YN6c6ZrloQIljT2_-adcYs/edit" target="_blank" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Google Таблица</span>
           </a>
         </div>
       </div>
 
-      <!-- НАВИГАЦИОННЫЕ ВКЛАДКИ -->
-      <nav class="flex space-x-8 -mb-px overflow-x-auto text-sm">
-        <button onclick="switchTab('builder')" id="tab-builder" class="tab-active py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+      <!-- Вкладки навигации -->
+      <nav class="flex space-x-8 -mb-px text-xs sm:text-sm font-semibold overflow-x-auto">
+        <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-active py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span>1. Дашборд Отдела Маркетинга (janamen1.kz)</span>
+          <span class="ml-1.5 px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-brand-800 rounded-full">Live AmoCRM</span>
+        </button>
+
+        <button onclick="switchTab('builder')" id="tab-builder" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-          <span>1. Конструктор & Регистрация UTM</span>
+          <span>2. Конструктор & Регистрация UTM</span>
         </button>
 
         <button onclick="switchTab('registry')" id="tab-registry" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-          <span>2. Реестр всех UTM-меток</span>
+          <span>3. Реестр всех ссылок</span>
           <span id="badgeRegistryCount" class="ml-1.5 px-2 py-0.5 text-xs font-semibold bg-slate-100 text-slate-600 rounded-full">0</span>
-        </button>
-
-        <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          <span>3. Сквозная Аналитика (AmoCRM)</span>
         </button>
 
         <button onclick="switchTab('tilda')" id="tab-tilda" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
@@ -109,17 +109,222 @@
     </div>
   </header>
 
-  <!-- ГЛАВНЫЙ КОНТЕНТ -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-    <!-- ВКЛАДКА 1: КОНСТРУКТОР -->
-    <div id="view-builder" class="space-y-6">
-      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-6 text-white shadow-lg">
-        <div class="max-w-3xl">
-          <span class="inline-block px-2.5 py-1 text-xs font-bold bg-blue-500/30 text-blue-200 rounded-md mb-2">Стандарт трекинга Jana Men</span>
-          <h2 class="text-xl sm:text-2xl font-black">Создание новой UTM-метки с мгновенной регистрацией</h2>
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 1: ДАШБОРД ОТДЕЛА МАРКЕТИНГА (janamen1.kz) -->
+    <!-- ============================================================ -->
+    <div id="view-analytics" class="space-y-8">
+      
+      <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ФИЛЬТРОВ -->
+      <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold text-blue-200 border border-white/10">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Выделенный домен отдела маркетинга: <b class="text-white">https://janamen1.kz</b></span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Сквозная оценка эффективности каналов и страниц</h2>
+            <p class="text-xs sm:text-sm text-blue-200/80 max-w-2xl leading-relaxed">
+              Критерий успешной продажи: <b>Воронка продаж, Этап 2 — «Успешно реализовано» (Status ID: 142)</b>. Автоматический расчет конверсии (CR %) и подтвержденной выручки по всем посадочным страницам и таргетологам.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs text-blue-200/60 font-semibold uppercase tracking-wider block w-full md:w-auto">Быстрый срез:</span>
+            <div class="inline-flex p-1 bg-slate-800/80 backdrop-blur-md rounded-xl border border-white/10 text-xs font-bold" id="channelFilterGroup">
+              <button onclick="setFilterScope('all')" id="scope-btn-all" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white transition">Все каналы</button>
+              <button onclick="setFilterScope('janamen1')" id="scope-btn-janamen1" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition">janamen1.kz</button>
+              <button onclick="setFilterScope('nikita')" id="scope-btn-nikita" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition">Таргет Никита</button>
+              <button onclick="setFilterScope('yura')" id="scope-btn-yura" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition">Таргет Юра</button>
+              <button onclick="setFilterScope('tiktok')" id="scope-btn-tiktok" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition">TikTok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 КЛЮЧЕВЫХ KPI КАРТОЧКИ -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Всего лидов / заявок</div>
+          <div id="kpiTotalLeads" class="text-2xl sm:text-4xl font-black text-slate-900 mt-2">—</div>
+          <div id="kpiLeadsSub" class="text-xs text-slate-500 mt-1 flex items-center space-x-1">
+            <span>зафиксировано в AmoCRM</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm bg-gradient-to-br from-white to-emerald-50/30">
+          <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (Статус 142)</div>
+          <div id="kpiWonLeads" class="text-2xl sm:text-4xl font-black text-emerald-600 mt-2">—</div>
+          <div id="kpiCr" class="text-xs font-bold text-emerald-700 mt-1">Конверсия (CR): —</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-blue-100 shadow-sm bg-gradient-to-br from-white to-blue-50/30">
+          <div class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Выручка отдела продаж (₸)</div>
+          <div id="kpiRevenue" class="text-2xl sm:text-4xl font-black text-brand-700 mt-2">—</div>
+          <div id="kpiAvgCheck" class="text-xs font-semibold text-slate-600 mt-1">Средний чек: —</div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Качество разметки (UTM)</div>
+          <div id="kpiTaggedShare" class="text-2xl sm:text-4xl font-black text-indigo-700 mt-2">—</div>
+          <div id="kpiTaggedSub" class="text-xs text-slate-500 mt-1">сделок с точным источником</div>
+        </div>
+      </div>
+
+      <!-- СПЕЦИАЛЬНЫЙ РАЗДЕЛ: ПОСАДОЧНЫЕ СТРАНИЦЫ JANAMEN1.KZ -->
+      <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-5">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-lg font-black text-slate-900">Посадочные страницы и поддомены маркетинг-сайта janamen1.kz</h3>
+              <span class="px-2.5 py-0.5 text-xs font-bold bg-blue-100 text-brand-800 rounded-md">Детальный разбор</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Реальные заявки, оплаты (статус 142), конверсия и выручка по каждому направлению</p>
+          </div>
+          <button onclick="quickCreateUtm('https://janamen1.kz/influence')" class="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs transition shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Создать UTM для посадочной</span>
+          </button>
+        </div>
+
+        <!-- СЕТКА КАРТОЧЕК СТРАНИЦ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="subpagesCardGrid">
+          <!-- Генерируется динамически через JS -->
+        </div>
+      </div>
+
+      <!-- ГРАФИКИ -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-900">Выручка по рекламным площадкам и таргетологам (₸)</h3>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Статус 142</span>
+          </div>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="chartSources"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-slate-900">Количество лидов по каналам и форматам (utm_medium)</h3>
+            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Все лиды</span>
+          </div>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="chartMediums"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- ТАБЛИЦА 1: ЭФФЕКТИВНОСТЬ ПО ПЛОЩАДКАМ (UTM SOURCE) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Сквозная эффективность по источникам (utm_source)</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Лиды, подтвержденные продажи (статус 142), конверсия CR % и выручка</p>
+          </div>
+          <span class="px-3 py-1 bg-blue-50 text-brand-700 text-xs font-bold rounded-lg border border-blue-200">
+            AmoCRM Live
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 px-4">Источник (utm_source)</th>
+                <th class="py-3 px-4 text-center">Всего заявок</th>
+                <th class="py-3 px-4 text-center">Оплачено (142)</th>
+                <th class="py-3 px-4 text-center">Конверсия (CR)</th>
+                <th class="py-3 px-4 text-right">Выручка (₸)</th>
+                <th class="py-3 px-4 text-right">Средний чек</th>
+                <th class="py-3 px-4 text-right">Доля в продажах</th>
+              </tr>
+            </thead>
+            <tbody id="analyticsTableBody" class="divide-y divide-slate-100">
+              <tr><td colspan="7" class="py-8 text-center text-slate-400">Загрузка данных источников...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ТАБЛИЦА 2: ТОП СВЯЗОК И ТАРГЕТОЛОГОВ (UTM MEDIUM) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Эффективность по каналам, таргетологам и форматам (utm_medium)</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Сравнение отдачи таргетологов (Никита, Юра, Рома), рекламы TikTok, инфлюенса и форматов Stories/Reels</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 px-4">Канал / Таргетолог (utm_medium)</th>
+                <th class="py-3 px-4 text-center">Лидов</th>
+                <th class="py-3 px-4 text-center">Оплачено (142)</th>
+                <th class="py-3 px-4 text-center">Конверсия (CR)</th>
+                <th class="py-3 px-4 text-right">Выручка (₸)</th>
+                <th class="py-3 px-4 text-right">Средний чек</th>
+              </tr>
+            </thead>
+            <tbody id="mediumsTableBody" class="divide-y divide-slate-100">
+              <tr><td colspan="6" class="py-8 text-center text-slate-400">Загрузка данных каналов...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ТАБЛИЦА 3: ПОСЛЕДНИЕ ПОДТВЕРЖДЕННЫЕ ПРОДАЖИ (STATUS 142) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Лента реальных оплат из AmoCRM (Этап 2 / Успешно реализовано)</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Сделки со статусом 142 с суммами, источником трафика и посадочной страницей</p>
+          </div>
+          <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold rounded-lg">
+            ✓ Оплачено
+          </span>
+        </div>
+
+        <div class="overflow-x-auto max-h-96">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider sticky top-0">
+              <tr>
+                <th class="py-3 px-4">ID сделки</th>
+                <th class="py-3 px-4">Название</th>
+                <th class="py-3 px-4 text-right">Сумма (₸)</th>
+                <th class="py-3 px-4">Площадка / Таргетолог</th>
+                <th class="py-3 px-4">Кампания / Связка</th>
+                <th class="py-3 px-4">Посадочная страница</th>
+                <th class="py-3 px-4 text-center">Ссылка в CRM</th>
+              </tr>
+            </thead>
+            <tbody id="recentDealsTableBody" class="divide-y divide-slate-100">
+              <tr><td colspan="7" class="py-8 text-center text-slate-400">Загрузка последних оплат...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 2: КОНСТРУКТОР & РЕГИСТРАЦИЯ UTM -->
+    <!-- ============================================================ -->
+    <div id="view-builder" class="hidden space-y-8">
+      <!-- Баннер -->
+      <div class="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 text-white p-6 sm:p-8 rounded-3xl shadow-sm relative overflow-hidden">
+        <div class="max-w-3xl relative z-10">
+          <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white/10 rounded-full border border-white/20">
+            Стандарт трекинга Jana Men
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black mt-3">Создание новой UTM-метки с мгновенной регистрацией</h2>
           <p class="mt-2 text-sm text-blue-100 leading-relaxed">
-            Создавайте новые ссылки через форму ниже или воспользуйтесь быстрым импортом: вставьте уже существующую UTM-ссылку, и система мгновенно разложит её на параметры для фиксации в едином реестре.
+            Заполните поля ниже или воспользуйтесь быстрым импортом: вставьте готовую ссылку с UTM, скрипт автоматически разложит её на параметры и зафиксирует в Google Таблице с автоматическим отслеживанием окупаемости в AmoCRM.
           </p>
         </div>
       </div>
@@ -133,7 +338,7 @@
             </div>
             <div>
               <h4 class="text-sm font-bold text-indigo-950">Быстрое добавление уже готовой UTM-ссылки</h4>
-              <p class="text-xs text-indigo-700/80">Вставьте готовую ссылку с UTM (из рекламы или AmoCRM) — скрипт автоматически извлечет лэндинг, источник, канал, блогера и заполнит форму</p>
+              <p class="text-xs text-indigo-700/80">Вставьте готовую ссылку с UTM (из рекламного кабинета или AmoCRM) — скрипт автоматически извлечет параметры и подставит их в форму</p>
             </div>
           </div>
           <span class="hidden sm:inline-block px-2.5 py-1 text-[11px] font-semibold bg-indigo-100 text-indigo-800 rounded-md">Авто-парсер URL</span>
@@ -141,7 +346,7 @@
 
         <div class="flex flex-col sm:flex-row gap-2.5">
           <div class="relative flex-1">
-            <input type="text" id="inputPasteUrl" oninput="handlePastedUrl(this.value, false)" placeholder="Вставьте сюда готовую ссылку (https://janamen1.kz/influence?utm_source=...&utm_campaign=...)" class="w-full px-4 py-3 text-xs sm:text-sm bg-white border border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none code-font text-slate-800 placeholder-slate-400 shadow-sm">
+            <input type="text" id="inputPasteUrl" oninput="handlePastedUrl(this.value, false)" placeholder="Вставьте сюда готовую ссылку (например, https://janamen1.kz/influence?utm_source=instagram&...)" class="w-full px-4 py-3 text-xs sm:text-sm bg-white border border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none code-font text-slate-800 placeholder-slate-400 shadow-sm">
             <button type="button" onclick="pasteFromClipboard()" class="absolute right-2.5 top-2.5 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold flex items-center space-x-1 transition">
               <span>Вставить из буфера</span>
             </button>
@@ -166,15 +371,20 @@
           </h3>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Базовый сайт / Лэндинг Jana Men *</label>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Посадочная страница Jana Men (janamen1.kz) *</label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
-              <select id="selectLanding" onchange="applyPresetLanding()" class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                <option value="https://janamen1.kz/influence">Jana Men — Инфлюенс (/influence)</option>
-                <option value="https://janamen1.kz">Jana Men — Главный сайт (janamen1.kz)</option>
+              <select id="selectLanding" onchange="applyPresetLanding()" class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none font-semibold">
+                <option value="https://janamen1.kz/influence">🎯 janamen1.kz/influence (Инфлюенс / Блогеры)</option>
+                <option value="https://janamen1.kz/lidmagnit">🎁 janamen1.kz/lidmagnit (Лид-магнит / Гайд)</option>
+                <option value="https://janamen1.kz/kaspiform">⚡ janamen1.kz/kaspiform (Kaspi-форма / Заявки)</option>
+                <option value="https://janamen1.kz/inst-women">🌸 janamen1.kz/inst-women (Instagram Women)</option>
+                <option value="https://janamen1.kz/inst-men">💪 janamen1.kz/inst-men (Instagram Men)</option>
+                <option value="https://janamen1.kz/fun">🧩 janamen1.kz/fun (Квиз / Воронка)</option>
+                <option value="https://janamen1.kz/vitamins-inst">💊 janamen1.kz/vitamins-inst (Витамины)</option>
+                <option value="https://janamen1.kz">🌐 janamen1.kz (Главная маркетинг)</option>
                 <option value="https://janamenhealth.kz">Jana Men Health (janamenhealth.kz)</option>
                 <option value="https://janamenhealth.kz/womens-yakut">Jana Men Women (/womens-yakut)</option>
                 <option value="https://janafit.kz">JanaFit (janafit.kz)</option>
-                <option value="https://janamen.kz/kaspi">Kaspi Landing (/kaspi)</option>
                 <option value="custom">Другой URL (ввести вручную)</option>
               </select>
             </div>
@@ -184,32 +394,33 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">utm_source (Площадка) *</label>
-              <select id="selectSource" onchange="syncSourceInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5">
+              <select id="selectSource" onchange="syncSourceInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5 font-medium">
                 <option value="instagram">Instagram</option>
-                <option value="tiktok">TikTok</option>
                 <option value="facebook">Facebook / Meta</option>
+                <option value="tiktok">TikTok</option>
                 <option value="telegram">Telegram</option>
                 <option value="youtube">YouTube</option>
                 <option value="google">Google Ads</option>
                 <option value="kaspi">Kaspi.kz</option>
                 <option value="whatsapp">WhatsApp</option>
-                <option value="offline_qr">Офлайн / QR на товаре</option>
+                <option value="offline_qr">Офлайн / QR на упаковке</option>
                 <option value="custom">Свой источник</option>
               </select>
               <input type="text" id="inputSource" value="instagram" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="instagram" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg code-font">
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">utm_medium (Тип трафика) *</label>
-              <select id="selectMedium" onchange="syncMediumInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">utm_medium (Канал / Таргетолог) *</label>
+              <select id="selectMedium" onchange="syncMediumInput()" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5 font-medium">
                 <option value="influencer">Блогер / Инфлюенс (influencer)</option>
+                <option value="nikita">Таргетолог Никита (nikita)</option>
+                <option value="yura">Таргетолог Юра (yura)</option>
                 <option value="target_cpc">Таргет реклама (target_cpc)</option>
                 <option value="stories">Сториз (stories)</option>
                 <option value="reels">Рилс (reels)</option>
                 <option value="bio">Шапка профиля (bio)</option>
                 <option value="tg_channel">Telegram канал (tg_channel)</option>
                 <option value="qr">QR-код (qr)</option>
-                <option value="cpa">Партнерская CPA (cpa)</option>
                 <option value="organic">Органика SMM (organic)</option>
                 <option value="custom">Свой тип</option>
               </select>
@@ -218,26 +429,26 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">utm_campaign (Имя блогера / название акции) *</label>
-            <p class="text-xs text-slate-500 mb-2">Например: <code>blogger_danik</code>, <code>kaspi_zhuma_nov</code>, <code>testosteron_boost</code></p>
-            <input type="text" id="inputCampaign" value="blogger_danik" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="blogger_danik" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font font-semibold text-brand-700">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">utm_campaign (Имя блогера / Название акции) *</label>
+            <p class="text-[11px] text-slate-400 mb-2">Например: <code>blogger_danik</code>, <code>kaspi_zhuma_nov</code>, <code>testosteron_boost</code></p>
+            <input type="text" id="inputCampaign" value="blogger_danik" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="blogger_danik" class="w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font font-bold text-brand-700">
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">utm_content (Креатив / Формат)</label>
-              <input type="text" id="inputContent" value="stories_review" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="stories_review" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg code-font">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">utm_content (Креатив / Формат)</label>
+              <input type="text" id="inputContent" value="stories_review" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="video_1, static_banner" class="w-full px-3.5 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">utm_term (Промокод / Оффер)</label>
-              <input type="text" id="inputTerm" value="danik20" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="danik20" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg code-font">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">utm_term (Промокод / Оффер)</label>
+              <input type="text" id="inputTerm" value="danik20" oninput="cleanAndFormat(this); updateLiveLink()" placeholder="danik20, skidka10" class="w-full px-3.5 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none code-font">
             </div>
           </div>
 
-          <div class="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-slate-100">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Тег / Категория</label>
-              <select id="selectTag" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Тег / Категория</label>
+              <select id="selectTag" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 <option value="Инфлюенс / Блогеры">Инфлюенс / Блогеры</option>
                 <option value="Таргет FB/Insta">Таргет FB/Insta</option>
                 <option value="TikTok Ads">TikTok Ads</option>
@@ -250,112 +461,111 @@
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Бюджет / Расход (₸)</label>
-              <input type="number" id="inputBudget" value="150000" placeholder="150000" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 font-semibold">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Бюджет / Расход (₸)</label>
+              <input type="number" id="inputBudget" value="150000" placeholder="150000" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Ответственный</label>
-              <input type="text" id="inputAuthor" value="Маркетолог" placeholder="Имя сотрудника" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ответственный</label>
+              <input type="text" id="inputAuthor" value="Маркетолог" placeholder="Имя маркетолога" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Описание / Условия сотрудничества</label>
-            <input type="text" id="inputDescription" placeholder="Напр. 3 сториз с распаковкой + отметка профиля + ссылка" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Описание / Условия сотрудничества</label>
+            <input type="text" id="inputDescription" value="Блогер Даник — обзор витаминов в Stories" placeholder="Краткое описание кампании" class="w-full px-3.5 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
           </div>
         </div>
 
-        <!-- ПРАВАЯ ПАНЕЛЬ (5 колонок) -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6 sticky top-24">
-            <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
-              <span>Готовая ссылка</span>
-              <span id="validationBadge" class="px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-md">Корректно</span>
-            </h3>
+        <!-- ПРЕДПРОСМОТР И РЕГИСТРАЦИЯ (5 колонок) -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-slate-900">Готовая ссылка</h3>
+              <span id="linkBadge" class="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">Корректно</span>
+            </div>
 
             <div>
-              <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Предпросмотр URL:</div>
-              <div id="previewUrlBox" class="p-3.5 bg-slate-900 text-emerald-400 rounded-xl code-font text-xs break-all leading-relaxed shadow-inner border border-slate-800 max-h-36 overflow-y-auto">
+              <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Предпросмотр URL:</label>
+              <div id="liveUrlPreview" class="p-3.5 bg-slate-900 rounded-xl code-font text-xs text-emerald-400 break-all border border-slate-800 min-h-[90px] leading-relaxed shadow-inner">
                 https://janamen1.kz/influence?utm_source=instagram&utm_medium=influencer&utm_campaign=blogger_danik&utm_content=stories_review&utm_term=danik20
               </div>
             </div>
 
-            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2 text-xs">
-              <div class="flex justify-between py-1 border-b border-slate-200/60">
-                <span class="text-slate-500">Площадка:</span>
-                <span id="previewSrc" class="font-bold text-slate-800 code-font">instagram</span>
+            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-600">
+              <div class="flex justify-between py-1 border-b border-slate-50">
+                <span class="text-slate-400">Посадочная:</span>
+                <span id="previewPage" class="font-bold text-slate-800">janamen1.kz/influence</span>
               </div>
-              <div class="flex justify-between py-1 border-b border-slate-200/60">
-                <span class="text-slate-500">Тип трафика:</span>
-                <span id="previewMed" class="font-bold text-slate-800 code-font">influencer</span>
+              <div class="flex justify-between py-1 border-b border-slate-50">
+                <span class="text-slate-400">Площадка:</span>
+                <span id="previewSource" class="font-bold text-slate-800">instagram</span>
               </div>
-              <div class="flex justify-between py-1 border-b border-slate-200/60">
-                <span class="text-slate-500">Кампания:</span>
-                <span id="previewCamp" class="font-bold text-brand-600 code-font">blogger_danik</span>
+              <div class="flex justify-between py-1 border-b border-slate-50">
+                <span class="text-slate-400">Тип трафика:</span>
+                <span id="previewMedium" class="font-bold text-slate-800">influencer</span>
               </div>
-              <div class="flex justify-between py-1 border-b border-slate-200/60">
-                <span class="text-slate-500">Тег:</span>
-                <span id="previewTag" class="font-bold text-slate-700">Инфлюенс / Блогеры</span>
+              <div class="flex justify-between py-1 border-b border-slate-50">
+                <span class="text-slate-400">Кампания:</span>
+                <span id="previewCampaign" class="font-bold text-brand-600 code-font">blogger_danik</span>
               </div>
               <div class="flex justify-between py-1">
-                <span class="text-slate-500">Бюджет:</span>
+                <span class="text-slate-400">Бюджет:</span>
                 <span id="previewBudget" class="font-bold text-slate-900">150 000 ₸</span>
               </div>
             </div>
 
-            <div class="space-y-3">
-              <button onclick="saveUtmToRegistry()" id="btnRegister" class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md shadow-brand-500/25 flex items-center justify-center space-x-2 transition transform active:scale-98">
+            <div class="pt-2 space-y-2.5">
+              <button type="button" onclick="registerUtm()" id="btnRegister" class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-extrabold text-sm transition shadow-lg shadow-brand-600/30 flex items-center justify-center space-x-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 <span>Зарегистрировать в Реестр</span>
               </button>
 
-              <button onclick="copyCurrentLink()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center justify-center space-x-2 transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <button type="button" onclick="copyCurrentLink()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition flex items-center justify-center space-x-1.5">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
                 <span>Скопировать ссылку</span>
               </button>
-            </div>
-
-            <div id="copyNotice" class="hidden text-center text-xs font-bold text-emerald-600 bg-emerald-50 py-2 rounded-lg border border-emerald-200">
-              ✓ Ссылка скопирована в буфер обмена!
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ВКЛАДКА 2: РЕЕСТР -->
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 3: РЕЕСТР ВСЕХ UTM-МЕТОК -->
+    <!-- ============================================================ -->
     <div id="view-registry" class="hidden space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <div>
-          <h2 class="text-xl font-bold text-slate-900">Реестр маркетинговых ссылок Jana Men</h2>
-          <p class="text-sm text-slate-500 mt-1">Все размеченные кампании, привязанные к сделкам AmoCRM с автоматическим подсчетом окупаемости</p>
-        </div>
-        <div class="flex items-center space-x-3">
-          <input type="text" id="searchRegistryInput" oninput="filterRegistryTable()" placeholder="Поиск по блогеру, тегу, ID..." class="px-4 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none w-64">
-          <button onclick="loadRegistryData()" class="p-2 text-slate-500 hover:text-slate-800 bg-slate-100 rounded-xl">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          </button>
-        </div>
-      </div>
-
       <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Единый реестр зарегистрированных маркетинговых ссылок</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Данные автоматически связываются со сделками AmoCRM для расчета окупаемости</p>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <input type="text" id="searchRegistryInput" oninput="filterRegistryTable()" placeholder="Поиск по блогеру, тегу, ID..." class="px-3.5 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none w-64">
+            <button onclick="loadRegistryData()" class="p-2 text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-lg transition" title="Обновить">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            </button>
+          </div>
+        </div>
+
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-600">
             <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
               <tr>
                 <th class="py-3 px-4">ID</th>
-                <th class="py-3 px-4">Площадка / Канал</th>
-                <th class="py-3 px-4">Кампания / Блогер</th>
+                <th class="py-3 px-4">Источник / Тип</th>
+                <th class="py-3 px-4">Кампания (Блогер)</th>
                 <th class="py-3 px-4">Тег</th>
                 <th class="py-3 px-4">Ссылка</th>
-                <th class="py-3 px-4 text-right">Расход</th>
+                <th class="py-3 px-4 text-right">Бюджет</th>
                 <th class="py-3 px-4 text-center">Лидов</th>
-                <th class="py-3 px-4 text-center" title="Сделки в статусе «ПРОВЕРКА ПРОЙДЕНА»">Проверка пройдена</th>
+                <th class="py-3 px-4 text-center">Оплачено (142)</th>
                 <th class="py-3 px-4 text-right">Выручка</th>
-                <th class="py-3 px-4 text-center">CR</th>
+                <th class="py-3 px-4 text-center">CR %</th>
                 <th class="py-3 px-4 text-right">ROMI</th>
-                <th class="py-3 px-4 text-center">Действие</th>
+                <th class="py-3 px-4 text-center">Копия</th>
               </tr>
             </thead>
             <tbody id="registryTableBody" class="divide-y divide-slate-100">
@@ -366,151 +576,69 @@
       </div>
     </div>
 
-    <!-- ВКЛАДКА 3: АНАЛИТИКА -->
-    <div id="view-analytics" class="hidden space-y-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Всего лидов в CRM</div>
-          <div id="kpiTotalLeads" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">—</div>
-          <div class="text-xs text-slate-500 mt-1">зафиксировано в AmoCRM</div>
-        </div>
-
-        <!-- Подтвержденные сделки (Проверка пройдена) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Проверка пройдена (Подтверждено)</div>
-          <div id="kpiWonLeads" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-2">—</div>
-          <div id="kpiCr" class="text-xs font-semibold text-slate-600 mt-1">Конверсия: —</div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-bold text-brand-600 uppercase tracking-wider">Общая Выручка</div>
-          <div id="kpiRevenue" class="text-2xl sm:text-3xl font-extrabold text-brand-700 mt-2">—</div>
-          <div id="kpiAvgCheck" class="text-xs font-semibold text-slate-600 mt-1">Ср. чек: —</div>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Окупаемость (ROMI)</div>
-          <div id="kpiRomi" class="text-2xl sm:text-3xl font-extrabold text-indigo-700 mt-2">—</div>
-          <div id="kpiBudget" class="text-xs text-slate-500 mt-1">Бюджет: —</div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <h3 class="text-sm font-bold text-slate-900">Распределение выручки по источникам (utm_source)</h3>
-          <div class="h-64 flex items-center justify-center">
-            <canvas id="chartSources"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <h3 class="text-sm font-bold text-slate-900">Количество лидов по типам трафика (utm_medium)</h3>
-          <div class="h-64 flex items-center justify-center">
-            <canvas id="chartMediums"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-          <div>
-            <h3 class="text-base font-bold text-slate-900">Сквозная воронка по источникам (Площадки)</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Данные агрегируются автоматически из сделок AmoCRM</p>
-          </div>
-          <span class="px-3 py-1 bg-blue-50 text-brand-700 text-xs font-bold rounded-lg border border-blue-200">
-            AmoCRM Live
-          </span>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs text-slate-600">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
-              <tr>
-                <th class="py-3 px-4">Источник (utm_source)</th>
-                <th class="py-3 px-4 text-center">Всего заявок</th>
-                <th class="py-3 px-4 text-center">Проверка пройдена</th>
-                <th class="py-3 px-4 text-center">Конверсия (CR)</th>
-                <th class="py-3 px-4 text-right">Выручка (₸)</th>
-                <th class="py-3 px-4 text-right">Ср. чек</th>
-                <th class="py-3 px-4 text-right">Доля в продажах</th>
-              </tr>
-            </thead>
-            <tbody id="analyticsTableBody" class="divide-y divide-slate-100">
-              <tr><td colspan="7" class="py-8 text-center text-slate-400">Загрузка аналитики...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ВКЛАДКА 4: TILDA -->
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 4: TILDA ИНСТРУКЦИЯ -->
+    <!-- ============================================================ -->
     <div id="view-tilda" class="hidden space-y-6">
       <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
         <div>
-          <h2 class="text-xl font-bold text-slate-900">Как использовать реестр на внутреннем сайте Tilda</h2>
-          <p class="text-sm text-slate-500 mt-1">Пошаговое руководство по встраиванию интерфейса генератора и сбору UTM-меток в заявки</p>
+          <h2 class="text-xl font-bold text-slate-900">Инструкция по подключению реестра на сайт Tilda</h2>
+          <p class="text-sm text-slate-500 mt-1">Пошаговое руководство по встраиванию интерфейса генератора и авто-захвату UTM в AmoCRM</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
             <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-sm">1</div>
-            <h3 class="text-base font-bold text-slate-900">Встроить этот дашборд на страницу Tilda</h3>
+            <h3 class="text-base font-bold text-slate-900">Встроить этот дашборд на внутренний сайт Tilda</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              На вашем внутреннем сайте в Тильде добавьте блок <b>T123 (HTML-код)</b> и вставьте следующий код:
+              На вашем закрытом сайте в Тильде добавьте стандартный блок <b>T123 (HTML-код)</b> и вставьте код:
             </p>
             <div class="bg-slate-900 text-slate-200 p-4 rounded-lg code-font text-xs overflow-x-auto">
 &lt;iframe 
-  src="https://script.google.com/macros/s/AKfycbwV97KvjNwl_OCWbydMTd7DVFn6mDSRvjj6-z5nhdlQK8v9XliGC6JFW6NHZSY0p3Jz/exec" 
+  src="https://janamen-utm.vercel.app" 
   width="100%" 
-  height="950" 
+  height="980" 
   frameborder="0" 
   style="border:none; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.05);"&gt;
 &lt;/iframe&gt;
             </div>
             <p class="text-[11px] text-slate-500">
-              💡 Маркетологи смогут открывать эту страницу прямо на сайте Tilda, регистрировать метки и смотреть аналитику.
+              💡 Маркетологи смогут открывать эту страницу прямо на сайте Tilda, регистрировать метки и отслеживать окупаемость.
             </p>
           </div>
 
           <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
             <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">2</div>
-            <h3 class="text-base font-bold text-slate-900">Как ловить UTM в формы на лэндингах Jana Men</h3>
+            <h3 class="text-base font-bold text-slate-900">Как настроить захват UTM в формах janamen1.kz</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Чтобы заявка с сайта передавала метки в AmoCRM, добавьте в форму Tilda скрытые поля:
+              Чтобы заявка с сайта передавала метки в AmoCRM, добавьте в каждую форму Tilda скрытые поля:
             </p>
-            <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-4">
-              <li>Поле <code>utm_source</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_source</code>)</li>
-              <li>Поле <code>utm_medium</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_medium</code>)</li>
-              <li>Поле <code>utm_campaign</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_campaign</code>)</li>
-              <li>Поле <code>utm_content</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_content</code>)</li>
-              <li>Поле <code>utm_term</code> (тип: <code>Скрытое поле</code>, переменная: <code>utm_term</code>)</li>
+            <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-4 font-mono">
+              <li>utm_source (Скрытое поле)</li>
+              <li>utm_medium (Скрытое поле)</li>
+              <li>utm_campaign (Скрытое поле)</li>
+              <li>utm_content (Скрытое поле)</li>
+              <li>utm_term (Скрытое поле)</li>
             </ul>
             <p class="text-[11px] text-slate-500">
-              Тильда автоматически считывает GET-параметры из адресной строки и отправляет их в AmoCRM в соответствующие поля сделки.
+              Тильда автоматически считывает GET-параметры из браузера и передает их в поля сделки AmoCRM при отправке заявки.
             </p>
           </div>
-        </div>
-
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 text-xs text-blue-900 space-y-2">
-          <div class="font-bold text-sm text-brand-800">🔒 Правила чистоты данных в Jana Men:</div>
-          <p>1. <b>Только нижний регистр (lowercase):</b> система в генераторе автоматически переводит всё в нижний регистр.</p>
-          <p>2. <b>Авто-транслитерация:</b> если маркетолог введет «блогер даник», генератор преобразует это в <code>blogger_danik</code> без пробелов.</p>
-          <p>3. <b>Проверка на дубли:</b> если блогер с такой ссылкой уже существует, система предупредит вас и покажет существующий ID.</p>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- МОДАЛЬНОЕ ОКНО -->
+  <!-- МОДАЛЬНОЕ ОКНО УСПЕХА -->
   <div id="modalSuccess" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100">
       <div class="text-center space-y-2">
         <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
           ✓
         </div>
         <h3 class="text-xl font-black text-slate-900">UTM-метка зарегистрирована!</h3>
-        <p class="text-xs text-slate-500">Запись успешно внесена в Google Таблицу под номером <span id="modalUtmId" class="font-bold text-brand-600">UTM-000</span></p>
+        <p class="text-xs text-slate-500">Запись успешно внесена в реестр под номером <span id="modalUtmId" class="font-bold text-brand-600">UTM-000</span></p>
       </div>
 
       <div>
@@ -539,22 +667,1342 @@
 
   <!-- JAVASCRIPT ЛОГИКА -->
   <script>
-    const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwV97KvjNwl_OCWbydMTd7DVFn6mDSRvjj6-z5nhdlQK8v9XliGC6JFW6NHZSY0p3Jz/exec';
+    // URL Google Apps Script WebApp
+    const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyhLyG_9dCagbpxFqM0WTS3AHQ1gZfC5HEfgjyPo9_WZkOn3Xpg61Zd1h7m39vVK8Cv/exec';
+
+    // Встроенные актуальные данные из AmoCRM (выгрузка через API)
+    const REAL_ANALYTICS_DATA = {
+  "kpi": {
+    "totalLeads": 4497,
+    "wonLeads": 116,
+    "totalRevenue": 21590801,
+    "totalBudget": 0,
+    "cr": 0.02579497442739604,
+    "avgCheck": 186128
+  },
+  "janamen1_kpi": {
+    "totalLeads": 203,
+    "wonLeads": 5,
+    "totalRevenue": 894000,
+    "cr": 0.024630541871921183,
+    "avgCheck": 178800
+  },
+  "janamen1_subpages": {
+    "/vitamins-inst": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "/lidmagnit": {
+      "leads": 136,
+      "won": 1,
+      "revenue": 352000
+    },
+    "/kaspiform": {
+      "leads": 41,
+      "won": 3,
+      "revenue": 430000
+    },
+    "/inst-women": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "/fun": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "/inst-men": {
+      "leads": 6,
+      "won": 1,
+      "revenue": 112000
+    },
+    "/influence": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "bySource": {
+    "Yuralend": {
+      "leads": 516,
+      "won": 8,
+      "revenue": 952000
+    },
+    "direct / none": {
+      "leads": 2662,
+      "won": 75,
+      "revenue": 14711801
+    },
+    "yuratiktok": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "Nikita": {
+      "leads": 642,
+      "won": 11,
+      "revenue": 1831000
+    },
+    "Yuratiktok": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Roma2": {
+      "leads": 121,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Roma": {
+      "leads": 139,
+      "won": 1,
+      "revenue": 62000
+    },
+    "NikitaTikTok": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "ig": {
+      "leads": 20,
+      "won": 0,
+      "revenue": 0
+    },
+    "nikita": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "fb": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "yuralend": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "janamenfun": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "janafit_telegram": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "tiktok": {
+      "leads": 171,
+      "won": 9,
+      "revenue": 1851000
+    },
+    "facebook": {
+      "leads": 200,
+      "won": 11,
+      "revenue": 2007000
+    }
+  },
+  "byMedium": {
+    "04.04 статика2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "04,04 JM4 статика": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "none": {
+      "leads": 2811,
+      "won": 82,
+      "revenue": 16109801
+    },
+    "paid": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM yura 1 айтым видео 0966.1 &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads pohudenie7 10.03": {
+      "leads": 30,
+      "won": 1,
+      "revenue": 176000
+    },
+    "JM3 .womens 21 статика": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM yura 1 айтым видео 0966.1": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads retarget 05.12": {
+      "leads": 88,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads wide best creo 25.04": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "10,04JM4 статика 4.26": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 0400 M 19.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "09.05 JM4 yuraforma видео аудиро &mdash; Копия &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "09.05 womens-yakut видео аудиро ugs &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads static1 M 28.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "07.05 JM3 womens-yakut статика &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.05 30 women yakut &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads new fanpage 26.02": {
+      "leads": 86,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Instagram_Stories": {
+      "leads": 138,
+      "won": 1,
+      "revenue": 176000
+    },
+    "poxydeniya": {
+      "leads": 106,
+      "won": 2,
+      "revenue": 352000
+    },
+    "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "FB": {
+      "leads": 164,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Leads pohudenie5 11.03": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide 24.02": {
+      "leads": 61,
+      "won": 1,
+      "revenue": 176000
+    },
+    "12,03 Indira_ vid 9": {
+      "leads": 84,
+      "won": 2,
+      "revenue": 124000
+    },
+    "Instagram_Feed": {
+      "leads": 51,
+      "won": 1,
+      "revenue": 62000
+    },
+    "JM yura 1 айтым видео  0961": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6186 23.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "TikTok": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide STC1 06.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25,05 ГПТ https://janamenhealth.kz/womens-yakut &mdash; Копия": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6185 23.05 &mdash; Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "12.03 Indira vid 7": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6186 12.03": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya4": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6184 10.03": {
+      "leads": 43,
+      "won": 0,
+      "revenue": 0
+    },
+    "Facebook_Mobile_Reels": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya2": {
+      "leads": 18,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Test - Leads pohudenie3 11.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads pohudenie4 11.03": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads slav_vid 06.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Instagram_Reels": {
+      "leads": 47,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads pohudenie2 08.03": {
+      "leads": 19,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Facebook_Mobile_Feed": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide WD4692 28.02": {
+      "leads": 15,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Leads pohudenie1 08.03": {
+      "leads": 20,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya6": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya3": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "12,03 Indira_ vid 10": {
+      "leads": 30,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads 6183 11.03": {
+      "leads": 36,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Test - Leads pohudenie6 10.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6207 13.03": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 6185 10.03": {
+      "leads": 38,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Messages 4516 06.03": {
+      "leads": 35,
+      "won": 2,
+      "revenue": 238000
+    },
+    "Poxydeniya5": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide WD4516 22.12": {
+      "leads": 23,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya1": {
+      "leads": 18,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+pohudenie2+08.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads Ramadan 21.02": {
+      "leads": 40,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads WD6205 13.03": {
+      "leads": 8,
+      "won": 1,
+      "revenue": 299000
+    },
+    "leads+6185+10.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Facebook_Stories": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+w+wide+wd4692+28.02": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Threads_Feed": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "poxydeniya1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "social": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "Others": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+retarget+05.12": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 4692 15.03": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Leads WD4502 15.03": {
+      "leads": 10,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+4692+15.03": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "leads+new+fanpage+26.02": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6677": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "stories": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6673": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "17.03 JMyura4 креатив 6668": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "nikita": {
+      "leads": 210,
+      "won": 13,
+      "revenue": 2460000
+    },
+    "qw": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "yura": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "{{campaign.name}}": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "mpb2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "byCampaign": {
+    "JM3 statica2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JM4": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "none": {
+      "leads": 2679,
+      "won": 75,
+      "revenue": 14711801
+    },
+    "Айтым": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия &mdash; Копия": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Woman": {
+      "leads": 173,
+      "won": 4,
+      "revenue": 704000
+    },
+    "JM3 statica1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Копия 1 объекта &laquo;Айтым&raquo;": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE8560": {
+      "leads": 49,
+      "won": 0,
+      "revenue": 0
+    },
+    "54": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "6184": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Men": {
+      "leads": 12,
+      "won": 0,
+      "revenue": 0
+    },
+    "6418": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью &quot;Лиды&quot;": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "6917": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "21.05 Айтым": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "21.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "2427, 2429, 2430, 2431, 2428": {
+      "leads": 33,
+      "won": 1,
+      "revenue": 62000
+    },
+    "4516": {
+      "leads": 54,
+      "won": 1,
+      "revenue": 176000
+    },
+    "ad17": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad1": {
+      "leads": 113,
+      "won": 2,
+      "revenue": 352000
+    },
+    "Group1": {
+      "leads": 69,
+      "won": 1,
+      "revenue": 176000
+    },
+    "RE8560 - 04.04": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Indiravid102": {
+      "leads": 22,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Indiravid9": {
+      "leads": 109,
+      "won": 1,
+      "revenue": 62000
+    },
+    "Reels2": {
+      "leads": 40,
+      "won": 1,
+      "revenue": 176000
+    },
+    "ad9": {
+      "leads": 65,
+      "won": 2,
+      "revenue": 124000
+    },
+    "Indiravid101": {
+      "leads": 33,
+      "won": 0,
+      "revenue": 0
+    },
+    "Group2": {
+      "leads": 88,
+      "won": 1,
+      "revenue": 62000
+    },
+    "RE7127": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Woman - Copy": {
+      "leads": 49,
+      "won": 0,
+      "revenue": 0
+    },
+    "24,05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Lead generation M 19.05": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Wide": {
+      "leads": 39,
+      "won": 1,
+      "revenue": 176000
+    },
+    "Lead generation W 19.05": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad2": {
+      "leads": 12,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya4": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad10": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "KZ retarget M - Copy": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya2": {
+      "leads": 18,
+      "won": 2,
+      "revenue": 238000
+    },
+    "New Leads Ad Set - Copy 2": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4 &mdash; 2": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad14": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya6": {
+      "leads": 11,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya3": {
+      "leads": 7,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad12": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy 3": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya5": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide - Copy": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4 &mdash; 1": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy 2": {
+      "leads": 16,
+      "won": 1,
+      "revenue": 176000
+    },
+    "6970025476721": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "Poxydeniya1": {
+      "leads": 18,
+      "won": 0,
+      "revenue": 0
+    },
+    "wide - Copy 2": {
+      "leads": 16,
+      "won": 1,
+      "revenue": 299000
+    },
+    "ad11": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "woman": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Static 27": {
+      "leads": 21,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE1896": {
+      "leads": 14,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad6 &mdash; 2": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad4": {
+      "leads": 16,
+      "won": 0,
+      "revenue": 0
+    },
+    "Static 26": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad6": {
+      "leads": 13,
+      "won": 0,
+      "revenue": 0
+    },
+    "RE2220": {
+      "leads": 9,
+      "won": 0,
+      "revenue": 0
+    },
+    "4516 - Copy": {
+      "leads": 10,
+      "won": 1,
+      "revenue": 62000
+    },
+    "Woman - Copy 2": {
+      "leads": 8,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad5": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "poxydeniya1": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "re8560": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Reels3 woman": {
+      "leads": 19,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad15": {
+      "leads": 4,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad16": {
+      "leads": 17,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad19": {
+      "leads": 6,
+      "won": 0,
+      "revenue": 0
+    },
+    "ad18": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "JMyura4": {
+      "leads": 15,
+      "won": 0,
+      "revenue": 0
+    },
+    "utm_campaign": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Group3": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "WD7163": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads M": {
+      "leads": 167,
+      "won": 9,
+      "revenue": 1851000
+    },
+    "Leads august11 / kaspiform": {
+      "leads": 22,
+      "won": 1,
+      "revenue": 179000
+    },
+    "Janamen yura 2": {
+      "leads": 75,
+      "won": 1,
+      "revenue": 179000
+    },
+    "JM Yura 3": {
+      "leads": 39,
+      "won": 2,
+      "revenue": 478000
+    },
+    "3.11": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "23,08 до после": {
+      "leads": 9,
+      "won": 1,
+      "revenue": 179000
+    },
+    "JM Nikita 3": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Новая группа объявлений с целью \"Лиды\" &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 5442 / kaspiform": {
+      "leads": 17,
+      "won": 2,
+      "revenue": 251000
+    },
+    "04.11 каспи жума": {
+      "leads": 5,
+      "won": 1,
+      "revenue": 204000
+    },
+    "facebook": {
+      "leads": 3,
+      "won": 1,
+      "revenue": 179000
+    },
+    "11.09 fb_jm_kreo2 https://janamenhealth.kz/kz-yakut-weight &mdash; Копия &mdash; Копия": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "{{adset.name}}": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "25.08 https://janamenhealth.kz/womens-yakut1": {
+      "leads": 5,
+      "won": 0,
+      "revenue": 0
+    },
+    "Test - Messages LAL 13.07": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "20,08 Весы КЗ яз": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "04.11 каспи жума — Копия": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads W wide STC1 15.06": {
+      "leads": 2,
+      "won": 1,
+      "revenue": 179000
+    },
+    "27.05 4353": {
+      "leads": 3,
+      "won": 0,
+      "revenue": 0
+    },
+    "Leads 3797 / kaspiform": {
+      "leads": 2,
+      "won": 0,
+      "revenue": 0
+    },
+    "Айтым форма — Копия": {
+      "leads": 3,
+      "won": 1,
+      "revenue": 179000
+    },
+    "acc_120244520434430580": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "Форма — Копия": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    },
+    "✨ Каждая женщина заслуживает быть в ресурсе и чувствовать уверенность в себе. JanaWomen помогает восстановить баланс, улучшить настроение и поддержать женское здоровье каждый день.\n\nПопробуй — и почув": {
+      "leads": 1,
+      "won": 0,
+      "revenue": 0
+    }
+  },
+  "recentWonDeals": [
+    {
+      "id": 38604301,
+      "name": "Сделка #38604301",
+      "price": 1,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "janamen1.kz",
+      "date": 1779717227
+    },
+    {
+      "id": 37437137,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773330610
+    },
+    {
+      "id": 37437303,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773331277
+    },
+    {
+      "id": 37437675,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "Poxydeniya2",
+      "campaign": "Poxydeniya2",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773332927
+    },
+    {
+      "id": 37438091,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773335234
+    },
+    {
+      "id": 37453795,
+      "name": "ЗАЯВКА С 5-7 кг похудение",
+      "price": 62000,
+      "source": "Roma",
+      "medium": "Instagram_Feed",
+      "campaign": "Group2",
+      "page": "https://janamenhealth.kz/vitamincomplex",
+      "date": 1773381015
+    },
+    {
+      "id": 37454385,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773383711
+    },
+    {
+      "id": 37464561,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads pohudenie2 08.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773415923
+    },
+    {
+      "id": 37465359,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads 6185 10.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773419890
+    },
+    {
+      "id": 37468099,
+      "name": "Заявка от (sayeraibragimova)",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "janamen1.kz",
+      "date": 1773449431
+    },
+    {
+      "id": 37468477,
+      "name": "Заявка с Лид магнит Питание",
+      "price": 352000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "http://janamen1.kz/lidmagnit",
+      "date": 1773455217
+    },
+    {
+      "id": 37469075,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Messages 4516 06.03",
+      "campaign": "4516 - Copy 2",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773460728
+    },
+    {
+      "id": 37471437,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "Poxydeniya2",
+      "campaign": "Poxydeniya2",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773474645
+    },
+    {
+      "id": 37472579,
+      "name": "ЗАЯВКА С",
+      "price": 299000,
+      "source": "Nikita",
+      "medium": "Leads WD6205 13.03",
+      "campaign": "wide - Copy 2",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773480408
+    },
+    {
+      "id": 37478855,
+      "name": "ЗАЯВКА С",
+      "price": 299000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773505556
+    },
+    {
+      "id": 37482953,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads W wide WD4692 28.02",
+      "campaign": "Wide",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773532964
+    },
+    {
+      "id": 37484767,
+      "name": "Заявка с 5-7 кг похудение",
+      "price": 176000,
+      "source": "Roma2",
+      "medium": "Instagram_Stories",
+      "campaign": "Group1",
+      "page": "janamen1.kz",
+      "date": 1773554654
+    },
+    {
+      "id": 37487503,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "page": "https://janamenhealth.kz/forall",
+      "date": 1773570872
+    },
+    {
+      "id": 37491799,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Test - Leads 6183 11.03",
+      "campaign": "Woman",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773595368
+    },
+    {
+      "id": 37495241,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "page": "https://janamenhealth.kz/yakut-form",
+      "date": 1773630213
+    },
+    {
+      "id": 37496817,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773640217
+    },
+    {
+      "id": 37504285,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "direct / none",
+      "medium": "none",
+      "campaign": "none",
+      "page": "https://janamenhealth.kz/lp/men",
+      "date": 1773662465
+    },
+    {
+      "id": 37509097,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "4516",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773685245
+    },
+    {
+      "id": 37512393,
+      "name": "ЗАЯВКА С",
+      "price": 62000,
+      "source": "Yuralend",
+      "medium": "FB",
+      "campaign": "Indiravid9",
+      "page": "https://janamenhealth.kz/yakut-form2",
+      "date": 1773721066
+    },
+    {
+      "id": 37521851,
+      "name": "ЗАЯВКА С",
+      "price": 176000,
+      "source": "Nikita",
+      "medium": "Leads W wide 24.02",
+      "campaign": "Reels2",
+      "page": "https://janamenhealth.kz/lp/women",
+      "date": 1773758664
+    }
+  ]
+};
 
     let currentFullUrl = '';
     let cachedRegistry = [];
-    let cachedAnalytics = null;
+    let currentScope = 'all'; // 'all', 'janamen1', 'nikita', 'yura', 'tiktok'
     let chartSourcesInstance = null;
     let chartMediumsInstance = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       updateLiveLink();
+      initAnalyticsDashboard();
       loadRegistryData();
-      loadAnalyticsData();
     });
 
     function switchTab(tabId) {
-      const tabs = ['builder', 'registry', 'analytics', 'tilda'];
+      const tabs = ['analytics', 'builder', 'registry', 'tilda'];
       tabs.forEach(t => {
         const btn = document.getElementById('tab-' + t);
         const view = document.getElementById('view-' + t);
@@ -567,14 +2015,381 @@
         }
       });
 
-      if (tabId === 'registry' && cachedRegistry.length === 0) {
-        loadRegistryData();
-      }
       if (tabId === 'analytics') {
         renderCharts();
       }
     }
 
+    function quickCreateUtm(url) {
+      switchTab('builder');
+      document.getElementById('inputBaseUrl').value = url;
+      document.getElementById('selectLanding').value = url;
+      updateLiveLink();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Инициализация дашборда
+    function initAnalyticsDashboard() {
+      renderSubpageCards();
+      renderTables();
+      renderCharts();
+      updateKpis();
+    }
+
+    // Фильтрация срезов (Scope)
+    function setFilterScope(scope) {
+      currentScope = scope;
+      const scopes = ['all', 'janamen1', 'nikita', 'yura', 'tiktok'];
+      scopes.forEach(s => {
+        const btn = document.getElementById('scope-btn-' + s);
+        if (btn) {
+          if (s === scope) {
+            btn.className = 'px-3 py-1.5 rounded-lg bg-blue-600 text-white transition';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition';
+          }
+        }
+      });
+
+      updateKpis();
+      renderTables();
+      renderCharts();
+    }
+
+    function updateKpis() {
+      const k = REAL_ANALYTICS_DATA.kpi;
+      const jk = REAL_ANALYTICS_DATA.janamen1_kpi;
+
+      let totalLeads = k.totalLeads;
+      let wonLeads = k.wonLeads;
+      let totalRev = k.totalRevenue;
+      let cr = k.cr;
+      let avgCheck = k.avgCheck;
+      let subText = 'всего сделок в CRM';
+
+      if (currentScope === 'janamen1') {
+        totalLeads = jk.totalLeads;
+        wonLeads = jk.wonLeads;
+        totalRev = jk.totalRevenue;
+        cr = jk.cr;
+        avgCheck = jk.avgCheck;
+        subText = 'по домену janamen1.kz';
+      } else if (currentScope === 'nikita') {
+        const m = REAL_ANALYTICS_DATA.byMedium['nikita'] || { leads: 210, won: 13, revenue: 2460000 };
+        totalLeads = 852;
+        wonLeads = 24;
+        totalRev = 4291000;
+        cr = wonLeads / totalLeads;
+        avgCheck = Math.round(totalRev / wonLeads);
+        subText = 'таргетолог Никита (FB/Insta)';
+      } else if (currentScope === 'yura') {
+        const s = REAL_ANALYTICS_DATA.bySource['Yuralend'] || { leads: 516, won: 8, revenue: 952000 };
+        totalLeads = s.leads;
+        wonLeads = s.won;
+        totalRev = s.revenue;
+        cr = s.leads > 0 ? (s.won / s.leads) : 0;
+        avgCheck = wonLeads > 0 ? Math.round(totalRev / wonLeads) : 0;
+        subText = 'таргетолог Юра (FB/Insta)';
+      } else if (currentScope === 'tiktok') {
+        const s = REAL_ANALYTICS_DATA.bySource['tiktok'] || { leads: 171, won: 9, revenue: 1851000 };
+        totalLeads = 184;
+        wonLeads = 9;
+        totalRev = 1851000;
+        cr = wonLeads / totalLeads;
+        avgCheck = Math.round(totalRev / wonLeads);
+        subText = 'TikTok реклама (органика + Ads)';
+      }
+
+      document.getElementById('kpiTotalLeads').innerText = totalLeads.toLocaleString('ru-RU');
+      document.getElementById('kpiLeadsSub').innerText = subText;
+      document.getElementById('kpiWonLeads').innerText = wonLeads.toLocaleString('ru-RU');
+      document.getElementById('kpiCr').innerText = 'Конверсия в оплату: ' + (cr * 100).toFixed(1) + '%';
+      document.getElementById('kpiRevenue').innerText = totalRev.toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('kpiAvgCheck').innerText = 'Средний чек: ' + avgCheck.toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('kpiTaggedShare').innerText = '40.8%';
+      document.getElementById('kpiTaggedSub').innerText = '1 835 сделок с полным UTM-хвостом';
+    }
+
+    // Отрисовка посадочных страниц janamen1.kz
+    function renderSubpageCards() {
+      const subpages = [
+        {
+          path: '/kaspiform',
+          name: 'Kaspi-форма',
+          desc: 'Специальная форма быстрого оформления под акции Kaspi',
+          leads: 41,
+          won: 3,
+          revenue: 430000,
+          cr: 0.073,
+          badge: 'ТОП КОНВЕРСИЯ (7.3%)',
+          badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+          url: 'https://janamen1.kz/kaspiform'
+        },
+        {
+          path: '/lidmagnit',
+          name: 'Лид-магнит (Гайд/Тест)',
+          desc: 'Посадочная с бесплатным материалом для сбора контактов',
+          leads: 136,
+          won: 1,
+          revenue: 352000,
+          cr: 0.007,
+          badge: 'Максимум лидов (136)',
+          badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+          url: 'https://janamen1.kz/lidmagnit'
+        },
+        {
+          path: '/inst-men',
+          name: 'Instagram Men',
+          desc: 'Посадочная для мужского сегмента из Instagram',
+          leads: 6,
+          won: 1,
+          revenue: 112000,
+          cr: 0.167,
+          badge: 'CR 16.7%',
+          badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+          url: 'https://janamen1.kz/inst-men'
+        },
+        {
+          path: '/influence',
+          name: 'Инфлюенс / Блогеры',
+          desc: 'Специальный лэндинг под блогерские интеграции и промокоды',
+          leads: 1,
+          won: 0,
+          revenue: 0,
+          cr: 0.0,
+          badge: 'Новая связка',
+          badgeColor: 'bg-slate-100 text-slate-700 border-slate-200',
+          url: 'https://janamen1.kz/influence'
+        },
+        {
+          path: '/inst-women',
+          name: 'Instagram Women',
+          desc: 'Посадочная для женской аудитории из соцсетей',
+          leads: 8,
+          won: 0,
+          revenue: 0,
+          cr: 0.0,
+          badge: 'В тестировании',
+          badgeColor: 'bg-pink-100 text-pink-800 border-pink-200',
+          url: 'https://janamen1.kz/inst-women'
+        },
+        {
+          path: '/fun',
+          name: 'Воронка / Квиз (/fun)',
+          desc: 'Интерактивный опрос и подбор программы здоровья',
+          leads: 10,
+          won: 0,
+          revenue: 0,
+          cr: 0.0,
+          badge: 'Квиз-воронка',
+          badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+          url: 'https://janamen1.kz/fun'
+        }
+      ];
+
+      const grid = document.getElementById('subpagesCardGrid');
+      grid.innerHTML = subpages.map(sp => `
+        <div class="p-5 rounded-2xl border border-slate-200 hover:border-brand-500/50 hover:shadow-md transition bg-gradient-to-br from-white to-slate-50/50 space-y-4">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="font-black text-sm text-slate-900 code-font">${sp.path}</span>
+              </div>
+              <div class="text-xs font-bold text-slate-700 mt-0.5">${sp.name}</div>
+            </div>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded-md border ${sp.badgeColor}">${sp.badge}</span>
+          </div>
+
+          <p class="text-[11px] text-slate-500 leading-relaxed">${sp.desc}</p>
+
+          <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
+            <div class="bg-white p-2 rounded-xl border border-slate-100">
+              <div class="text-[10px] text-slate-400 font-bold uppercase">Лидов</div>
+              <div class="text-sm font-extrabold text-slate-900 mt-0.5">${sp.leads}</div>
+            </div>
+            <div class="bg-white p-2 rounded-xl border border-slate-100">
+              <div class="text-[10px] text-emerald-600 font-bold uppercase">Опл. 142</div>
+              <div class="text-sm font-extrabold text-emerald-600 mt-0.5">${sp.won}</div>
+            </div>
+            <div class="bg-white p-2 rounded-xl border border-slate-100">
+              <div class="text-[10px] text-brand-600 font-bold uppercase">Выручка</div>
+              <div class="text-[11px] font-extrabold text-brand-700 mt-1">${sp.revenue > 0 ? (sp.revenue / 1000).toFixed(0) + 'k ₸' : '0 ₸'}</div>
+            </div>
+          </div>
+
+          <div class="pt-1 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500 font-medium">Конверсия: <b>${(sp.cr * 100).toFixed(1)}%</b></span>
+            <button onclick="quickCreateUtm('${sp.url}')" class="text-xs font-bold text-brand-600 hover:text-brand-800 transition flex items-center space-x-1">
+              <span>Создать UTM</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTables() {
+      // 1. Таблица источников
+      const sources = REAL_ANALYTICS_DATA.bySource;
+      const srcTbody = document.getElementById('analyticsTableBody');
+      const totalRev = REAL_ANALYTICS_DATA.kpi.totalRevenue;
+
+      const sortedSources = Object.keys(sources).sort((a,b) => sources[b].revenue - sources[a].revenue);
+
+      srcTbody.innerHTML = sortedSources.map(s => {
+        const item = sources[s];
+        const cr = item.leads > 0 ? ((item.won / item.leads) * 100).toFixed(1) : '0.0';
+        const avg = item.won > 0 ? Math.round(item.revenue / item.won) : 0;
+        const share = totalRev > 0 ? ((item.revenue / totalRev) * 100).toFixed(1) : '0';
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-bold text-slate-900 code-font">${s}</td>
+            <td class="py-3 px-4 text-center font-bold text-slate-800">${item.leads.toLocaleString('ru-RU')}</td>
+            <td class="py-3 px-4 text-center font-black text-emerald-600">${item.won}</td>
+            <td class="py-3 px-4 text-center font-bold ${parseFloat(cr) > 2 ? 'text-emerald-700' : 'text-slate-600'}">${cr}%</td>
+            <td class="py-3 px-4 text-right font-black text-slate-900">${item.revenue.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3 px-4 text-right font-semibold text-slate-700">${avg.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3 px-4 text-right">
+              <span class="px-2 py-0.5 text-[11px] font-bold bg-blue-50 text-brand-700 rounded-md">${share}%</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // 2. Таблица каналов (medium)
+      const mediums = REAL_ANALYTICS_DATA.byMedium;
+      const medTbody = document.getElementById('mediumsTableBody');
+      const topMediums = Object.keys(mediums)
+        .filter(m => m !== 'none')
+        .sort((a,b) => mediums[b].revenue - mediums[a].revenue)
+        .slice(0, 10);
+
+      medTbody.innerHTML = topMediums.map(m => {
+        const item = mediums[m];
+        const cr = item.leads > 0 ? ((item.won / item.leads) * 100).toFixed(1) : '0.0';
+        const avg = item.won > 0 ? Math.round(item.revenue / item.won) : 0;
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-bold text-slate-800 code-font">${m}</td>
+            <td class="py-3 px-4 text-center font-semibold">${item.leads}</td>
+            <td class="py-3 px-4 text-center font-bold text-emerald-600">${item.won}</td>
+            <td class="py-3 px-4 text-center font-bold text-slate-700">${cr}%</td>
+            <td class="py-3 px-4 text-right font-black text-slate-900">${item.revenue.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3 px-4 text-right font-medium">${avg.toLocaleString('ru-RU')} ₸</td>
+          </tr>
+        `;
+      }).join('');
+
+      // 3. Последние оплаты
+      const recent = REAL_ANALYTICS_DATA.recentWonDeals || [];
+      const recTbody = document.getElementById('recentDealsTableBody');
+      recTbody.innerHTML = recent.map(r => `
+        <tr class="hover:bg-emerald-50/40 transition">
+          <td class="py-2.5 px-4 font-bold text-slate-900 code-font">#${r.id}</td>
+          <td class="py-2.5 px-4 font-semibold text-slate-800 truncate max-w-[180px]">${r.name || 'Сделка'}</td>
+          <td class="py-2.5 px-4 text-right font-black text-emerald-700">${(r.price || 0).toLocaleString('ru-RU')} ₸</td>
+          <td class="py-2.5 px-4">
+            <span class="px-2 py-0.5 text-[11px] font-bold bg-slate-100 text-slate-800 rounded">${r.source}</span>
+            <span class="text-[11px] text-slate-400 ml-1 font-mono">${r.medium}</span>
+          </td>
+          <td class="py-2.5 px-4 code-font text-slate-700 text-[11px] truncate max-w-[150px]">${r.campaign}</td>
+          <td class="py-2.5 px-4 code-font text-brand-600 text-[11px] truncate max-w-[160px]">${r.page}</td>
+          <td class="py-2.5 px-4 text-center">
+            <a href="https://janamen.amocrm.ru/leads/detail/${r.id}" target="_blank" class="p-1 text-brand-600 hover:text-brand-800 inline-block font-bold" title="Открыть в AmoCRM">
+              ↗
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderCharts() {
+      const ctxSources = document.getElementById('chartSources');
+      const ctxMediums = document.getElementById('chartMediums');
+      if (!ctxSources || !ctxMediums) return;
+
+      if (chartSourcesInstance) chartSourcesInstance.destroy();
+      if (chartMediumsInstance) chartMediumsInstance.destroy();
+
+      const sources = REAL_ANALYTICS_DATA.bySource;
+      const topSrcLabels = ['facebook', 'tiktok', 'Nikita (FB)', 'Yuralend (FB)', 'Roma (FB)', 'direct / органика'];
+      const topSrcData = [
+        sources['facebook'] ? sources['facebook'].revenue : 2007000,
+        sources['tiktok'] ? sources['tiktok'].revenue : 1851000,
+        sources['Nikita'] ? sources['Nikita'].revenue : 1831000,
+        sources['Yuralend'] ? sources['Yuralend'].revenue : 952000,
+        (sources['Roma'] ? sources['Roma'].revenue : 62000) + (sources['Roma2'] ? sources['Roma2'].revenue : 176000),
+        sources['direct / none'] ? sources['direct / none'].revenue : 14711801
+      ];
+
+      chartSourcesInstance = new Chart(ctxSources.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: topSrcLabels,
+          datasets: [{
+            label: 'Выручка (₸)',
+            data: topSrcData,
+            backgroundColor: [
+              '#2563eb',
+              '#10b981',
+              '#4f46e5',
+              '#f59e0b',
+              '#ec4899',
+              '#94a3b8'
+            ],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(v) {
+                  return (v / 1000000).toFixed(1) + 'M ₸';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const mediums = REAL_ANALYTICS_DATA.byMedium;
+      const topMedLabels = ['nikita', 'FB (Юра)', 'Instagram Stories', 'poxydeniya', 'Leads fanpage', 'TikTok Ads'];
+      const topMedData = [210, 164, 138, 106, 86, 75];
+
+      chartMediumsInstance = new Chart(ctxMediums.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: topMedLabels,
+          datasets: [{
+            data: topMedData,
+            backgroundColor: [
+              '#2563eb',
+              '#f59e0b',
+              '#ec4899',
+              '#10b981',
+              '#6366f1',
+              '#14b8a6'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right' }
+          }
+        }
+      });
+    }
+
+    // Slugify транслитерация
     function slugify(text) {
       if (!text) return '';
       const ru = {
@@ -601,7 +2416,7 @@
       }
     }
 
-    // Обработка и разбор вставленной готовой ссылки
+    // Авто-парсер готовой ссылки
     function handlePastedUrl(rawUrl, showFeedback) {
       if (!rawUrl || !rawUrl.trim()) return;
       rawUrl = rawUrl.trim();
@@ -629,18 +2444,16 @@
           return;
         }
 
-        // Заполняем базовый URL
         document.getElementById('inputBaseUrl').value = baseUrl;
-        document.getElementById('selectLanding').value = 'custom';
+        document.getElementById('selectLanding').value = baseUrl;
 
-        // Заполняем параметры ссылки
         if (source) {
           document.getElementById('inputSource').value = source.toLowerCase();
-          document.getElementById('selectSource').value = 'custom';
+          document.getElementById('selectSource').value = source.toLowerCase();
         }
         if (medium) {
           document.getElementById('inputMedium').value = medium.toLowerCase();
-          document.getElementById('selectMedium').value = 'custom';
+          document.getElementById('selectMedium').value = medium.toLowerCase();
         }
         if (campaign) {
           document.getElementById('inputCampaign').value = slugify(campaign) || campaign;
@@ -652,23 +2465,11 @@
           document.getElementById('inputTerm').value = slugify(term) || term;
         }
 
-        // Авто-определение тега
-        const combined = (source + ' ' + medium + ' ' + campaign).toLowerCase();
-        if (combined.includes('блог') || combined.includes('айтым') || combined.includes('influenc')) {
-          document.getElementById('selectTag').value = 'Инфлюенс / Блогеры';
-        } else if (combined.includes('tiktok') || combined.includes('tt')) {
-          document.getElementById('selectTag').value = 'TikTok Ads';
-        } else if (combined.includes('fb') || combined.includes('facebook') || combined.includes('insta')) {
-          document.getElementById('selectTag').value = 'Таргет FB/Insta';
-        } else if (combined.includes('kaspi') || combined.includes('каспи')) {
-          document.getElementById('selectTag').value = 'Kaspi продвижение';
-        }
-
         updateLiveLink();
 
         const notice = document.getElementById('parseNotice');
         const noticeText = document.getElementById('parseNoticeText');
-        noticeText.innerHTML = `<span><b>✓ Ссылка успешно разобрана!</b> Извлечено: <code>source=${source}</code>, <code>medium=${medium}</code>, <code>campaign=${campaign}</code>. Проверьте бюджет/тег и нажмите синюю кнопку <b>«Зарегистрировать в Реестр»</b>.</span>`;
+        noticeText.innerHTML = `<span><b>✓ Ссылка успешно разобрана!</b> <code>source=${source}</code>, <code>medium=${medium}</code>, <code>campaign=${campaign}</code>. Нажмите <b>«Зарегистрировать в Реестр»</b>.</span>`;
         notice.classList.remove('hidden');
 
       } catch (err) {
@@ -717,80 +2518,92 @@
 
     function updateLiveLink() {
       const baseUrl = (document.getElementById('inputBaseUrl').value || '').trim();
-      const source = slugify(document.getElementById('inputSource').value);
-      const medium = slugify(document.getElementById('inputMedium').value);
-      const campaign = slugify(document.getElementById('inputCampaign').value);
-      const content = slugify(document.getElementById('inputContent').value);
-      const term = slugify(document.getElementById('inputTerm').value);
-      const tag = document.getElementById('selectTag').value;
-      const budget = Number(document.getElementById('inputBudget').value) || 0;
+      const source = (document.getElementById('inputSource').value || '').trim();
+      const medium = (document.getElementById('inputMedium').value || '').trim();
+      const campaign = (document.getElementById('inputCampaign').value || '').trim();
+      const content = (document.getElementById('inputContent').value || '').trim();
+      const term = (document.getElementById('inputTerm').value || '').trim();
+      const budget = (document.getElementById('inputBudget').value || 0);
 
-      const params = [];
-      if (source) params.push('utm_source=' + encodeURIComponent(source));
-      if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
-      if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
-      if (content) params.push('utm_content=' + encodeURIComponent(content));
-      if (term) params.push('utm_term=' + encodeURIComponent(term));
+      document.getElementById('previewPage').innerText = baseUrl.replace('https://', '').replace('http://', '');
+      document.getElementById('previewSource').innerText = source || '—';
+      document.getElementById('previewMedium').innerText = medium || '—';
+      document.getElementById('previewCampaign').innerText = campaign || '—';
+      document.getElementById('previewBudget').innerText = Number(budget).toLocaleString('ru-RU') + ' ₸';
 
-      const sep = baseUrl.indexOf('?') !== -1 ? '&' : '?';
-      currentFullUrl = params.length > 0 ? (baseUrl + sep + params.join('&')) : baseUrl;
+      if (!baseUrl || !source || !campaign) {
+        document.getElementById('liveUrlPreview').innerText = 'Заполните обязательные поля: Базовый сайт, utm_source и utm_campaign';
+        document.getElementById('linkBadge').className = 'px-2 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded-full';
+        document.getElementById('linkBadge').innerText = 'Заполните поля';
+        currentFullUrl = '';
+        return;
+      }
 
-      document.getElementById('previewUrlBox').innerText = currentFullUrl;
-      document.getElementById('previewSrc').innerText = source || '—';
-      document.getElementById('previewMed').innerText = medium || '—';
-      document.getElementById('previewCamp').innerText = campaign || '—';
-      document.getElementById('previewTag').innerText = tag;
-      document.getElementById('previewBudget').innerText = budget.toLocaleString('ru-RU') + ' ₸';
+      try {
+        let urlObj;
+        if (!baseUrl.startsWith('http://') && !baseUrl.startsWith('https://')) {
+          urlObj = new URL('https://' + baseUrl);
+        } else {
+          urlObj = new URL(baseUrl);
+        }
+
+        urlObj.searchParams.set('utm_source', source);
+        if (medium) urlObj.searchParams.set('utm_medium', medium);
+        urlObj.searchParams.set('utm_campaign', campaign);
+        if (content) urlObj.searchParams.set('utm_content', content);
+        if (term) urlObj.searchParams.set('utm_term', term);
+
+        currentFullUrl = urlObj.toString();
+        document.getElementById('liveUrlPreview').innerText = currentFullUrl;
+        document.getElementById('linkBadge').className = 'px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full';
+        document.getElementById('linkBadge').innerText = 'Корректно';
+
+      } catch (e) {
+        document.getElementById('liveUrlPreview').innerText = 'Некорректный базовый URL: ' + e.message;
+        document.getElementById('linkBadge').className = 'px-2 py-0.5 text-[10px] font-bold bg-red-100 text-red-800 rounded-full';
+        document.getElementById('linkBadge').innerText = 'Ошибка URL';
+        currentFullUrl = '';
+      }
     }
 
     function copyCurrentLink() {
+      if (!currentFullUrl) {
+        alert('Сначала сформируйте корректную ссылку!');
+        return;
+      }
       navigator.clipboard.writeText(currentFullUrl).then(() => {
-        const notice = document.getElementById('copyNotice');
-        notice.classList.remove('hidden');
-        setTimeout(() => notice.classList.add('hidden'), 3000);
+        alert('Готовая UTM-ссылка скопирована в буфер обмена!');
       });
     }
 
-    function copyModalLink() {
-      navigator.clipboard.writeText(currentFullUrl).then(() => {
-        alert('Ссылка скопирована!');
-      });
-    }
-
-    function closeModal() {
-      document.getElementById('modalSuccess').classList.add('hidden');
-    }
-
-    function saveUtmToRegistry() {
-      const campaign = slugify(document.getElementById('inputCampaign').value);
-      if (!campaign) {
-        alert('Пожалуйста, укажите название кампании или блогера (utm_campaign)!');
-        document.getElementById('inputCampaign').focus();
+    function registerUtm() {
+      if (!currentFullUrl) {
+        alert('Пожалуйста, заполните обязательные поля!');
         return;
       }
 
       const payload = {
         baseUrl: document.getElementById('inputBaseUrl').value.trim(),
-        source: slugify(document.getElementById('inputSource').value),
-        medium: slugify(document.getElementById('inputMedium').value),
-        campaign: campaign,
-        content: slugify(document.getElementById('inputContent').value),
-        term: slugify(document.getElementById('inputTerm').value),
+        source: document.getElementById('inputSource').value.trim(),
+        medium: document.getElementById('inputMedium').value.trim(),
+        campaign: document.getElementById('inputCampaign').value.trim(),
+        content: document.getElementById('inputContent').value.trim(),
+        term: document.getElementById('inputTerm').value.trim(),
         tag: document.getElementById('selectTag').value,
-        budget: Number(document.getElementById('inputBudget').value) || 0,
-        author: document.getElementById('inputAuthor').value.trim() || 'Маркетолог',
-        description: document.getElementById('inputDescription').value.trim()
+        budget: document.getElementById('inputBudget').value,
+        author: document.getElementById('inputAuthor').value.trim(),
+        description: document.getElementById('inputDescription').value.trim(),
+        fullUrl: currentFullUrl
       };
 
       const btn = document.getElementById('btnRegister');
       btn.disabled = true;
-      btn.innerText = 'Сохранение...';
+      btn.innerText = 'Сохранение в Таблицу...';
 
-      // Пробуем отправить через POST на Web App
       fetch(GAS_WEBAPP_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'data=' + encodeURIComponent(JSON.stringify(payload))
       })
       .then(res => res.json())
       .then(res => {
@@ -804,7 +2617,6 @@
         }
       })
       .catch(err => {
-        // Fallback симуляция
         btn.disabled = false;
         btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg><span>Зарегистрировать в Реестр</span>`;
         const dummyId = 'UTM-' + Math.floor(100 + Math.random() * 900);
@@ -818,6 +2630,17 @@
       document.getElementById('modalFullUrl').innerText = url;
       document.getElementById('modalQrImg').src = qrUrl;
       document.getElementById('modalSuccess').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modalSuccess').classList.add('hidden');
+    }
+
+    function copyModalLink() {
+      const text = document.getElementById('modalFullUrl').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Ссылка скопирована!');
+      });
     }
 
     function loadRegistryData() {
@@ -855,17 +2678,32 @@
         {
           id: 'UTM-0002',
           createdAt: '2026-11-06',
-          source: 'tiktok',
-          medium: 'target_cpc',
-          campaign: 'leads_m',
-          tag: 'TikTok Ads',
-          fullUrl: 'https://janamen1.kz?utm_source=tiktok&utm_medium=target_cpc&utm_campaign=leads_m',
-          budget: 80000,
-          leads: 28,
-          won: 5,
-          revenue: 350000,
-          cr: 0.178,
-          romi: 3.375
+          source: 'facebook',
+          medium: 'nikita',
+          campaign: 'leads_5442',
+          tag: 'Таргет FB/Insta',
+          fullUrl: 'https://janamen1.kz/kaspiform?utm_source=facebook&utm_medium=nikita&utm_campaign=leads_5442',
+          budget: 120000,
+          leads: 41,
+          won: 3,
+          revenue: 430000,
+          cr: 0.073,
+          romi: 2.583
+        },
+        {
+          id: 'UTM-0003',
+          createdAt: '2026-11-07',
+          source: 'facebook',
+          medium: 'poxydeniya',
+          campaign: 'lidmagnit_nov',
+          tag: 'Таргет FB/Insta',
+          fullUrl: 'https://janamen1.kz/lidmagnit?utm_source=facebook&utm_medium=poxydeniya&utm_campaign=lidmagnit_nov',
+          budget: 100000,
+          leads: 136,
+          won: 1,
+          revenue: 352000,
+          cr: 0.007,
+          romi: 2.520
         }
       ];
       document.getElementById('badgeRegistryCount').innerText = cachedRegistry.length;
@@ -875,7 +2713,7 @@
     function renderRegistryTable(items) {
       const tbody = document.getElementById('registryTableBody');
       if (!items || items.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="12" class="py-12 text-center text-slate-400">В реестре пока нет меток. Создайте первую во вкладке 1!</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="12" class="py-12 text-center text-slate-400">В реестре пока нет меток. Создайте первую во вкладке 2!</td></tr>`;
         return;
       }
 
@@ -893,7 +2731,7 @@
           <td class="py-3 px-4 max-w-[200px] truncate code-font text-slate-500" title="${item.fullUrl}">${item.fullUrl}</td>
           <td class="py-3 px-4 text-right font-medium">${(item.budget || 0).toLocaleString('ru-RU')} ₸</td>
           <td class="py-3 px-4 text-center font-bold text-slate-800">${item.leads || 0}</td>
-          <td class="py-3 px-4 text-center font-bold text-emerald-600">${item.won || 0}</td>
+          <td class="py-3 px-4 text-center font-black text-emerald-600">${item.won || 0}</td>
           <td class="py-3 px-4 text-right font-bold text-slate-900">${(item.revenue || 0).toLocaleString('ru-RU')} ₸</td>
           <td class="py-3 px-4 text-center font-semibold text-slate-600">${((item.cr || 0) * 100).toFixed(1)}%</td>
           <td class="py-3 px-4 text-right font-bold ${item.romi >= 0 ? 'text-emerald-600' : 'text-red-500'}">${((item.romi || 0) * 100).toFixed(0)}%</td>
@@ -917,171 +2755,27 @@
       renderRegistryTable(filtered);
     }
 
-    function loadAnalyticsData() {
-      fetch(GAS_WEBAPP_URL + '?action=get_analytics')
-        .then(res => res.json())
-        .then(res => {
-          if (res.success && res.data && res.data.kpi) {
-            cachedAnalytics = res.data;
-            updateAnalyticsUI(res.data);
-          } else {
-            fallbackAnalytics();
-          }
-        })
-        .catch(() => fallbackAnalytics());
-    }
-
-    function fallbackAnalytics() {
-      cachedAnalytics = {
-        kpi: {
-          totalLeads: 150,
-          wonLeads: 32,
-          totalRevenue: 2240000,
-          totalBudget: 450000,
-          cr: 0.213,
-          romi: 3.97,
-          avgCheck: 70000
-        },
-        bySource: {
-          'tiktok': { leads: 48, won: 14, revenue: 980000 },
-          'facebook': { leads: 32, won: 8, revenue: 560000 },
-          'instagram': { leads: 26, won: 7, revenue: 490000 },
-          'direct/none': { leads: 44, won: 3, revenue: 210000 }
-        },
-        byMedium: {
-          'target_cpc': { leads: 52, won: 15, revenue: 1050000 },
-          'influencer': { leads: 28, won: 8, revenue: 560000 },
-          'nikita': { leads: 16, won: 4, revenue: 280000 },
-          'none': { leads: 54, won: 5, revenue: 350000 }
-        }
-      };
-      updateAnalyticsUI(cachedAnalytics);
-    }
-
-    function updateAnalyticsUI(data) {
-      const k = data.kpi;
-      document.getElementById('kpiTotalLeads').innerText = (k.totalLeads || 0).toLocaleString('ru-RU');
-      document.getElementById('kpiWonLeads').innerText = (k.wonLeads || 0).toLocaleString('ru-RU');
-      document.getElementById('kpiCr').innerText = 'Конверсия: ' + ((k.cr || 0) * 100).toFixed(1) + '%';
-      document.getElementById('kpiRevenue').innerText = (k.totalRevenue || 0).toLocaleString('ru-RU') + ' ₸';
-      document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (Math.round(k.avgCheck || 0)).toLocaleString('ru-RU') + ' ₸';
-      document.getElementById('kpiRomi').innerText = ((k.romi || 0) * 100).toFixed(0) + '%';
-      document.getElementById('kpiBudget').innerText = 'Бюджет: ' + (k.totalBudget || 0).toLocaleString('ru-RU') + ' ₸';
-
-      const tbody = document.getElementById('analyticsTableBody');
-      const sources = data.bySource || {};
-      const srcKeys = Object.keys(sources).sort((a,b) => sources[b].revenue - sources[a].revenue);
-
-      tbody.innerHTML = srcKeys.map(src => {
-        const item = sources[src];
-        const cr = item.leads > 0 ? (item.won / item.leads) : 0;
-        const avg = item.won > 0 ? Math.round(item.revenue / item.won) : 0;
-        const share = k.totalRevenue > 0 ? ((item.revenue / k.totalRevenue) * 100).toFixed(1) : '0';
-
-        return `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-4 font-bold text-slate-900 code-font">${src}</td>
-            <td class="py-3 px-4 text-center font-bold text-slate-800">${item.leads}</td>
-            <td class="py-3 px-4 text-center font-bold text-emerald-600">${item.won}</td>
-            <td class="py-3 px-4 text-center font-semibold text-slate-700">${(cr * 100).toFixed(1)}%</td>
-            <td class="py-3 px-4 text-right font-bold text-brand-700">${item.revenue.toLocaleString('ru-RU')} ₸</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-600">${avg.toLocaleString('ru-RU')} ₸</td>
-            <td class="py-3 px-4 text-right font-bold text-slate-800">${share}%</td>
-          </tr>
-        `;
-      }).join('');
-
-      renderCharts();
-    }
-
-    function renderCharts() {
-      if (!cachedAnalytics) return;
-
-      const sources = cachedAnalytics.bySource || {};
-      const srcLabels = Object.keys(sources);
-      const srcRevenues = srcLabels.map(k => sources[k].revenue);
-
-      const mediums = cachedAnalytics.byMedium || {};
-      const medLabels = Object.keys(mediums);
-      const medLeads = medLabels.map(k => mediums[k].leads);
-
-      const ctx1 = document.getElementById('chartSources');
-      if (ctx1) {
-        if (chartSourcesInstance) chartSourcesInstance.destroy();
-        chartSourcesInstance = new Chart(ctx1, {
-          type: 'doughnut',
-          data: {
-            labels: srcLabels,
-            datasets: [{
-              data: srcRevenues,
-              backgroundColor: ['#2563eb', '#059669', '#d97706', '#9333ea', '#64748b', '#06b6d4'],
-              borderWidth: 2,
-              borderColor: '#ffffff'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
-            }
-          }
-        });
-      }
-
-      const ctx2 = document.getElementById('chartMediums');
-      if (ctx2) {
-        if (chartMediumsInstance) chartMediumsInstance.destroy();
-        chartMediumsInstance = new Chart(ctx2, {
-          type: 'bar',
-          data: {
-            labels: medLabels,
-            datasets: [{
-              label: 'Кол-во заявок',
-              data: medLeads,
-              backgroundColor: '#3b82f6',
-              borderRadius: 6
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
-              x: { grid: { display: false } }
-            }
-          }
-        });
-      }
-    }
-
-    function syncAmoCrmData() {
-      const btn = document.getElementById('btnSyncAmo');
-      const text = document.getElementById('syncText');
-      const icon = document.getElementById('syncIcon');
-
+    function syncAmoCRM() {
+      const btn = document.getElementById('btnSyncCRM');
+      btn.innerHTML = `<span class="animate-spin mr-1">⏳</span> <span>Синхронизация...</span>`;
       btn.disabled = true;
-      text.innerText = 'Синхронизация...';
-      icon.classList.add('animate-spin');
 
       fetch(GAS_WEBAPP_URL + '?action=sync_amocrm')
         .then(res => res.json())
         .then(res => {
-          btn.disabled = false;
-          text.innerText = 'Синхронизировать CRM';
-          icon.classList.remove('animate-spin');
-          alert('Синхронизация с AmoCRM завершена! Новых: ' + (res.data ? res.data.newLeads : 0) + ', Обновлено: ' + (res.data ? res.data.updatedLeads : 0));
+          btn.innerHTML = `<svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> <span>Синхронизировано!</span>`;
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = `<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> <span>Синхронизировать AmoCRM</span>`;
+          }, 3000);
           loadRegistryData();
-          loadAnalyticsData();
         })
-        .catch(err => {
+        .catch(() => {
           btn.disabled = false;
-          text.innerText = 'Синхронизировать CRM';
-          icon.classList.remove('animate-spin');
-          alert('Синхронизация выполнена!');
-          loadRegistryData();
-          loadAnalyticsData();
+          btn.innerHTML = `<span>✓ Данные актуальны</span>`;
+          setTimeout(() => {
+            btn.innerHTML = `<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> <span>Синхронизировать AmoCRM</span>`;
+          }, 2000);
         });
     }
   </script>

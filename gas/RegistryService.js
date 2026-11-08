@@ -102,11 +102,11 @@ function registerUtm(data) {
   var utmId = 'UTM-' + ('000' + (nextRow - 1)).slice(-4);
   var r = nextRow;
 
-  // Формулы расчета для строки
+  // Формулы расчета для строки (Критерий: Этап 2 / Воронка продаж — Успешно реализовано 142)
   var formulaFullUrl = '=IF(C' + r + '="","", C' + r + ' & IF(ISNUMBER(FIND("?", C' + r + ')), "&", "?") & "utm_source=" & D' + r + ' & "&utm_medium=" & E' + r + ' & "&utm_campaign=" & F' + r + ' & IF(G' + r + '="","", "&utm_content=" & G' + r + ') & IF(H' + r + '="","", "&utm_term=" & H' + r + '))';
   var formulaLeads = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + '))';
-  var formulaWon = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))';
-  var formulaRevenue = '=IF(F' + r + '="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Проверка пройдена"))';
+  var formulaWon = '=IF(F' + r + '="","", COUNTIFS(\'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))';
+  var formulaRevenue = '=IF(F' + r + '="","", SUMIFS(\'📥 Сделки AmoCRM\'!$F:$F, \'📥 Сделки AmoCRM\'!$H:$H, D' + r + ', \'📥 Сделки AmoCRM\'!$J:$J, F' + r + ', \'📥 Сделки AmoCRM\'!$E:$E, "Успешно реализовано"))';
   var formulaCr = '=IF(O' + r + '>0, P' + r + '/O' + r + ', 0)';
   var formulaCpl = '=IF(O' + r + '>0, M' + r + '/O' + r + ', 0)';
   var formulaCac = '=IF(P' + r + '>0, M' + r + '/P' + r + ', 0)';
@@ -224,6 +224,19 @@ function getAnalyticsSummary() {
   var byMedium = {};
   var byCampaign = {};
 
+  var janamen1TotalLeads = 0;
+  var janamen1WonLeads = 0;
+  var janamen1Revenue = 0;
+  var janamen1Subpages = {
+    '/influence': { leads: 0, won: 0, revenue: 0 },
+    '/lidmagnit': { leads: 0, won: 0, revenue: 0 },
+    '/kaspiform': { leads: 0, won: 0, revenue: 0 },
+    '/inst-women': { leads: 0, won: 0, revenue: 0 },
+    '/inst-men': { leads: 0, won: 0, revenue: 0 },
+    '/fun': { leads: 0, won: 0, revenue: 0 },
+    '/vitamins-inst': { leads: 0, won: 0, revenue: 0 }
+  };
+
   // Бюджеты из реестра
   for (var r = 1; r < registryData.length; r++) {
     var regRow = registryData[r];
@@ -240,7 +253,7 @@ function getAnalyticsSummary() {
     totalLeads++;
     var statusCategory = d[4];
     var price = Number(d[5]) || 0;
-    var isWon = (statusCategory === 'Проверка пройдена');
+    var isWon = (statusCategory === 'Успешно реализовано');
 
     if (isWon) {
       wonLeads++;
@@ -250,6 +263,32 @@ function getAnalyticsSummary() {
     var src = String(d[7] || 'direct/none').toLowerCase();
     var med = String(d[8] || 'none').toLowerCase();
     var camp = String(d[9] || 'none').toLowerCase();
+    var landingPage = String(d[15] || '').toLowerCase();
+
+    // Отдельный учет для домена отдела маркетинга janamen1.kz
+    var isJanamen1 = (landingPage.indexOf('janamen1.kz') !== -1 || String(d[16] || '').indexOf('janamen1.kz') !== -1);
+    if (isJanamen1) {
+      janamen1TotalLeads++;
+      if (isWon) {
+        janamen1WonLeads++;
+        janamen1Revenue += price;
+      }
+      var subpage = '/';
+      if (landingPage.indexOf('/influence') !== -1) subpage = '/influence';
+      else if (landingPage.indexOf('/lidmagnit') !== -1) subpage = '/lidmagnit';
+      else if (landingPage.indexOf('/kaspiform') !== -1) subpage = '/kaspiform';
+      else if (landingPage.indexOf('/inst-women') !== -1) subpage = '/inst-women';
+      else if (landingPage.indexOf('/inst-men') !== -1) subpage = '/inst-men';
+      else if (landingPage.indexOf('/fun') !== -1) subpage = '/fun';
+      else if (landingPage.indexOf('/vitamins-inst') !== -1) subpage = '/vitamins-inst';
+
+      if (!janamen1Subpages[subpage]) janamen1Subpages[subpage] = { leads: 0, won: 0, revenue: 0 };
+      janamen1Subpages[subpage].leads++;
+      if (isWon) {
+        janamen1Subpages[subpage].won++;
+        janamen1Subpages[subpage].revenue += price;
+      }
+    }
 
     // Source stats
     if (!bySource[src]) bySource[src] = { leads: 0, won: 0, revenue: 0 };
@@ -282,6 +321,9 @@ function getAnalyticsSummary() {
   var romi = totalBudget > 0 ? ((totalRevenue - totalBudget) / totalBudget) : 0;
   var avgCheck = wonLeads > 0 ? (totalRevenue / wonLeads) : 0;
 
+  var janamen1Cr = janamen1TotalLeads > 0 ? (janamen1WonLeads / janamen1TotalLeads) : 0;
+  var janamen1AvgCheck = janamen1WonLeads > 0 ? (janamen1Revenue / janamen1WonLeads) : 0;
+
   return {
     kpi: {
       totalLeads: totalLeads,
@@ -292,6 +334,14 @@ function getAnalyticsSummary() {
       romi: romi,
       avgCheck: avgCheck
     },
+    janamen1_kpi: {
+      totalLeads: janamen1TotalLeads,
+      wonLeads: janamen1WonLeads,
+      totalRevenue: janamen1Revenue,
+      cr: janamen1Cr,
+      avgCheck: janamen1AvgCheck
+    },
+    janamen1_subpages: janamen1Subpages,
     bySource: bySource,
     byMedium: byMedium,
     byCampaign: byCampaign

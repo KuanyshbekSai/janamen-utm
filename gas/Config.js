@@ -15,39 +15,41 @@ var CONFIG = {
     ACCESS_TOKEN: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImEwYjNmMDg0MzBmYjYyNzViMDE3YjUwMmMyMDM0OGUxNDdkZjkwZDUxNDljOTQxNWMyYjVmM2FjNzkwYWE5OGU5Mzk1OWNjYTI0NDBlNTIyIn0.eyJhdWQiOiIzZDE4ZGY5Ni1lNTEyLTRiZjQtYWYxZS0wOGY3YzNkODNhNWYiLCJqdGkiOiJhMGIzZjA4NDMwZmI2Mjc1YjAxN2I1MDJjMjAzNDhlMTQ3ZGY5MGQ1MTQ5Yzk0MTVjMmI1ZjNhYzc5MGFhOThlOTM5NTljY2EyNDQwZTUyMiIsImlhdCI6MTc4NzU1NTk3NCwibmJmIjoxNzg3NTU1OTc0LCJleHAiOjE4ODIyMjQwMDAsInN1YiI6IjExODA0NDc0IiwiZ3JhbnRfdHlwZSI6IiIsImFjY291bnRfaWQiOjMyMDc5NjU4LCJiYXNlX2RvbWFpbiI6ImFtb2NybS5ydSIsInZlcnNpb24iOjIsInNjb3BlcyI6WyJwdXNoX25vdGlmaWNhdGlvbnMiLCJmaWxlcyIsImNybSIsIm5vdGlmaWNhdGlvbnMiXSwiaGFzaF91dWlkIjoiMjAwZTdmOWMtYTI5Ny00OTFlLWJjMWMtMmM3YjdiYmY3YmQ2IiwiYXBpX2RvbWFpbiI6ImFwaS1iLmFtb2NybS5ydSJ9.kbK8E9uJ0JbpcS9NfkJ4UB8e-yE05c18raojZuhSrKT4VoEMqqFRz5cHOCYRRF7JI3uqIcyJywyN_yFAKzFnsMnRr-DH2rZ03GGBpMuiR1wgQ5wy4onDkRRYxohkLvEopCrTiEZu5Y3QKIRlsd85scGUV_BR3CAPc8IVuqEfN__9sVoWPwS-sa3m3fCIMOb9_BYyiH-FuW51mq6w5xlqliW5Ok7g1jOlY_KZZwgbHjCQy8z7cC_Allw0pYYQ_Z_YquyWl-4a7ATP8Q1Kv9JcjAxsna0vH5im-jbVPrkP0kvN_qvyOYRx9HUXv4QY6EseT8reFcChgM-LFDvYVwNGjw',
     CLIENT_ID: '3d18df96-e512-4bf4-af1e-08f7c3d83a5f',
 
-    // Целевой статус подтверждения продажи: «ПРОВЕРКА ПРОЙДЕНА» (и последующие этапы доставки)
-    STATUS_VERIFIED_CHECK_ID: 87044238, // Отдел доставки: «ПРОВЕРКА ПРОЙДЕНА»
+    // Целевой статус подтверждения продажи: Этап 2, Воронка продаж — «Успешно реализовано» (Status ID 142)
+    STATUS_WON_ID: 142,
     VERIFIED_STATUS_IDS: [
-      87044238, // Отдел доставки: ПРОВЕРКА ПРОЙДЕНА
-      87044242, // Отдел доставки: ПЕРЕДАЛИ КУРЬЕРАМ
-      87065486, // Отдел доставки: ДОСТАВЛЕНО
-      87220542, // Отдел доставки: Самовывоз
-      89097766, // Отдел доставки Заграница: На доставку
-      142       // Успешно реализовано
+      142 // Успешно реализовано (Этап 2 / Воронка продаж)
     ],
     LOST_STATUS_IDS: [
-      143,      // Закрыто и не реализовано
-      87065490  // Отдел доставки: ОТКАЗАНО
+      143 // Закрыто и не реализовано
     ],
     BATCH_SIZE: 50,
-    MAX_DEALS_FETCH: 2000
+    MAX_DEALS_FETCH: 2500
   },
+
+  // Выделенный домен отдела маркетинга
+  MARKETING_DOMAIN: 'janamen1.kz',
 
   // Имена листов
   SHEETS: {
     REGISTRY: '🎯 Реестр UTM',
+    MARKETING_DASHBOARD: '📊 Отдел Маркетинга (janamen1.kz)',
     DASHBOARD: '📊 Сквозная Аналитика',
     DEALS: '📥 Сделки AmoCRM',
     TAXONOMY: '⚙️ Справочники'
   },
 
-  // Базовые сайты компании Jana Men
+  // Базовые сайты и страницы отдела маркетинга (janamen1.kz)
   DEFAULT_LANDINGS: [
-    { label: 'Jana Men Главный (janamen1.kz)', url: 'https://janamen1.kz' },
     { label: 'Jana Men Инфлюенс (janamen1.kz/influence)', url: 'https://janamen1.kz/influence' },
+    { label: 'Jana Men Лидмагнит (janamen1.kz/lidmagnit)', url: 'https://janamen1.kz/lidmagnit' },
+    { label: 'Jana Men Kaspi-форма (janamen1.kz/kaspiform)', url: 'https://janamen1.kz/kaspiform' },
+    { label: 'Jana Men Воронка / Квиз (janamen1.kz/fun)', url: 'https://janamen1.kz/fun' },
+    { label: 'Jana Men Inst Women (janamen1.kz/inst-women)', url: 'https://janamen1.kz/inst-women' },
+    { label: 'Jana Men Inst Men (janamen1.kz/inst-men)', url: 'https://janamen1.kz/inst-men' },
+    { label: 'Jana Men Главный (janamen1.kz)', url: 'https://janamen1.kz' },
     { label: 'Jana Men Health (janamenhealth.kz)', url: 'https://janamenhealth.kz' },
-    { label: 'Jana Men Women (janamenhealth.kz/womens-yakut)', url: 'https://janamenhealth.kz/womens-yakut' },
-    { label: 'JanaFit (janafit.kz)', url: 'https://janafit.kz' },
+    { label: 'Jana Men Women Yakut (janamenhealth.kz/womens-yakut)', url: 'https://janamenhealth.kz/womens-yakut' },
     { label: 'Kaspi Landing (janamen.kz/kaspi)', url: 'https://janamen.kz/kaspi' }
   ],
 
