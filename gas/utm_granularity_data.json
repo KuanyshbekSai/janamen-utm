@@ -1,0 +1,4838 @@
+{
+  "sources": [
+    {
+      "name": "direct / none",
+      "leads": 2662,
+      "won": 75,
+      "cr": 2.8,
+      "revenue": 14711801,
+      "avgCheck": 196157
+    },
+    {
+      "name": "facebook",
+      "leads": 200,
+      "won": 11,
+      "cr": 5.5,
+      "revenue": 2007000,
+      "avgCheck": 182455
+    },
+    {
+      "name": "tiktok",
+      "leads": 171,
+      "won": 9,
+      "cr": 5.3,
+      "revenue": 1851000,
+      "avgCheck": 205667
+    },
+    {
+      "name": "Nikita",
+      "leads": 642,
+      "won": 11,
+      "cr": 1.7,
+      "revenue": 1831000,
+      "avgCheck": 166455
+    },
+    {
+      "name": "Yuralend",
+      "leads": 516,
+      "won": 8,
+      "cr": 1.6,
+      "revenue": 952000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "Roma2",
+      "leads": 121,
+      "won": 1,
+      "cr": 0.8,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Roma",
+      "leads": 139,
+      "won": 1,
+      "cr": 0.7,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "ig",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yuratiktok",
+      "leads": 10,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "nikita",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "NikitaTikTok",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "janamenfun",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Yuratiktok",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "fb",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yuralend",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "janafit_telegram",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ],
+  "mediums": [
+    {
+      "name": "nikita",
+      "leads": 210,
+      "won": 13,
+      "cr": 6.2,
+      "revenue": 2460000,
+      "avgCheck": 189231
+    },
+    {
+      "name": "poxydeniya",
+      "leads": 106,
+      "won": 2,
+      "cr": 1.9,
+      "revenue": 352000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads WD6205 13.03",
+      "leads": 8,
+      "won": 1,
+      "cr": 12.5,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "FB",
+      "leads": 164,
+      "won": 2,
+      "cr": 1.2,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "Leads new fanpage 26.02",
+      "leads": 86,
+      "won": 2,
+      "cr": 2.3,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "Messages 4516 06.03",
+      "leads": 35,
+      "won": 2,
+      "cr": 5.7,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "Poxydeniya2",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "Instagram_Stories",
+      "leads": 138,
+      "won": 1,
+      "cr": 0.7,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads W wide 24.02",
+      "leads": 61,
+      "won": 1,
+      "cr": 1.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads 6185 10.03",
+      "leads": 38,
+      "won": 1,
+      "cr": 2.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Test - Leads 6183 11.03",
+      "leads": 36,
+      "won": 1,
+      "cr": 2.8,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads pohudenie7 10.03",
+      "leads": 30,
+      "won": 1,
+      "cr": 3.3,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads pohudenie2 08.03",
+      "leads": 19,
+      "won": 1,
+      "cr": 5.3,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Leads W wide WD4692 28.02",
+      "leads": 15,
+      "won": 1,
+      "cr": 6.7,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "12,03 Indira_ vid 9",
+      "leads": 84,
+      "won": 2,
+      "cr": 2.4,
+      "revenue": 124000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "Instagram_Feed",
+      "leads": 51,
+      "won": 1,
+      "cr": 2.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "Leads retarget 05.12",
+      "leads": 88,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Instagram_Reels",
+      "leads": 47,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads 6184 10.03",
+      "leads": 43,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads Ramadan 21.02",
+      "leads": 40,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "12,03 Indira_ vid 10",
+      "leads": 30,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads W wide WD4516 22.12",
+      "leads": 23,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads pohudenie5 11.03",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads WD6186 12.03",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads pohudenie1 08.03",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "paid",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya1",
+      "leads": 18,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya5",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads WD6207 13.03",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads 4692 15.03",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya4",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "social",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "12.03 Indira vid 7",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Facebook_Mobile_Feed",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya6",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Test - Leads WD4502 15.03",
+      "leads": 10,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Facebook_Mobile_Reels",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "17.03 JMyura4 креатив 6673",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Test - Leads pohudenie4 11.03",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya3",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yura",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "04,04 JM4 статика",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads wide best creo 25.04",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "17.03 JMyura4 креатив 6668",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "qw",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM yura 1 айтым видео 0966.1",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "TikTok",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "25,05 ГПТ https://janamenhealth.kz/womens-yakut &mdash; Копия",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "stories",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "09.05 womens-yakut видео аудиро ugs &mdash; Копия",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "17.05 30 women yakut &mdash; Копия",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Others",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+retarget+05.12",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "17.03 JMyura4 креатив 6677",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "04.04 статика2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM yura 1 айтым видео 0966.1 &mdash; Копия",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM3 .womens 21 статика",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "10,04JM4 статика 4.26",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads 0400 M 19.04",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "09.05 JM4 yuraforma видео аудиро &mdash; Копия &mdash; Копия",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads static1 M 28.04",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "07.05 JM3 womens-yakut статика &mdash; Копия",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM yura 1 айтым видео  0961",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads WD6186 23.05",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads W wide STC1 06.05",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "25,05 ГПТ https://janamenhealth.kz/womens-yakut",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads 6185 23.05 &mdash; Копия",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Test - Leads pohudenie3 11.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads slav_vid 06.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Test - Leads pohudenie6 10.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+pohudenie2+08.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+6185+10.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Facebook_Stories",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+w+wide+wd4692+28.02",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Threads_Feed",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "poxydeniya1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+4692+15.03",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "leads+new+fanpage+26.02",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "{{campaign.name}}",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "mpb2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ],
+  "campaigns": [
+    {
+      "name": "Leads M",
+      "leads": 167,
+      "won": 9,
+      "cr": 5.4,
+      "revenue": 1851000,
+      "avgCheck": 205667
+    },
+    {
+      "name": "Woman",
+      "leads": 173,
+      "won": 4,
+      "cr": 2.3,
+      "revenue": 704000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "JM Yura 3",
+      "leads": 39,
+      "won": 2,
+      "cr": 5.1,
+      "revenue": 478000,
+      "avgCheck": 239000
+    },
+    {
+      "name": "ad1",
+      "leads": 113,
+      "won": 2,
+      "cr": 1.8,
+      "revenue": 352000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "wide - Copy 2",
+      "leads": 16,
+      "won": 1,
+      "cr": 6.2,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "Leads 5442 / kaspiform",
+      "leads": 17,
+      "won": 2,
+      "cr": 11.8,
+      "revenue": 251000,
+      "avgCheck": 125500
+    },
+    {
+      "name": "Poxydeniya2",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "04.11 каспи жума",
+      "leads": 5,
+      "won": 1,
+      "cr": 20.0,
+      "revenue": 204000,
+      "avgCheck": 204000
+    },
+    {
+      "name": "Janamen yura 2",
+      "leads": 75,
+      "won": 1,
+      "cr": 1.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "Leads august11 / kaspiform",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "23,08 до после",
+      "leads": 9,
+      "won": 1,
+      "cr": 11.1,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "facebook",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "Айтым форма — Копия",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "Leads W wide STC1 15.06",
+      "leads": 2,
+      "won": 1,
+      "cr": 50.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "Group1",
+      "leads": 69,
+      "won": 1,
+      "cr": 1.4,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "4516",
+      "leads": 54,
+      "won": 1,
+      "cr": 1.9,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Reels2",
+      "leads": 40,
+      "won": 1,
+      "cr": 2.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Wide",
+      "leads": 39,
+      "won": 1,
+      "cr": 2.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Indiravid102",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "4516 - Copy 2",
+      "leads": 16,
+      "won": 1,
+      "cr": 6.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "ad9",
+      "leads": 65,
+      "won": 2,
+      "cr": 3.1,
+      "revenue": 124000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "Indiravid9",
+      "leads": 109,
+      "won": 1,
+      "cr": 0.9,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "Group2",
+      "leads": 88,
+      "won": 1,
+      "cr": 1.1,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "2427, 2429, 2430, 2431, 2428",
+      "leads": 33,
+      "won": 1,
+      "cr": 3.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "4516 - Copy",
+      "leads": 10,
+      "won": 1,
+      "cr": 10.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "RE8560",
+      "leads": 49,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Woman - Copy",
+      "leads": 49,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Indiravid101",
+      "leads": 33,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad10",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Static 27",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "wide",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Static 26",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Reels3 woman",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya1",
+      "leads": 18,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad16",
+      "leads": 17,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad4",
+      "leads": 16,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad12",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya5",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad11",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "KZ retarget M - Copy",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "RE1896",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya4",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "wide - Copy",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad6",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Men",
+      "leads": 12,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad2",
+      "leads": 12,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya6",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad4 &mdash; 2",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "4516 - Copy 3",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad4 &mdash; 1",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "RE2220",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970025476721",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Woman - Copy 2",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya3",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad19",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM4",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия &mdash; Копия",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad14",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM Nikita 3",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "25.08 https://janamenhealth.kz/womens-yakut1",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad17",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad6 &mdash; 2",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad15",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad5",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "utm_campaign",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "3.11",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "04.11 каспи жума — Копия",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "27.05 4353",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Айтым",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Копия 1 объекта &laquo;Айтым&raquo;",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6184",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Lead generation M 19.05",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "woman",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "re8560",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Group3",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD7163",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Новая группа объявлений с целью \"Лиды\" &mdash; Копия",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "11.09 fb_jm_kreo2 https://janamenhealth.kz/kz-yakut-weight &mdash; Копия &mdash; Копия",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Leads 3797 / kaspiform",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM3 statica2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM3 statica1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "54",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6418",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Новая группа объявлений с целью &quot;Лиды&quot;",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6917",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "21.05 Айтым",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "21.05",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "RE8560 - 04.04",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "RE7127",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "24,05",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Lead generation W 19.05",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "New Leads Ad Set - Copy 2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "poxydeniya1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad18",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "{{adset.name}}",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Test - Messages LAL 13.07",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "20,08 Весы КЗ яз",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "acc_120244520434430580",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Форма — Копия",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "✨ Каждая женщина заслуживает быть в ресурсе и чувствовать уверенность в себе. JanaWomen помогает восстановить баланс, улучшить настроение и поддержать женское здоровье каждый день.\n\nПопробуй — и почув",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ],
+  "contents": [
+    {
+      "name": "Новое объявление с целью \"Лиды\"",
+      "leads": 46,
+      "won": 3,
+      "cr": 6.5,
+      "revenue": 657000,
+      "avgCheck": 219000
+    },
+    {
+      "name": "1879323315567922",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 478000,
+      "avgCheck": 239000
+    },
+    {
+      "name": "4516",
+      "leads": 89,
+      "won": 3,
+      "cr": 3.4,
+      "revenue": 414000,
+      "avgCheck": 138000
+    },
+    {
+      "name": "WD6183",
+      "leads": 66,
+      "won": 2,
+      "cr": 3.0,
+      "revenue": 352000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "WD6205",
+      "leads": 8,
+      "won": 1,
+      "cr": 12.5,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "1877151243645953",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "5442kf",
+      "leads": 17,
+      "won": 2,
+      "cr": 11.8,
+      "revenue": 251000,
+      "avgCheck": 125500
+    },
+    {
+      "name": "Poxydeniya2",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "9635",
+      "leads": 21,
+      "won": 1,
+      "cr": 4.8,
+      "revenue": 204000,
+      "avgCheck": 204000
+    },
+    {
+      "name": "Новое объявление с целью \"Вовлеченность\"",
+      "leads": 27,
+      "won": 1,
+      "cr": 3.7,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1880950746480721",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "august11kf",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1880950531077618",
+      "leads": 20,
+      "won": 1,
+      "cr": 5.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1879323442425905",
+      "leads": 10,
+      "won": 1,
+      "cr": 10.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "0159",
+      "leads": 9,
+      "won": 1,
+      "cr": 11.1,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1880950746477842",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1879323315601842",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "STC1",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1877151406886914",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "yad5",
+      "leads": 55,
+      "won": 1,
+      "cr": 1.8,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "ad2",
+      "leads": 55,
+      "won": 1,
+      "cr": 1.8,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "yad6",
+      "leads": 51,
+      "won": 1,
+      "cr": 2.0,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Reels2",
+      "leads": 40,
+      "won": 1,
+      "cr": 2.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "WD6185",
+      "leads": 39,
+      "won": 1,
+      "cr": 2.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "WD4692",
+      "leads": 29,
+      "won": 1,
+      "cr": 3.4,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "Indiravid102",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "WD5964",
+      "leads": 19,
+      "won": 1,
+      "cr": 5.3,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "yad9",
+      "leads": 63,
+      "won": 2,
+      "cr": 3.2,
+      "revenue": 124000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "Indiravid9",
+      "leads": 109,
+      "won": 1,
+      "cr": 0.9,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "ad6",
+      "leads": 77,
+      "won": 1,
+      "cr": 1.3,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "2430",
+      "leads": 20,
+      "won": 1,
+      "cr": 5.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "ad4",
+      "leads": 77,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "8560",
+      "leads": 52,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD6184",
+      "leads": 43,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Indiravid101",
+      "leads": 33,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD4516",
+      "leads": 23,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD6186",
+      "leads": 22,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD5951",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yad10",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "27",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD3254",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "26",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Reels3",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya1",
+      "leads": 18,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad16",
+      "leads": 17,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yad12",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya5",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yad11",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "2431",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WW85",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD6207",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1896",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya4",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "link_in_bio",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "3696",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "yad2",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya6",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "5973",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD4502",
+      "leads": 10,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722915081569",
+      "leads": 10,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "2220",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD5952",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970025477121",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "5972",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323315567890",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Poxydeniya3",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad1",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1880724211129377",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad19",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877151406893378",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1880724397891634",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad14",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323315565714",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877151406883842",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad17",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad15",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad9",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6673.1",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722915139617",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442409762",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722663559009",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad5",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6673.2",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323315562850",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "fb_jm_video_6260",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "4353.1",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877877192383665",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "7501",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.1.28",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM1 0966.2",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6184",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.1.26",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "30",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM1 0966.1",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "video-output-A62E8924-8683-41E4-9BF5-F813668CBF1D-1_F2catuob.MOV",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Новое объявление с целью &quot;Лиды&quot;",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD5954",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "wd4692",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6673.3",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6668.2",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "WD7163",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "3797",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722915141185",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "fb_jm_kreo2",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877151243645185",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "fb_jm_video_6242",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442408578",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "9632",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "fb_jm_men_pohud_stat_1",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "3797kf",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877151243645217",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "0242",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura3.2.8",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM1 0966.4",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM3.yakut-form 21.3",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "54",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.2.26",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "0400",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM4.3641.3",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM 3.3512.3",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM 3.3512.4",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ST1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM3 4.1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6917",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1343",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Wstat1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "7127",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JM1 0961.2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "TT6_EQWTRMip.mp4",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "slav_vid1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "wd5964",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "wd6185",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "poxydeniya1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "ad18",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6677.1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6677.2",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6668.1",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "JMyura4.6668.3",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323315605074",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "inabattan01",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877151406883874",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442406402",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1880724211315713",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442409730",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722663558977",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722915085665",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Напишите нам",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "Получите консультацию по ссылке",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442402785",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879323442427073",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ],
+  "terms": [
+    {
+      "name": "1879323203811330",
+      "leads": 39,
+      "won": 3,
+      "cr": 7.7,
+      "revenue": 657000,
+      "avgCheck": 219000
+    },
+    {
+      "name": "1880950625402929",
+      "leads": 26,
+      "won": 2,
+      "cr": 7.7,
+      "revenue": 358000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1877150914666577",
+      "leads": 8,
+      "won": 1,
+      "cr": 12.5,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "120244613604540655",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "name": "120251168271030504",
+      "leads": 17,
+      "won": 2,
+      "cr": 11.8,
+      "revenue": 251000,
+      "avgCheck": 125500
+    },
+    {
+      "name": "6969493879921",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "name": "120251132924190504",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1879323356124337",
+      "leads": 20,
+      "won": 1,
+      "cr": 5.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1880950437302289",
+      "leads": 20,
+      "won": 1,
+      "cr": 5.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "1877151185346625",
+      "leads": 15,
+      "won": 1,
+      "cr": 6.7,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "120249647227720508",
+      "leads": 2,
+      "won": 1,
+      "cr": 50.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "name": "120244027124480655",
+      "leads": 54,
+      "won": 1,
+      "cr": 1.9,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120243936242870655",
+      "leads": 40,
+      "won": 1,
+      "cr": 2.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120244464577660655",
+      "leads": 38,
+      "won": 1,
+      "cr": 2.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "6970026915721",
+      "leads": 31,
+      "won": 1,
+      "cr": 3.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "6970026235121",
+      "leads": 29,
+      "won": 1,
+      "cr": 3.4,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120240174728510035",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120244464169570655",
+      "leads": 19,
+      "won": 1,
+      "cr": 5.3,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120244385303970655",
+      "leads": 18,
+      "won": 1,
+      "cr": 5.6,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120242773315720508",
+      "leads": 16,
+      "won": 1,
+      "cr": 6.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120244314882150655",
+      "leads": 16,
+      "won": 1,
+      "cr": 6.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120243825624690631",
+      "leads": 15,
+      "won": 1,
+      "cr": 6.7,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120244514697580655",
+      "leads": 11,
+      "won": 1,
+      "cr": 9.1,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "name": "120240423470600035",
+      "leads": 63,
+      "won": 2,
+      "cr": 3.2,
+      "revenue": 124000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "120240179063310035",
+      "leads": 109,
+      "won": 1,
+      "cr": 0.9,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "120244027295020655",
+      "leads": 33,
+      "won": 1,
+      "cr": 3.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "120243923740070631",
+      "leads": 14,
+      "won": 1,
+      "cr": 7.1,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "120244314876020655",
+      "leads": 10,
+      "won": 1,
+      "cr": 10.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "name": "120242896208230508",
+      "leads": 51,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464288830655",
+      "leads": 35,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240179046640035",
+      "leads": 33,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970026915521",
+      "leads": 25,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514890070655",
+      "leads": 25,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240029893300508",
+      "leads": 23,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923739840631",
+      "leads": 23,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240423531110035",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243762960850655",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740450631",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514588730655",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970026875921",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244384414050655",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6969493879721",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243761908740655",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244658502900655",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722723182209",
+      "leads": 17,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240423534790035",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6969493878721",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240423534780035",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120238834182480508",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740190631",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120242895573330508",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6969493878121",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970025477321",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6969493878921",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740250631",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244558393320655",
+      "leads": 11,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740080631",
+      "leads": 10,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244558307070655",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243825624640631",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244314882980655",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244053779590631",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120242896706510508",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244709785020655",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244709763300655",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244385986520631",
+      "leads": 9,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244613590820655",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464296750655",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6970025477521",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243820069650631",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923739720631",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244386197390631",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1880724129522097",
+      "leads": 8,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "6969493880121",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740480631",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243825624810631",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243949066750631",
+      "leads": 7,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923739990631",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243848671540631",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514479470655",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243848671570631",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1880724230952146",
+      "leads": 6,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923739880631",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243820100090631",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243820035210631",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244613602160655",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244053913090631",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243949066730631",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244709816030655",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1879722532024385",
+      "leads": 5,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244053779600631",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244613601290655",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464515620655",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244053913060631",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464517560655",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244386197370631",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536333030434",
+      "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243825624680631",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243949066760631",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464301010655",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244386197440631",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536333040434",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120249635074820035",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "1877877043399714",
+      "leads": 3,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120241534885720434",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246373232930580",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120245601213670508",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120241534917720434",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244386197380631",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514479460655",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244613600630655",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244385304010655",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740490631",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244385986580631",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244385986530631",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923740090631",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536315260434",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536392100434",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244783062560655",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120245188996050035",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120253839245340580",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120249635050810035",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120250864855340504",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120241805436910035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246373256240580",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120242722205220035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246119033990508",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120241794653800434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246660207420655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243366133120434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244160462200035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244160462220035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120247273097500655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244038145250035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120247133487280508",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243732132370434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243732132420434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246372929100580",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120249067174130580",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244474085170508",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244140724690508",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246372905160580",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120248873908880655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120246372866480508",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120245188854010035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120245188996030035",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120248873869590655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514588760655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514331660655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244300827980655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244514927360655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243820069640631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244709748750655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244709816020655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120243923739640631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244558393940655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244385986500631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244386197360631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536184680434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244404757650631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536279520434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536352820434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244404694190631",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120240536392110434",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "name": "120244464577640655",
+      "leads": 1,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ],
+  "combinations": [
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "JM Yura 3",
+      "content": "Новое объявление с целью \"Лиды\"",
+      "term": "none",
+      "leads": 38,
+      "won": 2,
+      "cr": 5.3,
+      "revenue": 478000,
+      "avgCheck": 239000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1879323315567922",
+      "term": "1879323203811330",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 478000,
+      "avgCheck": 239000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1877151243645953",
+      "term": "1877150914666577",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads WD6205 13.03",
+      "campaign": "wide - Copy 2",
+      "content": "WD6205",
+      "term": "120244613604540655",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 299000,
+      "avgCheck": 299000
+    },
+    {
+      "source": "facebook",
+      "medium": "nikita",
+      "campaign": "Leads 5442 / kaspiform",
+      "content": "5442kf",
+      "term": "120251168271030504",
+      "leads": 17,
+      "won": 2,
+      "cr": 11.8,
+      "revenue": 251000,
+      "avgCheck": 125500
+    },
+    {
+      "source": "Yuralend",
+      "medium": "Poxydeniya2",
+      "campaign": "Poxydeniya2",
+      "content": "Poxydeniya2",
+      "term": "6969493879921",
+      "leads": 18,
+      "won": 2,
+      "cr": 11.1,
+      "revenue": 238000,
+      "avgCheck": 119000
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "04.11 каспи жума",
+      "content": "9635",
+      "term": "none",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 204000,
+      "avgCheck": 204000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1880950746480721",
+      "term": "1880950625402929",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "nikita",
+      "campaign": "Leads august11 / kaspiform",
+      "content": "august11kf",
+      "term": "120251132924190504",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1880950531077618",
+      "term": "1880950437302289",
+      "leads": 20,
+      "won": 1,
+      "cr": 5.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1879323442425905",
+      "term": "1879323356124337",
+      "leads": 10,
+      "won": 1,
+      "cr": 10.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "23,08 до после",
+      "content": "Новое объявление с целью \"Вовлеченность\"",
+      "term": "none",
+      "leads": 9,
+      "won": 1,
+      "cr": 11.1,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "Janamen yura 2",
+      "content": "0159",
+      "term": "none",
+      "leads": 9,
+      "won": 1,
+      "cr": 11.1,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1880950746477842",
+      "term": "1880950625402929",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1879323315601842",
+      "term": "1879323203811330",
+      "leads": 4,
+      "won": 1,
+      "cr": 25.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "facebook",
+      "content": "none",
+      "term": "none",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "tiktok",
+      "medium": "nikita",
+      "campaign": "Leads M",
+      "content": "1877151406886914",
+      "term": "1877151185346625",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "Айтым форма — Копия",
+      "content": "Новое объявление с целью \"Лиды\"",
+      "term": "none",
+      "leads": 3,
+      "won": 1,
+      "cr": 33.3,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "facebook",
+      "medium": "nikita",
+      "campaign": "Leads W wide STC1 15.06",
+      "content": "STC1",
+      "term": "120249647227720508",
+      "leads": 2,
+      "won": 1,
+      "cr": 50.0,
+      "revenue": 179000,
+      "avgCheck": 179000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655",
+      "leads": 53,
+      "won": 1,
+      "cr": 1.9,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads W wide 24.02",
+      "campaign": "Reels2",
+      "content": "Reels2",
+      "term": "120243936242870655",
+      "leads": 40,
+      "won": 1,
+      "cr": 2.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads 6185 10.03",
+      "campaign": "Woman",
+      "content": "WD6185",
+      "term": "120244464577660655",
+      "leads": 37,
+      "won": 1,
+      "cr": 2.7,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "content": "yad6",
+      "term": "6970026915721",
+      "leads": 31,
+      "won": 1,
+      "cr": 3.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "content": "yad5",
+      "term": "6970026235121",
+      "leads": 29,
+      "won": 1,
+      "cr": 3.4,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Yuralend",
+      "medium": "FB",
+      "campaign": "Indiravid102",
+      "content": "Indiravid102",
+      "term": "120240174728510035",
+      "leads": 22,
+      "won": 1,
+      "cr": 4.5,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads pohudenie7 10.03",
+      "campaign": "Woman",
+      "content": "WD6183",
+      "term": "120244464169570655",
+      "leads": 19,
+      "won": 1,
+      "cr": 5.3,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads pohudenie2 08.03",
+      "campaign": "Woman",
+      "content": "WD5964",
+      "term": "120244385303970655",
+      "leads": 17,
+      "won": 1,
+      "cr": 5.9,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Messages 4516 06.03",
+      "campaign": "4516 - Copy 2",
+      "content": "4516",
+      "term": "120244314882150655",
+      "leads": 16,
+      "won": 1,
+      "cr": 6.2,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads W wide WD4692 28.02",
+      "campaign": "Wide",
+      "content": "WD4692",
+      "term": "120242773315720508",
+      "leads": 15,
+      "won": 1,
+      "cr": 6.7,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Test - Leads 6183 11.03",
+      "campaign": "Woman",
+      "content": "WD6183",
+      "term": "120244514697580655",
+      "leads": 11,
+      "won": 1,
+      "cr": 9.1,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Roma2",
+      "medium": "Instagram_Stories",
+      "campaign": "Group1",
+      "content": "ad2",
+      "term": "120243825624690631",
+      "leads": 9,
+      "won": 1,
+      "cr": 11.1,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad9",
+      "content": "yad9",
+      "term": "120240423470600035",
+      "leads": 63,
+      "won": 2,
+      "cr": 3.2,
+      "revenue": 124000,
+      "avgCheck": 62000
+    },
+    {
+      "source": "Yuralend",
+      "medium": "FB",
+      "campaign": "Indiravid9",
+      "content": "Indiravid9",
+      "term": "120240179063310035",
+      "leads": 109,
+      "won": 1,
+      "cr": 0.9,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "content": "2430",
+      "term": "120244027295020655",
+      "leads": 19,
+      "won": 1,
+      "cr": 5.3,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Messages 4516 06.03",
+      "campaign": "4516 - Copy",
+      "content": "4516",
+      "term": "120244314876020655",
+      "leads": 10,
+      "won": 1,
+      "cr": 10.0,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "source": "Roma",
+      "medium": "Instagram_Feed",
+      "campaign": "Group2",
+      "content": "ad6",
+      "term": "120243923740070631",
+      "leads": 7,
+      "won": 1,
+      "cr": 14.3,
+      "revenue": 62000,
+      "avgCheck": 62000
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads retarget 05.12",
+      "campaign": "RE8560",
+      "content": "8560",
+      "term": "120242896208230508",
+      "leads": 49,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads 6184 10.03",
+      "campaign": "Woman",
+      "content": "WD6184",
+      "term": "120244464288830655",
+      "leads": 35,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "FB",
+      "campaign": "Indiravid101",
+      "content": "Indiravid101",
+      "term": "120240179046640035",
+      "leads": 33,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "content": "yad5",
+      "term": "6970026915521",
+      "leads": 25,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Test - Leads 6183 11.03",
+      "campaign": "Woman - Copy",
+      "content": "WD6183",
+      "term": "120244514890070655",
+      "leads": 25,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads W wide WD4516 22.12",
+      "campaign": "Wide",
+      "content": "WD4516",
+      "term": "120240029893300508",
+      "leads": 23,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 9",
+      "campaign": "ad10",
+      "content": "yad10",
+      "term": "120240423531110035",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads Ramadan 21.02",
+      "campaign": "Static 27",
+      "content": "27",
+      "term": "120243762960850655",
+      "leads": 21,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads pohudenie5 11.03",
+      "campaign": "Woman",
+      "content": "WD5951",
+      "term": "120244514588730655",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "poxydeniya",
+      "campaign": "ad1",
+      "content": "yad6",
+      "term": "6970026875921",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads pohudenie1 08.03",
+      "campaign": "Woman",
+      "content": "WD3254",
+      "term": "120244384414050655",
+      "leads": 20,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads Ramadan 21.02",
+      "campaign": "Static 26",
+      "content": "26",
+      "term": "120243761908740655",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads W wide 24.02",
+      "campaign": "Reels3 woman",
+      "content": "Reels3",
+      "term": "120244658502900655",
+      "leads": 19,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "Poxydeniya1",
+      "campaign": "Poxydeniya1",
+      "content": "Poxydeniya1",
+      "term": "6969493879721",
+      "leads": 18,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Roma",
+      "medium": "Instagram_Stories",
+      "campaign": "Group1",
+      "content": "ad2",
+      "term": "120243923739840631",
+      "leads": 18,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 10",
+      "campaign": "ad12",
+      "content": "yad12",
+      "term": "120240423534790035",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "Poxydeniya5",
+      "campaign": "Poxydeniya5",
+      "content": "Poxydeniya5",
+      "term": "6969493878721",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "12,03 Indira_ vid 10",
+      "campaign": "ad11",
+      "content": "yad11",
+      "term": "120240423534780035",
+      "leads": 15,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads new fanpage 26.02",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "content": "2431",
+      "term": "120244027295020655",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads retarget 05.12",
+      "campaign": "KZ retarget M - Copy",
+      "content": "WW85",
+      "term": "120238834182480508",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Nikita",
+      "medium": "Leads retarget 05.12",
+      "campaign": "RE1896",
+      "content": "1896",
+      "term": "120242895573330508",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "facebook",
+      "medium": "none",
+      "campaign": "Janamen yura 2",
+      "content": "9635",
+      "term": "none",
+      "leads": 14,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "Yuralend",
+      "medium": "Poxydeniya4",
+      "campaign": "Poxydeniya4",
+      "content": "Poxydeniya4",
+      "term": "6969493878121",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "source": "ig",
+      "medium": "social",
+      "campaign": "none",
+      "content": "link_in_bio",
+      "term": "none",
+      "leads": 13,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    }
+  ]
+}
