@@ -96,11 +96,58 @@ def parse_lead(d):
     # Группировка основных каналов Jana Men:
     page_l = page.lower()
     clean_l = clean_path.lower()
+    blogger_text = f"{page_l} {src.lower()} {med.lower()} {cmp_.lower()} {cnt.lower()} {trm.lower()}"
+
+    # Списки блогеров из реестра инфлюенс-отдела для атрибуции:
+    mpb1_bloggers = {'saule_kuralbaevna', 'ainykshaaa', 'ainyshka', 'asylzat_erbolatovnaa', 'asylzaterbolat', 'aliyaestet', 'aliyakairatkyzy', 'madina.dreams', 'madinaamirbekova', 'qura1aikaa', 'quralai', 'hayrinis_aa', 'hairinissa', 'aknur_ydyrys', 'aknurydyrys', 'bota_abdualii', 'gaukhar_taktarbekova', 'araika.mom', 'gulayan.keneshbaeva', 'gulayan', 'aizadaalnur', 'aizada1', 'aizada_usenqyzy', 'lyazzka001', 'lyazkaa01', 'adina_tolegenova', 'adinatolegenoca', 'sitora_sidelnikova', 'sitora', 'd.guldanaa', 'guldana', 'gauhar_diary', 'gaukhar2'}
+    mpb2_bloggers = {'frolova__kristina', 'frolova_kristina', 'frolova', 'asema_kotoraya_alel', 'asema', 'akhmoldinaa', 'ramazankyzy_dana', 'meruna_ll', 'habataev.maksat', 'kazhmuratova_asiya', 'zhuldyz_zaynulina', 'dinarakaltore', 'bika_mazhenova', 'orunkeeva_kz', 'karima_turs', 'kuzenbaikyzy___', 'dankarti', 'almaznyi__', 'sharipova_zhannat', 'damirusha__', 'sarsssembaeva', 'inabattan01', 'inabattan', 'diva_boni', 'kuanysheva.dii', 'anarayerikovna'}
+    mpb3_bloggers = {'zar1nka', 'kanatkyzyy___', 'yrysgul.abdukarimova', 'gulnur_zhumagul', 'indira_nyrbekkyzyy', 'aselqyzdan', 'anar_aitzhanova_', 'timon_bmw', 'dr.nazerke_kuatkyzy', 'aya_bainiyet', 'elon.rasulovna', 'sanimka.off', '_zzhuldyzbaeva', 'alua_toltayeva', 'xamida_iles', 'armana_fitness_trainer', 'taubaeva.bayan', 'raushan_ismail'}
+
+    is_blogger = False
+    if any(b in blogger_text for b in mpb1_bloggers):
+        is_blogger = True
+        if med in UNSET or med == 'none':
+            med = 'mpb1'
+    elif any(b in blogger_text for b in mpb2_bloggers):
+        is_blogger = True
+        if med in UNSET or med == 'none':
+            med = 'mpb2'
+    elif any(b in blogger_text for b in mpb3_bloggers):
+        is_blogger = True
+        if med in UNSET or med == 'none':
+            med = 'mpb3'
+
+    if is_blogger:
+        clean_path = '/influence'
+        dom = 'janamen1.kz'
+        is_jana = True
+        if cmp_ in UNSET or cmp_ == 'none':
+            cmp_ = 'ugc_barter'
+
+    # Фан-аккаунты / Креаторы сетки:
+    fan_creators = {
+        'fan_ainagul': ['janamenfun', 'ainagul', 'доскажанова'],
+        'fan_dilnaz': ['janamen_fans', 'dilnaz', 'бекежанова'],
+        'fan_aysulu': ['janamennfans', 'janamen.edit', 'aysulu', 'кенжебаева'],
+        'fan_kamila': ['aitym.fanclub', 'kamila', 'гайсина'],
+        'fan_aida': ['janamennnfan', 'aida'],
+        'fan_adina': ['jana.men68', 'jana.menfan', 'aitymzhakupovfanacc', 'adina']
+    }
+    if med == 'fan' or 'fan' in med.lower() or 'janamenfun' in blogger_text or 'fanclub' in blogger_text:
+        med = 'fan'
+        dom = 'janamen1.kz'
+        is_jana = True
+        for f_camp, kws in fan_creators.items():
+            if any(kw in blogger_text for kw in kws):
+                if cmp_ in UNSET or cmp_ == 'none':
+                    cmp_ = f_camp
+                break
+
     if 'magnit' in clean_l or 'magnet' in clean_l or 'гайд' in clean_l or clean_l.startswith('/lidmagnit') or clean_l.startswith('/ligmagnit') or 'magnit' in page_l:
         clean_path = '/lidmagnit'
         dom = 'janamen1.kz'
         is_jana = True
-    elif 'influence' in clean_l or 'influence' in page_l:
+    elif 'influence' in clean_l or 'influence' in page_l or is_blogger:
         clean_path = '/influence'
         dom = 'janamen1.kz'
         is_jana = True
@@ -133,6 +180,7 @@ def parse_lead(d):
         'clean_path': clean_path,
         'is_jana': is_jana,
         'is_wa_aytym': is_wa_aytym,
+        'is_blogger': is_blogger,
         'name': (d.get('name') or '').strip()[:35]
     }
 
@@ -147,7 +195,7 @@ landings_all = defaultdict(agg)
 monthly_all = defaultdict(agg)
 monthly_jana = defaultdict(agg)
 
-scope_defs = ['all', 'janamen1', 'aytym_organika', 'nikita', 'yura', 'organika', 'tiktok']
+scope_defs = ['all', 'janamen1', 'aytym_organika', 'influence', 'fan', 'nikita', 'yura', 'organika', 'tiktok']
 scope_aggs = {k: agg() for k in scope_defs}
 scope_sources = {k: defaultdict(agg) for k in scope_defs}
 scope_mediums = {k: defaultdict(agg) for k in scope_defs}
@@ -190,6 +238,7 @@ for d in leads:
     clean_path = item['clean_path']
     is_jana = item['is_jana']
     is_wa_aytym = item['is_wa_aytym']
+    is_blogger = item['is_blogger']
     page = item['page']
 
     is_tagged = (src.lower() not in UNSET) or (cmp_.lower() not in UNSET) or (med.lower() not in UNSET)
@@ -218,6 +267,10 @@ for d in leads:
         matched_scopes.append('janamen1')
     if is_wa_aytym or 'айтым' in hay:
         matched_scopes.append('aytym_organika')
+    if is_blogger or 'influence' in page.lower() or 'mpb' in hay:
+        matched_scopes.append('influence')
+    if med == 'fan' or 'fan' in hay or 'fan_' in hay:
+        matched_scopes.append('fan')
     if 'nikita' in hay:
         matched_scopes.append('nikita')
     if 'yura' in hay or 'yurakv' in page.lower():

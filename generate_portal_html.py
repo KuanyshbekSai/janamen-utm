@@ -82,17 +82,29 @@ html_content = f'''<!DOCTYPE html>
       </div>
 
       <!-- НАВИГАЦИОННЫЕ ВКЛАДКИ -->
-      <nav class="flex space-x-8 -mb-px text-xs sm:text-sm font-semibold overflow-x-auto">
+      <nav class="flex space-x-6 -mb-px text-xs sm:text-sm font-semibold overflow-x-auto">
         <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-active py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
           <svg class="w-4 h-4 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          <span>1. Дашборд Отдела Маркетинга (janamen1.kz)</span>
+          <span>1. Дашборд Маркетинга</span>
           <span class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full" id="badgeNavRevenue">81.6M ₸</span>
         </button>
 
         <button onclick="switchTab('granularity')" id="tab-granularity" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
           <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-          <span>2. Полная детализация по всем UTM (5 параметров)</span>
-          <span id="badgeCombos" class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-purple-100 text-purple-800 rounded-full">251 связка janamen1.kz</span>
+          <span>2. Полная детализация UTM (5 параметров)</span>
+          <span id="badgeCombos" class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-purple-100 text-purple-800 rounded-full">251 связка</span>
+        </button>
+
+        <button onclick="switchTab('builder-bloggers')" id="tab-builder-bloggers" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <span class="text-base leading-none">🌟</span>
+          <span>3. Конструктор: Блогеры (МПБ)</span>
+          <span class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-pink-100 text-pink-800 rounded-full">Инфлюенс</span>
+        </button>
+
+        <button onclick="switchTab('builder-fans')" id="tab-builder-fans" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
+          <span class="text-base leading-none">🎬</span>
+          <span>4. Конструктор: Фан-аккаунты (Сетка)</span>
+          <span class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-indigo-100 text-indigo-800 rounded-full">TikTok & Reels</span>
         </button>
       </nav>
     </div>
@@ -191,9 +203,11 @@ html_content = f'''<!DOCTYPE html>
           <select id="filterMediumSelect" onchange="onFilterChange()" class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
             <option value="all">Все каналы</option>
             <option value="Айтым Берикович - органика">📱 Айтым Берикович - органика (WhatsApp)</option>
-            <option value="mpb1">mpb1 (Блогеры - Менеджер 1)</option>
-            <option value="mpb2">mpb2 (Блогеры - Менеджер 2)</option>
-            <option value="mpb3">mpb3 (Блогеры - Менеджер 3)</option>
+            <option value="mpb1">mpb1 (Блогеры - Анельжан)</option>
+            <option value="mpb2">mpb2 (Блогеры - Алина)</option>
+            <option value="mpb3">mpb3 (Блогеры - Алуа)</option>
+            <option value="mpb4">mpb4 (Блогеры - Дарина)</option>
+            <option value="fan">🎬 fan (Фан-аккаунты / Креаторы сетки)</option>
             <option value="nikita">nikita (Таргет Никита)</option>
             <option value="social">social (Соцсети / SMM)</option>
             <option value="paid">paid (Платная реклама)</option>
@@ -203,29 +217,36 @@ html_content = f'''<!DOCTYPE html>
 
         <div>
           <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Поиск по UTM / Кампании:</label>
-          <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="leads, kaspiform, блогер..." class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
+          <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="leads, kaspiform, блогер, fan..." class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
         </div>
       </div>
 
-      <!-- БЫСТРЫЙ ВЫБОР 5 ОСНОВНЫХ КАНАЛОВ -->
+      <!-- БЫСТРЫЙ ВЫБОР ОСНОВНЫХ КАНАЛОВ -->
       <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 text-xs">
-        <span class="text-slate-400 font-bold uppercase tracking-wider text-[11px] mr-1">5 основных каналов:</span>
+        <span class="text-slate-400 font-bold uppercase tracking-wider text-[11px] mr-1">Основные каналы:</span>
         <button onclick="resetAllFilters()" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">Все каналы</button>
         <button onclick="filterByPage('/iwa-9828')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold transition flex items-center space-x-1 shadow-sm">
           <span>📱 /iwa-9828 (WhatsApp)</span>
           <span class="px-1.5 py-0.2 text-[10px] bg-emerald-200 text-emerald-900 rounded-full font-black">181M ₸</span>
         </button>
+        <button onclick="filterByPage('/influence')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>🌟 /influence (Блогеры МПБ)</span>
+          <span class="px-1.5 py-0.2 text-[10px] bg-purple-200 text-purple-900 rounded-full font-black">1.5M ₸</span>
+        </button>
+        <button onclick="filterByMedium('fan')" class="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>🎬 Фан-аккаунты (fan)</span>
+        </button>
         <button onclick="filterByPage('/lidmagnit')" class="px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-800 border border-brand-200 font-bold transition flex items-center space-x-1 shadow-sm">
           <span>🎁 /lidmagnit* (Лидмагниты)</span>
           <span class="px-1.5 py-0.2 text-[10px] bg-blue-200 text-brand-900 rounded-full font-black">3.4k</span>
-        </button>
-        <button onclick="filterByPage('/influence')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold transition flex items-center space-x-1 shadow-sm">
-          <span>🌟 /influence (Блогеры)</span>
         </button>
         <button onclick="filterByPage('/fun')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold transition flex items-center space-x-1 shadow-sm">
           <span>⚡ /fun (Квиз)</span>
         </button>
         <button onclick="filterByPage('/smm')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>📸 /smm (Соцсети)</span>
+        </button>
+      </div>
           <span>📸 /smm (Соцсети)</span>
         </button>
       </div>
@@ -494,7 +515,331 @@ html_content = f'''<!DOCTYPE html>
 
     </div>
 
-  </main>
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 3: КОНСТРУКТОР UTM ДЛЯ БЛОГЕРОВ (МПБ) -->
+    <!-- ============================================================ -->
+    <div id="view-builder-bloggers" class="hidden space-y-6">
+      
+      <!-- ШАПКА КОНСТРУКТОРА БЛОГЕРОВ -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-indigo-500/10 border border-pink-200 shadow-sm relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-pink-100 text-pink-800 text-xs font-bold mb-2">
+              <span>🌟 Инфлюенс-маркетинг (UGC & Амбассадоры)</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Конструктор персональных UTM для Блогеров</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+              Генерирует 100% валидную ссылку для блогера с автоматической привязкой к менеджеру (mpb1, mpb2, mpb3). Исключает потери лидов в AmoCRM и формирует готовое ТЗ для отправки блогеру в WhatsApp.
+            </p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur border border-pink-200 text-xs font-bold text-pink-800 shadow-sm">
+              Целевой CR: > 3.0%
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- СЕТКА: ФОРМА И РЕЗУЛЬТАТ -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ЛЕВАЯ КОЛОНКА: ПАРАМЕТРЫ ССЫЛКИ -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+            <span>Параметры интеграции</span>
+          </h3>
+
+          <!-- МЕНЕДЖЕР -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+              1. Ответственный менеджер (utm_medium):
+            </label>
+            <select id="blgManager" onchange="updateBloggerUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-semibold text-slate-800">
+              <option value="mpb1">Анельжан (mpb1)</option>
+              <option value="mpb2" selected>Алина (mpb2)</option>
+              <option value="mpb3">Алуа (mpb3)</option>
+              <option value="mpb4">Дарина (mpb4)</option>
+            </select>
+          </div>
+
+          <!-- ПОСАДОЧНАЯ СТРАНИЦА -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+              2. Посадочная страница сайта:
+            </label>
+            <select id="blgPage" onchange="onBloggerPageChange()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-semibold text-slate-800">
+              <option value="https://janamen1.kz/influence" selected>🎯 https://janamen1.kz/influence (РЕКОМЕНДУЕТСЯ — страница блогеров)</option>
+              <option value="https://janamen1.kz/lidmagnit">🎁 https://janamen1.kz/lidmagnit (Лидмагнит / Гайд)</option>
+              <option value="https://janamen1.kz/fun">⚡ https://janamen1.kz/fun (Квиз-воронка)</option>
+              <option value="https://janamen1.kz/organika">🌿 https://janamen1.kz/organika (Органика)</option>
+              <option value="custom">✍️ Другая ссылка / Свой URL...</option>
+            </select>
+            <input type="text" id="blgCustomPage" oninput="updateBloggerUrl()" placeholder="https://janamen1.kz/..." class="hidden mt-2 w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-medium">
+          </div>
+
+          <!-- НИК БЛОГЕРА С УМНОЙ ОЧИСТКОЙ -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-bold text-slate-700 uppercase">
+                3. Никнейм блогера (utm_source):
+              </label>
+              <span class="text-[11px] text-pink-600 font-semibold">Очищается от @ и ссылок</span>
+            </div>
+            <input type="text" id="blgNick" oninput="updateBloggerUrl()" placeholder="Например: bota_abdualii, sarsssembaeva или ссылка" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-bold text-slate-800">
+            
+            <!-- БЫСТРЫЕ ЧИПСЫ ТОП-БЛОГЕРОВ ИЗ РЕЕСТРА -->
+            <div class="flex flex-wrap items-center gap-1.5 mt-2.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Из реестра:</span>
+              <button type="button" onclick="setBloggerNick('sarsssembaeva')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@sarsssembaeva</button>
+              <button type="button" onclick="setBloggerNick('asema_kotoraya_alel')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@asema</button>
+              <button type="button" onclick="setBloggerNick('frolova__kristina')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@frolova</button>
+              <button type="button" onclick="setBloggerNick('bota_abdualii')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@bota</button>
+              <button type="button" onclick="setBloggerNick('inabattan01')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@inabattan</button>
+              <button type="button" onclick="setBloggerNick('kuanysheva.dii')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@kuanysheva</button>
+              <button type="button" onclick="setBloggerNick('armana_fitness_trainer')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-pink-100 hover:text-pink-800 text-slate-700 rounded-lg transition">@armana</button>
+            </div>
+          </div>
+
+          <!-- ФОРМАТ И КАМПАНИЯ В 2 КОЛОНКИ -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                4. Формат (utm_content):
+              </label>
+              <select id="blgFormat" onchange="updateBloggerUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-semibold text-slate-800">
+                <option value="stories" selected>Stories со стикером (ТОП)</option>
+                <option value="reels_stories">Reels + Stories</option>
+                <option value="reels_bio">Ссылка в Bio профиля</option>
+                <option value="tg_post">Пост в Telegram</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                5. Кампания (utm_campaign):
+              </label>
+              <select id="blgCampaign" onchange="updateBloggerUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-pink-500 font-semibold text-slate-800">
+                <option value="ugc_barter" selected>ugc_barter (Бартер за витамины)</option>
+                <option value="paid_promo">paid_promo (Платная интеграция)</option>
+                <option value="ambassador">ambassador (Амбассадор)</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: ГОТОВАЯ ССЫЛКА И ТЗ -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- ГОТОВАЯ ССЫЛКА КАРТОЧКА -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Готовая ссылка для блогера</span>
+              </span>
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">100% Валидно</span>
+            </div>
+
+            <div class="p-3.5 bg-slate-900 rounded-2xl text-emerald-400 font-mono text-xs break-all leading-relaxed shadow-inner selection:bg-emerald-500 selection:text-slate-900" id="blgResultUrl">
+              https://janamen1.kz/influence?utm_source=sarsssembaeva&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <button onclick="copyBloggerUrl()" id="btnCopyBlgUrl" class="flex-1 py-2.5 px-4 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>Скопировать ссылку</span>
+              </button>
+              <a href="#" id="btnTestBlgUrl" target="_blank" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition flex items-center space-x-1">
+                <span>Тест ↗</span>
+              </a>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+              <div class="flex justify-between"><span>Канал (medium):</span> <b id="lblBlgMedium" class="text-slate-800">mpb2</b></div>
+              <div class="flex justify-between"><span>Блогер (source):</span> <b id="lblBlgSource" class="text-slate-800">sarsssembaeva</b></div>
+              <div class="flex justify-between"><span>Формат (content):</span> <b id="lblBlgContent" class="text-slate-800">stories</b></div>
+            </div>
+          </div>
+
+          <!-- ГОТОВОЕ ТЗ ДЛЯ WHATSAPP -->
+          <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-3xl border border-emerald-200/80 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-emerald-900 uppercase tracking-wider flex items-center space-x-1.5">
+                <span>💬 Сообщение для блогера в WhatsApp</span>
+              </span>
+            </div>
+            
+            <textarea id="blgWhatsAppText" readonly rows="4" class="w-full p-3 bg-white border border-emerald-200 rounded-xl text-xs text-slate-700 font-sans leading-relaxed resize-none focus:outline-none"></textarea>
+
+            <button onclick="copyBloggerMessage()" id="btnCopyBlgMsg" class="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span>Скопировать ТЗ для WhatsApp</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ВКЛАДКА 4: КОНСТРУКТОР UTM ДЛЯ ФАН-АККАУНТОВ (СЕТКА) -->
+    <!-- ============================================================ -->
+    <div id="view-builder-fans" class="hidden space-y-6">
+      
+      <!-- ШАПКА КОНСТРУКТОРА ФАН-АККАУНТОВ -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-blue-500/10 to-cyan-500/10 border border-indigo-200 shadow-sm relative overflow-hidden">
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold mb-2">
+              <span>🎬 Сетка видео (TikTok · Reels · YouTube Shorts)</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Конструктор UTM для Фан-аккаунтов</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+              Генерирует индивидуальные ссылки для 12+ аккаунтов сетки (Доскажанова Айнагуль и 5 креаторов). Все заявки привязываются персонально к сотруднику в AmoCRM для точного расчета бонуса по KPI.
+            </p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur border border-indigo-200 text-xs font-bold text-indigo-800 shadow-sm">
+              1 440 видео / месяц
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- СЕТКА: ПАРАМЕТРЫ И ИНСТРУКЦИЯ -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ЛЕВАЯ КОЛОНКА: ВЫБОР ПАРАМЕТРОВ -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+          <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <span>Параметры аккаунта сетки</span>
+          </h3>
+
+          <!-- КРЕАТОР / СОТРУДНИК -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+              1. Креатор / Ответственный сотрудник (utm_campaign):
+            </label>
+            <select id="fanCreator" onchange="onFanCreatorChange()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-semibold text-slate-800">
+              <option value="fan_ainagul" selected>Доскажанова Айнагуль (Руководитель) — fan_ainagul</option>
+              <option value="fan_dilnaz">Бекежанова Дильназ — fan_dilnaz</option>
+              <option value="fan_aysulu">Кенжебаева Айсулу — fan_aysulu</option>
+              <option value="fan_kamila">Гайсина Камила — fan_kamila</option>
+              <option value="fan_aida">Кенжебаева Аида — fan_aida</option>
+              <option value="fan_adina">Адина Хайдарова — fan_adina</option>
+            </select>
+          </div>
+
+          <!-- ПЛОЩАДКА И АККАУНТ В 2 КОЛОНКИ -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                2. Площадка (utm_source):
+              </label>
+              <select id="fanPlatform" onchange="updateFanUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-semibold text-slate-800">
+                <option value="tiktok" selected>TikTok (tiktok)</option>
+                <option value="instagram">Instagram Reels (instagram)</option>
+                <option value="youtube">YouTube Shorts (youtube)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                3. Фан-аккаунт сетки:
+              </label>
+              <select id="fanAccount" onchange="onFanAccountChange()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-semibold text-slate-800">
+                <!-- Заполняется динамически -->
+              </select>
+            </div>
+          </div>
+
+          <input type="text" id="fanCustomAccount" oninput="updateFanUrl()" placeholder="Введите ник аккаунта..." class="hidden w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-medium">
+
+          <!-- КУДА ВЕДЕМ ТРАФИК -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+              4. Целевая страница сайта (Куда направлять трафик):
+            </label>
+            <select id="fanPage" onchange="updateFanUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-semibold text-slate-800">
+              <option value="https://janamen1.kz/fun" selected>⚡ https://janamen1.kz/fun (ТОП ДЛЯ ВИДЕО — Квиз-воронка с тестом)</option>
+              <option value="https://janamen1.kz/lidmagnit">🎁 https://janamen1.kz/lidmagnit (Бесплатный гайд от Айтыма)</option>
+              <option value="https://janamen1.kz/iwa-9828">📱 https://janamen1.kz/iwa-9828 (WhatsApp Айтыма +7 708 377-98-28)</option>
+              <option value="https://janamen1.kz/">🌿 https://janamen1.kz/ (Главная страница)</option>
+            </select>
+          </div>
+
+          <!-- МЕСТО РАЗМЕЩЕНИЯ -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+              5. Место ссылки в аккаунте:
+            </label>
+            <select id="fanPlacement" onchange="updateFanUrl()" class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-indigo-500 font-semibold text-slate-800">
+              <option value="bio" selected>bio — Шапка профиля (Ссылка в Bio / Веб-сайт профиля)</option>
+              <option value="comment">comment — Закрепленный комментарий под видео</option>
+              <option value="stories">stories — Стикер в Instagram Stories</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: ССЫЛКА И ИНСТРУКЦИЯ -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- КАРТОЧКА ГОТОВОЙ ССЫЛКИ -->
+          <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                <span>Ссылка для шапки профиля (Bio)</span>
+              </span>
+              <span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200">utm_medium=fan</span>
+            </div>
+
+            <div class="p-3.5 bg-slate-900 rounded-2xl text-cyan-400 font-mono text-xs break-all leading-relaxed shadow-inner selection:bg-cyan-500 selection:text-slate-900" id="fanResultUrl">
+              https://janamen1.kz/fun?utm_source=tiktok&utm_medium=fan&utm_campaign=fan_ainagul&utm_content=janamenfun_bio
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <button onclick="copyFanUrl()" id="btnCopyFanUrl" class="flex-1 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition flex items-center justify-center space-x-1.5 shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>Скопировать ссылку для Bio</span>
+              </button>
+              <a href="#" id="btnTestFanUrl" target="_blank" class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition flex items-center space-x-1">
+                <span>Тест ↗</span>
+              </a>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+              <div class="flex justify-between"><span>Канал:</span> <b class="text-slate-800">fan (Фан-сетка)</b></div>
+              <div class="flex justify-between"><span>Креатор (campaign):</span> <b id="lblFanCampaign" class="text-slate-800">fan_ainagul</b></div>
+              <div class="flex justify-between"><span>Площадка (source):</span> <b id="lblFanSource" class="text-slate-800">tiktok</b></div>
+            </div>
+          </div>
+
+          <!-- ИНСТРУКЦИЯ ДЛЯ КРЕАТОРА -->
+          <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-3xl border border-indigo-200/80 shadow-sm space-y-3">
+            <h4 class="text-xs font-black text-indigo-950 uppercase tracking-wider flex items-center space-x-1.5">
+              <span>📌 Как установить ссылку в профиль</span>
+            </h4>
+            <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside leading-relaxed">
+              <li>Скопируйте ссылку выше кнопкой «Скопировать».</li>
+              <li>Откройте TikTok / Instagram / YouTube и зайдите в <b>«Изменить профиль»</b>.</li>
+              <li>Вставьте ссылку в поле <b>«Веб-сайт» / «Website»</b> (в шапке профиля).</li>
+              <li>В описании роликов пишите: <i>«Пройди тест по ссылке в шапке профиля 👆»</i>.</li>
+              <li><b>Все заявки попадут в AmoCRM под вашей фамилией</b> и пойдут в зачёт плана по лидам!</li>
+            </ol>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
   <!-- JAVASCRIPT ЛОГИКА -->
   <script>
@@ -629,6 +974,12 @@ html_content = f'''<!DOCTYPE html>
       onFilterChange();
     }}
 
+    function filterByMedium(medium) {{
+      const sel = document.getElementById('filterMediumSelect');
+      if (sel) sel.value = medium;
+      onFilterChange();
+    }}
+
     function filterByPage(page) {{
       document.getElementById('filterPageSelect').value = page;
       onFilterChange();
@@ -755,7 +1106,7 @@ html_content = f'''<!DOCTYPE html>
     // ВКЛАДКИ
     // ============================================================
     function switchTab(tabId) {{
-      const tabs = ['analytics', 'granularity'];
+      const tabs = ['analytics', 'granularity', 'builder-bloggers', 'builder-fans'];
       tabs.forEach(t => {{
         const btn = document.getElementById('tab-' + t);
         const view = document.getElementById('view-' + t);
@@ -771,6 +1122,8 @@ html_content = f'''<!DOCTYPE html>
       }});
       if (tabId === 'analytics') renderCharts();
       if (tabId === 'granularity') renderGranularityTable();
+      if (tabId === 'builder-bloggers') updateBloggerUrl();
+      if (tabId === 'builder-fans') updateFanUrl();
     }}
 
     function drilldownSubpage(subpage) {{
@@ -1302,6 +1655,185 @@ html_content = f'''<!DOCTYPE html>
       link.click();
       document.body.removeChild(link);
     }}
+
+    // ============================================================
+    // КОНСТРУКТОР UTM ДЛЯ БЛОГЕРОВ (МПБ)
+    // ============================================================
+    function cleanNick(raw) {{
+      if (!raw) return '';
+      let s = raw.trim();
+      s = s.replace(/^https?:\/\/(www\.)?instagram\.com\//i, '');
+      s = s.replace(/^https?:\/\/(www\.)?tiktok\.com\/@?/i, '');
+      s = s.replace(/^@+/, '');
+      s = s.split('?')[0].split('/')[0].trim();
+      return s.toLowerCase();
+    }}
+
+    function onBloggerPageChange() {{
+      const sel = document.getElementById('blgPage').value;
+      const inp = document.getElementById('blgCustomPage');
+      if (sel === 'custom') {{
+        inp.classList.remove('hidden');
+      }} else {{
+        inp.classList.add('hidden');
+      }}
+      updateBloggerUrl();
+    }}
+
+    function setBloggerNick(nick) {{
+      document.getElementById('blgNick').value = nick;
+      updateBloggerUrl();
+    }}
+
+    function updateBloggerUrl() {{
+      const elManager = document.getElementById('blgManager');
+      if (!elManager) return;
+      const manager = elManager.value;
+      const pageSel = document.getElementById('blgPage').value;
+      const customPage = document.getElementById('blgCustomPage').value.trim();
+      let baseUrl = pageSel === 'custom' ? (customPage || 'https://janamen1.kz/influence') : pageSel;
+      
+      const rawNick = document.getElementById('blgNick').value;
+      const source = cleanNick(rawNick) || 'sarsssembaeva';
+      const format = document.getElementById('blgFormat').value;
+      const campaign = document.getElementById('blgCampaign').value;
+
+      baseUrl = baseUrl.replace(/\/+$/, '');
+      const url = baseUrl + '?utm_source=' + encodeURIComponent(source) +
+                  '&utm_medium=' + encodeURIComponent(manager) +
+                  '&utm_campaign=' + encodeURIComponent(campaign) +
+                  '&utm_content=' + encodeURIComponent(format);
+
+      document.getElementById('blgResultUrl').innerText = url;
+      document.getElementById('btnTestBlgUrl').href = url;
+      document.getElementById('lblBlgMedium').innerText = manager;
+      document.getElementById('lblBlgSource').innerText = source;
+      document.getElementById('lblBlgContent').innerText = format;
+
+      const waText = "Сәлеметсіз бе! 🌿\\n\\nВот ваша персональная ссылка для отметки в Stories:\\n" + url + "\\n\\nПожалуйста, добавьте её кликабельным стикером-наклейкой в Stories (текст на стикере: «Заказать витамины Jana Men» или «Пройти тест»).\\nСпасибо большое!";
+      document.getElementById('blgWhatsAppText').value = waText;
+    }}
+
+    function copyBloggerUrl() {{
+      const url = document.getElementById('blgResultUrl').innerText.trim();
+      navigator.clipboard.writeText(url).then(() => {{
+        const btn = document.getElementById('btnCopyBlgUrl');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="text-white font-bold">Скопировано! ✅</span>';
+        setTimeout(() => {{ btn.innerHTML = orig; }}, 2000);
+      }});
+    }}
+
+    function copyBloggerMessage() {{
+      const txt = document.getElementById('blgWhatsAppText').value;
+      navigator.clipboard.writeText(txt).then(() => {{
+        const btn = document.getElementById('btnCopyBlgMsg');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="text-white font-bold">ТЗ скопировано! ✅ Вставьте в WhatsApp</span>';
+        setTimeout(() => {{ btn.innerHTML = orig; }}, 2000);
+      }});
+    }}
+
+    // ============================================================
+    // КОНСТРУКТОР UTM ДЛЯ ФАН-АККАУНТОВ (СЕТКА)
+    // ============================================================
+    const FAN_ACCOUNTS_DATA = {{
+      'fan_ainagul': [
+        {{ label: '@janamenfun (TikTok / Reels)', nick: 'janamenfun' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ],
+      'fan_dilnaz': [
+        {{ label: '@janamen_fans (TikTok / Inst)', nick: 'janamen_fans' }},
+        {{ label: '@janamen_fanss (YouTube Shorts)', nick: 'janamen_fanss' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ],
+      'fan_aysulu': [
+        {{ label: '@janamennfans (TikTok / Inst)', nick: 'janamennfans' }},
+        {{ label: '@janamen.edit (Сетка 2)', nick: 'janamen.edit' }},
+        {{ label: '@janamenaitymfan (Shorts)', nick: 'janamenaitymfan' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ],
+      'fan_kamila': [
+        {{ label: '@aitym.fanclub (TikTok / Inst)', nick: 'aitym.fanclub' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ],
+      'fan_aida': [
+        {{ label: '@janamennn.fan (TikTok)', nick: 'janamennn.fan' }},
+        {{ label: '@janamennnfan (Inst / Shorts)', nick: 'janamennnfan' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ],
+      'fan_adina': [
+        {{ label: '@jana.men68 (TikTok)', nick: 'jana.men68' }},
+        {{ label: '@aitymzhakupovfanacc (Inst)', nick: 'aitymzhakupovfanacc' }},
+        {{ label: '@jana.menfan (TikTok 2)', nick: 'jana.menfan' }},
+        {{ label: '@janamen_fan (Inst 2)', nick: 'janamen_fan' }},
+        {{ label: 'Другой аккаунт...', nick: 'custom' }}
+      ]
+    }};
+
+    function onFanCreatorChange() {{
+      const elCreator = document.getElementById('fanCreator');
+      if (!elCreator) return;
+      const creator = elCreator.value;
+      const accSelect = document.getElementById('fanAccount');
+      const accounts = FAN_ACCOUNTS_DATA[creator] || [{{ label: 'Другой аккаунт...', nick: 'custom' }}];
+
+      accSelect.innerHTML = accounts.map(a => `<option value="${{a.nick}}">${{a.label}}</option>`).join('');
+      onFanAccountChange();
+    }}
+
+    function onFanAccountChange() {{
+      const val = document.getElementById('fanAccount').value;
+      const inp = document.getElementById('fanCustomAccount');
+      if (val === 'custom') {{
+        inp.classList.remove('hidden');
+      }} else {{
+        inp.classList.add('hidden');
+      }}
+      updateFanUrl();
+    }}
+
+    function updateFanUrl() {{
+      const elCreator = document.getElementById('fanCreator');
+      if (!elCreator) return;
+      const creator = elCreator.value;
+      const platform = document.getElementById('fanPlatform').value;
+      const accSel = document.getElementById('fanAccount').value;
+      const customAcc = document.getElementById('fanCustomAccount').value.trim();
+      const rawNick = accSel === 'custom' ? (customAcc || 'fan_acc') : accSel;
+      const nickClean = rawNick.replace(/^@/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+
+      const page = document.getElementById('fanPage').value.replace(/\/+$/, '');
+      const placement = document.getElementById('fanPlacement').value;
+
+      const content = nickClean + '_' + placement;
+
+      const url = page + '?utm_source=' + encodeURIComponent(platform) +
+                  '&utm_medium=fan' +
+                  '&utm_campaign=' + encodeURIComponent(creator) +
+                  '&utm_content=' + encodeURIComponent(content);
+
+      document.getElementById('fanResultUrl').innerText = url;
+      document.getElementById('btnTestFanUrl').href = url;
+      document.getElementById('lblFanCampaign').innerText = creator;
+      document.getElementById('lblFanSource').innerText = platform;
+    }}
+
+    function copyFanUrl() {{
+      const url = document.getElementById('fanResultUrl').innerText.trim();
+      navigator.clipboard.writeText(url).then(() => {{
+        const btn = document.getElementById('btnCopyFanUrl');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="text-white font-bold">Ссылка скопирована! ✅</span>';
+        setTimeout(() => {{ btn.innerHTML = orig; }}, 2000);
+      }});
+    }}
+
+    // Инициализация конструкторов при старте:
+    setTimeout(() => {{
+      onFanCreatorChange();
+      updateBloggerUrl();
+    }}, 100);
 
     // ============================================================
     // СИНХРОНИЗАЦИЯ AMOCRM

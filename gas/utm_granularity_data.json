@@ -374,7 +374,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 14,
@@ -384,12 +384,12 @@
         "avgCheck": 179000
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "kazhmuratova_asiya",
         "term": "none",
         "leads": 15,
@@ -474,12 +474,12 @@
         "avgCheck": 156500
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "asema_kotoraya_alel",
         "term": "none",
         "leads": 13,
@@ -489,12 +489,12 @@
         "avgCheck": 299000
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "sharipova_zhannat",
         "term": "none",
         "leads": 11,
@@ -864,11 +864,11 @@
         "avgCheck": 176000
       },
       {
-        "landing": "janamenhealth.kz/lp/women",
-        "domain": "janamenhealth.kz",
+        "landing": "janamen1.kz/lp/women",
+        "domain": "janamen1.kz",
         "path": "/lp/women",
         "source": "Nikita",
-        "medium": "Leads new fanpage 26.02",
+        "medium": "fan",
         "campaign": "4516",
         "content": "4516",
         "term": "120244027124480655",
@@ -954,12 +954,12 @@
         "avgCheck": 176000
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "frolova_kristina",
         "term": "none",
         "leads": 25,
@@ -1224,11 +1224,11 @@
         "avgCheck": 62000
       },
       {
-        "landing": "janamenhealth.kz/forall",
-        "domain": "janamenhealth.kz",
+        "landing": "janamen1.kz/forall",
+        "domain": "janamen1.kz",
         "path": "/forall",
         "source": "Nikita",
-        "medium": "Leads new fanpage 26.02",
+        "medium": "fan",
         "campaign": "2427, 2429, 2430, 2431, 2428",
         "content": "2430",
         "term": "120244027295020655",
@@ -1739,7 +1739,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "sarsssembaeva",
         "term": "none",
         "leads": 19,
@@ -1824,12 +1824,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "aizada_usenqyzy",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 16,
@@ -1899,11 +1899,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamenhealth.kz/forall",
-        "domain": "janamenhealth.kz",
+        "landing": "janamen1.kz/forall",
+        "domain": "janamen1.kz",
         "path": "/forall",
         "source": "Nikita",
-        "medium": "Leads new fanpage 26.02",
+        "medium": "fan",
         "campaign": "2427, 2429, 2430, 2431, 2428",
         "content": "2431",
         "term": "120244027295020655",
@@ -2034,12 +2034,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "aliyakairatkyzy",
         "term": "none",
         "leads": 12,
@@ -2049,12 +2049,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "zar1nka",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 12,
@@ -2199,12 +2199,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "ramazankyzy_dana",
         "term": "none",
         "leads": 11,
@@ -2214,12 +2214,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "aselqyzdan",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 11,
@@ -2304,12 +2304,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "quralai",
         "term": "none",
         "leads": 10,
@@ -2424,12 +2424,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "kanatkyzyy___",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 9,
@@ -2924,7 +2924,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "inabattan01",
         "term": "none",
         "leads": 5,
@@ -2979,12 +2979,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "bika_mazhenova",
         "term": "none",
         "leads": 5,
@@ -3014,7 +3014,7 @@
         "path": "/influence",
         "source": "armana_fitness_trainer",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 5,
@@ -4584,11 +4584,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamenhealth.kz/newmain",
-        "domain": "janamenhealth.kz",
+        "landing": "janamen1.kz/newmain",
+        "domain": "janamen1.kz",
         "path": "/newmain",
         "source": "janamenfun",
-        "medium": "stories",
+        "medium": "fan",
         "campaign": "utm_campaign",
         "content": "none",
         "term": "none",
@@ -5214,12 +5214,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "alua_toltayeva",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -5259,12 +5259,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "gulnur_zhumagul",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -5289,11 +5289,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "facebook",
-        "medium": "none",
+        "medium": "mpb3",
         "campaign": "Janamen yura 2",
         "content": "Новое объявление с целью \"Лиды\"",
         "term": "none",
@@ -5324,7 +5324,7 @@
         "path": "/influence",
         "source": "_zzhuldyzbaeva",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -5334,12 +5334,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "dinarakaltore",
         "term": "none",
         "leads": 2,
@@ -5354,7 +5354,7 @@
         "path": "/influence",
         "source": "elon.rasulovna",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -6849,11 +6849,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamenhealth.kz/lp/men",
-        "domain": "janamenhealth.kz",
+        "landing": "janamen1.kz/lp/men",
+        "domain": "janamen1.kz",
         "path": "/lp/men",
         "source": "nikita",
-        "medium": "leads+new+fanpage+26.02",
+        "medium": "fan",
         "campaign": "4516",
         "content": "4516",
         "term": "120244027124480655",
@@ -8019,12 +8019,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "gaukhar2",
         "term": "none",
         "leads": 1,
@@ -8259,12 +8259,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "ainyshka",
         "term": "none",
         "leads": 1,
@@ -8289,11 +8289,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "facebook",
-        "medium": "none",
+        "medium": "mpb1",
         "campaign": "JM Yura 3",
         "content": "Новое объявление с целью \"Лиды\"",
         "term": "none",
@@ -8559,12 +8559,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "kuzenbaikyzy___",
         "term": "none",
         "leads": 1,
@@ -8579,7 +8579,7 @@
         "path": "/influence",
         "source": "xamida_iles",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 1,
@@ -8709,12 +8709,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "dankarti",
         "term": "none",
         "leads": 1,
@@ -8744,7 +8744,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb1",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "gaukhar_taktarbekova",
         "term": "none",
         "leads": 1,
@@ -8789,7 +8789,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "diva_boni",
         "term": "none",
         "leads": 1,
@@ -8829,12 +8829,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "asylzaterbolat",
         "term": "none",
         "leads": 1,
@@ -8844,12 +8844,12 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
+        "landing": "janamen1.kz/influence",
         "domain": "janamen1.kz",
-        "path": "/organika",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "aknurydyrys",
         "term": "none",
         "leads": 1,
@@ -8894,7 +8894,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb1",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "saule_kuralbaevna",
         "term": "none",
         "leads": 1,
@@ -8909,7 +8909,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "anarayerikovna",
         "term": "none",
         "leads": 1,
@@ -9568,7 +9568,7 @@
         "domain": "janamen1.kz",
         "path": "/iwa-9828",
         "source": "janamenfun",
-        "medium": "Айтым Берикович - органика",
+        "medium": "fan",
         "campaign": "utm_campaign",
         "content": "link_in_bio",
         "term": "none",
@@ -10188,7 +10188,7 @@
       "mediums": [
         {
           "name": "Айтым Берикович - органика",
-          "leads": 18086,
+          "leads": 18085,
           "won": 1076,
           "cr": 5.9,
           "revenue": 181163000,
@@ -10196,11 +10196,11 @@
         },
         {
           "name": "none",
-          "leads": 13272,
-          "won": 452,
+          "leads": 13107,
+          "won": 447,
           "cr": 3.4,
-          "revenue": 78196601,
-          "avgCheck": 173001
+          "revenue": 77067601,
+          "avgCheck": 172411
         },
         {
           "name": "nikita",
@@ -10209,6 +10209,14 @@
           "cr": 3.8,
           "revenue": 17369000,
           "avgCheck": 173690
+        },
+        {
+          "name": "mpb2",
+          "leads": 126,
+          "won": 7,
+          "cr": 5.6,
+          "revenue": 1487000,
+          "avgCheck": 212429
         },
         {
           "name": "social",
@@ -10225,14 +10233,6 @@
           "cr": 5.6,
           "revenue": 475000,
           "avgCheck": 237500
-        },
-        {
-          "name": "mpb2",
-          "leads": 42,
-          "won": 2,
-          "cr": 4.8,
-          "revenue": 358000,
-          "avgCheck": 179000
         },
         {
           "name": "poxydeniya",
@@ -10275,10 +10275,10 @@
           "avgCheck": 119000
         },
         {
-          "name": "Leads new fanpage 26.02",
-          "leads": 86,
+          "name": "fan",
+          "leads": 90,
           "won": 2,
-          "cr": 2.3,
+          "cr": 2.2,
           "revenue": 238000,
           "avgCheck": 119000
         },
@@ -10389,6 +10389,22 @@
         {
           "name": "yurakv статика &mdash; Копия",
           "leads": 359,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "mpb1",
+          "leads": 51,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "mpb3",
+          "leads": 48,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -10555,14 +10571,6 @@
           "avgCheck": 0
         },
         {
-          "name": "mpb3",
-          "leads": 10,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "04,04 JM4 статика",
           "leads": 9,
           "won": 0,
@@ -10603,14 +10611,6 @@
           "avgCheck": 0
         },
         {
-          "name": "mpb1",
-          "leads": 8,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "Poxydeniya3",
           "leads": 7,
           "won": 0,
@@ -10636,14 +10636,6 @@
         },
         {
           "name": "TikTok",
-          "leads": 4,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
-          "name": "stories",
           "leads": 4,
           "won": 0,
           "cr": 0.0,
@@ -10732,6 +10724,14 @@
         },
         {
           "name": "17.03 JMyura4 креатив 6677",
+          "leads": 2,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "stories",
           "leads": 2,
           "won": 0,
           "cr": 0.0,
@@ -10947,14 +10947,6 @@
           "avgCheck": 0
         },
         {
-          "name": "leads+new+fanpage+26.02",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "{{campaign.name}}",
           "leads": 1,
           "won": 0,
@@ -11062,11 +11054,11 @@
         },
         {
           "name": "none",
-          "leads": 13404,
-          "won": 456,
+          "leads": 13190,
+          "won": 449,
           "cr": 3.4,
-          "revenue": 78567601,
-          "avgCheck": 172297
+          "revenue": 77080601,
+          "avgCheck": 171672
         },
         {
           "name": "Leads 5442 / kaspiform",
@@ -11099,6 +11091,14 @@
           "cr": 6.5,
           "revenue": 1686000,
           "avgCheck": 140500
+        },
+        {
+          "name": "ugc_barter",
+          "leads": 214,
+          "won": 7,
+          "cr": 3.3,
+          "revenue": 1487000,
+          "avgCheck": 212429
         },
         {
           "name": "Leads wide+ 08.10",
@@ -17463,11 +17463,11 @@
   },
   "janamen1": {
     "totals": {
-      "leads": 32261,
-      "won": 1559,
-      "revenue": 262793800,
+      "leads": 32350,
+      "won": 1561,
+      "revenue": 263031800,
       "cr": 4.8,
-      "avgCheck": 168566
+      "avgCheck": 168502
     },
     "combos": [
       {
@@ -17755,7 +17755,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 14,
@@ -17765,11 +17765,11 @@
         "avgCheck": 179000
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "kazhmuratova_asiya",
         "term": "none",
         "leads": 15,
@@ -17849,11 +17849,11 @@
         "avgCheck": 156500
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "asema_kotoraya_alel",
         "term": "none",
         "leads": 13,
@@ -17863,11 +17863,11 @@
         "avgCheck": 299000
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "sharipova_zhannat",
         "term": "none",
         "leads": 11,
@@ -18003,6 +18003,20 @@
         "avgCheck": 176000
       },
       {
+        "landing": "janamen1.kz/lp/women",
+        "path": "/lp/women",
+        "source": "Nikita",
+        "medium": "fan",
+        "campaign": "4516",
+        "content": "4516",
+        "term": "120244027124480655",
+        "leads": 53,
+        "won": 1,
+        "cr": 1.9,
+        "revenue": 176000,
+        "avgCheck": 176000
+      },
+      {
         "landing": "janamen1.kz/inst-women",
         "path": "/inst-women",
         "source": "facebook",
@@ -18017,11 +18031,11 @@
         "avgCheck": 176000
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "frolova_kristina",
         "term": "none",
         "leads": 25,
@@ -18141,6 +18155,20 @@
         "cr": 100.0,
         "revenue": 112000,
         "avgCheck": 112000
+      },
+      {
+        "landing": "janamen1.kz/forall",
+        "path": "/forall",
+        "source": "Nikita",
+        "medium": "fan",
+        "campaign": "2427, 2429, 2430, 2431, 2428",
+        "content": "2430",
+        "term": "120244027295020655",
+        "leads": 19,
+        "won": 1,
+        "cr": 5.3,
+        "revenue": 62000,
+        "avgCheck": 62000
       },
       {
         "landing": "janamen1.kz/iwa-9828",
@@ -18385,7 +18413,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "sarsssembaeva",
         "term": "none",
         "leads": 19,
@@ -18437,11 +18465,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "aizada_usenqyzy",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 16,
@@ -18459,6 +18487,20 @@
         "content": "yurakv8131",
         "term": "120242311063150035",
         "leads": 15,
+        "won": 0,
+        "cr": 0.0,
+        "revenue": 0,
+        "avgCheck": 0
+      },
+      {
+        "landing": "janamen1.kz/forall",
+        "path": "/forall",
+        "source": "Nikita",
+        "medium": "fan",
+        "campaign": "2427, 2429, 2430, 2431, 2428",
+        "content": "2431",
+        "term": "120244027295020655",
+        "leads": 14,
         "won": 0,
         "cr": 0.0,
         "revenue": 0,
@@ -18493,11 +18535,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "aliyakairatkyzy",
         "term": "none",
         "leads": 12,
@@ -18507,11 +18549,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "zar1nka",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 12,
@@ -18591,11 +18633,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "ramazankyzy_dana",
         "term": "none",
         "leads": 11,
@@ -18605,11 +18647,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "aselqyzdan",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 11,
@@ -18675,11 +18717,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "quralai",
         "term": "none",
         "leads": 10,
@@ -18717,11 +18759,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "kanatkyzyy___",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 9,
@@ -18889,7 +18931,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "inabattan01",
         "term": "none",
         "leads": 5,
@@ -18941,11 +18983,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "bika_mazhenova",
         "term": "none",
         "leads": 5,
@@ -18973,7 +19015,7 @@
         "path": "/influence",
         "source": "armana_fitness_trainer",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 5,
@@ -19347,6 +19389,20 @@
         "avgCheck": 0
       },
       {
+        "landing": "janamen1.kz/newmain",
+        "path": "/newmain",
+        "source": "janamenfun",
+        "medium": "fan",
+        "campaign": "utm_campaign",
+        "content": "none",
+        "term": "none",
+        "leads": 2,
+        "won": 0,
+        "cr": 0.0,
+        "revenue": 0,
+        "avgCheck": 0
+      },
+      {
         "landing": "janamen1.kz/lidmagnit",
         "path": "/lidmagnit",
         "source": "roma2",
@@ -19683,11 +19739,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "alua_toltayeva",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -19725,11 +19781,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "gulnur_zhumagul",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb3",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -19753,10 +19809,10 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "facebook",
-        "medium": "none",
+        "medium": "mpb3",
         "campaign": "Janamen yura 2",
         "content": "Новое объявление с целью \"Лиды\"",
         "term": "none",
@@ -19785,7 +19841,7 @@
         "path": "/influence",
         "source": "_zzhuldyzbaeva",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -19795,11 +19851,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "dinarakaltore",
         "term": "none",
         "leads": 2,
@@ -19813,7 +19869,7 @@
         "path": "/influence",
         "source": "elon.rasulovna",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 2,
@@ -20013,6 +20069,20 @@
         "content": "Jana Men",
         "term": "none",
         "leads": 2,
+        "won": 0,
+        "cr": 0.0,
+        "revenue": 0,
+        "avgCheck": 0
+      },
+      {
+        "landing": "janamen1.kz/lp/men",
+        "path": "/lp/men",
+        "source": "nikita",
+        "medium": "fan",
+        "campaign": "4516",
+        "content": "4516",
+        "term": "120244027124480655",
+        "leads": 1,
         "won": 0,
         "cr": 0.0,
         "revenue": 0,
@@ -20411,11 +20481,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "gaukhar2",
         "term": "none",
         "leads": 1,
@@ -20635,11 +20705,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "ainyshka",
         "term": "none",
         "leads": 1,
@@ -20663,10 +20733,10 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "facebook",
-        "medium": "none",
+        "medium": "mpb1",
         "campaign": "JM Yura 3",
         "content": "Новое объявление с целью \"Лиды\"",
         "term": "none",
@@ -20901,11 +20971,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "kuzenbaikyzy___",
         "term": "none",
         "leads": 1,
@@ -20919,7 +20989,7 @@
         "path": "/influence",
         "source": "xamida_iles",
         "medium": "mpb3",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "none",
         "term": "none",
         "leads": 1,
@@ -21041,11 +21111,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb2",
+        "campaign": "ugc_barter",
         "content": "dankarti",
         "term": "none",
         "leads": 1,
@@ -21073,7 +21143,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb1",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "gaukhar_taktarbekova",
         "term": "none",
         "leads": 1,
@@ -21115,7 +21185,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "diva_boni",
         "term": "none",
         "leads": 1,
@@ -21153,11 +21223,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "asylzaterbolat",
         "term": "none",
         "leads": 1,
@@ -21167,11 +21237,11 @@
         "avgCheck": 0
       },
       {
-        "landing": "janamen1.kz/organika",
-        "path": "/organika",
+        "landing": "janamen1.kz/influence",
+        "path": "/influence",
         "source": "direct/none",
-        "medium": "none",
-        "campaign": "none",
+        "medium": "mpb1",
+        "campaign": "ugc_barter",
         "content": "aknurydyrys",
         "term": "none",
         "leads": 1,
@@ -21213,7 +21283,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb1",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "saule_kuralbaevna",
         "term": "none",
         "leads": 1,
@@ -21227,7 +21297,7 @@
         "path": "/influence",
         "source": "direct/none",
         "medium": "mpb2",
-        "campaign": "none",
+        "campaign": "ugc_barter",
         "content": "anarayerikovna",
         "term": "none",
         "leads": 1,
@@ -21842,7 +21912,7 @@
         "landing": "janamen1.kz/iwa-9828",
         "path": "/iwa-9828",
         "source": "janamenfun",
-        "medium": "Айтым Берикович - органика",
+        "medium": "fan",
         "campaign": "utm_campaign",
         "content": "link_in_bio",
         "term": "none",
@@ -22191,11 +22261,11 @@
         },
         {
           "name": "Nikita",
-          "leads": 53,
-          "won": 2,
-          "cr": 3.8,
-          "revenue": 528000,
-          "avgCheck": 264000
+          "leads": 139,
+          "won": 4,
+          "cr": 2.9,
+          "revenue": 766000,
+          "avgCheck": 191500
         },
         {
           "name": "fb",
@@ -22248,6 +22318,14 @@
         {
           "name": "armana_fitness_trainer",
           "leads": 5,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "janamenfun",
+          "leads": 3,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -22342,6 +22420,14 @@
           "avgCheck": 0
         },
         {
+          "name": "nikita",
+          "leads": 1,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
           "name": "NikitaTikTok",
           "leads": 1,
           "won": 0,
@@ -22382,14 +22468,6 @@
           "avgCheck": 0
         },
         {
-          "name": "janamenfun",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "Roma2",
           "leads": 1,
           "won": 0,
@@ -22409,7 +22487,7 @@
       "mediums": [
         {
           "name": "Айтым Берикович - органика",
-          "leads": 18086,
+          "leads": 18085,
           "won": 1076,
           "cr": 5.9,
           "revenue": 181163000,
@@ -22417,11 +22495,11 @@
         },
         {
           "name": "none",
-          "leads": 10686,
-          "won": 375,
+          "leads": 10521,
+          "won": 370,
           "cr": 3.5,
-          "revenue": 63106800,
-          "avgCheck": 168285
+          "revenue": 61977800,
+          "avgCheck": 167508
         },
         {
           "name": "nikita",
@@ -22430,6 +22508,14 @@
           "cr": 3.7,
           "revenue": 15339000,
           "avgCheck": 170433
+        },
+        {
+          "name": "mpb2",
+          "leads": 126,
+          "won": 7,
+          "cr": 5.6,
+          "revenue": 1487000,
+          "avgCheck": 212429
         },
         {
           "name": "social",
@@ -22448,14 +22534,6 @@
           "avgCheck": 237500
         },
         {
-          "name": "mpb2",
-          "leads": 42,
-          "won": 2,
-          "cr": 4.8,
-          "revenue": 358000,
-          "avgCheck": 179000
-        },
-        {
           "name": "12.04 yurakv &mdash; Копия &mdash; Копия",
           "leads": 43,
           "won": 2,
@@ -22470,6 +22548,14 @@
           "cr": 9.1,
           "revenue": 264000,
           "avgCheck": 264000
+        },
+        {
+          "name": "fan",
+          "leads": 90,
+          "won": 2,
+          "cr": 2.2,
+          "revenue": 238000,
+          "avgCheck": 119000
         },
         {
           "name": "yurakv статика",
@@ -22496,6 +22582,22 @@
           "avgCheck": 0
         },
         {
+          "name": "mpb1",
+          "leads": 51,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "mpb3",
+          "leads": 48,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
           "name": "Форма",
           "leads": 38,
           "won": 0,
@@ -22514,22 +22616,6 @@
         {
           "name": "Leads W wide WD8130 10.04",
           "leads": 12,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
-          "name": "mpb3",
-          "leads": 10,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
-          "name": "mpb1",
-          "leads": 8,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -22731,11 +22817,11 @@
         },
         {
           "name": "none",
-          "leads": 10960,
-          "won": 386,
+          "leads": 10746,
+          "won": 379,
           "cr": 3.5,
-          "revenue": 64875800,
-          "avgCheck": 168072
+          "revenue": 63388800,
+          "avgCheck": 167253
         },
         {
           "name": "Leads 5442 / kaspiform",
@@ -22760,6 +22846,14 @@
           "cr": 6.6,
           "revenue": 1686000,
           "avgCheck": 140500
+        },
+        {
+          "name": "ugc_barter",
+          "leads": 214,
+          "won": 7,
+          "cr": 3.3,
+          "revenue": 1487000,
+          "avgCheck": 212429
         },
         {
           "name": "Leads wide+ 08.10",
@@ -22866,6 +22960,14 @@
           "avgCheck": 176000
         },
         {
+          "name": "4516",
+          "leads": 55,
+          "won": 1,
+          "cr": 1.8,
+          "revenue": 176000,
+          "avgCheck": 176000
+        },
+        {
           "name": "Leads int 09.10",
           "leads": 9,
           "won": 1,
@@ -22880,6 +22982,14 @@
           "cr": 14.3,
           "revenue": 112000,
           "avgCheck": 112000
+        },
+        {
+          "name": "2427, 2429, 2430, 2431, 2428",
+          "leads": 33,
+          "won": 1,
+          "cr": 3.0,
+          "revenue": 62000,
+          "avgCheck": 62000
         },
         {
           "name": "Новая группа объявлений с целью &quot;Лиды&quot; &mdash; Копия &mdash; Копия",
@@ -23044,6 +23154,14 @@
         {
           "name": "RE7127",
           "leads": 4,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "utm_campaign",
+          "leads": 3,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -23418,14 +23536,6 @@
           "avgCheck": 0
         },
         {
-          "name": "4516",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "RE6917 - 24.05",
           "leads": 1,
           "won": 0,
@@ -23451,14 +23561,6 @@
         },
         {
           "name": "Копия 1 объекта «17.07»",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
-          "name": "utm_campaign",
           "leads": 1,
           "won": 0,
           "cr": 0.0,
@@ -23541,7 +23643,7 @@
       "contents": [
         {
           "name": "none",
-          "leads": 28113,
+          "leads": 28115,
           "won": 1422,
           "cr": 5.1,
           "revenue": 238962800,
@@ -23772,6 +23874,14 @@
           "avgCheck": 176000
         },
         {
+          "name": "4516",
+          "leads": 56,
+          "won": 1,
+          "cr": 1.8,
+          "revenue": 176000,
+          "avgCheck": 176000
+        },
+        {
           "name": "RE5036",
           "leads": 45,
           "won": 1,
@@ -23852,6 +23962,14 @@
           "avgCheck": 112000
         },
         {
+          "name": "2430",
+          "leads": 20,
+          "won": 1,
+          "cr": 5.0,
+          "revenue": 62000,
+          "avgCheck": 62000
+        },
+        {
           "name": "JMyura4.1.26",
           "leads": 9,
           "won": 1,
@@ -23918,6 +24036,14 @@
         {
           "name": "august9kf",
           "leads": 17,
+          "won": 0,
+          "cr": 0.0,
+          "revenue": 0,
+          "avgCheck": 0
+        },
+        {
+          "name": "2431",
+          "leads": 15,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -24428,14 +24554,6 @@
           "avgCheck": 0
         },
         {
-          "name": "4516",
-          "leads": 2,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "RE3696",
           "leads": 2,
           "won": 0,
@@ -24454,14 +24572,6 @@
         {
           "name": "2643",
           "leads": 2,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
-          "name": "2430",
-          "leads": 1,
           "won": 0,
           "cr": 0.0,
           "revenue": 0,
@@ -24916,14 +25026,6 @@
           "avgCheck": 0
         },
         {
-          "name": "2431",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "JM1 0966.1",
           "leads": 1,
           "won": 0,
@@ -25087,7 +25189,7 @@
       "terms": [
         {
           "name": "none",
-          "leads": 29037,
+          "leads": 29039,
           "won": 1457,
           "cr": 5.0,
           "revenue": 245312800,
@@ -25246,6 +25348,14 @@
           "avgCheck": 176000
         },
         {
+          "name": "120244027124480655",
+          "leads": 55,
+          "won": 1,
+          "cr": 1.8,
+          "revenue": 176000,
+          "avgCheck": 176000
+        },
+        {
           "name": "120253199134550508",
           "leads": 45,
           "won": 1,
@@ -25292,6 +25402,14 @@
           "cr": 100.0,
           "revenue": 112000,
           "avgCheck": 112000
+        },
+        {
+          "name": "120244027295020655",
+          "leads": 33,
+          "won": 1,
+          "cr": 3.0,
+          "revenue": 62000,
+          "avgCheck": 62000
         },
         {
           "name": "120242369783920035",
@@ -26078,14 +26196,6 @@
           "avgCheck": 0
         },
         {
-          "name": "120244027124480655",
-          "leads": 1,
-          "won": 0,
-          "cr": 0.0,
-          "revenue": 0,
-          "avgCheck": 0
-        },
-        {
           "name": "120247652530430508",
           "leads": 1,
           "won": 0,
@@ -26238,11 +26348,11 @@
         "path": "/organika",
         "title": "Органика (Основная)",
         "desc": "Основная посадочная под органический трафик и посты",
-        "leads": 3857,
-        "won": 182,
-        "cr": 4.7,
-        "revenue": 30071000,
-        "avgCheck": 165225
+        "leads": 3692,
+        "won": 177,
+        "cr": 4.8,
+        "revenue": 28942000,
+        "avgCheck": 163514
       },
       {
         "path": "/inst-men",
@@ -26305,6 +26415,16 @@
         "avgCheck": 175000
       },
       {
+        "path": "/influence",
+        "title": "Инфлюенс / Блогеры (МПБ)",
+        "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
+        "leads": 231,
+        "won": 7,
+        "cr": 3.0,
+        "revenue": 1487000,
+        "avgCheck": 212429
+      },
+      {
         "path": "/fun",
         "title": "Квиз / Воронка (/fun)",
         "desc": "Интерактивный опрос и подбор программы курса",
@@ -26345,14 +26465,24 @@
         "avgCheck": 237500
       },
       {
-        "path": "/influence",
-        "title": "Инфлюенс / Блогеры (МПБ)",
-        "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
-        "leads": 66,
-        "won": 2,
+        "path": "/lp/women",
+        "title": "lp/women",
+        "desc": "Посадочная страница /lp/women",
+        "leads": 53,
+        "won": 1,
+        "cr": 1.9,
+        "revenue": 176000,
+        "avgCheck": 176000
+      },
+      {
+        "path": "/forall",
+        "title": "forall",
+        "desc": "Посадочная страница /forall",
+        "leads": 33,
+        "won": 1,
         "cr": 3.0,
-        "revenue": 358000,
-        "avgCheck": 179000
+        "revenue": 62000,
+        "avgCheck": 62000
       },
       {
         "path": "/aojiru-inst",
@@ -26405,6 +26535,26 @@
         "avgCheck": 0
       },
       {
+        "path": "/newmain",
+        "title": "newmain",
+        "desc": "Посадочная страница /newmain",
+        "leads": 2,
+        "won": 0,
+        "cr": 0.0,
+        "revenue": 0,
+        "avgCheck": 0
+      },
+      {
+        "path": "/lp/men",
+        "title": "lp/men",
+        "desc": "Посадочная страница /lp/men",
+        "leads": 1,
+        "won": 0,
+        "cr": 0.0,
+        "revenue": 0,
+        "avgCheck": 0
+      },
+      {
         "path": "/plan",
         "title": "plan",
         "desc": "Посадочная страница /plan",
@@ -26417,14 +26567,14 @@
     ]
   },
   "meta": {
-    "generated_at": "2026-11-10T15:17:55.768203",
+    "generated_at": "2026-11-10T16:17:41.897519",
     "combinations_all": 659,
-    "combinations_jana": 334,
+    "combinations_jana": 339,
     "sources": 36,
-    "mediums": 108,
-    "campaigns": 171,
+    "mediums": 107,
+    "campaigns": 172,
     "contents": 305,
     "terms": 281,
-    "pages_jana": 19
+    "pages_jana": 23
   }
 }

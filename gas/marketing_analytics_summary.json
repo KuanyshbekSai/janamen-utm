@@ -7,11 +7,11 @@
     "avgCheck": 169727
   },
   "janamen1": {
-    "leads": 32261,
-    "won": 1559,
-    "revenue": 262793800,
+    "leads": 32350,
+    "won": 1561,
+    "revenue": 263031800,
     "cr": 4.8,
-    "avgCheck": 168566
+    "avgCheck": 168502
   },
   "scopes": {
     "all": {
@@ -214,14 +214,14 @@
           "revenue": 0
         },
         "Айтым Берикович - органика": {
-          "leads": 18086,
+          "leads": 18085,
           "won": 1076,
           "revenue": 181163000
         },
         "none": {
-          "leads": 13272,
-          "won": 452,
-          "revenue": 78196601
+          "leads": 13107,
+          "won": 447,
+          "revenue": 77067601
         },
         "paid": {
           "leads": 36,
@@ -293,8 +293,8 @@
           "won": 0,
           "revenue": 0
         },
-        "Leads new fanpage 26.02": {
-          "leads": 86,
+        "fan": {
+          "leads": 90,
           "won": 2,
           "revenue": 238000
         },
@@ -568,23 +568,18 @@
           "won": 0,
           "revenue": 0
         },
-        "leads+new+fanpage+26.02": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
         "17.03 JMyura4 креатив 6677": {
           "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "stories": {
-          "leads": 4,
+        "17.03 JMyura4 креатив 6673": {
+          "leads": 9,
           "won": 0,
           "revenue": 0
         },
-        "17.03 JMyura4 креатив 6673": {
-          "leads": 9,
+        "stories": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -614,9 +609,9 @@
           "revenue": 0
         },
         "mpb2": {
-          "leads": 42,
-          "won": 2,
-          "revenue": 358000
+          "leads": 126,
+          "won": 7,
+          "revenue": 1487000
         },
         "Форма": {
           "leads": 38,
@@ -678,6 +673,11 @@
           "won": 0,
           "revenue": 0
         },
+        "mpb1": {
+          "leads": 51,
+          "won": 0,
+          "revenue": 0
+        },
         "JM yura 1 айтым видео 0961": {
           "leads": 1,
           "won": 0,
@@ -698,13 +698,13 @@
           "won": 0,
           "revenue": 0
         },
-        "alina": {
-          "leads": 1,
+        "mpb3": {
+          "leads": 48,
           "won": 0,
           "revenue": 0
         },
-        "mpb1": {
-          "leads": 8,
+        "alina": {
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -728,11 +728,6 @@
           "won": 0,
           "revenue": 0
         },
-        "mpb3": {
-          "leads": 10,
-          "won": 0,
-          "revenue": 0
-        },
         "yurakv статика — Копия": {
           "leads": 1,
           "won": 0,
@@ -746,11 +741,11 @@
       }
     },
     "janamen1": {
-      "leads": 32261,
-      "won": 1559,
-      "revenue": 262793800,
+      "leads": 32350,
+      "won": 1561,
+      "revenue": 263031800,
       "cr": 4.8,
-      "avgCheck": 168566,
+      "avgCheck": 168502,
       "bySource": {
         "whatsapp": {
           "leads": 17922,
@@ -761,6 +756,21 @@
           "leads": 10623,
           "won": 377,
           "revenue": 63464800
+        },
+        "Nikita": {
+          "leads": 139,
+          "won": 4,
+          "revenue": 766000
+        },
+        "nikita": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "janamenfun": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
         },
         "facebook": {
           "leads": 2564,
@@ -781,11 +791,6 @@
           "leads": 2,
           "won": 0,
           "revenue": 0
-        },
-        "Nikita": {
-          "leads": 53,
-          "won": 2,
-          "revenue": 528000
         },
         "fb": {
           "leads": 5,
@@ -897,11 +902,6 @@
           "won": 0,
           "revenue": 0
         },
-        "janamenfun": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
         "Roma2": {
           "leads": 1,
           "won": 0,
@@ -915,14 +915,19 @@
       },
       "byMedium": {
         "Айтым Берикович - органика": {
-          "leads": 18086,
+          "leads": 18085,
           "won": 1076,
           "revenue": 181163000
         },
         "none": {
-          "leads": 10686,
-          "won": 375,
-          "revenue": 63106800
+          "leads": 10521,
+          "won": 370,
+          "revenue": 61977800
+        },
+        "fan": {
+          "leads": 90,
+          "won": 2,
+          "revenue": 238000
         },
         "nikita": {
           "leads": 2449,
@@ -935,9 +940,9 @@
           "revenue": 1411000
         },
         "mpb2": {
-          "leads": 42,
-          "won": 2,
-          "revenue": 358000
+          "leads": 126,
+          "won": 7,
+          "revenue": 1487000
         },
         "Форма": {
           "leads": 38,
@@ -1029,6 +1034,11 @@
           "won": 0,
           "revenue": 0
         },
+        "mpb1": {
+          "leads": 51,
+          "won": 0,
+          "revenue": 0
+        },
         "JM yura 1 айтым видео 0961": {
           "leads": 1,
           "won": 0,
@@ -1059,13 +1069,13 @@
           "won": 0,
           "revenue": 0
         },
-        "alina": {
-          "leads": 1,
+        "mpb3": {
+          "leads": 48,
           "won": 0,
           "revenue": 0
         },
-        "mpb1": {
-          "leads": 8,
+        "alina": {
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -1086,11 +1096,6 @@
         },
         "Yura": {
           "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb3": {
-          "leads": 10,
           "won": 0,
           "revenue": 0
         },
@@ -1186,7 +1191,7 @@
       },
       "byMedium": {
         "Айтым Берикович - органика": {
-          "leads": 18086,
+          "leads": 18085,
           "won": 1076,
           "revenue": 181163000
         },
@@ -1219,6 +1224,148 @@
           "leads": 1,
           "won": 0,
           "revenue": 0
+        },
+        "fan": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        }
+      }
+    },
+    "influence": {
+      "leads": 231,
+      "won": 7,
+      "revenue": 1487000,
+      "cr": 3.0,
+      "avgCheck": 212429,
+      "bySource": {
+        "direct/none": {
+          "leads": 165,
+          "won": 7,
+          "revenue": 1487000
+        },
+        "aizada_usenqyzy": {
+          "leads": 16,
+          "won": 0,
+          "revenue": 0
+        },
+        "zar1nka": {
+          "leads": 12,
+          "won": 0,
+          "revenue": 0
+        },
+        "facebook": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "claude_test": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "aselqyzdan": {
+          "leads": 11,
+          "won": 0,
+          "revenue": 0
+        },
+        "alua_toltayeva": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "kanatkyzyy___": {
+          "leads": 9,
+          "won": 0,
+          "revenue": 0
+        },
+        "gulnur_zhumagul": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "xamida_iles": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "armana_fitness_trainer": {
+          "leads": 5,
+          "won": 0,
+          "revenue": 0
+        },
+        "_zzhuldyzbaeva": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "elon.rasulovna": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        }
+      },
+      "byMedium": {
+        "mpb2": {
+          "leads": 126,
+          "won": 7,
+          "revenue": 1487000
+        },
+        "mpb1": {
+          "leads": 51,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb3": {
+          "leads": 48,
+          "won": 0,
+          "revenue": 0
+        },
+        "alina": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "test": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "none": {
+          "leads": 4,
+          "won": 0,
+          "revenue": 0
+        }
+      }
+    },
+    "fan": {
+      "leads": 90,
+      "won": 2,
+      "revenue": 238000,
+      "cr": 2.2,
+      "avgCheck": 119000,
+      "bySource": {
+        "Nikita": {
+          "leads": 86,
+          "won": 2,
+          "revenue": 238000
+        },
+        "nikita": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "janamenfun": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        }
+      },
+      "byMedium": {
+        "fan": {
+          "leads": 90,
+          "won": 2,
+          "revenue": 238000
         }
       }
     },
@@ -1281,8 +1428,8 @@
           "won": 0,
           "revenue": 0
         },
-        "Leads new fanpage 26.02": {
-          "leads": 86,
+        "fan": {
+          "leads": 87,
           "won": 2,
           "revenue": 238000
         },
@@ -1427,11 +1574,6 @@
           "revenue": 0
         },
         "leads+4692+15.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+new+fanpage+26.02": {
           "leads": 1,
           "won": 0,
           "revenue": 0
@@ -1678,7 +1820,7 @@
           "revenue": 0
         },
         "none": {
-          "leads": 145,
+          "leads": 142,
           "won": 3,
           "revenue": 657000
         },
@@ -1742,6 +1884,11 @@
           "won": 0,
           "revenue": 0
         },
+        "mpb1": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
         "nikita": {
           "leads": 13,
           "won": 0,
@@ -1754,6 +1901,11 @@
         },
         "Yura": {
           "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb3": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -1839,9 +1991,9 @@
       },
       "byMedium": {
         "none": {
-          "leads": 3831,
-          "won": 182,
-          "revenue": 30071000
+          "leads": 3666,
+          "won": 177,
+          "revenue": 28942000
         },
         "Leads retarget 05.12": {
           "leads": 4,
@@ -1888,6 +2040,11 @@
           "won": 0,
           "revenue": 0
         },
+        "mpb1": {
+          "leads": 43,
+          "won": 0,
+          "revenue": 0
+        },
         "JM yura 1 айтым видео 0961": {
           "leads": 1,
           "won": 0,
@@ -1895,6 +2052,16 @@
         },
         "TikTok": {
           "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb2": {
+          "leads": 84,
+          "won": 5,
+          "revenue": 1129000
+        },
+        "mpb3": {
+          "leads": 38,
           "won": 0,
           "revenue": 0
         },
@@ -1992,11 +2159,11 @@
       "path": "/organika",
       "title": "Органика (Основная)",
       "desc": "Основная посадочная под органический трафик и посты",
-      "leads": 3857,
-      "won": 182,
-      "cr": 4.7,
-      "revenue": 30071000,
-      "avgCheck": 165225
+      "leads": 3692,
+      "won": 177,
+      "cr": 4.8,
+      "revenue": 28942000,
+      "avgCheck": 163514
     },
     {
       "path": "/inst-men",
@@ -2059,6 +2226,16 @@
       "avgCheck": 175000
     },
     {
+      "path": "/influence",
+      "title": "Инфлюенс / Блогеры (МПБ)",
+      "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
+      "leads": 231,
+      "won": 7,
+      "cr": 3.0,
+      "revenue": 1487000,
+      "avgCheck": 212429
+    },
+    {
       "path": "/fun",
       "title": "Квиз / Воронка (/fun)",
       "desc": "Интерактивный опрос и подбор программы курса",
@@ -2099,14 +2276,24 @@
       "avgCheck": 237500
     },
     {
-      "path": "/influence",
-      "title": "Инфлюенс / Блогеры (МПБ)",
-      "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
-      "leads": 66,
-      "won": 2,
+      "path": "/lp/women",
+      "title": "lp/women",
+      "desc": "Посадочная страница /lp/women",
+      "leads": 53,
+      "won": 1,
+      "cr": 1.9,
+      "revenue": 176000,
+      "avgCheck": 176000
+    },
+    {
+      "path": "/forall",
+      "title": "forall",
+      "desc": "Посадочная страница /forall",
+      "leads": 33,
+      "won": 1,
       "cr": 3.0,
-      "revenue": 358000,
-      "avgCheck": 179000
+      "revenue": 62000,
+      "avgCheck": 62000
     },
     {
       "path": "/aojiru-inst",
@@ -2153,6 +2340,26 @@
       "title": "kaspiform/men",
       "desc": "Посадочная страница /kaspiform/men",
       "leads": 4,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "path": "/newmain",
+      "title": "newmain",
+      "desc": "Посадочная страница /newmain",
+      "leads": 2,
+      "won": 0,
+      "cr": 0.0,
+      "revenue": 0,
+      "avgCheck": 0
+    },
+    {
+      "path": "/lp/men",
+      "title": "lp/men",
+      "desc": "Посадочная страница /lp/men",
+      "leads": 1,
       "won": 0,
       "cr": 0.0,
       "revenue": 0,
@@ -2326,11 +2533,11 @@
     },
     {
       "month": "2026-03",
-      "leads": 4456,
-      "won": 92,
+      "leads": 4545,
+      "won": 94,
       "cr": 2.1,
-      "revenue": 15277000,
-      "avgCheck": 166054
+      "revenue": 15515000,
+      "avgCheck": 165053
     },
     {
       "month": "2026-04",
@@ -2447,6 +2654,38 @@
       "term": "none"
     },
     {
+      "id": 37508037,
+      "name": "ЗАЯВКА С",
+      "status_id": 83732202,
+      "status_name": "Принят в работу",
+      "won": false,
+      "price": 0,
+      "date": "16.03.2026 21:52",
+      "created_at": 1773679963,
+      "path": "/forall",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "content": "2431",
+      "term": "120244027295020655"
+    },
+    {
+      "id": 37508069,
+      "name": "ЗАЯВКА С",
+      "status_id": 83732202,
+      "status_name": "Принят в работу",
+      "won": false,
+      "price": 0,
+      "date": "16.03.2026 21:56",
+      "created_at": 1773680175,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
       "id": 37523701,
       "name": "Заявка с Лид магнит Питание",
       "status_id": 143,
@@ -2477,6 +2716,22 @@
       "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
+    },
+    {
+      "id": 37461035,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 16:08",
+      "created_at": 1773400099,
+      "path": "/forall",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "content": "2431",
+      "term": "120244027295020655"
     },
     {
       "id": 37746095,
@@ -2959,6 +3214,22 @@
       "term": "none"
     },
     {
+      "id": 37438323,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.03.2026 22:30",
+      "created_at": 1773336612,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
       "id": 37438423,
       "name": "Заявка с Лид магнит Питание",
       "status_id": 143,
@@ -3359,6 +3630,38 @@
       "term": "none"
     },
     {
+      "id": 37451677,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 05:29",
+      "created_at": 1773361779,
+      "path": "/forall",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "2427, 2429, 2430, 2431, 2428",
+      "content": "2431",
+      "term": "120244027295020655"
+    },
+    {
+      "id": 37451753,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 05:53",
+      "created_at": 1773363196,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
       "id": 37451901,
       "name": "Заявка с Лид магнит Питание",
       "status_id": 143,
@@ -3519,6 +3822,54 @@
       "term": "none"
     },
     {
+      "id": 37452797,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 09:08",
+      "created_at": 1773374916,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
+      "id": 37452875,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 09:19",
+      "created_at": 1773375573,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
+      "id": 37452881,
+      "name": "ЗАЯВКА С",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.03.2026 09:19",
+      "created_at": 1773375588,
+      "path": "/lp/women",
+      "source": "Nikita",
+      "medium": "fan",
+      "campaign": "4516",
+      "content": "4516",
+      "term": "120244027124480655"
+    },
+    {
       "id": 37453267,
       "name": "Заявка с Лид магнит Питание",
       "status_id": 143,
@@ -3527,150 +3878,6 @@
       "price": 0,
       "date": "13.03.2026 10:00",
       "created_at": 1773378001,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454185,
-      "name": "Заявка от (.)",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 11:17",
-      "created_at": 1773382660,
-      "path": "/iwa-9828",
-      "source": "whatsapp",
-      "medium": "Айтым Берикович - органика",
-      "campaign": "iwa_9828",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454225,
-      "name": "Заявка от (",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 11:20",
-      "created_at": 1773382822,
-      "path": "/iwa-9828",
-      "source": "whatsapp",
-      "medium": "Айтым Берикович - органика",
-      "campaign": "iwa_9828",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454403,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 11:36",
-      "created_at": 1773383816,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454431,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 11:38",
-      "created_at": 1773383909,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454585,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 11:51",
-      "created_at": 1773384712,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37454989,
-      "name": "Заявка от (Алтынбек )",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 12:14",
-      "created_at": 1773386066,
-      "path": "/iwa-9828",
-      "source": "whatsapp",
-      "medium": "Айтым Берикович - органика",
-      "campaign": "iwa_9828",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37455165,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 12:23",
-      "created_at": 1773386593,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37455285,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 12:30",
-      "created_at": 1773387056,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37455395,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 12:35",
-      "created_at": 1773387311,
       "path": "/lidmagnit",
       "source": "direct/none",
       "medium": "none",
@@ -3892,9 +4099,9 @@
       "created_at": 1773570872,
       "path": "/forall",
       "source": "Nikita",
-      "medium": "Leads new fanpage 26.02",
+      "medium": "fan",
       "campaign": "2427, 2429, 2430, 2431, 2428",
-      "domain": "janamenhealth.kz"
+      "domain": "janamen1.kz"
     },
     {
       "id": 37491799,
@@ -3952,9 +4159,9 @@
       "created_at": 1773685245,
       "path": "/lp/women",
       "source": "Nikita",
-      "medium": "Leads new fanpage 26.02",
+      "medium": "fan",
       "campaign": "4516",
-      "domain": "janamenhealth.kz"
+      "domain": "janamen1.kz"
     },
     {
       "id": 37512393,
@@ -4642,10 +4849,10 @@
     }
   ],
   "meta": {
-    "generated_at": "2026-11-10T15:17:55.768172",
+    "generated_at": "2026-11-10T16:17:41.897487",
     "total_analyzed_leads": 36484,
-    "total_tagged_leads": 23476,
-    "janamen1_leads_count": 32261,
-    "combinations_count": 334
+    "total_tagged_leads": 23586,
+    "janamen1_leads_count": 32350,
+    "combinations_count": 339
   }
 }
