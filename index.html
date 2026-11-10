@@ -83,22 +83,6 @@
           <span>2. Полная детализация по всем UTM (5 параметров)</span>
           <span id="badgeCombos" class="ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-purple-100 text-purple-800 rounded-full">251 связка janamen1.kz</span>
         </button>
-
-        <button onclick="switchTab('builder')" id="tab-builder" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
-          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-          <span>3. Конструктор & Регистрация UTM</span>
-        </button>
-
-        <button onclick="switchTab('registry')" id="tab-registry" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
-          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-          <span>4. Реестр всех ссылок</span>
-          <span id="badgeRegistryCount" class="ml-1.5 px-2 py-0.5 text-xs font-semibold bg-slate-100 text-slate-600 rounded-full">0</span>
-        </button>
-
-        <button onclick="switchTab('tilda')" id="tab-tilda" class="tab-inactive py-3.5 px-1 inline-flex items-center space-x-2 whitespace-nowrap">
-          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
-          <span>5. Встраивание в Tilda</span>
-        </button>
       </nav>
     </div>
   </header>
@@ -261,8 +245,9 @@
               </button>
             </div>
 
-            <button onclick="quickCreateUtm('https://janamen1.kz/kaspiform')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-sm">
-              <span>+ Создать UTM</span>
+            <button onclick="switchTab('granularity')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-xl transition shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span>Все UTM-связки →</span>
             </button>
           </div>
         </div>
@@ -464,274 +449,7 @@
 
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ВКЛАДКА 3: КОНСТРУКТОР & РЕГИСТРАЦИЯ UTM -->
-    <!-- ============================================================ -->
-    <div id="view-builder" class="hidden space-y-8">
-      
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm max-w-4xl mx-auto space-y-6">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900">Генератор и Регистратор UTM-ссылок</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">
-            Создайте ссылку по стандартам таксономии Jana Men. Ссылка автоматически регистрируется в Google Таблице с уникальным UTM ID.
-          </p>
-        </div>
-
-        <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start space-x-3">
-          <svg class="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <div class="text-xs text-amber-900 leading-relaxed">
-            <b>Быстрый импорт готовой ссылки:</b> Вставьте существующую ссылку с UTM-метками в поле ниже — система автоматически разберет все параметры, заполнит форму и позволит сохранить её в реестр.
-          </div>
-        </div>
-
-        <div class="space-y-4 pt-2">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">1. Целевой URL страницы (Landing Page)</label>
-            <div class="flex space-x-2">
-              <input type="url" id="inputLandingUrl" oninput="handlePastedUrl(this.value); updateLiveLink();" placeholder="https://janamen1.kz/kaspiform" class="flex-1 px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-mono transition">
-              <button onclick="pasteFromClipboard()" class="px-3 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200 whitespace-nowrap">
-                Вставить из буфера
-              </button>
-            </div>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span class="text-[11px] text-slate-400 font-medium py-0.5">Быстрый выбор:</span>
-              <button onclick="applyPresetLanding('https://janamen1.kz/kaspiform')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/kaspiform</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/organika')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/organika</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/inst-men')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/inst-men</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/inst-women')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/inst-women</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/lidmagnit')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/lidmagnit</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/vitamins-inst')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/vitamins-inst</button>
-              <button onclick="applyPresetLanding('https://janamen1.kz/fun')" class="px-2 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md transition">/fun</button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">2. Источник (utm_source) <span class="text-rose-500">*</span></label>
-              <div class="space-y-1.5">
-                <select id="selectSourcePreset" onchange="syncSourceInput(this.value)" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-semibold">
-                  <option value="">-- Выбрать стандартный источник --</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="tiktok">TikTok</option>
-                  <option value="facebook">Facebook Ads</option>
-                  <option value="telegram">Telegram</option>
-                  <option value="youtube">YouTube</option>
-                  <option value="google">Google Ads</option>
-                  <option value="kaspi">Kaspi</option>
-                  <option value="whatsapp">WhatsApp</option>
-                  <option value="offline_qr">QR-код на упаковке</option>
-                </select>
-                <input type="text" id="inputSource" oninput="updateLiveLink()" placeholder="instagram" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-mono">
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">3. Канал (utm_medium) <span class="text-rose-500">*</span></label>
-              <div class="space-y-1.5">
-                <select id="selectMediumPreset" onchange="syncMediumInput(this.value)" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-semibold">
-                  <option value="">-- Выбрать стандартный канал --</option>
-                  <option value="target_cpc">Таргет (CPC / Клики)</option>
-                  <option value="influencer">Блогер / Инфлюенсер</option>
-                  <option value="stories">Сториз</option>
-                  <option value="reels">Рилс</option>
-                  <option value="bio">Ссылка в шапке (Bio)</option>
-                  <option value="post">Пост / Лента</option>
-                  <option value="tg_channel">Telegram канал</option>
-                  <option value="organic">Органика</option>
-                </select>
-                <input type="text" id="inputMedium" oninput="updateLiveLink()" placeholder="target_cpc" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-mono">
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">4. Кампания (utm_campaign) <span class="text-rose-500">*</span></label>
-              <input type="text" id="inputCampaign" oninput="updateLiveLink()" placeholder="leads_kaspiform_nov" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-mono">
-              <span class="text-[10px] text-slate-400 mt-1 block">Название акции, оффера или имя блогера</span>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">5. Креатив (utm_content)</label>
-              <input type="text" id="inputContent" oninput="updateLiveLink()" placeholder="banner_red_v1" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-mono">
-              <span class="text-[10px] text-slate-400 mt-1 block">Формат визуала, вариант креатива</span>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">6. Аудитория (utm_term)</label>
-              <input type="text" id="inputTerm" oninput="updateLiveLink()" placeholder="men_25_45_almaty" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500 font-mono">
-              <span class="text-[10px] text-slate-400 mt-1 block">Ключевое слово или таргетинг</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Ответственный / Таргетолог</label>
-              <input type="text" id="inputOwner" placeholder="Никита / Юра / SMM" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Рекламный бюджет (₸)</label>
-              <input type="number" id="inputBudget" placeholder="0" class="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-brand-500">
-            </div>
-          </div>
-        </div>
-
-        <!-- РЕЗУЛЬТИРУЮЩАЯ ССЫЛКА И КНОПКА СОХРАНЕНИЯ -->
-        <div class="p-5 bg-slate-900 rounded-2xl text-white space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Сгенерированная ссылка:</span>
-            <button onclick="copyCurrentLink()" class="text-xs text-brand-400 hover:text-brand-300 font-bold transition flex items-center space-x-1">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              <span>Копировать</span>
-            </button>
-          </div>
-          <div id="liveResultUrl" class="font-mono text-xs sm:text-sm text-brand-300 break-all bg-slate-800/80 p-3 rounded-xl border border-slate-700/60 select-all">
-            https://janamen1.kz/kaspiform
-          </div>
-          <div class="flex justify-end pt-2">
-            <button onclick="registerUtm()" id="btnRegister" class="inline-flex items-center space-x-2 px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-lg shadow-brand-500/30 transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
-              <span>Зарегистрировать ссылку в Реестре</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- ВКЛАДКА 4: РЕЕСТР ВСЕХ ССЫЛОК -->
-    <!-- ============================================================ -->
-    <div id="view-registry" class="hidden space-y-6">
-      
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">Реестр UTM-ссылок</h2>
-            <p class="text-xs sm:text-sm text-slate-500">
-              База всех созданных размеченных ссылок с уникальными UTM ID, бюджетами и ответственными
-            </p>
-          </div>
-
-          <div class="flex items-center space-x-2">
-            <button onclick="switchTab('builder')" class="inline-flex items-center space-x-1.5 px-3 py-2 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-sm">
-              <span>+ Новая ссылка</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="relative max-w-md">
-          <input type="text" id="registrySearchInput" oninput="filterRegistryTable()" placeholder="Поиск по ссылке, источнику, кампании..." class="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 transition">
-          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
-              <tr>
-                <th class="py-3 px-4">UTM ID</th>
-                <th class="py-3 px-4">Целевой URL</th>
-                <th class="py-3 px-4">Источник</th>
-                <th class="py-3 px-4">Канал</th>
-                <th class="py-3 px-4">Кампания</th>
-                <th class="py-3 px-4">Креатив</th>
-                <th class="py-3 px-4">Ответственный</th>
-                <th class="py-3 px-4 text-right">Бюджет</th>
-                <th class="py-3 px-4 text-center">Действия</th>
-              </tr>
-            </thead>
-            <tbody id="registryTableBody" class="divide-y divide-slate-100">
-              <!-- Заполняется динамически -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- ВКЛАДКА 5: ВСТРАИВАНИЕ В TILDA -->
-    <!-- ============================================================ -->
-    <div id="view-tilda" class="hidden space-y-6">
-      
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm max-w-4xl mx-auto space-y-6">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900">Инструкция по сохранению UTM-меток в Tilda</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1">
-            Скрипт захвата UTM параметров для вставки в блок T123 (HTML-код) на сайтах janamen1.kz и janamenhealth.kz
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl text-xs text-blue-900 leading-relaxed space-y-2">
-            <div class="font-bold">Как работает скрипт в Tilda:</div>
-            <ol class="list-decimal list-inside space-y-1 text-blue-800">
-              <li>Захватывает все UTM-метки из адресной строки (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id`).</li>
-              <li>Сохраняет их в `localStorage` и `cookies` на 30 дней, чтобы метки не терялись при переходе между страницами сайта.</li>
-              <li>Автоматически заполняет скрытые поля форм Tilda перед отправкой заявки в AmoCRM.</li>
-            </ol>
-          </div>
-
-          <div class="space-y-2">
-            <span class="text-xs font-bold uppercase text-slate-700">Код для блока T123 (HTML-код в Tilda):</span>
-            <pre class="bg-slate-900 text-slate-100 p-4 rounded-2xl text-xs font-mono overflow-x-auto leading-relaxed select-all">&lt;script&gt;
-(function() {
-  function getQueryParam(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : null;
-  }
-  var utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id'];
-  utms.forEach(function(u) {
-    var v = getQueryParam(u);
-    if (v) {
-      try { localStorage.setItem(u, v); } catch(e){}
-      document.cookie = u + '=' + encodeURIComponent(v) + '; path=/; max-age=' + (30*86400);
-    }
-  });
-  document.addEventListener('DOMContentLoaded', function() {
-    utms.forEach(function(u) {
-      var val = getQueryParam(u) || (function(){ try{return localStorage.getItem(u);}catch(e){return null;} })();
-      if (!val) return;
-      var inputs = document.querySelectorAll('input[name="' + u + '"]');
-      inputs.forEach(function(inp) { inp.value = val; });
-    });
-  });
-})();
-&lt;/script&gt;</pre>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
   </main>
-
-  <!-- МОДАЛЬНОЕ ОКНО УСПЕХА -->
-  <div id="successModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
-      <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-2xl mx-auto">
-        ✓
-      </div>
-      <div class="text-center space-y-1">
-        <h3 class="text-lg font-black text-slate-900">Ссылка успешно создана!</h3>
-        <p class="text-xs text-slate-500">Зарегистрирована в Google Таблице с UTM ID: <b id="modalUtmId" class="text-brand-600"></b></p>
-      </div>
-      <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-        <div id="modalLinkText" class="font-mono text-xs text-slate-800 break-all select-all"></div>
-      </div>
-      <div class="flex space-x-2">
-        <button onclick="copyModalLink()" class="flex-1 py-2.5 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-md shadow-brand-500/20">
-          Копировать ссылку
-        </button>
-        <button onclick="closeModal()" class="px-4 py-2.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
-          Закрыть
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- JAVASCRIPT ЛОГИКА -->
   <script>
@@ -768,12 +486,9 @@
 
     let chartSourcesInstance = null;
     let chartMediumsInstance = null;
-    let cachedRegistry = [];
-
     // Инициализация при загрузке страницы
     document.addEventListener('DOMContentLoaded', function () {
       applyAllFilters();
-      loadRegistryData();
     });
 
     // ============================================================
@@ -975,7 +690,7 @@
     // ВКЛАДКИ
     // ============================================================
     function switchTab(tabId) {
-      const tabs = ['analytics', 'granularity', 'builder', 'registry', 'tilda'];
+      const tabs = ['analytics', 'granularity'];
       tabs.forEach(t => {
         const btn = document.getElementById('tab-' + t);
         const view = document.getElementById('view-' + t);
@@ -993,9 +708,13 @@
       if (tabId === 'granularity') renderGranularityTable();
     }
 
-    function quickCreateUtm(url) {
-      switchTab('builder');
-      applyPresetLanding(url);
+    function drilldownSubpage(subpage) {
+      const sel = document.getElementById('filterSubpage');
+      if (sel) {
+        sel.value = subpage;
+        onFilterChange();
+      }
+      switchTab('granularity');
     }
 
     // ============================================================
@@ -1117,8 +836,8 @@
                 ${avgCheck.toLocaleString('ru-RU')} ₸
               </td>
               <td class="py-3 px-4 text-center whitespace-nowrap">
-                <button onclick="quickCreateUtm('${url}')" class="px-3 py-1.5 text-xs font-bold text-brand-600 hover:text-white hover:bg-brand-600 rounded-lg transition border border-brand-200">
-                  + Создать UTM →
+                <button onclick="drilldownSubpage('${sp.subpage}')" class="px-3 py-1.5 text-xs font-bold text-purple-700 hover:text-white hover:bg-purple-600 rounded-lg transition border border-purple-200">
+                  Смотреть UTM →
                 </button>
               </td>
             </tr>
@@ -1169,7 +888,7 @@
               </div>
               <div class="pt-1 flex items-center justify-between">
                 <span class="text-[11px] text-slate-500 font-medium">Конверсия: <b class="${sp.cr >= 4 ? 'text-emerald-700 font-extrabold' : 'text-slate-800'}">${sp.cr}%</b></span>
-                <button onclick="quickCreateUtm('${url}')" class="text-xs font-bold text-brand-600 hover:text-brand-800 transition">Создать UTM →</button>
+                <button onclick="drilldownSubpage('${sp.subpage}')" class="text-xs font-bold text-purple-700 hover:text-purple-900 transition">Смотреть UTM →</button>
               </div>
             </div>
           `;
@@ -1515,215 +1234,6 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }
-
-    // ============================================================
-    // КОНСТРУКТОР ССЫЛОК
-    // ============================================================
-    function slugify(text) {
-      return (text || '').toString().toLowerCase().trim()
-        .replace(/\s+/g, '_')
-        .replace(/[^a-z0-9_.-]/g, '');
-    }
-
-    function handlePastedUrl(urlStr) {
-      if (!urlStr || !urlStr.includes('?')) return;
-      try {
-        const urlObj = new URL(urlStr);
-        document.getElementById('inputLandingUrl').value = urlObj.origin + urlObj.pathname;
-        const p = urlObj.searchParams;
-        if (p.get('utm_source')) document.getElementById('inputSource').value = p.get('utm_source');
-        if (p.get('utm_medium')) document.getElementById('inputMedium').value = p.get('utm_medium');
-        if (p.get('utm_campaign')) document.getElementById('inputCampaign').value = p.get('utm_campaign');
-        if (p.get('utm_content')) document.getElementById('inputContent').value = p.get('utm_content');
-        if (p.get('utm_term')) document.getElementById('inputTerm').value = p.get('utm_term');
-        updateLiveLink();
-      } catch (e) {}
-    }
-
-    function pasteFromClipboard() {
-      if (!navigator.clipboard) return;
-      navigator.clipboard.readText().then(text => {
-        if (text) {
-          document.getElementById('inputLandingUrl').value = text;
-          handlePastedUrl(text);
-          updateLiveLink();
-        }
-      }).catch(() => {});
-    }
-
-    function applyPresetLanding(url) {
-      document.getElementById('inputLandingUrl').value = url;
-      updateLiveLink();
-    }
-
-    function syncSourceInput(val) {
-      if (val) document.getElementById('inputSource').value = val;
-      updateLiveLink();
-    }
-
-    function syncMediumInput(val) {
-      if (val) document.getElementById('inputMedium').value = val;
-      updateLiveLink();
-    }
-
-    function updateLiveLink() {
-      const base = document.getElementById('inputLandingUrl').value.trim() || 'https://janamen1.kz/kaspiform';
-      const src = slugify(document.getElementById('inputSource').value);
-      const med = slugify(document.getElementById('inputMedium').value);
-      const cmp = slugify(document.getElementById('inputCampaign').value);
-      const cnt = slugify(document.getElementById('inputContent').value);
-      const trm = slugify(document.getElementById('inputTerm').value);
-
-      const params = [];
-      if (src) params.push('utm_source=' + encodeURIComponent(src));
-      if (med) params.push('utm_medium=' + encodeURIComponent(med));
-      if (cmp) params.push('utm_campaign=' + encodeURIComponent(cmp));
-      if (cnt) params.push('utm_content=' + encodeURIComponent(cnt));
-      if (trm) params.push('utm_term=' + encodeURIComponent(trm));
-
-      const finalUrl = base.split('?')[0] + (params.length ? '?' + params.join('&') : '');
-      document.getElementById('liveResultUrl').innerText = finalUrl;
-      return finalUrl;
-    }
-
-    function copyCurrentLink() {
-      const link = document.getElementById('liveResultUrl').innerText;
-      navigator.clipboard.writeText(link).then(() => alert('Ссылка скопирована в буфер!'));
-    }
-
-    function registerUtm() {
-      const finalUrl = updateLiveLink();
-      const src = document.getElementById('inputSource').value.trim();
-      const med = document.getElementById('inputMedium').value.trim();
-      const cmp = document.getElementById('inputCampaign').value.trim();
-
-      if (!src || !med || !cmp) {
-        alert('Пожалуйста, заполните обязательные поля: utm_source, utm_medium, utm_campaign');
-        return;
-      }
-
-      const btn = document.getElementById('btnRegister');
-      btn.innerText = 'Сохранение...';
-      btn.disabled = true;
-
-      const payload = {
-        action: 'register_utm',
-        landing_url: document.getElementById('inputLandingUrl').value.trim() || 'https://janamen1.kz/kaspiform',
-        utm_source: src,
-        utm_medium: med,
-        utm_campaign: cmp,
-        utm_content: document.getElementById('inputContent').value.trim(),
-        utm_term: document.getElementById('inputTerm').value.trim(),
-        owner: document.getElementById('inputOwner').value.trim(),
-        budget: document.getElementById('inputBudget').value || 0
-      };
-
-      fetch(GAS_WEBAPP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(payload).toString()
-      })
-      .then(r => r.json())
-      .then(res => {
-        if (res.success && res.data) {
-          showSuccessModal(res.data.utm_id, res.data.full_url);
-          loadRegistryData();
-        } else {
-          alert('Ошибка регистрации: ' + (res.message || 'Неизвестная ошибка'));
-        }
-      })
-      .catch(err => alert('Сетевая ошибка: ' + err))
-      .finally(() => {
-        btn.innerHTML = '<span>Зарегистрировать ссылку в Реестре</span>';
-        btn.disabled = false;
-      });
-    }
-
-    function showSuccessModal(utmId, fullUrl) {
-      document.getElementById('modalUtmId').innerText = utmId;
-      document.getElementById('modalLinkText').innerText = fullUrl;
-      document.getElementById('successModal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('successModal').classList.add('hidden');
-    }
-
-    function copyModalLink() {
-      const link = document.getElementById('modalLinkText').innerText;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('Ссылка скопирована!');
-        closeModal();
-      });
-    }
-
-    // ============================================================
-    // РЕЕСТР
-    // ============================================================
-    function loadRegistryData() {
-      fetch(GAS_WEBAPP_URL + '?action=get_registry')
-        .then(r => r.json())
-        .then(res => {
-          if (res.success && Array.isArray(res.data)) {
-            cachedRegistry = res.data;
-            document.getElementById('badgeRegistryCount').innerText = res.data.length;
-            renderRegistryTable(res.data);
-          } else {
-            fallbackRegistry();
-          }
-        })
-        .catch(() => fallbackRegistry());
-    }
-
-    function fallbackRegistry() {
-      cachedRegistry = [];
-      document.getElementById('badgeRegistryCount').innerText = '0';
-      renderRegistryTable([]);
-    }
-
-    function renderRegistryTable(data) {
-      const tbody = document.getElementById('registryTableBody');
-      if (!tbody) return;
-
-      if (!data || data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" class="py-8 text-center text-slate-400">В реестре пока нет зарегистрированных ссылок</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = data.map(r => `
-        <tr class="hover:bg-slate-50 transition">
-          <td class="py-3 px-4 font-black text-brand-600 code-font">${r.utm_id || '—'}</td>
-          <td class="py-3 px-4 font-mono text-slate-700 truncate max-w-[200px]">${r.landing_url || '—'}</td>
-          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-800">${r.utm_source || '—'}</span></td>
-          <td class="py-3 px-4 code-font text-slate-600">${r.utm_medium || '—'}</td>
-          <td class="py-3 px-4 font-bold text-slate-900 code-font">${r.utm_campaign || '—'}</td>
-          <td class="py-3 px-4 text-slate-500 code-font">${r.utm_content || '—'}</td>
-          <td class="py-3 px-4 font-semibold text-slate-800">${r.owner || '—'}</td>
-          <td class="py-3 px-4 text-right font-black text-slate-900">${Number(r.budget || 0).toLocaleString('ru-RU')} ₸</td>
-          <td class="py-3 px-4 text-center">
-            <button onclick="navigator.clipboard.writeText('${r.full_url}').then(() => alert('Ссылка скопирована!'))" class="text-brand-600 hover:text-brand-800 font-bold" title="Копировать">
-              📋
-            </button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function filterRegistryTable() {
-      const q = document.getElementById('registrySearchInput').value.toLowerCase().trim();
-      if (!q) {
-        renderRegistryTable(cachedRegistry);
-        return;
-      }
-      const filtered = cachedRegistry.filter(r => 
-        (r.utm_id || '').toLowerCase().includes(q) ||
-        (r.landing_url || '').toLowerCase().includes(q) ||
-        (r.utm_source || '').toLowerCase().includes(q) ||
-        (r.utm_campaign || '').toLowerCase().includes(q) ||
-        (r.owner || '').toLowerCase().includes(q)
-      );
-      renderRegistryTable(filtered);
     }
 
     // ============================================================
