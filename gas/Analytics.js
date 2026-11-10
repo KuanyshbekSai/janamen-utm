@@ -68,7 +68,7 @@ function buildFullAnalytics() {
   var jSub = {};
   var landings = {};
   var monthly = {};
-  var scopes = { all: newAgg_(), janamen1: newAgg_(), organika: newAgg_(), nikita: newAgg_(), yura: newAgg_(), tiktok: newAgg_() };
+  var scopes = { all: newAgg_(), janamen1: newAgg_(), aytym_organika: newAgg_(), organika: newAgg_(), nikita: newAgg_(), yura: newAgg_(), tiktok: newAgg_() };
   var recentWon = [];
   var recentJanamen = [];
   var domain = String(CONFIG.MARKETING_DOMAIN).toLowerCase();
@@ -121,6 +121,7 @@ function buildFullAnalytics() {
     if (hay.indexOf('yura') !== -1) who.push('yura');
     if (src.toLowerCase().indexOf('tiktok') !== -1) who.push('tiktok');
     if (page.toLowerCase().indexOf('organika') !== -1) who.push('organika');
+    if (hay.indexOf('9828') !== -1 || hay.indexOf('айтым') !== -1) who.push('aytym_organika');
     for (var w = 0; w < who.length; w++) {
       scopes[who[w]].leads++;
       if (won) { scopes[who[w]].won++; scopes[who[w]].revenue += price; }
