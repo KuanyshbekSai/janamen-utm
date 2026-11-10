@@ -12,7 +12,8 @@ function onOpen() {
     .addItem('⚡ 2. Синхронизировать сделки из AmoCRM', 'syncAmoCrmDeals')
     .addItem('🌐 3. Открыть веб-дашборд и генератор', 'showWebDashboardDialog')
     .addSeparator()
-    .addItem('⏰ 4. Включить автообновление AmoCRM (каждые 2ч)', 'setupHourlyTrigger')
+    .addItem('⏰ 4. Включить автообновление AmoCRM (каждый час)', 'setupHourlyTrigger')
+    .addItem('🔄 Полная перезагрузка всей базы AmoCRM', 'fullResync')
     .addItem('🛑 5. Отключить автообновление', 'clearHourlyTriggers')
     .addToUi();
 }
@@ -46,24 +47,38 @@ function showWebDashboardDialog() {
  * Установка триггера регулярной синхронизации сделок
  */
 function setupHourlyTrigger() {
-  clearHourlyTriggers();
+  deleteTriggersByHandler_('syncAmoCrmDeals');
   ScriptApp.newTrigger('syncAmoCrmDeals')
     .timeBased()
-    .everyHours(2)
+    .everyHours(1)
     .create();
 
-  SpreadsheetApp.getActiveSpreadsheet().toast('Автообновление включено (каждые 2 часа)', 'Триггер установлен', 5);
+  try { SpreadsheetApp.getActiveSpreadsheet().toast('Автообновление включено (каждый час)', 'Триггер установлен', 5); } catch (e) {}
+}
+
+/**
+ * ОДНОКРАТНЫЙ запуск из редактора Apps Script: включает почасовое автообновление
+ * и стартует загрузку всей базы AmoCRM (продолжится автоматически по триггеру).
+ */
+function setupAutomation() {
+  setupHourlyTrigger();
+  var res = syncAmoCrmDeals();
+  Logger.log('Автоматизация включена. Первый запуск: ' + JSON.stringify(res));
+  return res;
+}
+
+function deleteTriggersByHandler_(handler) {
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === handler) ScriptApp.deleteTrigger(triggers[i]);
+  }
 }
 
 /**
  * Удаление триггеров синхронизации
  */
 function clearHourlyTriggers() {
-  var triggers = ScriptApp.getProjectTriggers();
-  for (var i = 0; i < triggers.length; i++) {
-    if (triggers[i].getHandlerFunction() === 'syncAmoCrmDeals') {
-      ScriptApp.deleteTrigger(triggers[i]);
-    }
-  }
-  SpreadsheetApp.getActiveSpreadsheet().toast('Автообновление отключено', 'Триггеры удалены', 5);
+  deleteTriggersByHandler_('syncAmoCrmDeals');
+  deleteTriggersByHandler_('syncContinuation');
+  try { SpreadsheetApp.getActiveSpreadsheet().toast('Автообновление отключено', 'Триггеры удалены', 5); } catch (e) {}
 }

@@ -1,257 +1,294 @@
 /**
  * ============================================================
- * AmoCrmSync.js — Синхронизация сделок и UTM-меток из AmoCRM
+ * AmoCrmSync.js — Полная и инкрементальная синхронизация сделок AmoCRM
+ * ------------------------------------------------------------
+ *  1) Первый запуск (backfill): выгружает ВСЮ базу сделок порциями по 250,
+ *     запоминает страницу и сам продолжает по триггеру (лимит GAS ~6 мин).
+ *  2) Далее (incremental): забирает только сделки, изменённые с прошлой
+ *     синхронизации (смена статуса, суммы, UTM) — раз в час по триггеру.
+ *  Все UTM (source/medium/campaign/content/term/id) + страница + даты
+ *  попадают в лист «📥 Сделки AmoCRM» (upsert по ID сделки).
  * ============================================================
  */
 
-/**
- * Основная функция синхронизации: скачивает свежие сделки и обновляет лист AmoCRM
- */
+var DEAL_COLS = 18;
+var DEAL_HEADERS = [
+  'ID сделки', 'Название сделки', 'Воронка', 'Этап сделки', 'Категория статуса',
+  'Сумма (₸)', 'Дата создания', 'utm_source', 'utm_medium', 'utm_campaign',
+  'utm_content', 'utm_term', 'UTM ID', 'Теги сделки', 'Ссылка в AmoCRM',
+  'Посадочная страница', 'Маркетинг janamen1.kz', 'Дата закрытия'
+];
+
+/** Точка входа для триггера и меню: инкрементальная (или продолжение полной) синхронизация */
 function syncAmoCrmDeals() {
-  var ss = getSpreadsheet();
-  var dealsSheet = ss.getSheetByName(CONFIG.SHEETS.DEALS);
-  if (!dealsSheet) {
-    setupSpreadsheet();
-    dealsSheet = ss.getSheetByName(CONFIG.SHEETS.DEALS);
-  }
-
-  Logger.log('Начало синхронизации с AmoCRM...');
-
-  // 1. Получаем справочник статусов и воронок для красивых названий
-  var pipelineStatusMap = fetchPipelinesAndStatuses();
-
-  // 2. Считываем уже существующие сделки в таблице, чтобы делать Upsert (не дублировать)
-  var existingData = dealsSheet.getDataRange().getValues();
-  var existingRowIndexById = {}; // leadId -> rowNumber (1-based)
-  for (var i = 1; i < existingData.length; i++) {
-    var rowId = String(existingData[i][0]).trim();
-    if (rowId) {
-      existingRowIndexById[rowId] = i + 1; // 1-based index in sheet
-    }
-  }
-
-  // 3. Выгружаем сделки из AmoCRM
-  var leads = fetchRecentLeadsFromAmoCRM(CONFIG.AMOCRM.MAX_DEALS_FETCH);
-  Logger.log('Получено сделок из AmoCRM: ' + leads.length);
-
-  if (!leads || leads.length === 0) {
-    SpreadsheetApp.getActiveSpreadsheet().toast('Новых сделок в AmoCRM не найдено', 'AmoCRM Sync', 5);
-    return;
-  }
-
-  var newRows = [];
-  var updatedCount = 0;
-
-  for (var j = 0; j < leads.length; j++) {
-    var lead = leads[j];
-    var leadId = String(lead.id);
-
-    // Определяем статус и воронку
-    var pipelineInfo = pipelineStatusMap[lead.status_id] || { pipeline: 'Воронка #' + lead.pipeline_id, status: 'Статус #' + lead.status_id };
-    var sName = (pipelineInfo.status || '').toUpperCase();
-    var statusCategory = 'В работе';
-
-    // Целевой статус: Этап 2, Воронка продаж — «Успешно реализовано» (Status ID 142)
-    if (lead.status_id === 142 || sName.indexOf('УСПЕШНО РЕАЛИЗОВАНО') !== -1) {
-      statusCategory = 'Успешно реализовано';
-    } else if (lead.status_id === 143 ||
-               CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
-               sName.indexOf('ОТКАЗАНО') !== -1 ||
-               sName.indexOf('ЗАКРЫТО И НЕ') !== -1) {
-      statusCategory = 'Отказ';
-    }
-
-    // Парсим кастомные поля UTM и посадочной страницы
-    var utmSource = '';
-    var utmMedium = '';
-    var utmCampaign = '';
-    var utmContent = '';
-    var utmTerm = '';
-    var utmId = '';
-    var landingPage = '';
-
-    var cfs = lead.custom_fields_values || [];
-    for (var k = 0; k < cfs.length; k++) {
-      var cf = cfs[k];
-      var name = (cf.field_name || '').toLowerCase();
-      var code = (cf.field_code || '').toLowerCase();
-      var fid = cf.field_id;
-      var val = cf.values && cf.values[0] && cf.values[0].value ? String(cf.values[0].value).trim() : '';
-
-      if (name.indexOf('utm_source') !== -1 || code === 'utm_source' || fid === 679639) {
-        utmSource = val.toLowerCase();
-      } else if (name.indexOf('utm_medium') !== -1 || code === 'utm_medium' || fid === 679635) {
-        utmMedium = val.toLowerCase();
-      } else if (name.indexOf('utm_campaign') !== -1 || code === 'utm_campaign' || fid === 679637) {
-        utmCampaign = val.toLowerCase();
-      } else if (name.indexOf('utm_content') !== -1 || code === 'utm_content' || fid === 679633) {
-        utmContent = val.toLowerCase();
-      } else if (name.indexOf('utm_term') !== -1 || code === 'utm_term' || fid === 679641) {
-        utmTerm = val.toLowerCase();
-      } else if (name === 'utm_id' || code === 'utm_id' || fid === 833139) {
-        utmId = val;
-      } else if (fid === 849891 || name === 'страница' || fid === 833007 || name === 'referer') {
-        if (!landingPage && val) landingPage = val;
-      }
-    }
-
-    if (!utmSource) utmSource = 'direct/none';
-    if (!utmMedium) utmMedium = 'none';
-    if (!utmCampaign) utmCampaign = 'none';
-
-    // Определение раздела маркетинга (janamen1.kz)
-    var marketingSection = 'Общий трафик';
-    if (landingPage.indexOf('janamen1.kz') !== -1) {
-      if (landingPage.indexOf('/influence') !== -1) marketingSection = 'janamen1.kz/influence (Инфлюенс)';
-      else if (landingPage.indexOf('/lidmagnit') !== -1) marketingSection = 'janamen1.kz/lidmagnit (Лидмагнит)';
-      else if (landingPage.indexOf('/kaspiform') !== -1) marketingSection = 'janamen1.kz/kaspiform (Kaspi-форма)';
-      else if (landingPage.indexOf('/inst-women') !== -1) marketingSection = 'janamen1.kz/inst-women (Inst Women)';
-      else if (landingPage.indexOf('/inst-men') !== -1) marketingSection = 'janamen1.kz/inst-men (Inst Men)';
-      else if (landingPage.indexOf('/fun') !== -1) marketingSection = 'janamen1.kz/fun (Квиз / Воронка)';
-      else if (landingPage.indexOf('/vitamins-inst') !== -1) marketingSection = 'janamen1.kz/vitamins-inst';
-      else marketingSection = 'janamen1.kz (Главная)';
-    }
-
-    // Теги
-    var tags = (lead._embedded && lead._embedded.tags) ? lead._embedded.tags.map(function(t) { return t.name; }).join(', ') : '';
-
-    // Ссылка на сделку в AmoCRM
-    var leadUrl = 'https://' + CONFIG.AMOCRM.SUBDOMAIN + '.amocrm.ru/leads/detail/' + leadId;
-
-    var createdAt = lead.created_at ? new Date(lead.created_at * 1000) : new Date();
-
-    var rowValues = [
-      leadId,
-      lead.name || 'Без названия',
-      pipelineInfo.pipeline,
-      pipelineInfo.status,
-      statusCategory,
-      lead.price || 0,
-      createdAt,
-      utmSource,
-      utmMedium,
-      utmCampaign,
-      utmContent,
-      utmTerm,
-      utmId,
-      tags,
-      leadUrl,
-      landingPage,
-      marketingSection
-    ];
-
-    if (existingRowIndexById[leadId]) {
-      // Обновляем статус, сумму, этап
-      var targetRow = existingRowIndexById[leadId];
-      dealsSheet.getRange(targetRow, 1, 1, rowValues.length).setValues([rowValues]);
-      updatedCount++;
-    } else {
-      newRows.push(rowValues);
-    }
-  }
-
-  // Добавляем новые сделки пачкой
-  if (newRows.length > 0) {
-    var startRow = dealsSheet.getLastRow() + 1;
-    dealsSheet.getRange(startRow, 1, newRows.length, newRows[0].length).setValues(newRows);
-  }
-
-  SpreadsheetApp.flush();
-  var msg = 'Синхронизация завершена! Новых: ' + newRows.length + ', Обновлено: ' + updatedCount;
-  Logger.log(msg);
-  try {
-    SpreadsheetApp.getActiveSpreadsheet().toast(msg, 'AmoCRM Sync', 5);
-  } catch (e) {}
-
-  return { newLeads: newRows.length, updatedLeads: updatedCount };
+  return runSync_();
 }
 
-/**
- * Получает маппинг pipelineId -> statusName
- */
-function fetchPipelinesAndStatuses() {
-  var url = CONFIG.AMOCRM.BASE_URL + '/leads/pipelines';
-  var statusMap = {};
+/** Триггер-продолжение: удаляет свой одноразовый триггер и продолжает */
+function syncContinuation() {
+  deleteTriggersByHandler_('syncContinuation');
+  return runSync_();
+}
 
+/** Полная перезагрузка всей базы с нуля (запускать вручную при необходимости) */
+function fullResync() {
+  var p = PropertiesService.getScriptProperties();
+  p.deleteProperty('SYNC_FULL_DONE');
+  p.deleteProperty('SYNC_BACKFILL_PAGE');
+  p.deleteProperty('SYNC_BACKFILL_STARTED');
+  return runSync_();
+}
+
+function runSync_() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(20000)) {
+    return { skipped: true, reason: 'Синхронизация уже выполняется' };
+  }
+
+  var t0 = Date.now();
+  var props = PropertiesService.getScriptProperties();
   try {
-    var response = UrlFetchApp.fetch(url, {
-      method: 'get',
-      headers: {
-        'Authorization': 'Bearer ' + CONFIG.AMOCRM.ACCESS_TOKEN,
-        'Content-Type': 'application/json'
-      },
-      muteHttpExceptions: true
-    });
+    var ss = getSpreadsheet();
+    var sheet = ss.getSheetByName(CONFIG.SHEETS.DEALS);
+    if (!sheet) {
+      setupSpreadsheet();
+      sheet = ss.getSheetByName(CONFIG.SHEETS.DEALS);
+    }
+    sheet.getRange(1, 1, 1, DEAL_COLS).setValues([DEAL_HEADERS]);
 
-    if (response.getResponseCode() === 200) {
-      var data = JSON.parse(response.getContentText());
-      var pipelines = (data._embedded && data._embedded.pipelines) || [];
-      for (var i = 0; i < pipelines.length; i++) {
-        var p = pipelines[i];
-        var statuses = (p._embedded && p._embedded.statuses) || [];
-        for (var j = 0; j < statuses.length; j++) {
-          var s = statuses[j];
-          statusMap[s.id] = {
-            pipeline: p.name,
-            status: s.name
-          };
+    var statusMap = fetchPipelinesAndStatuses();
+
+    // Существующие строки в память
+    var lastRow = sheet.getLastRow();
+    var rows = lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, DEAL_COLS).getValues() : [];
+    var index = {};
+    for (var i = 0; i < rows.length; i++) {
+      var rid = String(rows[i][0]).trim();
+      if (rid) index[rid] = i;
+    }
+
+    var fullDone = props.getProperty('SYNC_FULL_DONE') === 'true';
+    if (fullDone && rows.length === 0) {           // таблицу очистили — грузим заново
+      fullDone = false;
+      props.deleteProperty('SYNC_BACKFILL_PAGE');
+    }
+
+    var runStartTs = Math.floor(Date.now() / 1000);
+    var page = 1;
+    var query = '';
+    if (!fullDone) {
+      page = Number(props.getProperty('SYNC_BACKFILL_PAGE')) || 1;
+      if (page === 1) props.setProperty('SYNC_BACKFILL_STARTED', String(runStartTs));
+      query = '&order[id]=asc';
+    } else {
+      var since = (Number(props.getProperty('SYNC_LAST_TS')) || runStartTs) - 600; // запас 10 мин
+      query = '&filter[updated_at][from]=' + since + '&order[updated_at]=asc';
+    }
+
+    var added = 0, updated = 0, finished = false, loopError = '';
+    try {
+      while (Date.now() - t0 < CONFIG.AMOCRM.TIME_BUDGET_MS) {
+        var url = CONFIG.AMOCRM.BASE_URL + '/leads?limit=' + CONFIG.AMOCRM.PAGE_LIMIT + '&page=' + page + query;
+        var data = amoGetJson_(url);
+        var leads = (data && data._embedded && data._embedded.leads) || [];
+        if (leads.length === 0) { finished = true; break; }
+
+        for (var j = 0; j < leads.length; j++) {
+          var row = leadToRow_(leads[j], statusMap);
+          var key = String(leads[j].id);
+          if (index[key] !== undefined) {
+            rows[index[key]] = row;
+            updated++;
+          } else {
+            index[key] = rows.length;
+            rows.push(row);
+            added++;
+          }
         }
+        page++;
+        if (leads.length < CONFIG.AMOCRM.PAGE_LIMIT) { finished = true; break; }
+        Utilities.sleep(200); // лимит AmoCRM ~7 запросов/сек
+      }
+    } catch (e) {
+      loopError = String(e);          // сохраняем всё, что успели загрузить, и продолжим позже
+      Logger.log('Сбой на странице ' + page + ': ' + loopError);
+    }
+
+    writeDealRows_(sheet, rows);
+
+    if (!fullDone) {
+      if (finished) {
+        props.setProperty('SYNC_FULL_DONE', 'true');
+        props.setProperty('SYNC_LAST_TS', props.getProperty('SYNC_BACKFILL_STARTED') || String(runStartTs));
+        props.deleteProperty('SYNC_BACKFILL_PAGE');
+      } else {
+        props.setProperty('SYNC_BACKFILL_PAGE', String(page));
+        ScriptApp.newTrigger('syncContinuation').timeBased().after(60 * 1000).create();
+      }
+    } else if (finished) {
+      props.setProperty('SYNC_LAST_TS', String(runStartTs));
+    }
+
+    props.setProperty('SYNC_LAST_RUN_AT', String(Date.now()));
+    props.setProperty('SYNC_LAST_RESULT', JSON.stringify({ added: added, updated: updated, finished: finished, total: rows.length }));
+
+    SpreadsheetApp.flush();
+    clearAnalyticsCache_();
+    try { getFullAnalyticsCached(); } catch (e) { Logger.log('Прогрев кэша: ' + e); }
+
+    var res = { mode: fullDone ? 'incremental' : 'backfill', added: added, updated: updated,
+                total: rows.length, complete: finished, nextPage: page, error: loopError || undefined };
+    Logger.log('Sync: ' + JSON.stringify(res));
+    return res;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function writeDealRows_(sheet, rows) {
+  if (!rows.length) return;
+  var need = rows.length + 1;
+  var max = sheet.getMaxRows();
+  if (max < need) sheet.insertRowsAfter(max, need - max);
+  sheet.getRange(2, 1, rows.length, DEAL_COLS).setValues(rows);
+  sheet.getRange('F2:F').setNumberFormat('#,##0" ₸"');
+  sheet.getRange('G2:G').setNumberFormat('yyyy-mm-dd hh:mm');
+  sheet.getRange('R2:R').setNumberFormat('yyyy-mm-dd hh:mm');
+}
+
+/** GET к AmoCRM с повтором при 429/5xx. 204 → null */
+function amoGetJson_(url) {
+  var lastErr = '';
+  for (var attempt = 0; attempt < 5; attempt++) {
+    try {
+      var resp = UrlFetchApp.fetch(url, {
+        method: 'get',
+        headers: { 'Authorization': 'Bearer ' + CONFIG.AMOCRM.ACCESS_TOKEN, 'Content-Type': 'application/json' },
+        muteHttpExceptions: true
+      });
+      var code = resp.getResponseCode();
+      if (code === 204) return null;
+      if (code === 200) {
+        var body = resp.getContentText();
+        return body ? JSON.parse(body) : null;
+      }
+      lastErr = 'HTTP ' + code + ': ' + resp.getContentText().substring(0, 200);
+      if (code === 401 || code === 403) break;           // токен — повторять бессмысленно
+      Utilities.sleep(1000 * (attempt + 1));             // 429 / 5xx — повтор
+    } catch (e) {                                        // сетевой сбой UrlFetchApp
+      lastErr = String(e);
+      Utilities.sleep(1500 * (attempt + 1));
+    }
+  }
+  throw new Error('AmoCRM API: ' + lastErr);
+}
+
+/** Сделка AmoCRM → строка листа (18 колонок) */
+function leadToRow_(lead, statusMap) {
+  var info = statusMap[lead.pipeline_id + ':' + lead.status_id] || { pipeline: 'Воронка #' + lead.pipeline_id, status: 'Статус #' + lead.status_id };
+  var sName = (info.status || '').toUpperCase();
+
+  // Целевой статус: Воронка продаж, Этап 2 — «Успешно реализовано» (ID 142)
+  var category = 'В работе';
+  if (lead.status_id === 142) category = 'Успешно реализовано';
+  else if (lead.status_id === 143 || CONFIG.AMOCRM.LOST_STATUS_IDS.indexOf(lead.status_id) !== -1 ||
+           sName.indexOf('ЗАКРЫТО И НЕ') !== -1) category = 'Отказ';
+
+  var f = { src: '', med: '', cmp: '', cnt: '', trm: '', uid: '', page: '' };
+  var cfs = lead.custom_fields_values || [];
+  for (var k = 0; k < cfs.length; k++) {
+    var cf = cfs[k];
+    var val = cf.values && cf.values[0] && cf.values[0].value != null ? String(cf.values[0].value).trim() : '';
+    switch (cf.field_id) {
+      case 679639: f.src = val; break;
+      case 679635: f.med = val; break;
+      case 679637: f.cmp = val; break;
+      case 679633: f.cnt = val; break;
+      case 679641: f.trm = val; break;
+      case 833139: f.uid = val; break;
+      case 849891: if (val) f.page = val; break;
+      case 833007: if (!f.page && val) f.page = val; break;
+    }
+  }
+
+  // Если UTM-поля пустые, но метки есть в ссылке страницы — достаём их оттуда
+  var fromUrl = parseUtmFromUrl_(f.page);
+  if (!f.src) f.src = fromUrl.utm_source || '';
+  if (!f.med) f.med = fromUrl.utm_medium || '';
+  if (!f.cmp) f.cmp = fromUrl.utm_campaign || '';
+  if (!f.cnt) f.cnt = fromUrl.utm_content || '';
+  if (!f.trm) f.trm = fromUrl.utm_term || '';
+  if (!f.uid) f.uid = fromUrl.utm_id || '';
+
+  // Нормализация (нижний регистр — как в правилах реестра)
+  var src = (f.src || 'direct/none').toLowerCase();
+  var med = (f.med || 'none').toLowerCase();
+  var cmp = (f.cmp || 'none').toLowerCase();
+
+  var tags = (lead._embedded && lead._embedded.tags) ? lead._embedded.tags.map(function (t) { return t.name; }).join(', ') : '';
+
+  return [
+    String(lead.id),
+    lead.name || 'Без названия',
+    info.pipeline,
+    info.status,
+    category,
+    lead.price || 0,
+    lead.created_at ? new Date(lead.created_at * 1000) : '',
+    src, med, cmp,
+    (f.cnt || '').toLowerCase(),
+    (f.trm || '').toLowerCase(),
+    f.uid,
+    tags,
+    'https://' + CONFIG.AMOCRM.SUBDOMAIN + '.amocrm.ru/leads/detail/' + lead.id,
+    f.page,
+    detectMarketingSection_(f.page),
+    lead.closed_at ? new Date(lead.closed_at * 1000) : ''
+  ];
+}
+
+function parseUtmFromUrl_(url) {
+  var out = {};
+  if (!url) return out;
+  var q = url.indexOf('?');
+  if (q < 0) return out;
+  var qs = url.substring(q + 1).split('#')[0].split('&');
+  for (var i = 0; i < qs.length; i++) {
+    var eq = qs[i].indexOf('=');
+    if (eq < 0) continue;
+    var key = qs[i].substring(0, eq).toLowerCase();
+    if (key.indexOf('utm_') !== 0) continue;
+    var v = qs[i].substring(eq + 1).replace(/\+/g, ' ');
+    try { v = decodeURIComponent(v); } catch (e) {}
+    out[key] = v.trim();
+  }
+  return out;
+}
+
+/** Раздел маркетингового домена janamen1.kz по ссылке страницы */
+function detectMarketingSection_(page) {
+  var p = String(page || '').toLowerCase();
+  if (p.indexOf(CONFIG.MARKETING_DOMAIN) === -1) return 'Общий трафик';
+  var path = p.split('?')[0].split('#')[0].replace(/^https?:\/\//, '').replace(CONFIG.MARKETING_DOMAIN, '').replace(/\/+$/, '');
+  return CONFIG.MARKETING_DOMAIN + (path || ' (Главная)');
+}
+
+/** Маппинг «pipelineId:statusId» → { pipeline, status } */
+function fetchPipelinesAndStatuses() {
+  var statusMap = {};
+  try {
+    var data = amoGetJson_(CONFIG.AMOCRM.BASE_URL + '/leads/pipelines');
+    var pipelines = (data && data._embedded && data._embedded.pipelines) || [];
+    for (var i = 0; i < pipelines.length; i++) {
+      var p = pipelines[i];
+      var statuses = (p._embedded && p._embedded.statuses) || [];
+      for (var j = 0; j < statuses.length; j++) {
+        // ID 142/143 общие для всех воронок — ключ «воронка:статус»
+        statusMap[p.id + ':' + statuses[j].id] = { pipeline: p.name, status: statuses[j].name };
       }
     }
   } catch (err) {
-    Logger.log('Ошибка при получении воронок: ' + err.toString());
+    Logger.log('Ошибка при получении воронок: ' + err);
   }
-
   return statusMap;
-}
-
-/**
- * Выгружает свежие сделки с пагинацией
- */
-function fetchRecentLeadsFromAmoCRM(maxLeads) {
-  var allLeads = [];
-  var page = 1;
-  var limit = CONFIG.AMOCRM.BATCH_SIZE || 50;
-  var totalToFetch = maxLeads || 500;
-
-  while (allLeads.length < totalToFetch) {
-    var url = CONFIG.AMOCRM.BASE_URL + '/leads?limit=' + limit + '&page=' + page + '&order[created_at]=desc&with=contacts';
-    try {
-      var response = UrlFetchApp.fetch(url, {
-        method: 'get',
-        headers: {
-          'Authorization': 'Bearer ' + CONFIG.AMOCRM.ACCESS_TOKEN,
-          'Content-Type': 'application/json'
-        },
-        muteHttpExceptions: true
-      });
-
-      var code = response.getResponseCode();
-      if (code === 204) {
-        // Нет данных
-        break;
-      }
-      if (code !== 200) {
-        Logger.log('HTTP ' + code + ' при загрузке сделок: ' + response.getContentText());
-        break;
-      }
-
-      var data = JSON.parse(response.getContentText());
-      var leads = (data._embedded && data._embedded.leads) || [];
-      if (leads.length === 0) break;
-
-      allLeads = allLeads.concat(leads);
-
-      if (leads.length < limit) break; // Последняя страница
-      page++;
-
-      // Пауза от rate limit
-      Utilities.sleep(250);
-    } catch (e) {
-      Logger.log('Ошибка fetchRecentLeads: ' + e.toString());
-      break;
-    }
-  }
-
-  return allLeads;
 }

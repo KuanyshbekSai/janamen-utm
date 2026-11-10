@@ -140,7 +140,8 @@ function setupDealsSheet(sheet) {
     'Теги сделки',        // N (14)
     'Ссылка в AmoCRM',    // O (15)
     'Посадочная страница',// P (16)
-    'Маркетинг janamen1.kz' // Q (17)
+    'Маркетинг janamen1.kz',// Q (17)
+    'Дата закрытия'         // R (18)
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -165,11 +166,13 @@ function setupDealsSheet(sheet) {
   sheet.setColumnWidth(15, 200);
   sheet.setColumnWidth(16, 260);
   sheet.setColumnWidth(17, 240);
+  sheet.setColumnWidth(18, 130);
 
   // Формат валюты
   sheet.getRange('F2:F').setNumberFormat('#,##0" ₸"');
   // Формат даты
   sheet.getRange('G2:G').setNumberFormat('yyyy-mm-dd hh:mm');
+  sheet.getRange('R2:R').setNumberFormat('yyyy-mm-dd hh:mm');
 }
 
 /**

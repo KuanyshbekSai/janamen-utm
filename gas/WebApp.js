@@ -32,17 +32,29 @@ function doGet(e) {
     });
   }
 
-  // API: Ручной запуск синхронизации из браузера
-  if (action === 'sync_amocrm') {
-    var syncResult = syncAmoCrmDeals();
-    return createJsonResponse({ success: true, data: syncResult });
+  // API: Полная аналитика по всем UTM (из кэша/листа сделок)
+  if (action === 'get_full_analytics') {
+    try {
+      return createJsonResponse({ success: true, data: getFullAnalyticsCached() });
+    } catch (err) {
+      return createJsonResponse({ success: false, message: String(err) });
+    }
   }
 
-  // API: Инициализация листов таблицы
-  if (action === 'setup_sheets') {
-    var initResult = setupSpreadsheet();
-    return createJsonResponse({ success: true, message: initResult });
+  // API: Ручной запуск синхронизации из браузера (не чаще раза в 2 минуты)
+  if (action === 'sync_amocrm') {
+    var lastRun = Number(PropertiesService.getScriptProperties().getProperty('SYNC_LAST_RUN_AT')) || 0;
+    if (Date.now() - lastRun < 120000) {
+      return createJsonResponse({ success: true, data: { skipped: true, reason: 'Данные обновлены менее 2 минут назад' } });
+    }
+    try {
+      var syncResult = syncAmoCrmDeals();
+      return createJsonResponse({ success: true, data: syncResult });
+    } catch (err2) {
+      return createJsonResponse({ success: false, message: String(err2) });
+    }
   }
+
 
   // По умолчанию: возвращаем HTML-дашборд
   var template = HtmlService.createTemplateFromFile('Dashboard');

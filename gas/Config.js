@@ -23,8 +23,8 @@ var CONFIG = {
     LOST_STATUS_IDS: [
       143 // Закрыто и не реализовано
     ],
-    BATCH_SIZE: 50,
-    MAX_DEALS_FETCH: 2500
+    PAGE_LIMIT: 250,           // максимум AmoCRM API
+    TIME_BUDGET_MS: 240000     // лимит одного запуска (GAS ~6 мин)
   },
 
   // Выделенный домен отдела маркетинга
