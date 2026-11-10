@@ -364,7 +364,65 @@ with open('gas/marketing_analytics_summary.json', 'w', encoding='utf-8') as f:
 with open('gas/utm_granularity_data.json', 'w', encoding='utf-8') as f:
     json.dump(granularity_data, f, ensure_ascii=False, indent=2)
 
+# Build compact dictionary-encoded leads for real-time period filtering
+strings = []
+s_map = {}
+def get_s(s):
+    if s not in s_map:
+        s_map[s] = len(strings)
+        strings.append(s)
+    return s_map[s]
+
+encoded_rows = []
+for d in leads:
+    won = 1 if d.get('status_id') == 142 else 0
+    price = d.get('price') or 0
+    st_id = d.get('status_id') or 0
+    created_at = d.get('created_at') or 0
+    cf = {c['field_id']: str(c['values'][0]['value']).strip() for c in (d.get('custom_fields_values') or []) if c.get('values')}
+    page = cf.get(849891) or cf.get(833007) or ''
+    q = {}
+    if '?' in page:
+        for kv in page.split('?', 1)[1].split('#')[0].split('&'):
+            if '=' in kv:
+                a, b = kv.split('=', 1)
+                if a.lower().startswith('utm_'):
+                    q[a.lower()] = unquote_plus(b).strip()
+    g = lambda fid, key: (cf.get(fid) or q.get(key) or '').strip()
+    src = g(679639, 'utm_source') or 'direct/none'
+    med = g(679635, 'utm_medium') or 'none'
+    cmp_ = g(679637, 'utm_campaign') or 'none'
+    cnt = g(679633, 'utm_content') or 'none'
+    trm = g(679641, 'utm_term') or 'none'
+    p = pk(page)
+    dom = get_domain(p)
+    path = p.replace(dom, '').split('#')[0] or '/' if dom != 'other' else p
+    if not path.startswith('/') and dom != 'other':
+        path = '/' + path
+    name = (d.get('name') or '').strip()[:35]
+    
+    encoded_rows.append([
+        d['id'],
+        created_at,
+        won,
+        price,
+        get_s(dom),
+        get_s(path),
+        get_s(src),
+        get_s(med),
+        get_s(cmp_),
+        get_s(cnt),
+        get_s(trm),
+        st_id,
+        name
+    ])
+
+compact_data = {'strings': strings, 'rows': encoded_rows}
+with open('gas/compact_leads_dict.json', 'w', encoding='utf-8') as f:
+    json.dump(compact_data, f, ensure_ascii=False)
+
 print('SUCCESS!')
 print(f"Total leads: {tot['leads']}, Won: {tot['won']}, Revenue: {tot['revenue']:,} ₸")
 print(f"Janamen1 leads: {jt['leads']}, Won: {jt['won']}, Revenue: {jt['revenue']:,} ₸")
 print(f"Combos all: {len(combo_list_all)}, Combos janamen1: {len(combo_list_jana)}")
+print(f"Compact leads encoded: {len(encoded_rows)} rows, {len(strings)} unique strings")
