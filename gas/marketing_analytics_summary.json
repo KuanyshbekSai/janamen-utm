@@ -1979,20 +1979,20 @@
   },
   "subpages_janamen1": [
     {
-      "path": "/wa-9828",
-      "title": "Айтым Берикович - органика",
-      "desc": "WhatsApp +7 708 377-98-28 (Wazzup диалоги и заявки)",
-      "leads": 17986,
-      "won": 1070,
+      "path": "/iwa-9828",
+      "title": "Instagram WhatsApp (iwa-9828)",
+      "desc": "Айтым Берикович (+7 708 377-98-28) — переписки и заявки",
+      "leads": 18085,
+      "won": 1076,
       "cr": 5.9,
-      "revenue": 180173000,
-      "avgCheck": 168386
+      "revenue": 181163000,
+      "avgCheck": 168367
     },
     {
       "path": "/organika",
       "title": "Органика (Основная)",
       "desc": "Основная посадочная под органический трафик и посты",
-      "leads": 3863,
+      "leads": 3857,
       "won": 182,
       "cr": 4.7,
       "revenue": 30071000,
@@ -2002,7 +2002,7 @@
       "path": "/inst-men",
       "title": "Instagram Men",
       "desc": "Мужская аудитория из соцсетей",
-      "leads": 1545,
+      "leads": 1538,
       "won": 93,
       "cr": 6.0,
       "revenue": 15157000,
@@ -2022,7 +2022,7 @@
       "path": "/inst-women",
       "title": "Instagram Women",
       "desc": "Женская аудитория из соцсетей",
-      "leads": 1589,
+      "leads": 1587,
       "won": 71,
       "cr": 4.5,
       "revenue": 11931800,
@@ -2030,9 +2030,9 @@
     },
     {
       "path": "/lidmagnit",
-      "title": "Лид-магнит / Гайд",
-      "desc": "Бесплатные материалы и тест за контакт",
-      "leads": 3402,
+      "title": "Лид-магниты (все варианты /lidmagnit*)",
+      "desc": "Бесплатные материалы, гайды и тесты с любыми приставками",
+      "leads": 3404,
       "won": 21,
       "cr": 0.6,
       "revenue": 4108000,
@@ -2060,8 +2060,8 @@
     },
     {
       "path": "/fun",
-      "title": "Квиз / Воронка",
-      "desc": "Интерактивный опрос и подбор программы",
+      "title": "Квиз / Воронка (/fun)",
+      "desc": "Интерактивный опрос и подбор программы курса",
       "leads": 279,
       "won": 9,
       "cr": 3.2,
@@ -2089,16 +2089,6 @@
       "avgCheck": 169250
     },
     {
-      "path": "/womens-yakut",
-      "title": "womens-yakut",
-      "desc": "Посадочная страница /womens-yakut",
-      "leads": 15,
-      "won": 3,
-      "cr": 20.0,
-      "revenue": 502000,
-      "avgCheck": 167333
-    },
-    {
       "path": "/orlanforma",
       "title": "Орлан форма",
       "desc": "Специальная форма партнеров",
@@ -2110,43 +2100,13 @@
     },
     {
       "path": "/influence",
-      "title": "Инфлюенс / Блогеры",
-      "desc": "Интеграции с блогерами и амбассадорами",
+      "title": "Инфлюенс / Блогеры (МПБ)",
+      "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
       "leads": 66,
       "won": 2,
       "cr": 3.0,
       "revenue": 358000,
       "avgCheck": 179000
-    },
-    {
-      "path": "/forall",
-      "title": "forall",
-      "desc": "Посадочная страница /forall",
-      "leads": 1,
-      "won": 1,
-      "cr": 100.0,
-      "revenue": 264000,
-      "avgCheck": 264000
-    },
-    {
-      "path": "/yakut-forme",
-      "title": "yakut-forme",
-      "desc": "Посадочная страница /yakut-forme",
-      "leads": 8,
-      "won": 1,
-      "cr": 12.5,
-      "revenue": 112000,
-      "avgCheck": 112000
-    },
-    {
-      "path": "/zapros",
-      "title": "zapros",
-      "desc": "Посадочная страница /zapros",
-      "leads": 4,
-      "won": 1,
-      "cr": 25.0,
-      "revenue": 112000,
-      "avgCheck": 112000
     },
     {
       "path": "/aojiru-inst",
@@ -2169,40 +2129,10 @@
       "avgCheck": 0
     },
     {
-      "path": "/lp/women",
-      "title": "lp/women",
-      "desc": "Посадочная страница /lp/women",
-      "leads": 24,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
       "path": "/kaspiform/women",
       "title": "kaspiform/women",
       "desc": "Посадочная страница /kaspiform/women",
       "leads": 16,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/yakut-form",
-      "title": "yakut-form",
-      "desc": "Посадочная страница /yakut-form",
-      "leads": 10,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/lp/men",
-      "title": "lp/men",
-      "desc": "Посадочная страница /lp/men",
-      "leads": 8,
       "won": 0,
       "cr": 0.0,
       "revenue": 0,
@@ -2229,129 +2159,9 @@
       "avgCheck": 0
     },
     {
-      "path": "/lidmagnit-2",
-      "title": "lidmagnit-2",
-      "desc": "Посадочная страница /lidmagnit-2",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/vitamincomplex",
-      "title": "vitamincomplex",
-      "desc": "Посадочная страница /vitamincomplex",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/tiktok-1",
-      "title": "tiktok-1",
-      "desc": "Посадочная страница /tiktok-1",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/newmain",
-      "title": "newmain",
-      "desc": "Посадочная страница /newmain",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
       "path": "/plan",
       "title": "plan",
       "desc": "Посадочная страница /plan",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/yuraforma",
-      "title": "yuraforma",
-      "desc": "Посадочная страница /yuraforma",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/yakut-gg",
-      "title": "yakut-gg",
-      "desc": "Посадочная страница /yakut-gg",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/end",
-      "title": "end",
-      "desc": "Посадочная страница /end",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/endorman",
-      "title": "endorman",
-      "desc": "Посадочная страница /endorman",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/lp/form",
-      "title": "lp/form",
-      "desc": "Посадочная страница /lp/form",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/men",
-      "title": "men",
-      "desc": "Посадочная страница /men",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/yakut-aojiru",
-      "title": "yakut-aojiru",
-      "desc": "Посадочная страница /yakut-aojiru",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/yakut-form2",
-      "title": "yakut-form2",
-      "desc": "Посадочная страница /yakut-form2",
       "leads": 1,
       "won": 0,
       "cr": 0.0,
@@ -2597,10 +2407,10 @@
       "price": 0,
       "date": "15.04.2026 09:44",
       "created_at": 1776228287,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -2629,10 +2439,10 @@
       "price": 0,
       "date": "11.05.2026 20:04",
       "created_at": 1778511841,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -2661,10 +2471,10 @@
       "price": 0,
       "date": "17.03.2026 21:57",
       "created_at": 1773766636,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -2677,10 +2487,10 @@
       "price": 0,
       "date": "31.03.2026 17:20",
       "created_at": 1774959625,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3269,10 +3079,10 @@
       "price": 0,
       "date": "13.03.2026 00:37",
       "created_at": 1773344240,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3685,10 +3495,10 @@
       "price": 0,
       "date": "13.03.2026 08:48",
       "created_at": 1773373695,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3733,10 +3543,10 @@
       "price": 0,
       "date": "13.03.2026 11:17",
       "created_at": 1773382660,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3749,10 +3559,10 @@
       "price": 0,
       "date": "13.03.2026 11:20",
       "created_at": 1773382822,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3813,10 +3623,10 @@
       "price": 0,
       "date": "13.03.2026 12:14",
       "created_at": 1773386066,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
@@ -3984,10 +3794,10 @@
       "price": 176000,
       "date": "14.03.2026 05:50",
       "created_at": 1773449431,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
@@ -4188,10 +3998,10 @@
       "price": 176000,
       "date": "18.03.2026 09:50",
       "created_at": 1773809441,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
@@ -4236,10 +4046,10 @@
       "price": 179000,
       "date": "08.11.2026 17:15",
       "created_at": 1794140111,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
@@ -4632,10 +4442,10 @@
       "price": 204000,
       "date": "08.11.2026 13:27",
       "created_at": 1794126423,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
@@ -4764,10 +4574,10 @@
       "price": 204000,
       "date": "08.11.2026 12:39",
       "created_at": 1794123579,
-      "path": "/wa-9828",
+      "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
-      "campaign": "wa_9828",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
@@ -4832,10 +4642,10 @@
     }
   ],
   "meta": {
-    "generated_at": "2026-11-10T14:42:03.443900",
+    "generated_at": "2026-11-10T15:17:55.768172",
     "total_analyzed_leads": 36484,
     "total_tagged_leads": 23476,
     "janamen1_leads_count": 32261,
-    "combinations_count": 343
+    "combinations_count": 334
   }
 }

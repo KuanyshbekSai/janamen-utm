@@ -72,7 +72,7 @@ def parse_lead(d):
     trm = g(679641, 'utm_term') or 'none'
 
     tags = [str(t.get('name', '')) for t in (d.get('_embedded') or {}).get('tags') or []]
-    is_wa_aytym = any('9828' in t for t in tags)
+    is_wa_aytym = any('9828' in t for t in tags) or ('iwa-9828' in page.lower()) or ('9828' in page.lower())
     
     p = pk(page)
     dom = get_domain(p)
@@ -83,16 +83,35 @@ def parse_lead(d):
         if src in UNSET:
             src = 'whatsapp'
         if cmp_ in UNSET:
-            cmp_ = 'wa_9828'
-        if not p or dom == 'other':
-            dom = 'janamen1.kz'
-            path = '/wa-9828'
-            p = 'janamen1.kz/wa-9828'
+            cmp_ = 'iwa_9828'
+        dom = 'janamen1.kz'
+        path = '/iwa-9828'
+        p = 'janamen1.kz/iwa-9828'
         is_jana = True
     else:
         is_jana = (dom == 'janamen1.kz') or ('janamen1.kz' in page.lower())
 
     clean_path = path if path.startswith('/') else '/' + path
+
+    # Группировка основных каналов Jana Men:
+    page_l = page.lower()
+    clean_l = clean_path.lower()
+    if 'magnit' in clean_l or 'magnet' in clean_l or 'гайд' in clean_l or clean_l.startswith('/lidmagnit') or clean_l.startswith('/ligmagnit') or 'magnit' in page_l:
+        clean_path = '/lidmagnit'
+        dom = 'janamen1.kz'
+        is_jana = True
+    elif 'influence' in clean_l or 'influence' in page_l:
+        clean_path = '/influence'
+        dom = 'janamen1.kz'
+        is_jana = True
+    elif clean_l.startswith('/fun') or '/fun' in page_l:
+        clean_path = '/fun'
+        dom = 'janamen1.kz'
+        is_jana = True
+    elif clean_l.startswith('/smm') or '/smm' in page_l:
+        clean_path = '/smm'
+        dom = 'janamen1.kz'
+        is_jana = True
 
     return {
         'id': d['id'],
@@ -339,18 +358,19 @@ scopes_out = {k: format_scope(k) for k in scope_defs}
 
 # Meta dictionary for human labels for janamen1 subpages
 subpage_meta = {
-    '/wa-9828': {'title': 'Айтым Берикович - органика', 'desc': 'WhatsApp +7 708 377-98-28 (Wazzup диалоги и заявки)'},
+    '/iwa-9828': {'title': 'Instagram WhatsApp (iwa-9828)', 'desc': 'Айтым Берикович (+7 708 377-98-28) — переписки и заявки'},
+    '/lidmagnit': {'title': 'Лид-магниты (все варианты /lidmagnit*)', 'desc': 'Бесплатные материалы, гайды и тесты с любыми приставками'},
+    '/influence': {'title': 'Инфлюенс / Блогеры (МПБ)', 'desc': 'Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)'},
+    '/fun': {'title': 'Квиз / Воронка (/fun)', 'desc': 'Интерактивный опрос и подбор программы курса'},
+    '/smm': {'title': 'SMM / Соцсети (/smm)', 'desc': 'Посадочная страница для социальных сетей и постов'},
     '/organika': {'title': 'Органика (Основная)', 'desc': 'Основная посадочная под органический трафик и посты'},
-    '/inst-men': {'title': 'Instagram Men', 'desc': 'Мужская аудитория из соцсетей'},
     '/kaspiform': {'title': 'Kaspi-форма', 'desc': 'Быстрый заказ через Kaspi Рассрочку / Red'},
+    '/inst-men': {'title': 'Instagram Men', 'desc': 'Мужская аудитория из соцсетей'},
     '/inst-women': {'title': 'Instagram Women', 'desc': 'Женская аудитория из соцсетей'},
-    '/lidmagnit': {'title': 'Лид-магнит / Гайд', 'desc': 'Бесплатные материалы и тест за контакт'},
     '/vitamins-inst': {'title': 'Витамины Inst', 'desc': 'Посадочная под витаминные комплексы'},
     '/inst-omega': {'title': 'Омега-3 Inst', 'desc': 'Посадочная под Омега-3 и добавки'},
-    '/fun': {'title': 'Квиз / Воронка', 'desc': 'Интерактивный опрос и подбор программы'},
     '/nikitaform': {'title': 'Форма Никита', 'desc': 'Форма таргетолога Никиты'},
     '/yurakv': {'title': 'Квиз Юра', 'desc': 'Квиз-воронка таргетолога Юры'},
-    '/influence': {'title': 'Инфлюенс / Блогеры', 'desc': 'Интеграции с блогерами и амбассадорами'},
     '/aojiru-inst': {'title': 'Аодзиру Inst', 'desc': 'Посадочная под японский аодзиру'},
     '/kaspiformsps': {'title': 'Kaspi Спасибо', 'desc': 'Страница благодарности после формы'},
     '/orlanforma': {'title': 'Орлан форма', 'desc': 'Специальная форма партнеров'},

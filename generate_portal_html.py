@@ -164,20 +164,25 @@ html_content = f'''<!DOCTYPE html>
           <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Посадочная страница / Точка входа:</label>
           <select id="filterPageSelect" onchange="onFilterChange()" class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
             <option value="all">Все страницы и каналы</option>
-            <option value="/wa-9828">📱 /wa-9828 (Айтым Берикович - органика)</option>
-            <option value="/organika">/organika (Органика / SMM)</option>
-            <option value="/inst-men">/inst-men (Instagram Men)</option>
-            <option value="/kaspiform">/kaspiform (Kaspi-форма)</option>
-            <option value="/inst-women">/inst-women (Instagram Women)</option>
-            <option value="/lidmagnit">/lidmagnit (Лид-магнит / Гайд)</option>
-            <option value="/vitamins-inst">/vitamins-inst (Витамины)</option>
-            <option value="/inst-omega">/inst-omega (Омега-3)</option>
-            <option value="/fun">/fun (Квиз воронка)</option>
-            <option value="/nikitaform">/nikitaform (Форма Никиты)</option>
-            <option value="/yurakv">/yurakv (Квиз Юры)</option>
-            <option value="/influence">/influence (Блогеры / Инфлюенс)</option>
-            <option value="/aojiru-inst">/aojiru-inst (Аодзиру)</option>
-            <option value="/">/ (Главная)</option>
+            <optgroup label="🎯 5 ОСНОВНЫХ КАНАЛОВ (Jana Men)">
+              <option value="/iwa-9828">📱 /iwa-9828 (WhatsApp 9828 — Айтым Берикович)</option>
+              <option value="/lidmagnit">🎁 /lidmagnit (Все варианты лид-магнитов и гайдов)</option>
+              <option value="/influence">🌟 /influence (Инфлюенс / Блогеры МПБ)</option>
+              <option value="/fun">⚡ /fun (Квиз-воронка)</option>
+              <option value="/smm">📸 /smm (SMM / Соцсети)</option>
+            </optgroup>
+            <optgroup label="Остальные посадочные страницы">
+              <option value="/organika">/organika (Органика / SMM)</option>
+              <option value="/kaspiform">/kaspiform (Kaspi-форма)</option>
+              <option value="/inst-men">/inst-men (Instagram Men)</option>
+              <option value="/inst-women">/inst-women (Instagram Women)</option>
+              <option value="/vitamins-inst">/vitamins-inst (Витамины)</option>
+              <option value="/inst-omega">/inst-omega (Омега-3)</option>
+              <option value="/nikitaform">/nikitaform (Форма Никиты)</option>
+              <option value="/yurakv">/yurakv (Квиз Юры)</option>
+              <option value="/aojiru-inst">/aojiru-inst (Аодзиру)</option>
+              <option value="/">/ (Главная)</option>
+            </optgroup>
           </select>
         </div>
 
@@ -186,10 +191,12 @@ html_content = f'''<!DOCTYPE html>
           <select id="filterMediumSelect" onchange="onFilterChange()" class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
             <option value="all">Все каналы</option>
             <option value="Айтым Берикович - органика">📱 Айтым Берикович - органика (WhatsApp)</option>
+            <option value="mpb1">mpb1 (Блогеры - Менеджер 1)</option>
+            <option value="mpb2">mpb2 (Блогеры - Менеджер 2)</option>
+            <option value="mpb3">mpb3 (Блогеры - Менеджер 3)</option>
             <option value="nikita">nikita (Таргет Никита)</option>
             <option value="social">social (Соцсети / SMM)</option>
             <option value="paid">paid (Платная реклама)</option>
-            <option value="mpb2">mpb2</option>
             <option value="none">none (Прямой переход)</option>
           </select>
         </div>
@@ -200,17 +207,27 @@ html_content = f'''<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- БЫСТРЫЙ ВЫБОР МАРКЕТИНГОВОГО КАНАЛА -->
-      <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 text-xs">
-        <span class="text-slate-400 font-bold uppercase tracking-wider text-[11px] mr-1">Быстрый срез по каналам:</span>
-        <button onclick="filterByChannel('all')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">Все каналы</button>
-        <button onclick="filterByChannel('Айтым Берикович - органика')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold transition flex items-center space-x-1.5 shadow-sm">
-          <span>📱 Айтым Берикович - органика (WhatsApp 9828)</span>
-          <span class="px-1.5 py-0.2 text-[10px] bg-emerald-200 text-emerald-900 rounded-full font-black">181.2M ₸</span>
+      <!-- БЫСТРЫЙ ВЫБОР 5 ОСНОВНЫХ КАНАЛОВ -->
+      <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 text-xs">
+        <span class="text-slate-400 font-bold uppercase tracking-wider text-[11px] mr-1">5 основных каналов:</span>
+        <button onclick="resetAllFilters()" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">Все каналы</button>
+        <button onclick="filterByPage('/iwa-9828')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>📱 /iwa-9828 (WhatsApp)</span>
+          <span class="px-1.5 py-0.2 text-[10px] bg-emerald-200 text-emerald-900 rounded-full font-black">181M ₸</span>
         </button>
-        <button onclick="filterByChannel('nikita')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">Таргет Никита</button>
-        <button onclick="filterByChannel('social')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">SMM / Соцсети</button>
-        <button onclick="filterByChannel('none')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">Прямой / Сайт</button>
+        <button onclick="filterByPage('/lidmagnit')" class="px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-brand-800 border border-brand-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>🎁 /lidmagnit* (Лидмагниты)</span>
+          <span class="px-1.5 py-0.2 text-[10px] bg-blue-200 text-brand-900 rounded-full font-black">3.4k</span>
+        </button>
+        <button onclick="filterByPage('/influence')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>🌟 /influence (Блогеры)</span>
+        </button>
+        <button onclick="filterByPage('/fun')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>⚡ /fun (Квиз)</span>
+        </button>
+        <button onclick="filterByPage('/smm')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 font-bold transition flex items-center space-x-1 shadow-sm">
+          <span>📸 /smm (Соцсети)</span>
+        </button>
       </div>
     </div>
 
@@ -612,6 +629,11 @@ html_content = f'''<!DOCTYPE html>
       onFilterChange();
     }}
 
+    function filterByPage(page) {{
+      document.getElementById('filterPageSelect').value = page;
+      onFilterChange();
+    }}
+
     function resetAllFilters() {{
       document.getElementById('filterDomainSelect').value = 'janamen1.kz';
       document.getElementById('filterPageSelect').value = 'all';
@@ -632,11 +654,19 @@ html_content = f'''<!DOCTYPE html>
         if (filterDateTo && l.ts > filterDateTo) return false;
 
         if (domFilter === 'janamen1.kz' && l.dom !== 'janamen1.kz') return false;
-        if (domFilter === 'janamen1_site' && (l.dom !== 'janamen1.kz' || l.path === '/wa-9828')) return false;
-        if (domFilter === 'whatsapp_9828' && (l.path !== '/wa-9828' && l.med !== 'Айтым Берикович - органика')) return false;
+        if (domFilter === 'janamen1_site' && (l.dom !== 'janamen1.kz' || l.path === '/iwa-9828' || l.path === '/wa-9828')) return false;
+        if (domFilter === 'whatsapp_9828' && (l.path !== '/iwa-9828' && l.path !== '/wa-9828' && l.med !== 'Айтым Берикович - органика')) return false;
         if (domFilter === 'janamenhealth.kz' && l.dom !== 'janamenhealth.kz') return false;
 
-        if (pageFilter !== 'all' && l.path !== pageFilter) return false;
+        if (pageFilter !== 'all') {{
+          if (pageFilter === '/lidmagnit') {{
+            if (!l.path.startsWith('/lidmagnit') && !l.path.startsWith('/ligmagnit')) return false;
+          }} else if (pageFilter === '/iwa-9828') {{
+            if (l.path !== '/iwa-9828' && l.path !== '/wa-9828') return false;
+          }} else if (l.path !== pageFilter) {{
+            return false;
+          }}
+        }}
 
         if (medFilter !== 'all' && l.med !== medFilter) return false;
 
@@ -744,7 +774,7 @@ html_content = f'''<!DOCTYPE html>
     }}
 
     function drilldownSubpage(subpage) {{
-      const sel = document.getElementById('filterSubpage');
+      const sel = document.getElementById('filterPageSelect');
       if (sel) {{
         sel.value = subpage;
         onFilterChange();
@@ -791,18 +821,19 @@ html_content = f'''<!DOCTYPE html>
 
     function renderSubpageCards() {{
       const meta = {{
-        '/wa-9828': ['📱 Айтым Берикович - органика', 'WhatsApp +7 708 377-98-28 (Wazzup переписки и заявки)'],
+        '/iwa-9828': ['📱 Айтым Берикович - органика', 'WhatsApp +7 708 377-98-28 (Wazzup переписки и заявки)'],
+        '/lidmagnit': ['🎁 Лид-магнит / Гайды (все вариации)', 'Все варианты лид-магнитов и гайдов (/lidmagnit*)'],
+        '/influence': ['🌟 Инфлюенс / Блогеры (МПБ)', 'Интеграции с блогерами и амбассадорами (mpb1, mpb2, mpb3)'],
+        '/fun': ['⚡ Квиз / Воронка', 'Интерактивный опрос и подбор программы (/fun)'],
+        '/smm': ['📸 SMM / Соцсети', 'Посадочная для SMM и соцсетей (janamen1.kz/smm)'],
         '/organika': ['Органика (Основная)', 'Основная посадочная под органический трафик и посты'],
         '/inst-men': ['Instagram Men', 'Мужская аудитория из соцсетей'],
         '/kaspiform': ['Kaspi-форма', 'Быстрый заказ через Kaspi Рассрочку / Red'],
         '/inst-women': ['Instagram Women', 'Женская аудитория из соцсетей'],
-        '/lidmagnit': ['Лид-магнит / Гайд', 'Бесплатные материалы и тест за контакт'],
         '/vitamins-inst': ['Витамины Inst', 'Посадочная под витаминные комплексы'],
         '/inst-omega': ['Омега-3 Inst', 'Посадочная под Омега-3 и добавки'],
-        '/fun': ['Квиз / Воронка', 'Интерактивный опрос и подбор программы'],
         '/nikitaform': ['Форма Никита', 'Форма таргетолога Никиты'],
         '/yurakv': ['Квиз Юра', 'Квиз-воронка таргетолога Юры'],
-        '/influence': ['Инфлюенс / Блогеры', 'Интеграции с блогерами и амбассадорами'],
         '/aojiru-inst': ['Аодзиру Inst', 'Посадочная под японский аодзиру'],
         '/': ['Главная страница', 'Главная janamen1.kz']
       }};
@@ -839,7 +870,7 @@ html_content = f'''<!DOCTYPE html>
             badge = '<span class="ml-2 px-2 py-0.5 text-[10px] rounded-md font-bold bg-purple-100 text-purple-800 border border-purple-200">ВЫСОКИЙ CR</span>';
           }}
 
-          const url = sp.path.startsWith('/wa-') ? 'https://wa.me/77083779828' : ('https://janamen1.kz' + (sp.path === '/' ? '' : sp.path));
+          const url = (sp.path === '/iwa-9828' || sp.path.startsWith('/wa-')) ? 'https://wa.me/77083779828' : ('https://janamen1.kz' + (sp.path === '/' ? '' : sp.path));
           const avgCheck = sp.won ? Math.round(sp.revenue / sp.won) : 0;
 
           return `
@@ -872,7 +903,7 @@ html_content = f'''<!DOCTYPE html>
                 ${{avgCheck.toLocaleString('ru-RU')}} ₸
               </td>
               <td class="py-3 px-4 text-center whitespace-nowrap">
-                <button onclick="drilldownSubpage('${{sp.subpage}}')" class="px-3 py-1.5 text-xs font-bold text-purple-700 hover:text-white hover:bg-purple-600 rounded-lg transition border border-purple-200">
+                <button onclick="drilldownSubpage('${{sp.path}}')" class="px-3 py-1.5 text-xs font-bold text-purple-700 hover:text-white hover:bg-purple-600 rounded-lg transition border border-purple-200">
                   Смотреть UTM →
                 </button>
               </td>
@@ -897,7 +928,7 @@ html_content = f'''<!DOCTYPE html>
             color = 'bg-purple-100 text-purple-800 border-purple-200 font-bold';
           }}
 
-          const url = sp.path.startsWith('/wa-') ? 'https://wa.me/77083779828' : ('https://janamen1.kz' + (sp.path === '/' ? '' : sp.path));
+          const url = (sp.path === '/iwa-9828' || sp.path.startsWith('/wa-')) ? 'https://wa.me/77083779828' : ('https://janamen1.kz' + (sp.path === '/' ? '' : sp.path));
           return `
             <div class="p-5 rounded-2xl border border-slate-200 hover:border-brand-500/50 hover:shadow-md transition bg-gradient-to-br from-white to-slate-50/50 space-y-4">
               <div class="flex items-start justify-between">
@@ -924,7 +955,7 @@ html_content = f'''<!DOCTYPE html>
               </div>
               <div class="pt-1 flex items-center justify-between">
                 <span class="text-[11px] text-slate-500 font-medium">Конверсия: <b class="${{sp.cr >= 4 ? 'text-emerald-700 font-extrabold' : 'text-slate-800'}}">${{sp.cr}}%</b></span>
-                <button onclick="drilldownSubpage('${{sp.subpage}}')" class="text-xs font-bold text-purple-700 hover:text-purple-900 transition">Смотреть UTM →</button>
+                <button onclick="drilldownSubpage('${{sp.path}}')" class="text-xs font-bold text-purple-700 hover:text-purple-900 transition">Смотреть UTM →</button>
               </div>
             </div>
           `;
