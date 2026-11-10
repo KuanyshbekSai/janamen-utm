@@ -236,20 +236,61 @@
         </div>
       </div>
 
-      <!-- КАРТОЧКИ ПОСАДОЧНЫХ СТРАНИЦ JANAMEN1.KZ -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
+      <!-- ПОСАДОЧНЫЕ СТРАНИЦЫ JANAMEN1.KZ (В ВИДЕ СПИСКА / ТАБЛИЦЫ) -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden space-y-0">
+        <div class="p-5 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 class="text-lg font-black text-slate-900">Посадочные страницы маркетинг-сайта janamen1.kz</h3>
-            <p class="text-xs text-slate-500">Показатели оплат и конверсий страниц за выбранный период</p>
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-600"></span>
+              <h3 class="text-base sm:text-lg font-black text-slate-900">Посадочные страницы маркетинг-сайта janamen1.kz</h3>
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-blue-50 text-brand-700">Список страниц</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">Показатели оплат, конверсий и выручки по каждой посадочной странице за выбранный период</p>
           </div>
-          <button onclick="quickCreateUtm('https://janamen1.kz/kaspiform')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-lg transition border border-brand-200">
-            <span>+ Создать UTM для страницы</span>
-          </button>
+
+          <div class="flex items-center space-x-2.5">
+            <!-- Переключатель вида: Список / Карточки -->
+            <div class="inline-flex p-0.5 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold">
+              <button onclick="setSubpageView('list')" id="btnSubViewList" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                <span>Списком</span>
+              </button>
+              <button onclick="setSubpageView('cards')" id="btnSubViewCards" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center space-x-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                <span>Карточками</span>
+              </button>
+            </div>
+
+            <button onclick="quickCreateUtm('https://janamen1.kz/kaspiform')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-sm">
+              <span>+ Создать UTM</span>
+            </button>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="subpagesCardGrid">
-          <!-- Генерируется из JS -->
+        <!-- ОСНОВНОЙ ВИД: СПИСОК / ТАБЛИЦА -->
+        <div id="subpagesListView" class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase font-bold text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 px-4">Страница на janamen1.kz</th>
+                <th class="py-3 px-4">Назначение / Описание</th>
+                <th class="py-3 px-4 text-center">Всего лидов</th>
+                <th class="py-3 px-4 text-center">Оплачено (142)</th>
+                <th class="py-3 px-4 text-center">Конверсия (CR %)</th>
+                <th class="py-3 px-4 text-right">Выручка (₸)</th>
+                <th class="py-3 px-4 text-right">Средний чек (₸)</th>
+                <th class="py-3 px-4 text-center">Действие</th>
+              </tr>
+            </thead>
+            <tbody id="subpagesTableBody" class="divide-y divide-slate-100">
+              <!-- Заполняется динамически -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- АЛЬТЕРНАТИВНЫЙ ВИД: КАРТОЧКИ (скрыты по умолчанию) -->
+        <div id="subpagesCardsView" class="hidden p-5 sm:p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Заполняется динамически -->
         </div>
       </div>
 
@@ -972,6 +1013,28 @@
       document.getElementById('badgeNavRevenue').innerText = (a.rev >= 1000000 ? (a.rev / 1000000).toFixed(1) + 'M ₸' : (a.rev / 1000).toFixed(0) + 'k ₸');
     }
 
+    let currentSubpageView = 'list';
+
+    function setSubpageView(view) {
+      currentSubpageView = view;
+      const bList = document.getElementById('btnSubViewList');
+      const bCards = document.getElementById('btnSubViewCards');
+      const vList = document.getElementById('subpagesListView');
+      const vCards = document.getElementById('subpagesCardsView');
+
+      if (view === 'list') {
+        bList.className = 'px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition flex items-center space-x-1.5';
+        bCards.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center space-x-1.5';
+        vList.classList.remove('hidden');
+        vCards.classList.add('hidden');
+      } else {
+        bCards.className = 'px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition flex items-center space-x-1.5';
+        bList.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center space-x-1.5';
+        vCards.classList.remove('hidden');
+        vList.classList.add('hidden');
+      }
+    }
+
     function renderSubpageCards() {
       const meta = {
         '/organika': ['Органика (Основная)', 'Основная посадочная под органический трафик и посты'],
@@ -1005,53 +1068,113 @@
         };
       }).sort((a, b) => b.revenue - a.revenue || b.leads - a.leads);
 
-      const grid = document.getElementById('subpagesCardGrid');
-      if (!grid) return;
-
       const maxRev = Math.max(0, ...items.map(i => i.revenue));
+      const maxLeads = Math.max(0, ...items.map(i => i.leads));
 
-      grid.innerHTML = items.map(sp => {
-        let badge = '', color = 'bg-slate-100 text-slate-700 border-slate-200';
-        if (sp.revenue === maxRev && maxRev > 0) {
-          badge = 'ТОП ВЫРУЧКА (' + (sp.revenue / 1000000).toFixed(1) + 'M ₸)';
-          color = 'bg-emerald-100 text-emerald-800 border-emerald-200 font-bold';
-        } else if (sp.cr >= 5.0 && sp.won >= 3) {
-          badge = 'Высокий CR (' + sp.cr + '%)';
-          color = 'bg-purple-100 text-purple-800 border-purple-200 font-bold';
-        }
+      // 1. Отрисовка СПИСКА (Таблицы)
+      const tbody = document.getElementById('subpagesTableBody');
+      if (tbody) {
+        tbody.innerHTML = items.map(sp => {
+          let badge = '';
+          if (sp.revenue === maxRev && maxRev > 0) {
+            badge = '<span class="ml-2 px-2 py-0.5 text-[10px] rounded-md font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">ТОП ВЫРУЧКА</span>';
+          } else if (sp.leads === maxLeads && maxLeads > 0) {
+            badge = '<span class="ml-2 px-2 py-0.5 text-[10px] rounded-md font-bold bg-blue-100 text-blue-800 border border-blue-200">МАКС. ЛИДОВ</span>';
+          } else if (sp.cr >= 5.0 && sp.won >= 3) {
+            badge = '<span class="ml-2 px-2 py-0.5 text-[10px] rounded-md font-bold bg-purple-100 text-purple-800 border border-purple-200">ВЫСОКИЙ CR</span>';
+          }
 
-        const url = 'https://janamen1.kz' + (sp.path === '/' ? '' : sp.path);
-        return `
-          <div class="p-5 rounded-2xl border border-slate-200 hover:border-brand-500/50 hover:shadow-md transition bg-gradient-to-br from-white to-slate-50/50 space-y-4">
-            <div class="flex items-start justify-between">
-              <div>
-                <span class="font-black text-sm text-slate-900 code-font">${sp.path}</span>
-                <div class="text-xs font-bold text-slate-700 mt-0.5">${sp.title}</div>
+          const url = 'https://janamen1.kz' + (sp.path === '/' ? '' : sp.path);
+          const avgCheck = sp.won ? Math.round(sp.revenue / sp.won) : 0;
+
+          return `
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 whitespace-nowrap">
+                <a href="${url}" target="_blank" class="font-black text-sm text-brand-600 hover:text-brand-800 code-font inline-flex items-center">
+                  <span>${sp.path}</span>
+                  ${badge}
+                </a>
+                <div class="text-[11px] font-bold text-slate-700 mt-0.5">${sp.title}</div>
+              </td>
+              <td class="py-3 px-4 text-xs text-slate-500 max-w-xs leading-relaxed">
+                ${sp.desc}
+              </td>
+              <td class="py-3 px-4 text-center font-extrabold text-slate-900">
+                ${sp.leads.toLocaleString('ru-RU')}
+              </td>
+              <td class="py-3 px-4 text-center font-black text-emerald-600 text-sm">
+                ${sp.won.toLocaleString('ru-RU')}
+              </td>
+              <td class="py-3 px-4 text-center">
+                <span class="px-2 py-1 rounded-lg text-xs font-bold ${sp.cr >= 5 ? 'bg-emerald-100 text-emerald-800' : (sp.cr >= 3 ? 'bg-blue-50 text-brand-700' : 'bg-slate-100 text-slate-700')}">
+                  ${sp.cr}%
+                </span>
+              </td>
+              <td class="py-3 px-4 text-right font-black text-slate-900 text-sm whitespace-nowrap">
+                ${sp.revenue.toLocaleString('ru-RU')} ₸
+              </td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">
+                ${avgCheck.toLocaleString('ru-RU')} ₸
+              </td>
+              <td class="py-3 px-4 text-center whitespace-nowrap">
+                <button onclick="quickCreateUtm('${url}')" class="px-3 py-1.5 text-xs font-bold text-brand-600 hover:text-white hover:bg-brand-600 rounded-lg transition border border-brand-200">
+                  + Создать UTM →
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 2. Отрисовка КАРТОЧЕК
+      const grid = document.getElementById('subpagesCardsView');
+      if (grid) {
+        grid.innerHTML = items.map(sp => {
+          let badge = '', color = 'bg-slate-100 text-slate-700 border-slate-200';
+          if (sp.revenue === maxRev && maxRev > 0) {
+            badge = 'ТОП ВЫРУЧКА (' + (sp.revenue / 1000000).toFixed(1) + 'M ₸)';
+            color = 'bg-emerald-100 text-emerald-800 border-emerald-200 font-bold';
+          } else if (sp.leads === maxLeads && maxLeads > 0) {
+            badge = 'Максимум лидов (' + sp.leads + ')';
+            color = 'bg-blue-100 text-blue-800 border-blue-200 font-bold';
+          } else if (sp.cr >= 5.0 && sp.won >= 3) {
+            badge = 'Высокий CR (' + sp.cr + '%)';
+            color = 'bg-purple-100 text-purple-800 border-purple-200 font-bold';
+          }
+
+          const url = 'https://janamen1.kz' + (sp.path === '/' ? '' : sp.path);
+          return `
+            <div class="p-5 rounded-2xl border border-slate-200 hover:border-brand-500/50 hover:shadow-md transition bg-gradient-to-br from-white to-slate-50/50 space-y-4">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="font-black text-sm text-slate-900 code-font">${sp.path}</span>
+                  <div class="text-xs font-bold text-slate-700 mt-0.5">${sp.title}</div>
+                </div>
+                ${badge ? `<span class="px-2 py-0.5 text-[10px] rounded-md border ${color}">${badge}</span>` : ''}
               </div>
-              ${badge ? `<span class="px-2 py-0.5 text-[10px] rounded-md border ${color}">${badge}</span>` : ''}
+              <p class="text-[11px] text-slate-500 leading-relaxed">${sp.desc}</p>
+              <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
+                <div class="bg-white p-2 rounded-xl border border-slate-100">
+                  <div class="text-[10px] text-slate-400 font-bold uppercase">Лидов</div>
+                  <div class="text-sm font-extrabold text-slate-900 mt-0.5">${sp.leads.toLocaleString('ru-RU')}</div>
+                </div>
+                <div class="bg-white p-2 rounded-xl border border-slate-100">
+                  <div class="text-[10px] text-emerald-600 font-bold uppercase">Опл. 142</div>
+                  <div class="text-sm font-extrabold text-emerald-600 mt-0.5">${sp.won}</div>
+                </div>
+                <div class="bg-white p-2 rounded-xl border border-slate-100">
+                  <div class="text-[10px] text-brand-600 font-bold uppercase">Выручка</div>
+                  <div class="text-[11px] font-extrabold text-brand-700 mt-1">${sp.revenue > 0 ? (sp.revenue / 1000).toFixed(0) + 'k ₸' : '0 ₸'}</div>
+                </div>
+              </div>
+              <div class="pt-1 flex items-center justify-between">
+                <span class="text-[11px] text-slate-500 font-medium">Конверсия: <b class="${sp.cr >= 4 ? 'text-emerald-700 font-extrabold' : 'text-slate-800'}">${sp.cr}%</b></span>
+                <button onclick="quickCreateUtm('${url}')" class="text-xs font-bold text-brand-600 hover:text-brand-800 transition">Создать UTM →</button>
+              </div>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">${sp.desc}</p>
-            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
-              <div class="bg-white p-2 rounded-xl border border-slate-100">
-                <div class="text-[10px] text-slate-400 font-bold uppercase">Лидов</div>
-                <div class="text-sm font-extrabold text-slate-900 mt-0.5">${sp.leads.toLocaleString('ru-RU')}</div>
-              </div>
-              <div class="bg-white p-2 rounded-xl border border-slate-100">
-                <div class="text-[10px] text-emerald-600 font-bold uppercase">Опл. 142</div>
-                <div class="text-sm font-extrabold text-emerald-600 mt-0.5">${sp.won}</div>
-              </div>
-              <div class="bg-white p-2 rounded-xl border border-slate-100">
-                <div class="text-[10px] text-brand-600 font-bold uppercase">Выручка</div>
-                <div class="text-[11px] font-extrabold text-brand-700 mt-1">${sp.revenue > 0 ? (sp.revenue / 1000).toFixed(0) + 'k ₸' : '0 ₸'}</div>
-              </div>
-            </div>
-            <div class="pt-1 flex items-center justify-between">
-              <span class="text-[11px] text-slate-500 font-medium">Конверсия: <b class="${sp.cr >= 4 ? 'text-emerald-700 font-extrabold' : 'text-slate-800'}">${sp.cr}%</b></span>
-              <button onclick="quickCreateUtm('${url}')" class="text-xs font-bold text-brand-600 hover:text-brand-800 transition">Создать UTM →</button>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
     }
 
     function renderTables() {
