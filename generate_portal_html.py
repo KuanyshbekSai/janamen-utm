@@ -527,9 +527,11 @@ html_template = r'''<!DOCTYPE html>
 
     // Данные кликов из Supabase
     let CLICK_COUNTS = {};
+    let CLICK_BY_CONTENT = {};
     let CLICK_BY_MEDIUM = {};
     let CLICK_BY_PAGE = {};
     let CLICK_BY_SOURCE = {};
+    let CLICK_BY_BLOGGER = {};
 
     // Агрегированные данные текущей выборки
     let currentChannelData = {};
@@ -1911,11 +1913,12 @@ html_template = r'''<!DOCTYPE html>
         const r = await fetch('/api/clicks-summary');
         const res = await r.json();
         if (res) {
-          if (res.byContent) CLICK_COUNTS = res.byContent;
+          if (res.byContent) { CLICK_COUNTS = res.byContent; CLICK_BY_CONTENT = res.byContent; }
           if (res.byMedium) CLICK_BY_MEDIUM = res.byMedium;
           if (res.byPage) CLICK_BY_PAGE = res.byPage;
           if (res.bySource) CLICK_BY_SOURCE = res.bySource;
           if (res.byCampaign) CLICK_BY_CAMPAIGN = res.byCampaign;
+          if (res.byBlogger) CLICK_BY_BLOGGER = res.byBlogger;
           onFilterChange();
         }
       } catch (e) {
