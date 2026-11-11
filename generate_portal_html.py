@@ -2563,7 +2563,7 @@ html_template = r'''<!DOCTYPE html>
         });
         const data = await res.json();
 
-        if (!data.success) {
+        if (!data.ok && !data.success) {
           fb.classList.add('bg-rose-50', 'text-rose-700', 'border', 'border-rose-200');
           fb.innerText = data.error || 'Ошибка входа / регистрации';
           return;
@@ -2641,7 +2641,7 @@ html_template = r'''<!DOCTYPE html>
           })
         });
         const data = await res.json();
-        if (data.success && Array.isArray(data.users)) {
+        if ((data.ok || data.success) && Array.isArray(data.users)) {
           ALL_USERS_LIST = data.users;
         } else {
           ALL_USERS_LIST = [
