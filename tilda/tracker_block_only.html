@@ -1,0 +1,23 @@
+<!-- Jana Men: Фиксация UTM-кликов и переходов v2 -->
+<script>
+(function() {
+  try {
+    var p = new URLSearchParams(window.location.search);
+    if (!(window.location.search || document.referrer)) return;
+    var o = {
+      utm_source: p.get('utm_source') || 'direct',
+      utm_medium: p.get('utm_medium') || 'none',
+      utm_campaign: p.get('utm_campaign') || 'none',
+      utm_content: p.get('utm_content') || 'none',
+      utm_term: p.get('utm_term') || 'none',
+      landing_page: window.location.pathname || '/',
+      referrer: document.referrer || 'direct'
+    };
+    var EP = 'https://janamen-utm.vercel.app/api/hit';
+    var q = Object.keys(o).map(function(k){ return k + '=' + encodeURIComponent(o[k]); }).join('&');
+    // 1) пиксель-запрос (GET): не блокируется как fetch/beacon, работает везде
+    var img = new Image(1, 1);
+    img.src = EP + '?' + q + '&_=' + Date.now();
+  } catch(e) {}
+})();
+</script>
