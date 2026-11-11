@@ -25,17 +25,29 @@ export default async function handler(req, res) {
 
     const data = await r.json();
     const byContent = {};
+    const byMedium = {};
+    const byPage = {};
+    const bySource = {};
+
     for (const c of (data || [])) {
-      const cnt = c.utm_content || 'none';
-      if (cnt !== 'none' && cnt !== '') {
-        byContent[cnt] = (byContent[cnt] || 0) + 1;
-      }
+      const cnt = (c.utm_content || '').trim();
+      const med = (c.utm_medium || '').trim();
+      const p = (c.landing_page || '').trim();
+      const src = (c.utm_source || '').trim();
+
+      if (cnt && cnt !== 'none') byContent[cnt] = (byContent[cnt] || 0) + 1;
+      if (med && med !== 'none') byMedium[med] = (byMedium[med] || 0) + 1;
+      if (p && p !== 'none') byPage[p] = (byPage[p] || 0) + 1;
+      if (src && src !== 'none') bySource[src] = (bySource[src] || 0) + 1;
     }
 
     return res.status(200).json({
       ok: true,
       total: (data || []).length,
       byContent,
+      byMedium,
+      byPage,
+      bySource,
       clicks: data || []
     });
   } catch (err) {
