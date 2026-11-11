@@ -70,6 +70,9 @@ html_content = f'''<!DOCTYPE html>
         <!-- КНОПКИ ДЕЙСТВИЙ -->
         <div class="flex items-center space-x-2.5">
           <span id="liveStatus" class="hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200">🟢 Supabase Realtime (36.7k сделок)</span>
+          <button onclick="openLinkGeneratorModal()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition border border-purple-200 shadow-sm">
+            <span>🔗 Ссылка для блогера</span>
+          </button>
           <button onclick="syncAmoCRM()" id="btnSyncCRM" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">
             <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span>Синхронизировать AmoCRM</span>
@@ -317,6 +320,64 @@ html_content = f'''<!DOCTYPE html>
         </table>
       </div>
 
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ГЕНЕРАТОРА ССЫЛОК ДЛЯ БЛОГЕРОВ -->
+    <div id="linkGenModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold">🔗</div>
+            <h3 class="text-base font-black text-slate-900">Генератор трекинг-ссылки блогера</h3>
+          </div>
+          <button onclick="closeLinkGeneratorModal()" class="text-slate-400 hover:text-slate-600 p-1 text-lg font-bold">✕</button>
+        </div>
+
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Ссылка автоматически считает <b>каждый клик подписчиков</b> в нашей базе Supabase и передает UTM в <b>AmoCRM</b> при отправке заявки.
+        </p>
+
+        <div class="space-y-3 text-xs font-semibold text-slate-700">
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Ник или имя блогера (utm_content):</label>
+            <input type="text" id="genBloggerName" oninput="updateGeneratedLink()" placeholder="например: sarsssembaeva, bika_mazhenova, ainyshka" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-purple-500 font-bold text-slate-900">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Менеджер (utm_medium):</label>
+              <select id="genManager" onchange="updateGeneratedLink()" class="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-purple-500 font-bold text-slate-900">
+                <option value="mpb2">mpb2 (Алина)</option>
+                <option value="mpb1">mpb1 (Анельжан)</option>
+                <option value="mpb3">mpb3 (Алуа)</option>
+                <option value="mpb4">mpb4 (Дарина)</option>
+                <option value="organic">organic (Органика)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Посадочная страница:</label>
+              <select id="genPage" onchange="updateGeneratedLink()" class="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-purple-500 font-bold text-slate-900">
+                <option value="/organika">/organika (Форма заявки)</option>
+                <option value="/influence">/influence (Инфлюенс)</option>
+                <option value="/lidmagnit">/lidmagnit (Лид-магнит)</option>
+                <option value="/">/ (Главная)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <label class="block text-[11px] uppercase tracking-wider text-purple-700 font-bold mb-1">Готовая ссылка для блогера (с авто-трекером кликов):</label>
+            <div class="relative">
+              <input type="text" id="genResultUrl" readonly class="w-full pl-3 pr-24 py-2.5 bg-purple-50/60 border border-purple-200 rounded-xl text-xs font-mono font-bold text-purple-900 select-all">
+              <button onclick="copyGeneratedLink()" id="btnCopyGenLink" class="absolute right-1 top-1 bottom-1 px-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                Копировать
+              </button>
+            </div>
+            <span id="copySuccessMsg" class="hidden text-[11px] text-emerald-600 font-bold mt-1">✓ Ссылка скопирована в буфер обмена!</span>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -743,6 +804,63 @@ html_content = f'''<!DOCTYPE html>
           </tr>
         `).join('');
 
+      }} else if (currentGranularityDim === 'contents') {{
+        thead.innerHTML = `
+          <tr>
+            <th class="py-3 px-4">utm_content (Креатив / Блогер)</th>
+            <th class="py-3 px-4 text-center">Кликов (Переходов)</th>
+            <th class="py-3 px-4 text-center">Всего заявок</th>
+            <th class="py-3 px-4 text-center">CR1 (Клик ➔ Лид)</th>
+            <th class="py-3 px-4 text-center">Оплачено (142)</th>
+            <th class="py-3 px-4 text-center">CR2 (Лид ➔ Оплата)</th>
+            <th class="py-3 px-4 text-right">Выручка (₸)</th>
+            <th class="py-3 px-4 text-right">Средний чек (₸)</th>
+          </tr>
+        `;
+
+        const srcObj = currentAggregates.byContent || {{}};
+        const allKeys = new Set([...Object.keys(srcObj), ...Object.keys(CLICK_COUNTS)]);
+        let list = Array.from(allKeys).filter(k => k && k !== 'none').map(k => {{
+          const item = srcObj[k] || {{ leads: 0, won: 0, rev: 0 }};
+          const clicks = CLICK_COUNTS[k] || 0;
+          const cr1 = clicks ? (Math.round(item.leads / clicks * 1000) / 10) + '%' : (item.leads ? '—' : '0%');
+          const cr2 = item.leads ? (Math.round(item.won / item.leads * 1000) / 10) + '%' : '0%';
+          return {{
+            name: k,
+            clicks: clicks,
+            leads: item.leads,
+            cr1: cr1,
+            won: item.won,
+            cr2: cr2,
+            revenue: item.rev,
+            avgCheck: item.won ? Math.round(item.rev / item.won) : 0
+          }};
+        }}).sort((a,b) => b.revenue - a.revenue || b.won - a.won || b.leads - a.leads || b.clicks - a.clicks);
+
+        if (search) {{
+          list = list.filter(item => item.name.toLowerCase().includes(search));
+        }}
+
+        if (countEl) countEl.innerText = 'Показано: ' + list.length + ' блогеров / креативов';
+
+        if (list.length === 0) {{
+          tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400">Ничего не найдено</td></tr>';
+          return;
+        }}
+
+        tbody.innerHTML = list.map(item => `
+          <tr class="hover:bg-purple-50/30 transition">
+            <td class="py-2.5 px-4 font-bold text-brand-700 code-font">${{item.name}}</td>
+            <td class="py-2.5 px-4 text-center font-bold text-purple-700">${{item.clicks ? item.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}}</td>
+            <td class="py-2.5 px-4 text-center font-bold text-slate-800">${{item.leads.toLocaleString('ru-RU')}}</td>
+            <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${{item.cr1}}</td>
+            <td class="py-2.5 px-4 text-center font-black text-emerald-600">${{item.won}}</td>
+            <td class="py-2.5 px-4 text-center font-bold ${{item.leads && (item.won/item.leads >= 0.05) ? 'text-emerald-700' : 'text-slate-700'}}">${{item.cr2}}</td>
+            <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${{item.revenue.toLocaleString('ru-RU')}} ₸</td>
+            <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${{item.avgCheck.toLocaleString('ru-RU')}} ₸</td>
+          </tr>
+        `).join('');
+
       }} else {{
         const paramMap = {{
           'campaigns': currentAggregates.byCampaign,
@@ -998,6 +1116,70 @@ html_content = f'''<!DOCTYPE html>
     }}
 
     // ============================================================
+    // КЛИК-ТРЕКЕР И ГЕНЕРАТОР ССЫЛОК ДЛЯ БЛОГЕРОВ
+    // ============================================================
+    let CLICK_COUNTS = {{}};
+
+    async function loadClickCounts() {{
+      try {{
+        const r = await fetch('/api/clicks-summary');
+        const res = await r.json();
+        if (res && res.byContent) {{
+          CLICK_COUNTS = res.byContent;
+          if (currentGranularityDim === 'contents') {{
+            renderGranularityTable();
+          }}
+        }}
+      }} catch (e) {{
+        console.warn('Load clicks summary err:', e);
+      }}
+    }}
+
+    function openLinkGeneratorModal() {{
+      const m = document.getElementById('linkGenModal');
+      if (m) {{
+        m.classList.remove('hidden');
+        updateGeneratedLink();
+      }}
+    }}
+
+    function closeLinkGeneratorModal() {{
+      const m = document.getElementById('linkGenModal');
+      if (m) m.classList.add('hidden');
+    }}
+
+    function updateGeneratedLink() {{
+      const bInput = document.getElementById('genBloggerName');
+      const mSelect = document.getElementById('genManager');
+      const pSelect = document.getElementById('genPage');
+      const resInput = document.getElementById('genResultUrl');
+      if (!bInput || !resInput) return;
+
+      const blogger = (bInput.value || '').trim().replace(/\\s+/g, '_');
+      const manager = mSelect ? mSelect.value : 'mpb2';
+      const page = pSelect ? pSelect.value : '/organika';
+      const origin = window.location.origin;
+
+      if (!blogger) {{
+        resInput.value = origin + '/api/go?b=blogger_name&m=' + manager + '&p=' + page;
+      }} else {{
+        resInput.value = origin + '/api/go?b=' + encodeURIComponent(blogger) + '&m=' + manager + '&p=' + page;
+      }}
+    }}
+
+    function copyGeneratedLink() {{
+      const resInput = document.getElementById('genResultUrl');
+      if (!resInput) return;
+      resInput.select();
+      navigator.clipboard.writeText(resInput.value);
+      const msg = document.getElementById('copySuccessMsg');
+      if (msg) {{
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 3500);
+      }}
+    }}
+
+    // ============================================================
     // СИНХРОНИЗАЦИЯ AMOCRM -> SUPABASE -> ДАШБОРД
     // ============================================================
     async function syncAmoCRM() {{
@@ -1028,6 +1210,7 @@ html_content = f'''<!DOCTYPE html>
     // Инициализация
     onFilterChange();
     loadFreshDealsFromSupabase();
+    loadClickCounts();
     initRealtime();
   </script>
 </body>
