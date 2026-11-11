@@ -1,19 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 
-const supabaseUrl = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
 
 export default async function handler(req, res) {
-  // Разрешаем CORS с любого домена (janamen1.kz, janamenhealth.kz, tilda)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
     let payload = {};
@@ -39,29 +34,32 @@ export default async function handler(req, res) {
     const userAgent = (req.headers['user-agent'] || '').slice(0, 255);
     const referrer = (payload.referrer || req.headers['referer'] || 'direct').slice(0, 255);
 
-    // Записываем в Supabase
-    const { error } = await supabase.from('clicks').insert([{
-      utm_source: source,
-      utm_medium: medium,
-      utm_campaign: campaign,
-      utm_content: blogger || 'none',
-      utm_term: term || 'none',
-      landing_page: page,
-      blogger: blogger || 'none',
-      referrer: referrer,
-      user_agent: userAgent,
-      ip_hash: ipHash,
-      created_at: new Date().toISOString()
-    }]);
+    // Записываем в Supabase REST API
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/clicks`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify([{
+        utm_source: source,
+        utm_medium: medium,
+        utm_campaign: campaign,
+        utm_content: blogger || 'none',
+        utm_term: term || 'none',
+        landing_page: page,
+        blogger: blogger || 'none',
+        referrer: referrer,
+        user_agent: userAgent,
+        ip_hash: ipHash,
+        created_at: new Date().toISOString()
+      }])
+    });
 
-    if (error) {
-      console.warn('Supabase insert click error:', error.message);
-      return res.status(200).json({ ok: false, error: error.message });
-    }
-
-    return res.status(200).json({ ok: true, timestamp: new Date().toISOString() });
+    return res.status(200).json({ ok: r.ok, timestamp: new Date().toISOString() });
   } catch (err) {
-    console.error('Click error:', err);
     return res.status(200).json({ ok: false, error: err.message });
   }
 }

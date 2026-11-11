@@ -1,9 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 
-const supabaseUrl = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
 
 export default async function handler(req, res) {
   try {
@@ -43,22 +41,29 @@ export default async function handler(req, res) {
     const userAgent = (req.headers['user-agent'] || '').slice(0, 255);
     const referrer = (req.headers['referer'] || req.headers['referrer'] || 'direct').slice(0, 255);
 
-    // Записываем клик в Supabase асинхронно
-    supabase.from('clicks').insert([{
-      utm_source: source,
-      utm_medium: medium,
-      utm_campaign: campaign,
-      utm_content: blogger || 'none',
-      utm_term: term || 'none',
-      landing_page: urlObj.pathname,
-      blogger: blogger || 'none',
-      referrer: referrer,
-      user_agent: userAgent,
-      ip_hash: ipHash,
-      created_at: new Date().toISOString()
-    }]).then(() => {}).catch(err => {
-      console.warn('Click log error:', err.message);
-    });
+    // Записываем клик в Supabase REST API без блокировки
+    fetch(`${SUPABASE_URL}/rest/v1/clicks`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify([{
+        utm_source: source,
+        utm_medium: medium,
+        utm_campaign: campaign,
+        utm_content: blogger || 'none',
+        utm_term: term || 'none',
+        landing_page: urlObj.pathname,
+        blogger: blogger || 'none',
+        referrer: referrer,
+        user_agent: userAgent,
+        ip_hash: ipHash,
+        created_at: new Date().toISOString()
+      }])
+    }).catch(err => console.warn('Click log error:', err.message));
 
     // Мгновенный 307 Temporary Redirect на сайт
     res.setHeader('Location', finalUrl);
@@ -66,7 +71,6 @@ export default async function handler(req, res) {
     return res.status(307).end();
   } catch (err) {
     console.error('Redirect handler error:', err);
-    // При любой ошибке сразу перенаправляем на главную страницу без задержек
     res.setHeader('Location', 'https://janamen1.kz/organika');
     return res.status(302).end();
   }
