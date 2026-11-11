@@ -181,7 +181,8 @@ def parse_lead(d):
         'is_jana': is_jana,
         'is_wa_aytym': is_wa_aytym,
         'is_blogger': is_blogger,
-        'name': (d.get('name') or '').strip()[:35]
+        'name': (d.get('name') or '').strip()[:35],
+        'tags': tags
     }
 
 # Dictionaries for overall and janamen1
@@ -554,7 +555,8 @@ for item in parsed_leads:
         get_s(item['cnt']),
         get_s(item['trm']),
         item['st_id'],
-        item['name']
+        item['name'],
+        [get_s(t) for t in item.get('tags', []) if t]
     ])
 
 compact_data = {'strings': strings, 'rows': encoded_rows}

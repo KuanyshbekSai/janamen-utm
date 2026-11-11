@@ -286,6 +286,9 @@ html_content = f'''<!DOCTYPE html>
         <button onclick="setGranularityDim('subpages')" id="dim-btn-subpages" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition">
           📄 Посадочные страницы (Subpages)
         </button>
+        <button onclick="setGranularityDim('tags')" id="dim-btn-tags" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition">
+          🏷️ Теги AmoCRM
+        </button>
       </div>
 
       <!-- ЖИВОЙ ПОИСК ПО ТАБЛИЦЕ -->
@@ -333,7 +336,8 @@ html_content = f'''<!DOCTYPE html>
       cnt: S[r[9]],
       trm: S[r[10]],
       status_id: r[11],
-      name: r[12]
+      name: r[12],
+      tags: (r[13] || []).map(idx => S[idx])
     }}));
 
     // Текущие фильтры
@@ -502,6 +506,7 @@ html_content = f'''<!DOCTYPE html>
       const byCampaign = {{}};
       const byContent = {{}};
       const byTerm = {{}};
+      const byTag = {{}};
       const subpages = {{}};
       const combos = {{}};
 
@@ -536,7 +541,8 @@ html_content = f'''<!DOCTYPE html>
 
         // 4. Текстовый поиск
         if (textSearch) {{
-          const hay = (l.src + ' ' + l.med + ' ' + l.cmp + ' ' + l.cnt + ' ' + l.trm + ' ' + l.path + ' ' + l.name).toLowerCase();
+          const tagStr = (l.tags || []).join(' ');
+          const hay = (l.src + ' ' + l.med + ' ' + l.cmp + ' ' + l.cnt + ' ' + l.trm + ' ' + l.path + ' ' + l.name + ' ' + tagStr).toLowerCase();
           if (!hay.includes(textSearch)) continue;
         }}
 
@@ -549,6 +555,11 @@ html_content = f'''<!DOCTYPE html>
         addDim(byContent, l.cnt);
         addDim(byTerm, l.trm);
         addDim(subpages, l.path);
+        if (l.tags && l.tags.length) {{
+          for (let ti = 0; ti < l.tags.length; ti++) {{
+            if (l.tags[ti]) addDim(byTag, l.tags[ti]);
+          }}
+        }}
 
         const ck = l.path + '|' + l.src + '|' + l.med + '|' + l.cmp + '|' + l.cnt + '|' + l.trm;
         let c = combos[ck];
@@ -580,7 +591,7 @@ html_content = f'''<!DOCTYPE html>
         leads, won, rev,
         cr: leads ? (won / leads) : 0,
         avgCheck: won ? Math.round(rev / won) : 0,
-        bySource, byMedium, byCampaign, byContent, byTerm,
+        bySource, byMedium, byCampaign, byContent, byTerm, byTag,
         subpages,
         combos: comboList
       }};
@@ -604,7 +615,7 @@ html_content = f'''<!DOCTYPE html>
     // ============================================================
     function setGranularityDim(dim) {{
       currentGranularityDim = dim;
-      const dims = ['combos', 'sources', 'mediums', 'campaigns', 'contents', 'terms', 'subpages'];
+      const dims = ['combos', 'sources', 'mediums', 'campaigns', 'contents', 'terms', 'subpages', 'tags'];
       dims.forEach(d => {{
         const btn = document.getElementById('dim-btn-' + d);
         if (btn) {{
@@ -726,14 +737,16 @@ html_content = f'''<!DOCTYPE html>
           'contents': currentAggregates.byContent,
           'mediums': currentAggregates.byMedium,
           'terms': currentAggregates.byTerm,
-          'sources': currentAggregates.bySource
+          'sources': currentAggregates.bySource,
+          'tags': currentAggregates.byTag
         }};
         const pNames = {{
           'campaigns': 'utm_campaign (Кампания)',
           'contents': 'utm_content (Креатив)',
           'mediums': 'utm_medium (Канал / Менеджер)',
           'terms': 'utm_term (Аудитория)',
-          'sources': 'utm_source (Площадка / Блогер)'
+          'sources': 'utm_source (Площадка / Блогер)',
+          'tags': '🏷️ Тег AmoCRM'
         }};
 
         thead.innerHTML = `
@@ -785,31 +798,69 @@ html_content = f'''<!DOCTYPE html>
     // ЭКСПОРТ В CSV
     // ============================================================
     function exportGranularityCsv() {{
-      const combos = currentAggregates.combos || [];
-      if (!combos.length) return alert('Нет данных для экспорта');
+      let csv = '';
+      let filename = 'utm_analytics_' + currentGranularityDim + '.csv';
 
-      let csv = 'Посадочная страница,utm_source,utm_medium,utm_campaign,utm_content,utm_term,Лидов,Оплачено (142),CR %,Выручка (KZT),Средний чек\\n';
-      combos.forEach(c => {{
-        const row = [
-          c.landing || c.path,
-          c.src,
-          c.med,
-          c.cmp,
-          c.cnt,
-          c.trm,
-          c.leads,
-          c.won,
-          c.cr + '%',
-          c.revenue,
-          c.avgCheck
-        ].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',');
-        csv += row + '\\n';
-      }});
+      if (currentGranularityDim === 'combos') {{
+        const combos = currentAggregates.combos || [];
+        if (!combos.length) return alert('Нет данных для экспорта');
+        csv = 'Посадочная страница,utm_source,utm_medium,utm_campaign,utm_content,utm_term,Лидов,Оплачено (142),CR %,Выручка (KZT),Средний чек\\n';
+        combos.forEach(c => {{
+          const row = [
+            c.landing || c.path,
+            c.src,
+            c.med,
+            c.cmp,
+            c.cnt,
+            c.trm,
+            c.leads,
+            c.won,
+            c.cr + '%',
+            c.revenue,
+            c.avgCheck
+          ].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',');
+          csv += row + '\\n';
+        }});
+      }} else {{
+        const paramMap = {{
+          'campaigns': currentAggregates.byCampaign,
+          'contents': currentAggregates.byContent,
+          'mediums': currentAggregates.byMedium,
+          'terms': currentAggregates.byTerm,
+          'sources': currentAggregates.bySource,
+          'tags': currentAggregates.byTag,
+          'subpages': currentAggregates.subpages
+        }};
+        const pNames = {{
+          'campaigns': 'utm_campaign',
+          'contents': 'utm_content',
+          'mediums': 'utm_medium',
+          'terms': 'utm_term',
+          'sources': 'utm_source',
+          'tags': 'Тег AmoCRM',
+          'subpages': 'Посадочная страница'
+        }};
+        const obj = paramMap[currentGranularityDim] || {{}};
+        const keys = Object.keys(obj);
+        if (!keys.length) return alert('Нет данных для экспорта');
+
+        csv = (pNames[currentGranularityDim] || 'Параметр') + ',Лидов,Оплачено (142),CR %,Выручка (KZT),Средний чек\\n';
+        keys.sort((a,b) => (obj[b].rev || obj[b].revenue || 0) - (obj[a].rev || obj[a].revenue || 0)).forEach(k => {{
+          const item = obj[k];
+          const l = item.leads || 0;
+          const w = item.won || 0;
+          const r = item.rev || item.revenue || 0;
+          const cr = l ? (Math.round(w / l * 1000) / 10) + '%' : '0%';
+          const avg = w ? Math.round(r / w) : 0;
+          const row = [k, l, w, cr, r, avg].map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',');
+          csv += row + '\\n';
+        }});
+      }}
 
       const blob = new Blob([csv], {{ type: 'text/csv;charset=utf-8;' }});
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.setAttribute('download', 'utm_analytics_filtered.csv');
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -835,7 +886,7 @@ html_content = f'''<!DOCTYPE html>
       try {{
         const {{ data, error }} = await supabaseClient
           .from('deals')
-          .select('id, name, created_at, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term')
+          .select('id, name, created_at, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags')
           .order('created_at', {{ ascending: false }})
           .limit(1000);
 
@@ -854,6 +905,7 @@ html_content = f'''<!DOCTYPE html>
               won: d.is_won ? 1 : 0,
               price: d.price || 0,
               dom: dom,
+              path: d.landing_page || '/',
               page: d.landing_page || '/',
               src: d.utm_source || 'direct/none',
               med: d.utm_medium || 'none',
@@ -861,7 +913,8 @@ html_content = f'''<!DOCTYPE html>
               cnt: d.utm_content || 'none',
               trm: d.utm_term || 'none',
               stId: d.is_won ? 142 : 0,
-              name: d.name || 'Сделка'
+              name: d.name || 'Сделка',
+              tags: Array.isArray(d.tags) ? d.tags : []
             }});
             existingIds.add(d.id);
             addedCount++;
@@ -899,6 +952,7 @@ html_content = f'''<!DOCTYPE html>
             won: d.is_won ? 1 : 0,
             price: d.price || 0,
             dom: dom,
+            path: d.landing_page || '/',
             page: d.landing_page || '/',
             src: d.utm_source || 'direct/none',
             med: d.utm_medium || 'none',
@@ -906,7 +960,8 @@ html_content = f'''<!DOCTYPE html>
             cnt: d.utm_content || 'none',
             trm: d.utm_term || 'none',
             stId: d.is_won ? 142 : 0,
-            name: d.name || 'Сделка'
+            name: d.name || 'Сделка',
+            tags: Array.isArray(d.tags) ? d.tags : []
           }};
 
           if (existingIndex >= 0) {{
