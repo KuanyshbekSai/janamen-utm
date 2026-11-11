@@ -199,7 +199,8 @@ html_content = f'''<!DOCTYPE html>
             <select id="filterPageSelect" onchange="onFilterChange()" class="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800">
               <option value="all">Все страницы и точки входа</option>
               <optgroup label="🎯 5 ОСНОВНЫХ КАНАЛОВ (Jana Men)">
-                <option value="/iwa-9828">📱 /iwa-9828 (WhatsApp 9828 — Айтым Берикович)</option>
+                <option value="/iwa-9828">📱 WhatsApp 9828 (WZ 77083779828 — Айтым Берикович)</option>
+                <option value="wa-0333">📱 WhatsApp 0333 (WZ 7475000333 / 500 03 33)</option>
                 <option value="/lidmagnit">🎁 /lidmagnit (Все варианты лид-магнитов и гайдов)</option>
                 <option value="/influence">🌟 /influence (Инфлюенс / Блогеры МПБ)</option>
                 <option value="/fun">⚡ /fun (Квиз-воронка)</option>
@@ -526,11 +527,16 @@ html_content = f'''<!DOCTYPE html>
         if (filterDateFrom && l.ts < filterDateFrom) continue;
         if (filterDateTo && l.ts > filterDateTo) continue;
 
-        // 2. Фильтр страниц
+        // 2. Фильтр страниц / каналов
         if (pageFilter !== 'all') {{
-          if (pageFilter === '/iwa-9828' && l.path !== '/iwa-9828' && !l.med.includes('Айтым')) continue;
-          else if (pageFilter === '/lidmagnit' && !l.path.startsWith('/lidmagnit') && !l.path.startsWith('/ligmagnit')) continue;
-          else if (pageFilter !== '/iwa-9828' && pageFilter !== '/lidmagnit' && l.path !== pageFilter) continue;
+          if (pageFilter === '/iwa-9828') {{
+            const isWa9828 = l.path === '/iwa-9828' || l.med.includes('Айтым') || (l.tags && l.tags.some(t => t.includes('9828') || t.includes('77083779828')));
+            if (!isWa9828) continue;
+          }} else if (pageFilter === 'wa-0333') {{
+            const isWa0333 = (l.tags && l.tags.some(t => t.includes('7475000333') || t.includes('500 03 33') || t.includes('5000333')));
+            if (!isWa0333) continue;
+          }} else if (pageFilter === '/lidmagnit' && !l.path.startsWith('/lidmagnit') && !l.path.startsWith('/ligmagnit')) continue;
+          else if (pageFilter !== '/iwa-9828' && pageFilter !== 'wa-0333' && pageFilter !== '/lidmagnit' && l.path !== pageFilter) continue;
         }}
 
         // 3. Фильтр utm_medium
