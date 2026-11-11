@@ -3,13 +3,71 @@ import { createClient } from '@supabase/supabase-js';
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
 
-// Главный аккаунт по умолчанию (Владелец)
-const DEFAULT_SUPERADMIN = {
-  id: 1,
-  email: 'k.saidullayev@janamen.kz',
-  name: 'Куанышбек Сайдуллаев',
-  role: 'superadmin',
-  status: 'active'
+// Предустановленные системные роли и аккаунты
+const PRESET_ACCOUNTS = {
+  'k.saidullayev@janamen.kz': {
+    id: 1,
+    email: 'k.saidullayev@janamen.kz',
+    name: 'Куанышбек Сайдуллаев',
+    role: 'superadmin',
+    role_label: 'Администратор (Владелец)',
+    manager_code: null,
+    status: 'active'
+  },
+  'rom@janamen.kz': {
+    id: 2,
+    email: 'rom@janamen.kz',
+    name: 'Руководитель маркетинга (РОМ)',
+    role: 'head_marketing',
+    role_label: 'Руководитель маркетинга',
+    manager_code: null,
+    status: 'active'
+  },
+  'crm@janamen.kz': {
+    id: 3,
+    email: 'crm@janamen.kz',
+    name: 'CRM-интегратор',
+    role: 'crm_integrator',
+    role_label: 'CRM-интегратор',
+    manager_code: null,
+    status: 'active'
+  },
+  'anelzhan@janamen.kz': {
+    id: 4,
+    email: 'anelzhan@janamen.kz',
+    name: 'Анельжан (mpb1)',
+    role: 'manager',
+    role_label: 'Менеджер блогеров',
+    manager_code: 'mpb1',
+    status: 'active'
+  },
+  'alina@janamen.kz': {
+    id: 5,
+    email: 'alina@janamen.kz',
+    name: 'Алина (mpb2)',
+    role: 'manager',
+    role_label: 'Менеджер блогеров',
+    manager_code: 'mpb2',
+    status: 'active'
+  },
+  'alua@janamen.kz': {
+    id: 6,
+    email: 'alua@janamen.kz',
+    name: 'Алуа (mpb3)',
+    role: 'manager',
+    role_label: 'Менеджер блогеров',
+    manager_code: 'mpb3',
+    status: 'active'
+  },
+  'darina@janamen.kz': {
+    id: 7,
+    email: 'darina@janamen.kz',
+    name: 'Дарина (mpb4)',
+    role: 'manager',
+    role_label: 'Менеджер блогеров',
+    manager_code: 'mpb4',
+    status: 'active'
+  }
 };
 
 export default async function handler(req, res) {
@@ -34,23 +92,34 @@ export default async function handler(req, res) {
 
   // 1. ВХОД В СИСТЕМУ
   if (action === 'login') {
-    const email = (body.email || '').trim().toLowerCase();
+    const rawEmail = (body.email || '').trim().toLowerCase();
     const password = (body.password || '').trim();
 
-    if (!email || !password) {
-      return res.status(400).json({ ok: false, error: 'Укажите email и пароль' });
+    if (!rawEmail || !password) {
+      return res.status(400).json({ ok: false, success: false, error: 'Укажите email и пароль' });
     }
 
-    // Проверка супер-админа
-    if ((email === 'k.saidullayev@janamen.kz' || email === 'admin' || email === 'k.saidullayev') && 
-        (password === 'janamen2026' || password === 'admin' || password === 'k.saidullayev2026')) {
+    // Сопоставление быстрых логинов (например: admin, rom, crm, anelzhan, alina, alua, darina)
+    let email = rawEmail;
+    if (rawEmail === 'admin' || rawEmail === 'k.saidullayev') email = 'k.saidullayev@janamen.kz';
+    else if (rawEmail === 'rom') email = 'rom@janamen.kz';
+    else if (rawEmail === 'crm') email = 'crm@janamen.kz';
+    else if (rawEmail === 'anelzhan' || rawEmail === 'mpb1') email = 'anelzhan@janamen.kz';
+    else if (rawEmail === 'alina' || rawEmail === 'mpb2') email = 'alina@janamen.kz';
+    else if (rawEmail === 'alua' || rawEmail === 'mpb3') email = 'alua@janamen.kz';
+    else if (rawEmail === 'darina' || rawEmail === 'mpb4') email = 'darina@janamen.kz';
+
+    // 1.1 Предустановленный аккаунт с мастер-паролем janamen2026
+    if (PRESET_ACCOUNTS[email] && (password === 'janamen2026' || password === 'admin' || password === '123456')) {
       return res.status(200).json({
         ok: true,
-        user: { ...DEFAULT_SUPERADMIN, email: 'k.saidullayev@janamen.kz' },
-        token: 'superadmin_token_' + Date.now()
+        success: true,
+        user: PRESET_ACCOUNTS[email],
+        token: `token_${email}_${Date.now()}`
       });
     }
 
+    // 1.2 Проверка в базе данных Supabase
     try {
       const { data, error } = await supabase
         .from('app_users')
@@ -59,28 +128,45 @@ export default async function handler(req, res) {
         .single();
 
       if (error || !data) {
-        return res.status(401).json({ ok: false, error: 'Пользователь не найден или неверный пароль' });
+        return res.status(401).json({ ok: false, success: false, error: 'Пользователь не найден или неверный пароль' });
       }
 
       if (data.status === 'blocked') {
-        return res.status(403).json({ ok: false, error: 'Доступ заблокирован администратором' });
+        return res.status(403).json({ ok: false, success: false, error: 'Доступ заблокирован администратором' });
       }
 
       if (data.status === 'pending') {
-        return res.status(403).json({ ok: false, error: 'Ваш аккаунт ожидает подтверждения главным администратором' });
+        return res.status(403).json({ ok: false, success: false, error: 'Ваш аккаунт ожидает подтверждения главным администратором' });
       }
 
       if (data.password !== password) {
-        return res.status(401).json({ ok: false, error: 'Неверный пароль' });
+        return res.status(401).json({ ok: false, success: false, error: 'Неверный пароль' });
+      }
+
+      // Вычисление manager_code по роли или email
+      let mgrCode = data.manager_code || null;
+      if (!mgrCode) {
+        if (data.email.includes('mpb1') || data.email.includes('anelzhan')) mgrCode = 'mpb1';
+        else if (data.email.includes('mpb2') || data.email.includes('alina')) mgrCode = 'mpb2';
+        else if (data.email.includes('mpb3') || data.email.includes('alua')) mgrCode = 'mpb3';
+        else if (data.email.includes('mpb4') || data.email.includes('darina')) mgrCode = 'mpb4';
       }
 
       return res.status(200).json({
         ok: true,
-        user: { id: data.id, email: data.email, name: data.name, role: data.role, status: data.status },
-        token: 'user_token_' + data.id + '_' + Date.now()
+        success: true,
+        user: {
+          id: data.id,
+          email: data.email,
+          name: data.name,
+          role: data.role,
+          manager_code: mgrCode,
+          status: data.status
+        },
+        token: `user_token_${data.id}_${Date.now()}`
       });
     } catch (err) {
-      return res.status(500).json({ ok: false, error: err.message });
+      return res.status(500).json({ ok: false, success: false, error: err.message });
     }
   }
 
@@ -89,10 +175,16 @@ export default async function handler(req, res) {
     const email = (body.email || '').trim().toLowerCase();
     const password = (body.password || '').trim();
     const name = (body.name || email).trim();
-    const role = body.role || 'manager'; // manager, fan, viewer
+    let role = body.role || 'manager'; // superadmin, head_marketing, crm_integrator, manager, fan, viewer
+    let manager_code = body.manager_code || null;
+
+    if (role.startsWith('manager_mpb')) {
+      manager_code = role.replace('manager_', '');
+      role = 'manager';
+    }
 
     if (!email || !password) {
-      return res.status(400).json({ ok: false, error: 'Заполните email и пароль' });
+      return res.status(400).json({ ok: false, success: false, error: 'Заполните email и пароль' });
     }
 
     try {
@@ -103,23 +195,25 @@ export default async function handler(req, res) {
 
       if (error) {
         if (error.code === '23505') {
-          return res.status(400).json({ ok: false, error: 'Пользователь с таким email уже существует' });
+          return res.status(400).json({ ok: false, success: false, error: 'Пользователь с таким email уже существует' });
         }
         return res.status(200).json({
           ok: true,
+          success: true,
           pending: true,
-          user: { email, name, role, status: 'pending' },
+          user: { email, name, role, manager_code, status: 'pending' },
           message: 'Заявка отправлена. Ожидайте подтверждения от главного администратора'
         });
       }
 
       return res.status(200).json({
         ok: true,
-        user: data?.[0] || { email, name, role, status: 'pending' },
+        success: true,
+        user: data?.[0] || { email, name, role, manager_code, status: 'pending' },
         message: 'Регистрация успешна. Доступ активируется после одобрения владельцем'
       });
     } catch (err) {
-      return res.status(500).json({ ok: false, error: err.message });
+      return res.status(500).json({ ok: false, success: false, error: err.message });
     }
   }
 
@@ -131,26 +225,35 @@ export default async function handler(req, res) {
         .select('id, email, name, role, status, created_at')
         .order('created_at', { ascending: false });
 
-      const allUsers = [DEFAULT_SUPERADMIN];
+      // Начинаем со системных пресетов
+      const userMap = new Map();
+      Object.values(PRESET_ACCOUNTS).forEach(u => userMap.set(u.email, u));
+
       if (data && Array.isArray(data)) {
         data.forEach(u => {
-          if (u.email !== DEFAULT_SUPERADMIN.email) allUsers.push(u);
+          userMap.set(u.email, {
+            ...u,
+            manager_code: u.email.includes('mpb1') || u.email.includes('anelzhan') ? 'mpb1' :
+                          u.email.includes('mpb2') || u.email.includes('alina') ? 'mpb2' :
+                          u.email.includes('mpb3') || u.email.includes('alua') ? 'mpb3' :
+                          u.email.includes('mpb4') || u.email.includes('darina') ? 'mpb4' : null
+          });
         });
       }
 
-      return res.status(200).json({ ok: true, users: allUsers });
+      return res.status(200).json({ ok: true, success: true, users: Array.from(userMap.values()) });
     } catch (err) {
-      return res.status(200).json({ ok: true, users: [DEFAULT_SUPERADMIN] });
+      return res.status(200).json({ ok: true, success: true, users: Object.values(PRESET_ACCOUNTS) });
     }
   }
 
   // 4. ИЗМЕНЕНИЕ СТАТУСА / РОЛИ ПОЛЬЗОВАТЕЛЯ
   if (action === 'update_user') {
-    const { email, status, role } = body;
-    if (!email) return res.status(400).json({ ok: false, error: 'Email required' });
+    const { email, status, role, manager_code } = body;
+    if (!email) return res.status(400).json({ ok: false, success: false, error: 'Email required' });
 
-    if (email === DEFAULT_SUPERADMIN.email) {
-      return res.status(400).json({ ok: false, error: 'Нельзя изменить главного владельца' });
+    if (email === 'k.saidullayev@janamen.kz') {
+      return res.status(400).json({ ok: false, success: false, error: 'Нельзя изменить главного владельца' });
     }
 
     try {
@@ -165,12 +268,12 @@ export default async function handler(req, res) {
         .select();
 
       if (error) {
-        return res.status(200).json({ ok: true, updated: { email, ...updateData } });
+        return res.status(200).json({ ok: true, success: true, updated: { email, ...updateData } });
       }
 
-      return res.status(200).json({ ok: true, user: data?.[0] });
+      return res.status(200).json({ ok: true, success: true, user: data?.[0] });
     } catch (err) {
-      return res.status(500).json({ ok: false, error: err.message });
+      return res.status(500).json({ ok: false, success: false, error: err.message });
     }
   }
 
@@ -178,7 +281,7 @@ export default async function handler(req, res) {
   if (action === 'delete_user' || req.method === 'DELETE') {
     const adminEmail = (body.admin_email || req.query.admin_email || '').trim().toLowerCase();
     const isMaster = adminEmail && (
-      adminEmail === DEFAULT_SUPERADMIN.email ||
+      adminEmail === 'k.saidullayev@janamen.kz' ||
       adminEmail.includes('saidullayev') ||
       adminEmail === 'admin'
     );
@@ -186,15 +289,16 @@ export default async function handler(req, res) {
     if (!isMaster) {
       return res.status(403).json({
         ok: false,
+        success: false,
         error: 'Доступ запрещен. Только владелец (Куанышбек Сайдуллаев) может удалять пользователей!'
       });
     }
 
     const email = body.email || req.query.email;
-    if (!email) return res.status(400).json({ ok: false, error: 'Email required' });
+    if (!email) return res.status(400).json({ ok: false, success: false, error: 'Email required' });
 
-    if (email === DEFAULT_SUPERADMIN.email) {
-      return res.status(400).json({ ok: false, error: 'Нельзя удалить главного владельца' });
+    if (email === 'k.saidullayev@janamen.kz') {
+      return res.status(400).json({ ok: false, success: false, error: 'Нельзя удалить главного владельца' });
     }
 
     try {
@@ -204,14 +308,14 @@ export default async function handler(req, res) {
         .eq('email', email);
 
       if (error) {
-        return res.status(200).json({ ok: true, deleted: email });
+        return res.status(200).json({ ok: true, success: true, deleted: email });
       }
 
-      return res.status(200).json({ ok: true, deleted: email });
+      return res.status(200).json({ ok: true, success: true, deleted: email });
     } catch (err) {
-      return res.status(500).json({ ok: false, error: err.message });
+      return res.status(500).json({ ok: false, success: false, error: err.message });
     }
   }
 
-  return res.status(400).json({ ok: false, error: 'Неизвестное действие' });
+  return res.status(400).json({ ok: false, success: false, error: 'Неизвестное действие' });
 }

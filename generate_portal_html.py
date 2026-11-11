@@ -67,23 +67,11 @@ html_template = r'''<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- КНОПКИ ДЕЙСТВИЙ -->
+        <!-- КНОПКИ ДЕЙСТВИЙ (Очищенная шапка) -->
         <div class="flex items-center space-x-2 sm:space-x-2.5">
-          <span id="liveStatus" class="hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200">🟢 Supabase Realtime (Живые данные)</span>
-          
-          <button onclick="openAddBloggerModal()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-black text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition shadow-sm">
+          <button onclick="openAddBloggerModal()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-black text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow-xs">
             <span>+ Добавить блогера</span>
           </button>
-
-          <button onclick="syncAmoCRM()" id="btnSyncCRM" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">
-            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            <span class="hidden sm:inline">Синхронизировать</span> AmoCRM
-          </button>
-
-          <a href="https://docs.google.com/spreadsheets/d/1jBeeF8b_7CORi8Xf9Kjr9YN6c6ZrloQIljT2_-adcYs/edit" target="_blank" class="hidden md:inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-lg transition shadow-sm">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            <span>Google Таблица</span>
-          </a>
 
           <!-- АВТОРИЗАЦИЯ & ПРОФИЛЬ -->
           <div id="authWidget" class="flex items-center space-x-1.5 pl-2 border-l border-slate-200">
@@ -142,85 +130,85 @@ html_template = r'''<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (СТАНДАРТНАЯ ДЛЯ ОРГАНИКИ, INFLUENCE, ТЕГОВ) -->
-    <div id="kpiStandardGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (КОМПАКТНЫЙ НИЗКОПРОФИЛЬНЫЙ ВИД) -->
+    <div id="kpiStandardGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5">
       
       <!-- Лиды -->
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок (лидов)</span>
-          <span id="kpiScopeBadge" class="text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">Органика</span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок (CRM)</span>
+          <span id="kpiScopeBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Органика</span>
         </div>
-        <div id="kpiTotalLeads" class="text-xl sm:text-3xl font-black text-slate-900 mt-1">—</div>
-        <div class="text-[11px] text-slate-500 mt-0.5" id="kpiLeadsPeriod">за выбранный период</div>
+        <div id="kpiTotalLeads" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight">—</div>
+        <div class="text-[10px] text-slate-400 mt-0.5" id="kpiLeadsPeriod">за выбранный период</div>
       </div>
 
       <!-- Клики -->
-      <div class="bg-white p-4 rounded-2xl border border-purple-200 shadow-sm bg-gradient-to-br from-white to-purple-50/30">
-        <div class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
-        <div id="kpiClicks" class="text-xl sm:text-3xl font-black text-purple-700 mt-1">0</div>
-        <div id="kpiCr1" class="text-[11px] font-bold text-purple-800 mt-0.5">CR1 (Клик ➔ Лид): —</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-purple-200 shadow-2xs bg-purple-50/20">
+        <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
+        <div id="kpiClicks" class="text-lg sm:text-2xl font-black text-purple-800 mt-0.5 leading-tight">0</div>
+        <div id="kpiCr1" class="text-[10px] font-bold text-purple-700 mt-0.5">CR1: —</div>
       </div>
 
       <!-- Оплачено -->
-      <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm bg-gradient-to-br from-white to-emerald-50/40">
-        <div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (Статус 142)</div>
-        <div id="kpiWonLeads" class="text-xl sm:text-3xl font-black text-emerald-600 mt-1">—</div>
-        <div id="kpiCr2" class="text-[11px] font-bold text-emerald-700 mt-0.5">CR2 (Лид ➔ Оплата): —</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
+        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (Статус 142)</div>
+        <div id="kpiWonLeads" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">—</div>
+        <div id="kpiCr2" class="text-[10px] font-bold text-emerald-700 mt-0.5">CR2: —</div>
       </div>
 
       <!-- Выручка -->
-      <div class="bg-white p-4 rounded-2xl border border-blue-200 shadow-sm bg-gradient-to-br from-white to-blue-50/40">
-        <div class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Подтвержденная Выручка</div>
-        <div id="kpiRevenue" class="text-xl sm:text-3xl font-black text-brand-700 mt-1">—</div>
-        <div id="kpiAvgCheck" class="text-[11px] font-semibold text-slate-600 mt-0.5">Средний чек: —</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
+        <div class="text-[10px] font-bold text-brand-700 uppercase tracking-wider">Выручка (₸)</div>
+        <div id="kpiRevenue" class="text-lg sm:text-2xl font-black text-brand-700 mt-0.5 leading-tight whitespace-nowrap">—</div>
+        <div id="kpiAvgCheck" class="text-[10px] font-medium text-slate-500 mt-0.5">Ср. чек: —</div>
       </div>
 
-      <!-- Активных сущностей -->
-      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm col-span-2 lg:col-span-1">
-        <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider" id="kpiEntityLabel">Активных блогеров/связок</div>
-        <div id="kpiEntitiesCount" class="text-xl sm:text-3xl font-black text-slate-800 mt-1">—</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">в текущей выборке</div>
+      <!-- Расходы / Активные -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs col-span-2 lg:col-span-1">
+        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider" id="kpiEntityLabel">Активных сущностей</div>
+        <div id="kpiEntitiesCount" class="text-lg sm:text-2xl font-black text-slate-800 mt-0.5 leading-tight">—</div>
+        <div class="text-[10px] text-slate-400 mt-0.5" id="kpiEntitySub">в текущей выборке</div>
       </div>
 
     </div>
 
-    <!-- 1b. ПОЛОСА 6 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (ЧИСТЫЕ ДАННЫЕ БЕЗ ВЫДУМАННЫХ РАСХОДОВ) -->
-    <div id="kpiFanGrid" class="hidden grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+    <!-- 1b. ПОЛОСА 6 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (КОМПАКТНЫЙ ВИД) -->
+    <div id="kpiFanGrid" class="hidden grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
       <!-- 1. Всего лидов -->
-      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Всего заявок (CRM)</div>
-        <div id="fanKpiLeads" class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">0</div>
-        <div class="text-[10px] text-slate-400 mt-0.5">сделки в AmoCRM</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок</div>
+        <div id="fanKpiLeads" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight">0</div>
+        <div class="text-[10px] text-slate-400 mt-0.5">AmoCRM</div>
       </div>
       <!-- 2. Кликов -->
-      <div class="bg-white p-3.5 rounded-2xl border border-purple-200 shadow-sm bg-purple-50/20">
-        <div class="text-[10px] font-black text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
-        <div id="fanKpiClicks" class="text-2xl sm:text-3xl font-black text-purple-800 mt-1">0</div>
-        <div class="text-[10px] text-purple-500 mt-0.5">трекинг Supabase</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-purple-200 shadow-2xs bg-purple-50/20">
+        <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Кликов</div>
+        <div id="fanKpiClicks" class="text-lg sm:text-2xl font-black text-purple-800 mt-0.5 leading-tight">0</div>
+        <div class="text-[10px] text-purple-500 mt-0.5">переходы</div>
       </div>
       <!-- 3. CR1 -->
-      <div class="bg-white p-3.5 rounded-2xl border border-blue-200 shadow-sm bg-blue-50/20">
-        <div class="text-[10px] font-black text-blue-700 uppercase tracking-wider">CR1 (Клик ➔ Лид)</div>
-        <div id="fanKpiCr1" class="text-2xl sm:text-3xl font-black text-blue-800 mt-1">0%</div>
-        <div class="text-[10px] text-blue-500 mt-0.5">конверсия лендинга</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
+        <div class="text-[10px] font-bold text-blue-700 uppercase tracking-wider">CR1 (Клик➔Лид)</div>
+        <div id="fanKpiCr1" class="text-lg sm:text-2xl font-black text-blue-800 mt-0.5 leading-tight">0%</div>
+        <div class="text-[10px] text-blue-500 mt-0.5">конверсия</div>
       </div>
       <!-- 4. Оплачено -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 shadow-sm bg-emerald-50/20">
-        <div class="text-[10px] font-black text-emerald-700 uppercase tracking-wider">Оплаченных сделок</div>
-        <div id="fanKpiWon" class="text-2xl sm:text-3xl font-black text-emerald-600 mt-1">0</div>
-        <div class="text-[10px] text-emerald-600 mt-0.5">статус 142 (Успешно)</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
+        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (142)</div>
+        <div id="fanKpiWon" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">0</div>
+        <div class="text-[10px] text-emerald-600 mt-0.5">успешные</div>
       </div>
       <!-- 5. CR2 -->
-      <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 shadow-sm bg-emerald-50/20">
-        <div class="text-[10px] font-black text-emerald-700 uppercase tracking-wider">CR2 (Лид ➔ Оплата)</div>
-        <div id="fanKpiCr2" class="text-2xl sm:text-3xl font-black text-emerald-700 mt-1">0%</div>
-        <div class="text-[10px] text-emerald-600 mt-0.5">конверсия в оплату</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
+        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">CR2 (Лид➔Оплата)</div>
+        <div id="fanKpiCr2" class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight">0%</div>
+        <div class="text-[10px] text-emerald-600 mt-0.5">оплата</div>
       </div>
       <!-- 6. Выручка -->
-      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Подтвержденная выручка</div>
-        <div id="fanKpiRevenue" class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">0 ₸</div>
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs">
+        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Выручка (₸)</div>
+        <div id="fanKpiRevenue" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
         <div class="text-[10px] text-slate-400 mt-0.5" id="fanKpiAvgCheck">Ср. чек: 0 ₸</div>
       </div>
     </div>
@@ -301,10 +289,10 @@ html_template = r'''<!DOCTYPE html>
       <div class="p-4 sm:p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2">
-            <h2 id="tableMainTitle" class="text-base sm:text-lg font-black text-slate-900 tracking-tight">🌿 Органика: SMM и WhatsApp Айтыма Бериковича</h2>
+            <h2 id="tableMainTitle" class="text-base sm:text-lg font-black text-slate-900 tracking-tight">🌿 Органика: SMM (janamen1.kz/smm) & WhatsApp 9828</h2>
             <span id="tableBadgeTitle" class="px-2 py-0.5 text-[10px] font-black uppercase rounded bg-emerald-100 text-emerald-800">Канал 1</span>
           </div>
-          <p id="tableMainSubtitle" class="text-xs text-slate-500 mt-0.5">Прямая прозрачная таблица без вложенности: все клики, заявки и подтвержденные оплаты</p>
+          <p id="tableMainSubtitle" class="text-xs text-slate-500 mt-0.5">6 официальных точек входа (шапка Instagram, YouTube, чат-бот Direct, Threads, TikTok и WhatsApp 9828)</p>
         </div>
 
         <div class="flex items-center space-x-2">
@@ -499,6 +487,19 @@ html_template = r'''<!DOCTYPE html>
           <button type="button" onclick="switchAuthTab('register')" id="tabAuthRegister" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900">Регистрация</button>
         </div>
 
+        <!-- Быстрый выбор роли для входа -->
+        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs">
+          <div class="text-[10px] font-black uppercase text-slate-400 mb-1.5">Быстрый тестовый вход под ролью:</div>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <button type="button" onclick="quickLoginRole('admin')" class="p-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-bold text-left">👑 Куанышбек (Владелец)</button>
+            <button type="button" onclick="quickLoginRole('rom')" class="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 rounded-lg font-bold text-left">💼 РОМ (Маркетинг)</button>
+            <button type="button" onclick="quickLoginRole('crm')" class="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-200 rounded-lg font-bold text-left">⚙️ CRM-интегратор</button>
+            <button type="button" onclick="quickLoginRole('anelzhan')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Анельжан (mpb1)</button>
+            <button type="button" onclick="quickLoginRole('alina')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Алина (mpb2)</button>
+            <button type="button" onclick="quickLoginRole('alua')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Алуа (mpb3)</button>
+          </div>
+        </div>
+
         <form id="authForm" onsubmit="event.preventDefault(); submitAuthForm();" class="space-y-3 text-xs font-semibold text-slate-700">
           <div id="authNameField" class="hidden">
             <label class="block text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-1">Ваше имя и фамилия:</label>
@@ -518,9 +519,13 @@ html_template = r'''<!DOCTYPE html>
           <div id="authRoleField" class="hidden">
             <label class="block text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-1">Отдел / Направление:</label>
             <select id="authRole" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-bold text-slate-900">
-              <option value="manager">Менеджер блогеров (Influence)</option>
+              <option value="head_marketing">Руководитель отдела маркетинга (РОМ)</option>
+              <option value="crm_integrator">CRM-интегратор</option>
+              <option value="manager_mpb1">Менеджер: Анельжан (mpb1)</option>
+              <option value="manager_mpb2">Менеджер: Алина (mpb2)</option>
+              <option value="manager_mpb3">Менеджер: Алуа (mpb3)</option>
+              <option value="manager_mpb4">Менеджер: Дарина (mpb4)</option>
               <option value="fan">Фан-аккаунты сетки</option>
-              <option value="viewer">Просмотр (Наблюдатель)</option>
             </select>
           </div>
 
@@ -703,7 +708,7 @@ html_template = r'''<!DOCTYPE html>
     let currentAllDim = 'combos';
 
     // Состояние развернутых аккордеонов
-    const expandedAccordions = new Set(['org_wa', 'org_smm', 'org_site', 'mpb1', 'mpb2', 'mpb3', 'mpb4', 'bekezhanova_dilnaz', 'doskazhanova_ainagul', 'kenzhebaeva_aisulu_1', 'kenzhebaeva_aisulu_2', 'gaisina_kamila', 'kenzhebaeva_aida', 'adina_khaidarova_1', 'adina_khaidarova_2']);
+    const expandedAccordions = new Set(['all_section_organika', 'all_section_influence', 'all_section_fan', 'org_wa', 'org_smm', 'org_site', 'mpb1', 'mpb2', 'mpb3', 'mpb4', 'bekezhanova_dilnaz', 'doskazhanova_ainagul', 'kenzhebaeva_aisulu_1', 'kenzhebaeva_aisulu_2', 'gaisina_kamila', 'kenzhebaeva_aida', 'adina_khaidarova_1', 'adina_khaidarova_2']);
     let CLICK_BY_CAMPAIGN = {};
 
     // Данные кликов из Supabase
@@ -897,28 +902,77 @@ html_template = r'''<!DOCTYPE html>
       let rev = 0;
       let clicks = 0;
 
-      // Структуры для каждого режима
-      const organikaSections = {
-        'org_wa': {
-          id: 'org_wa',
-          name: '📱 WhatsApp Айтыма Бериковича (77083779828 / iwa-9828)',
-          badge: 'WhatsApp 9828',
-          leads: 0, won: 0, rev: 0, clicks: 0,
-          items: {}
+      // Официальные 6 точек входа Органики (janamen1.kz/smm + WhatsApp 9828)
+      const organikaItems = {
+        'smm_bio': {
+          id: 'smm_bio',
+          name: '📸 Шапка профиля Instagram (Bio)',
+          placement: 'Instagram Bio',
+          source: 'instagram',
+          medium: 'bio',
+          campaign: 'main_profile',
+          url: 'https://janamen1.kz/smm?utm_source=instagram&utm_medium=bio&utm_campaign=main_profile',
+          leads: 0, won: 0, rev: 0, clicks: 0
         },
-        'org_smm': {
-          id: 'org_smm',
-          name: '📸 SMM / Соцсети (/smm)',
-          badge: 'SMM Соцсети',
-          leads: 0, won: 0, rev: 0, clicks: 0,
-          items: {}
+        'smm_youtube': {
+          id: 'smm_youtube',
+          name: '▶️ YouTube канал (Шапка и описание)',
+          placement: 'YouTube канал',
+          source: 'youtube',
+          medium: 'channel',
+          campaign: 'smm_video',
+          url: 'https://janamen1.kz/smm?utm_source=youtube&utm_medium=channel&utm_campaign=smm_video',
+          leads: 0, won: 0, rev: 0, clicks: 0
         },
-        'org_site': {
-          id: 'org_site',
-          name: '🌐 Прямой трафик & Органика сайта (/organika & Главная)',
-          badge: 'Органика сайта',
-          leads: 0, won: 0, rev: 0, clicks: 0,
-          items: {}
+        'smm_chatbot': {
+          id: 'smm_chatbot',
+          name: '🤖 Чат-бот из основного профиля Direct',
+          placement: 'Instagram Bot / Direct',
+          source: 'chatbot',
+          medium: 'direct_bot',
+          campaign: 'welcome_bot',
+          url: 'https://janamen1.kz/smm?utm_source=chatbot&utm_medium=direct_bot&utm_campaign=welcome_bot',
+          leads: 0, won: 0, rev: 0, clicks: 0
+        },
+        'smm_threads': {
+          id: 'smm_threads',
+          name: '🧵 Threads ссылка (В профиле и постах)',
+          placement: 'Threads профиль',
+          source: 'threads',
+          medium: 'post',
+          campaign: 'threads_bio',
+          url: 'https://janamen1.kz/smm?utm_source=threads&utm_medium=post&utm_campaign=threads_bio',
+          leads: 0, won: 0, rev: 0, clicks: 0
+        },
+        'smm_tiktok': {
+          id: 'smm_tiktok',
+          name: '🎵 TikTok (Шапка основного аккаунта)',
+          placement: 'TikTok Bio',
+          source: 'tiktok',
+          medium: 'bio',
+          campaign: 'tiktok_main',
+          url: 'https://janamen1.kz/smm?utm_source=tiktok&utm_medium=bio&utm_campaign=tiktok_main',
+          leads: 0, won: 0, rev: 0, clicks: 0
+        },
+        'wa_9828': {
+          id: 'wa_9828',
+          name: '📱 WhatsApp Айтыма Бериковича (9828)',
+          placement: 'WhatsApp 77083779828',
+          source: 'whatsapp',
+          medium: 'direct',
+          campaign: 'wa9828',
+          url: 'https://janamen1.kz/iwa-9828?utm_source=whatsapp&utm_medium=direct&utm_campaign=wa9828',
+          leads: 0, won: 0, rev: 0, clicks: 0
+        },
+        'smm_other': {
+          id: 'smm_other',
+          name: '🌐 Прямые заходы на /smm и заявки',
+          placement: 'Сайт /smm',
+          source: 'smm',
+          medium: 'direct',
+          campaign: 'other',
+          url: 'https://janamen1.kz/smm',
+          leads: 0, won: 0, rev: 0, clicks: 0
         }
       };
 
@@ -1116,43 +1170,31 @@ html_template = r'''<!DOCTYPE html>
           rev += l.price;
         }
 
-        // Агрегация для Органики
-        if (currentMainChannel === 'organika') {
-          let secKey = 'org_site';
-          if (isWa9828) secKey = 'org_wa';
-          else if (isSmm) secKey = 'org_smm';
-
-          const sec = organikaSections[secKey];
-          sec.leads++;
-          if (l.won) { sec.won++; sec.rev += l.price; }
-
-          let subName = '';
-          if (secKey === 'org_wa') {
-            subName = (l.src || 'whatsapp') + ' · ' + (l.cmp || 'none') + (l.cnt && l.cnt !== 'none' ? ' · ' + l.cnt : '');
-          } else if (secKey === 'org_smm') {
-            subName = (l.src || 'smm') + (l.cnt && l.cnt !== 'none' ? ' · @' + l.cnt : (l.cmp && l.cmp !== 'none' ? ' · ' + l.cmp : ' · прямой'));
-          } else {
-            subName = (l.path || '/') + ' · ' + (l.src || 'direct');
+        // Агрегация для Органики (6 официальных точек janamen1.kz/smm + WhatsApp 9828)
+        if (isOrganika) {
+          let orgKey = 'smm_other';
+          if (isWa9828) {
+            orgKey = 'wa_9828';
+          } else if (lSrc === 'chatbot' || lMed === 'direct_bot' || lCmp.includes('bot')) {
+            orgKey = 'smm_chatbot';
+          } else if (lSrc === 'youtube' || lMed === 'channel' || lCmp.includes('youtube')) {
+            orgKey = 'smm_youtube';
+          } else if (lSrc === 'threads' || lMed === 'post' || lCmp.includes('threads')) {
+            orgKey = 'smm_threads';
+          } else if (lSrc === 'tiktok' || lCmp.includes('tiktok')) {
+            orgKey = 'smm_tiktok';
+          } else if (lSrc === 'instagram' || lMed === 'bio' || lCmp.includes('bio') || lCmp.includes('profile')) {
+            orgKey = 'smm_bio';
           }
 
-          if (!sec.items[subName]) {
-            sec.items[subName] = {
-              name: subName,
-              path: l.path || (secKey === 'org_wa' ? '/iwa-9828' : (secKey === 'org_smm' ? '/smm' : '/organika')),
-              src: l.src || 'direct',
-              cmp: l.cmp || 'none',
-              cnt: l.cnt || 'none',
-              secKey: secKey,
-              leads: 0,
-              won: 0,
-              rev: 0,
-              clicks: 0
-            };
+          if (organikaItems[orgKey]) {
+            organikaItems[orgKey].leads++;
+            if (l.won) {
+              organikaItems[orgKey].won++;
+              organikaItems[orgKey].rev += l.price;
+            }
           }
-          sec.items[subName].leads++;
-          if (l.won) { sec.items[subName].won++; sec.items[subName].rev += l.price; }
         }
-
         // Агрегация для Influence (Два источника: Таблица Реестра + AmoCRM)
         if (currentMainChannel === 'influence') {
           let mKey = (l.med && l.med.startsWith('mpb')) ? l.med : null;
@@ -1280,17 +1322,37 @@ html_template = r'''<!DOCTYPE html>
       if (bFan) bFan.innerText = countFan + ' лид.';
 
       // Привязка кликов
-      if (currentMainChannel === 'organika') {
-        organikaSections['org_wa'].clicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_COUNTS['iwa-9828'] || 0);
-        organikaSections['org_smm'].clicks = (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_COUNTS['smm'] || 0);
-        organikaSections['org_site'].clicks = (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
-        clicks = organikaSections['org_wa'].clicks + organikaSections['org_smm'].clicks + organikaSections['org_site'].clicks;
+      // Подсчет кликов для 6 точек Органики
+      let orgTotalClicks = 0;
+      if (Array.isArray(RAW_CLICKS) && RAW_CLICKS.length > 0) {
+        RAW_CLICKS.forEach(c => {
+          const p = (c.landing_page || '').toLowerCase();
+          const src = (c.utm_source || '').toLowerCase();
+          const med = (c.utm_medium || '').toLowerCase();
+          const cmp = (c.utm_campaign || '').toLowerCase();
 
-        Object.values(organikaSections).forEach(s => {
-          Object.values(s.items).forEach(item => {
-            item.clicks = CLICK_BY_CONTENT[item.cnt] || CLICK_BY_CAMPAIGN[item.cmp] || 0;
-          });
+          if (p === '/iwa-9828' || src === 'whatsapp' || cmp.includes('wa9828')) {
+            organikaItems['wa_9828'].clicks++;
+          } else if (p.includes('/smm')) {
+            if (src === 'chatbot' || med === 'direct_bot' || cmp.includes('bot')) {
+              organikaItems['smm_chatbot'].clicks++;
+            } else if (src === 'youtube' || med === 'channel' || cmp.includes('youtube')) {
+              organikaItems['smm_youtube'].clicks++;
+            } else if (src === 'threads' || med === 'post' || cmp.includes('threads')) {
+              organikaItems['smm_threads'].clicks++;
+            } else if (src === 'tiktok' || cmp.includes('tiktok')) {
+              organikaItems['smm_tiktok'].clicks++;
+            } else if (src === 'instagram' || med === 'bio' || cmp.includes('profile')) {
+              organikaItems['smm_bio'].clicks++;
+            } else {
+              organikaItems['smm_other'].clicks++;
+            }
+          }
         });
+      }
+      Object.values(organikaItems).forEach(item => orgTotalClicks += item.clicks);
+      if (currentMainChannel === 'organika') {
+        clicks = orgTotalClicks;
       } else if (currentMainChannel === 'influence') {
         // 1. Динамическая регистрация блогеров из RAW_CLICKS (клики без лидов)
         if (Array.isArray(RAW_CLICKS)) {
@@ -1415,7 +1477,7 @@ html_template = r'''<!DOCTYPE html>
         cr1: clicks ? (won ? (leads / clicks) : 0) : 0,
         cr2: leads ? (won / leads) : 0,
         avgCheck: won ? Math.round(rev / won) : 0,
-        organikaSections,
+        organikaItems,
         influenceManagers,
         fanAccounts,
         allCombos: Object.values(allCombos).sort((a,b) => b.rev - a.rev || b.leads - a.leads),
@@ -1430,6 +1492,8 @@ html_template = r'''<!DOCTYPE html>
 
     function updateKpis() {
       const d = currentChannelData;
+      const userRole = CURRENT_USER?.role || 'superadmin';
+      const userMgrCode = CURRENT_USER?.manager_code;
 
       if (currentMainChannel === 'fan') {
         const stdGrid = document.getElementById('kpiStandardGrid');
@@ -1463,37 +1527,61 @@ html_template = r'''<!DOCTYPE html>
         if (stdGrid) stdGrid.classList.remove('hidden');
         if (fanGrid) fanGrid.classList.add('hidden');
 
-        document.getElementById('kpiTotalLeads').innerText = d.leads.toLocaleString('ru-RU');
-        document.getElementById('kpiWonLeads').innerText = d.won.toLocaleString('ru-RU');
-        document.getElementById('kpiRevenue').innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('kpiAvgCheck').innerText = 'Средний чек: ' + (d.avgCheck || 0).toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('kpiClicks').innerText = d.clicks.toLocaleString('ru-RU');
+        let displayLeads = d.leads;
+        let displayWon = d.won;
+        let displayRev = d.rev;
+        let displayClicks = d.clicks;
+        let displayAvgCheck = d.avgCheck;
+
+        // Если вошел конкретный менеджер (например Анельжан mpb1) — изолируем метрики strictly под нее
+        if (currentMainChannel === 'influence' && userRole === 'manager' && userMgrCode) {
+          const myMgr = d.influenceManagers?.[userMgrCode] || { leads: 0, won: 0, rev: 0, clicks: 0 };
+          displayLeads = myMgr.leads;
+          displayWon = myMgr.won;
+          displayRev = myMgr.rev;
+          displayClicks = myMgr.clicks;
+          displayAvgCheck = displayWon ? Math.round(displayRev / displayWon) : 0;
+        }
+
+        document.getElementById('kpiTotalLeads').innerText = displayLeads.toLocaleString('ru-RU');
+        document.getElementById('kpiWonLeads').innerText = displayWon.toLocaleString('ru-RU');
+        document.getElementById('kpiRevenue').innerText = displayRev.toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (displayAvgCheck || 0).toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('kpiClicks').innerText = displayClicks.toLocaleString('ru-RU');
         
-        const cr1Pct = d.clicks ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : (d.leads ? '—' : '0%');
-        document.getElementById('kpiCr1').innerText = 'CR1 (Клик ➔ Лид): ' + cr1Pct;
+        const cr1Pct = displayClicks ? (Math.round(displayLeads / displayClicks * 1000) / 10) + '%' : (displayLeads ? '—' : '0%');
+        document.getElementById('kpiCr1').innerText = 'CR1: ' + cr1Pct;
         
-        const cr2Pct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
-        document.getElementById('kpiCr2').innerText = 'CR2 (Лид ➔ Оплата): ' + cr2Pct;
+        const cr2Pct = displayLeads ? (Math.round(displayWon / displayLeads * 1000) / 10) + '%' : '0%';
+        document.getElementById('kpiCr2').innerText = 'CR2: ' + cr2Pct;
 
         const scopeBadge = document.getElementById('kpiScopeBadge');
         const entityLabel = document.getElementById('kpiEntityLabel');
         const entitiesCount = document.getElementById('kpiEntitiesCount');
 
         if (currentMainChannel === 'organika') {
-          scopeBadge.innerText = 'Органика';
+          scopeBadge.innerText = 'Органика SMM';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800';
-          entityLabel.innerText = 'Связок и точек входа';
-          let subTotal = 0;
-          Object.values(d.organikaSections || {}).forEach(s => subTotal += Object.keys(s.items).length);
-          entitiesCount.innerText = '3 напр. (' + subTotal + ' связок)';
+          entityLabel.innerText = 'Точек входа (/smm & WA)';
+          entitiesCount.innerText = '6 каналов';
+          const entitySub = document.getElementById('kpiEntitySub');
+          if (entitySub) entitySub.innerText = 'официальные ссылки';
         } else if (currentMainChannel === 'influence') {
-          scopeBadge.innerText = 'Influence';
-          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
-          entityLabel.innerText = 'Расходы на блогеров';
           let bCount = 0;
           let bActive = 0;
           let totalInfExpenses = 0;
-          Object.values(d.influenceManagers || {}).forEach(m => {
+
+          let mgrList = Object.values(d.influenceManagers || {});
+          if (userRole === 'manager' && userMgrCode) {
+            mgrList = [d.influenceManagers?.[userMgrCode]].filter(Boolean);
+            scopeBadge.innerText = `Менеджер ${userMgrCode.toUpperCase()}`;
+          } else {
+            scopeBadge.innerText = 'Influence';
+          }
+          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
+          entityLabel.innerText = 'Расходы на блогеров';
+
+          mgrList.forEach(m => {
             const bList = Object.values(m.bloggers || {});
             bCount += bList.length;
             bActive += bList.filter(b => b.leads > 0).length;
@@ -1503,10 +1591,10 @@ html_template = r'''<!DOCTYPE html>
             });
           });
           entitiesCount.innerText = totalInfExpenses > 0 ? (totalInfExpenses.toLocaleString('ru-RU') + ' ₸') : (bCount + ' блогеров');
-          const entitySub = entitiesCount.nextElementSibling;
+          const entitySub = document.getElementById('kpiEntitySub');
           if (entitySub) {
-            if (totalInfExpenses > 0 && d.rev > 0) {
-              const romi = Math.round((d.rev - totalInfExpenses) / totalInfExpenses * 100);
+            if (totalInfExpenses > 0 && displayRev > 0) {
+              const romi = Math.round((displayRev - totalInfExpenses) / totalInfExpenses * 100);
               entitySub.innerHTML = `<span class="${romi >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">ROMI: ${romi >= 0 ? '+' : ''}${romi}%</span> (${bCount} блог.)`;
             } else if (totalInfExpenses > 0) {
               entitySub.innerText = 'витамины 62k/72k + доставка';
@@ -1563,14 +1651,15 @@ html_template = r'''<!DOCTYPE html>
       const textSearch = (document.getElementById('filterSearchInput')?.value || '').toLowerCase().trim();
 
       if (currentMainChannel === 'organika') {
-        mainTitle.innerText = '🌿 Органика: WhatsApp Айтыма Бериковича & SMM /smm';
+        mainTitle.innerText = '🌿 Органика: SMM (janamen1.kz/smm) & WhatsApp 9828';
         badgeTitle.innerText = 'Канал 1';
         badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-emerald-100 text-emerald-800';
-        subTitle.innerText = 'Свертка по направлениям (WhatsApp Айтыма 9828, SMM /smm, Органика сайта) с раскрытием до каждого источника и креатива';
+        subTitle.innerText = 'Официальные UTM-метки: Шапка профиля Instagram, YouTube канал, Чат-бот Direct, Threads, TikTok и WhatsApp 9828';
 
         thead.innerHTML = `
           <tr>
-            <th class="py-3 px-4">Направление / Источник / Креатив</th>
+            <th class="py-3 px-4">Точка входа / Размещение</th>
+            <th class="py-3 px-4 text-center">Площадка</th>
             <th class="py-3 px-4 text-center">Кликов (Переходов)</th>
             <th class="py-3 px-4 text-center">Всего заявок (Лидов)</th>
             <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
@@ -1578,110 +1667,61 @@ html_template = r'''<!DOCTYPE html>
             <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
             <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
-            <th class="py-3 px-4 text-center">Быстрая ссылка</th>
+            <th class="py-3 px-4 text-center">Готовая UTM-ссылка</th>
           </tr>
         `;
 
-        const secs = currentChannelData.organikaSections || {};
+        const items = currentChannelData.organikaItems || {};
         let totalRows = 0;
         let html = '';
 
-        const order = ['org_wa', 'org_smm', 'org_site'];
+        const order = ['smm_bio', 'smm_youtube', 'smm_chatbot', 'smm_threads', 'smm_tiktok', 'wa_9828', 'smm_other'];
 
-        order.forEach(sKey => {
-          const s = secs[sKey];
-          if (!s) return;
-          const isExpanded = expandedAccordions.has(sKey);
-          const itemsList = Object.values(s.items || {}).sort((a,b) => b.rev - a.rev || b.leads - a.leads);
-          const iCount = itemsList.length;
+        order.forEach(k => {
+          const item = items[k];
+          if (!item) return;
 
-          const sCr1 = s.clicks ? (Math.round(s.leads / s.clicks * 1000) / 10) + '%' : (s.leads ? '—' : '0%');
-          const sCr2 = s.leads ? (Math.round(s.won / s.leads * 1000) / 10) + '%' : '0%';
-          const sAvg = s.won ? Math.round(s.rev / s.won) : 0;
-
-          totalRows++;
-
-          let rowColor = 'bg-emerald-50/70 hover:bg-emerald-100/70 border-emerald-200 text-emerald-950';
-          let badgeColor = 'bg-emerald-200 text-emerald-900';
-          let btnColor = 'bg-emerald-600';
-          if (sKey === 'org_smm') {
-            rowColor = 'bg-rose-50/70 hover:bg-rose-100/70 border-rose-200 text-rose-950';
-            badgeColor = 'bg-rose-200 text-rose-900';
-            btnColor = 'bg-rose-600';
-          } else if (sKey === 'org_site') {
-            rowColor = 'bg-slate-100/80 hover:bg-slate-200/80 border-slate-200 text-slate-900';
-            badgeColor = 'bg-slate-200 text-slate-800';
-            btnColor = 'bg-slate-800';
+          if (textSearch) {
+            const hay = (item.name + ' ' + item.placement + ' ' + item.source + ' ' + item.medium + ' ' + item.campaign).toLowerCase();
+            if (!hay.includes(textSearch)) return;
           }
 
-          // Строка направления (Level 1)
+          totalRows++;
+          const cr1 = item.clicks ? (Math.round(item.leads / item.clicks * 1000) / 10) + '%' : (item.leads ? '—' : '0%');
+          const cr2 = item.leads ? (Math.round(item.won / item.leads * 1000) / 10) + '%' : '0%';
+          const avg = item.won ? Math.round(item.rev / item.won) : 0;
+
           html += `
-            <tr onclick="toggleAccordion('${sKey}')" class="${rowColor} cursor-pointer transition font-bold border-t-2">
-              <td class="py-3.5 px-4 flex items-center space-x-2">
-                <span class="w-5 h-5 rounded-md ${btnColor} text-white flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
-                  ▶
-                </span>
-                <span class="text-sm font-black">${s.name}</span>
-                <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full ${badgeColor}">
-                  ${iCount} связок / источников
-                </span>
+            <tr class="hover:bg-emerald-50/40 transition text-xs border-b border-slate-100">
+              <td class="py-3 px-4 font-bold text-slate-900 flex items-center space-x-2">
+                <span>${item.name}</span>
+                ${item.leads > 0 ? `<span class="px-2 py-0.5 text-[10px] font-black rounded-full bg-emerald-100 text-emerald-800">${item.leads} лид.</span>` : ''}
               </td>
-              <td class="py-3.5 px-4 text-center font-black text-purple-700">${s.clicks ? s.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
-              <td class="py-3.5 px-4 text-center font-black text-slate-900">${s.leads.toLocaleString('ru-RU')}</td>
-              <td class="py-3.5 px-4 text-center font-bold text-slate-700">${sCr1}</td>
-              <td class="py-3.5 px-4 text-center font-black text-emerald-600">${s.won}</td>
-              <td class="py-3.5 px-4 text-center font-bold ${s.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${sCr2}</td>
-              <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${s.rev.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${sAvg.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="event.stopPropagation(); copyOrganikaBaseLink('${sKey}')" class="px-2 py-1 text-[11px] font-bold text-slate-700 bg-white hover:bg-slate-200 rounded-lg border border-slate-300 transition">
-                  📋 Ссылка
-                </button>
+              <td class="py-3 px-4 text-center">
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700">${item.placement}</span>
+              </td>
+              <td class="py-3 px-4 text-center font-bold text-purple-700">${item.clicks ? item.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+              <td class="py-3 px-4 text-center font-black ${item.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${item.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3 px-4 text-center font-semibold text-slate-600">${cr1}</td>
+              <td class="py-3 px-4 text-center font-black ${item.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${item.won}</td>
+              <td class="py-3 px-4 text-center font-semibold ${item.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${cr2}</td>
+              <td class="py-3 px-4 text-right font-black ${item.rev > 0 ? 'text-slate-900' : 'text-slate-400'} whitespace-nowrap">${item.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-600 whitespace-nowrap">${avg ? avg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+              <td class="py-3 px-4 text-center">
+                <div class="inline-flex items-center space-x-1">
+                  <button onclick="copyDirectUrl('${item.url}')" title="Скопировать ссылку с UTM" class="px-2.5 py-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded-lg border border-emerald-300 transition shadow-2xs">
+                    📋 Копировать UTM
+                  </button>
+                  <a href="${item.url}" target="_blank" title="Открыть ссылку" class="px-1.5 py-1 text-[11px] font-bold text-slate-500 hover:text-slate-800 bg-slate-100 rounded-lg border border-slate-200 transition">
+                    ↗
+                  </a>
+                </div>
               </td>
             </tr>
           `;
-
-          // Дочерние строки (Level 2)
-          if (isExpanded) {
-            if (iCount === 0) {
-              html += `
-                <tr class="bg-white">
-                  <td colspan="9" class="py-3 px-8 text-xs text-slate-400 italic">Пока нет заявок в этом направлении за выбранный период</td>
-                </tr>
-              `;
-            } else {
-              itemsList.forEach(item => {
-                totalRows++;
-                const iCr1 = item.clicks ? (Math.round(item.leads / item.clicks * 1000) / 10) + '%' : (item.leads ? '—' : '0%');
-                const iCr2 = item.leads ? (Math.round(item.won / item.leads * 1000) / 10) + '%' : '0%';
-                const iAvg = item.won ? Math.round(item.rev / item.won) : 0;
-
-                html += `
-                  <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
-                    <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 code-font flex items-center space-x-1.5">
-                      <span class="text-slate-300 font-mono">└─</span>
-                      <span class="text-brand-700 font-bold">${item.name}</span>
-                    </td>
-                    <td class="py-2.5 px-4 text-center font-bold text-purple-700">${item.clicks ? item.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
-                    <td class="py-2.5 px-4 text-center font-bold text-slate-800">${item.leads.toLocaleString('ru-RU')}</td>
-                    <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${iCr1}</td>
-                    <td class="py-2.5 px-4 text-center font-black text-emerald-600">${item.won}</td>
-                    <td class="py-2.5 px-4 text-center font-bold ${item.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${iCr2}</td>
-                    <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${item.rev.toLocaleString('ru-RU')} ₸</td>
-                    <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${iAvg.toLocaleString('ru-RU')} ₸</td>
-                    <td class="py-2.5 px-4 text-center">
-                      <button onclick="copyOrganikaItemLink('${item.path}', '${item.src}', '${item.cmp}', '${item.cnt}')" title="Скопировать ссылку связки" class="px-2 py-0.5 text-[11px] font-bold text-slate-600 hover:text-emerald-700 bg-slate-100 hover:bg-emerald-50 rounded border border-slate-200 transition">
-                        📋 Ссылка
-                      </button>
-                    </td>
-                  </tr>
-                `;
-              });
-            }
-          }
         });
 
-        rowBadge.innerText = 'Показано: ' + totalRows + ' строк';
+        rowBadge.innerText = 'Показано: ' + totalRows + ' точек входа';
         tbody.innerHTML = html;
       } else if (currentMainChannel === 'influence') {
         mainTitle.innerText = '🌟 Influence (Инфлюенс-маркетинг): Менеджеры МПБ & Блогеры';
@@ -1717,7 +1757,14 @@ html_template = r'''<!DOCTYPE html>
         let totalRows = 0;
         let html = '';
 
-        const order = ['mpb1', 'mpb2', 'mpb3', 'mpb4', 'other'];
+        const userRole = CURRENT_USER?.role || 'superadmin';
+        const userMgrCode = CURRENT_USER?.manager_code;
+
+        let order = ['mpb1', 'mpb2', 'mpb3', 'mpb4', 'other'];
+        // Изоляция менеджеров: если вошла Анельжан (mpb1), видит ТОЛЬКО mpb1
+        if (userRole === 'manager' && userMgrCode) {
+          order = [userMgrCode];
+        }
 
         order.forEach(mCode => {
           const m = mgrs[mCode];
@@ -2096,50 +2143,335 @@ html_template = r'''<!DOCTYPE html>
         }).join('');
 
       } else {
-        // ALL CHANNELS
-        mainTitle.innerText = '📊 Сводная таблица связок и эффективности UTM';
+        // ============================================================
+        // ВСЕ КАНАЛЫ (СВОДКА В ТОЧНО ТАКОМ ЖЕ ВИДЕ: ОРГАНИКА + INFLUENCE + FAN)
+        // ============================================================
+        mainTitle.innerText = '📊 Все каналы (Сквозная аналитика): Органика · Инфлюенс · Фан-сетка';
         badgeTitle.innerText = 'Все каналы';
-        badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-slate-100 text-slate-800';
-        subTitle.innerText = 'Оценка переходов, конверсии в оплату и подтвержденной выручки по всем параметрам';
+        badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-brand-100 text-brand-900 border border-brand-300';
+        subTitle.innerText = 'Единый сквозной срез по всем источникам трафика Jana Men в единой иерархической структуре';
 
         thead.innerHTML = `
           <tr>
-            <th class="py-2.5 px-3">Посадочная страница</th>
-            <th class="py-2.5 px-3">utm_source</th>
-            <th class="py-2.5 px-3">utm_medium</th>
-            <th class="py-2.5 px-3">utm_campaign</th>
-            <th class="py-2.5 px-3">utm_content</th>
-            <th class="py-2.5 px-3">utm_term</th>
-            <th class="py-2.5 px-3 text-center">Лидов</th>
-            <th class="py-2.5 px-3 text-center">Оплачено (142)</th>
-            <th class="py-2.5 px-3 text-center">CR %</th>
-            <th class="py-2.5 px-3 text-right">Выручка (₸)</th>
-            <th class="py-2.5 px-3 text-right">Ср. чек</th>
+            <th class="py-3 px-4">Канал / Направление / Менеджер / Блогер</th>
+            <th class="py-3 px-4 text-center">Тип / Площадка</th>
+            <th class="py-3 px-4 text-center">Условия / Расход</th>
+            <th class="py-3 px-4 text-center">Кликов</th>
+            <th class="py-3 px-4 text-center">Лидов</th>
+            <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
+            <th class="py-3 px-4 text-center">Оплачено (142)</th>
+            <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
+            <th class="py-3 px-4 text-right">Выручка (₸)</th>
+            <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
+            <th class="py-3 px-4 text-center">Ссылка / Действие</th>
           </tr>
         `;
 
-        const list = currentChannelData.allCombos || [];
-        rowBadge.innerText = 'Показано: ' + list.length + ' связок';
+        let totalRows = 0;
+        let html = '';
 
-        tbody.innerHTML = list.map(c => {
-          const cr = c.leads ? Math.round(c.won / c.leads * 1000) / 10 : 0;
-          const avg = c.won ? Math.round(c.rev / c.won) : 0;
-          return `
-            <tr class="hover:bg-purple-50/30 transition">
-              <td class="py-2 px-3 font-bold text-brand-700 code-font whitespace-nowrap">${c.landing || c.path}</td>
-              <td class="py-2 px-3 font-bold text-slate-800 code-font">${c.src}</td>
-              <td class="py-2 px-3 text-slate-600 code-font">${c.med}</td>
-              <td class="py-2 px-3 font-semibold text-slate-800 code-font">${c.cmp}</td>
-              <td class="py-2 px-3 text-slate-500 code-font text-[11px]">${c.cnt}</td>
-              <td class="py-2 px-3 text-slate-500 code-font text-[11px]">${c.trm}</td>
-              <td class="py-2 px-3 text-center font-bold text-slate-800">${c.leads.toLocaleString('ru-RU')}</td>
-              <td class="py-2 px-3 text-center font-black text-emerald-600">${c.won}</td>
-              <td class="py-2 px-3 text-center font-bold ${cr >= 5 ? 'text-emerald-700 bg-emerald-50 rounded' : 'text-slate-600'}">${cr}%</td>
-              <td class="py-2 px-3 text-right font-black text-slate-900 whitespace-nowrap">${c.rev.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-2 px-3 text-right font-semibold text-slate-700 whitespace-nowrap">${avg.toLocaleString('ru-RU')} ₸</td>
-            </tr>
-          `;
-        }).join('');
+        // -------------------------------------------------------------
+        // РАЗДЕЛ 1: ОРГАНИКА (SMM & WA 9828)
+        // -------------------------------------------------------------
+        const orgItems = currentChannelData.organikaItems || {};
+        let orgLeads = 0, orgWon = 0, orgRev = 0, orgClicks = 0;
+        Object.values(orgItems).forEach(i => {
+          orgLeads += i.leads; orgWon += i.won; orgRev += i.rev; orgClicks += i.clicks;
+        });
+        const orgCr1 = orgClicks ? (Math.round(orgLeads / orgClicks * 1000) / 10) + '%' : (orgLeads ? '—' : '0%');
+        const orgCr2 = orgLeads ? (Math.round(orgWon / orgLeads * 1000) / 10) + '%' : '0%';
+        const orgAvg = orgWon ? Math.round(orgRev / orgWon) : 0;
+        const isOrgExpanded = expandedAccordions.has('all_section_organika');
+
+        totalRows++;
+        html += `
+          <tr onclick="toggleAccordion('all_section_organika')" class="bg-emerald-50/80 hover:bg-emerald-100/80 cursor-pointer transition font-bold border-t-2 border-emerald-300">
+            <td class="py-3.5 px-4 text-emerald-950 flex items-center space-x-2">
+              <span class="w-5 h-5 rounded-md bg-emerald-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isOrgExpanded ? 'rotate-90' : ''}">▶</span>
+              <span class="text-sm font-black">🌿 КАНАЛ 1: Органика (SMM /smm & WhatsApp 9828)</span>
+              <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-200 text-emerald-900">6 точек входа</span>
+            </td>
+            <td class="py-3.5 px-4 text-center text-xs font-semibold text-emerald-800">Соцсети & WA</td>
+            <td class="py-3.5 px-4 text-center text-xs text-slate-400 font-medium">Бесплатно (SMM)</td>
+            <td class="py-3.5 px-4 text-center font-black text-purple-700">${orgClicks ? orgClicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+            <td class="py-3.5 px-4 text-center font-black text-slate-900">${orgLeads.toLocaleString('ru-RU')}</td>
+            <td class="py-3.5 px-4 text-center font-bold text-slate-700">${orgCr1}</td>
+            <td class="py-3.5 px-4 text-center font-black text-emerald-600">${orgWon}</td>
+            <td class="py-3.5 px-4 text-center font-bold ${orgWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${orgCr2}</td>
+            <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${orgRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${orgAvg.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center">
+              <button onclick="event.stopPropagation(); switchMainChannel('organika')" class="px-2.5 py-1 text-[11px] font-bold text-emerald-800 bg-white hover:bg-emerald-100 rounded-lg border border-emerald-300 transition">
+                Перейти в канал
+              </button>
+            </td>
+          </tr>
+        `;
+
+        if (isOrgExpanded) {
+          ['smm_bio', 'smm_youtube', 'smm_chatbot', 'smm_threads', 'smm_tiktok', 'wa_9828', 'smm_other'].forEach(k => {
+            const item = orgItems[k];
+            if (!item) return;
+            totalRows++;
+            const cr1 = item.clicks ? (Math.round(item.leads / item.clicks * 1000) / 10) + '%' : (item.leads ? '—' : '0%');
+            const cr2 = item.leads ? (Math.round(item.won / item.leads * 1000) / 10) + '%' : '0%';
+            const avg = item.won ? Math.round(item.rev / item.won) : 0;
+            html += `
+              <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
+                <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 flex items-center space-x-2">
+                  <span class="text-slate-300 font-mono">└─</span>
+                  <span>${item.name}</span>
+                </td>
+                <td class="py-2.5 px-4 text-center text-[10px] text-slate-500 font-medium">${item.placement}</td>
+                <td class="py-2.5 px-4 text-center text-slate-400 font-mono text-[10px]">—</td>
+                <td class="py-2.5 px-4 text-center font-bold text-purple-700">${item.clicks ? item.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                <td class="py-2.5 px-4 text-center font-black ${item.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${item.leads.toLocaleString('ru-RU')}</td>
+                <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${cr1}</td>
+                <td class="py-2.5 px-4 text-center font-black ${item.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${item.won}</td>
+                <td class="py-2.5 px-4 text-center font-semibold ${item.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${cr2}</td>
+                <td class="py-2.5 px-4 text-right font-black ${item.rev > 0 ? 'text-slate-900' : 'text-slate-400'} whitespace-nowrap">${item.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-right font-semibold text-slate-600 whitespace-nowrap">${avg ? avg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                <td class="py-2.5 px-4 text-center">
+                  <button onclick="copyDirectUrl('${item.url}')" class="px-2 py-0.5 text-[10px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded border border-emerald-300 transition">
+                    📋 UTM
+                  </button>
+                </td>
+              </tr>
+            `;
+          });
+        }
+
+        // -------------------------------------------------------------
+        // РАЗДЕЛ 2: INFLUENCE (МЕНЕДЖЕРЫ МПБ & БЛОГЕРЫ)
+        // -------------------------------------------------------------
+        const infMgrs = currentChannelData.influenceManagers || {};
+        let infLeads = 0, infWon = 0, infRev = 0, infClicks = 0, infExpenses = 0, infBloggersCount = 0;
+        Object.values(infMgrs).forEach(m => {
+          infLeads += m.leads; infWon += m.won; infRev += m.rev; infClicks += m.clicks;
+          const bList = Object.values(m.bloggers || {});
+          infBloggersCount += bList.length;
+          bList.forEach(b => {
+            const exp = calculateBloggerExpenses(b);
+            infExpenses += exp.totalExpense;
+          });
+        });
+        const infCr1 = infClicks ? (Math.round(infLeads / infClicks * 1000) / 10) + '%' : (infLeads ? '—' : '0%');
+        const infCr2 = infLeads ? (Math.round(infWon / infLeads * 1000) / 10) + '%' : '0%';
+        const infAvg = infWon ? Math.round(infRev / infWon) : 0;
+        const isInfExpanded = expandedAccordions.has('all_section_influence');
+
+        totalRows++;
+        html += `
+          <tr onclick="toggleAccordion('all_section_influence')" class="bg-purple-50/80 hover:bg-purple-100/80 cursor-pointer transition font-bold border-t-2 border-purple-300">
+            <td class="py-3.5 px-4 text-purple-950 flex items-center space-x-2">
+              <span class="w-5 h-5 rounded-md bg-purple-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isInfExpanded ? 'rotate-90' : ''}">▶</span>
+              <span class="text-sm font-black">🌟 КАНАЛ 2: Influence (Менеджеры МПБ & Блогеры)</span>
+              <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-purple-200 text-purple-900">${infBloggersCount} блогеров</span>
+            </td>
+            <td class="py-3.5 px-4 text-center text-xs font-semibold text-purple-800">4 менеджера МПБ</td>
+            <td class="py-3.5 px-4 text-center font-black text-rose-800 text-xs">${infExpenses > 0 ? (infExpenses.toLocaleString('ru-RU') + ' ₸') : '—'}</td>
+            <td class="py-3.5 px-4 text-center font-black text-purple-700">${infClicks ? infClicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+            <td class="py-3.5 px-4 text-center font-black text-slate-900">${infLeads.toLocaleString('ru-RU')}</td>
+            <td class="py-3.5 px-4 text-center font-bold text-slate-700">${infCr1}</td>
+            <td class="py-3.5 px-4 text-center font-black text-emerald-600">${infWon}</td>
+            <td class="py-3.5 px-4 text-center font-bold ${infWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${infCr2}</td>
+            <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${infRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${infAvg.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center">
+              <button onclick="event.stopPropagation(); switchMainChannel('influence')" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-100 rounded-lg border border-purple-300 transition">
+                Перейти в канал
+              </button>
+            </td>
+          </tr>
+        `;
+
+        if (isInfExpanded) {
+          // Если залогинен конкретный менеджер — показываем только его отдел
+          const userRole = CURRENT_USER?.role || 'superadmin';
+          const userMgrCode = CURRENT_USER?.manager_code;
+          let mgrOrder = ['mpb1', 'mpb2', 'mpb3', 'mpb4', 'other'];
+          if (userRole === 'manager' && userMgrCode) {
+            mgrOrder = [userMgrCode];
+          }
+
+          mgrOrder.forEach(mCode => {
+            const m = infMgrs[mCode];
+            if (!m) return;
+            const bList = Object.values(m.bloggers || {});
+            let mExp = 0;
+            bList.forEach(b => { mExp += calculateBloggerExpenses(b).totalExpense; });
+            const mCr1 = m.clicks ? (Math.round(m.leads / m.clicks * 1000) / 10) + '%' : (m.leads ? '—' : '0%');
+            const mCr2 = m.leads ? (Math.round(m.won / m.leads * 1000) / 10) + '%' : '0%';
+            const mAvg = m.won ? Math.round(m.rev / m.won) : 0;
+            const isMgrExp = expandedAccordions.has('all_mgr_' + mCode);
+
+            totalRows++;
+            html += `
+              <tr onclick="toggleAccordion('all_mgr_${mCode}')" class="bg-purple-50/40 hover:bg-purple-100/40 cursor-pointer transition text-xs border-b border-purple-100 font-bold">
+                <td class="py-2.5 px-4 pl-8 flex items-center space-x-2 text-purple-900">
+                  <span class="w-4 h-4 rounded bg-purple-200 text-purple-800 flex items-center justify-center text-[10px] ${isMgrExp ? 'rotate-90' : ''}">▶</span>
+                  <span class="font-extrabold">${m.name}</span>
+                  <span class="text-[10px] text-purple-600">(${bList.length} блог.)</span>
+                </td>
+                <td class="py-2.5 px-4 text-center text-slate-500 font-medium">Менеджер МПБ</td>
+                <td class="py-2.5 px-4 text-center font-bold text-rose-700">${mExp > 0 ? (mExp.toLocaleString('ru-RU') + ' ₸') : '—'}</td>
+                <td class="py-2.5 px-4 text-center font-bold text-purple-700">${m.clicks ? m.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                <td class="py-2.5 px-4 text-center font-black text-slate-900">${m.leads.toLocaleString('ru-RU')}</td>
+                <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${mCr1}</td>
+                <td class="py-2.5 px-4 text-center font-black ${m.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${m.won}</td>
+                <td class="py-2.5 px-4 text-center font-semibold ${m.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${mCr2}</td>
+                <td class="py-2.5 px-4 text-right font-black text-slate-900">${m.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-right font-semibold text-slate-600">${mAvg ? mAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                <td class="py-2.5 px-4 text-center">
+                  <button onclick="event.stopPropagation(); copyInfluenceManagerLink('${mCode}')" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 bg-white rounded border border-purple-200">
+                    📋 Ссылка
+                  </button>
+                </td>
+              </tr>
+            `;
+
+            if (isMgrExp) {
+              bList.forEach(b => {
+                totalRows++;
+                const exp = calculateBloggerExpenses(b);
+                const bCr1 = b.clicks ? (Math.round(b.leads / b.clicks * 1000) / 10) + '%' : (b.leads ? '—' : '0%');
+                const bCr2 = b.leads ? (Math.round(b.won / b.leads * 1000) / 10) + '%' : '0%';
+                const bAvg = b.won ? Math.round(b.rev / b.won) : 0;
+                html += `
+                  <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
+                    <td class="py-2 px-4 pl-14 font-medium text-slate-800 flex items-center space-x-1.5">
+                      <span class="text-slate-300 font-mono">└─</span>
+                      <a href="${b.profile || ('https://instagram.com/' + b.handle)}" target="_blank" class="font-bold text-purple-700 hover:underline">@${b.handle}</a>
+                      ${b.name && b.name !== b.handle ? `<span class="text-slate-400 text-[10px]">(${b.name})</span>` : ''}
+                    </td>
+                    <td class="py-2 px-4 text-center text-slate-500 text-[10px]">${b.subs || '—'} · ${b.city || '—'}</td>
+                    <td class="py-2 px-4 text-center text-rose-700 font-bold text-[10px]">${exp.totalExpense > 0 ? (exp.totalExpense.toLocaleString('ru-RU') + ' ₸') : '—'}</td>
+                    <td class="py-2 px-4 text-center font-bold text-purple-700">${b.clicks ? b.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                    <td class="py-2 px-4 text-center font-black ${b.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${b.leads.toLocaleString('ru-RU')}</td>
+                    <td class="py-2 px-4 text-center font-semibold text-slate-600">${bCr1}</td>
+                    <td class="py-2 px-4 text-center font-black ${b.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${b.won}</td>
+                    <td class="py-2 px-4 text-center font-semibold ${b.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${bCr2}</td>
+                    <td class="py-2 px-4 text-right font-black ${b.rev > 0 ? 'text-slate-900' : 'text-slate-400'}">${b.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2 px-4 text-right font-semibold text-slate-600">${bAvg ? bAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                    <td class="py-2 px-4 text-center">
+                      <button onclick="copyBloggerDirectLink('${b.handle}', '${mCode}')" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 bg-purple-50 rounded border border-purple-200">
+                        🔗 Ссылка
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              });
+            }
+          });
+        }
+
+        // -------------------------------------------------------------
+        // РАЗДЕЛ 3: FAN (ФАН-АККАУНТЫ СЕТКИ)
+        // -------------------------------------------------------------
+        const fanAccs = currentChannelData.fanAccounts || {};
+        let fanLeads = 0, fanWon = 0, fanRev = 0, fanClicks = 0;
+        Object.values(fanAccs).forEach(f => {
+          fanLeads += f.leads; fanWon += f.won; fanRev += f.rev; fanClicks += f.clicks;
+        });
+        const fanCr1 = fanClicks ? (Math.round(fanLeads / fanClicks * 1000) / 10) + '%' : (fanLeads ? '—' : '0%');
+        const fanCr2 = fanLeads ? (Math.round(fanWon / fanLeads * 1000) / 10) + '%' : '0%';
+        const fanAvg = fanWon ? Math.round(fanRev / fanWon) : 0;
+        const isFanExpanded = expandedAccordions.has('all_section_fan');
+
+        totalRows++;
+        html += `
+          <tr onclick="toggleAccordion('all_section_fan')" class="bg-indigo-50/80 hover:bg-indigo-100/80 cursor-pointer transition font-bold border-t-2 border-indigo-300">
+            <td class="py-3.5 px-4 text-indigo-950 flex items-center space-x-2">
+              <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isFanExpanded ? 'rotate-90' : ''}">▶</span>
+              <span class="text-sm font-black">🎬 КАНАЛ 3: Fan (Фан-аккаунты сетки)</span>
+              <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-200 text-indigo-900">8 аккаунтов</span>
+            </td>
+            <td class="py-3.5 px-4 text-center text-xs font-semibold text-indigo-800">TikTok · Insta · YouTube</td>
+            <td class="py-3.5 px-4 text-center text-xs text-slate-400 font-medium">Контент-сетка</td>
+            <td class="py-3.5 px-4 text-center font-black text-indigo-700">${fanClicks ? fanClicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+            <td class="py-3.5 px-4 text-center font-black text-slate-900">${fanLeads.toLocaleString('ru-RU')}</td>
+            <td class="py-3.5 px-4 text-center font-bold text-slate-700">${fanCr1}</td>
+            <td class="py-3.5 px-4 text-center font-black text-emerald-600">${fanWon}</td>
+            <td class="py-3.5 px-4 text-center font-bold ${fanWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${fanCr2}</td>
+            <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${fanRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fanAvg.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center">
+              <button onclick="event.stopPropagation(); switchMainChannel('fan')" class="px-2.5 py-1 text-[11px] font-bold text-indigo-700 bg-white hover:bg-indigo-100 rounded-lg border border-indigo-300 transition">
+                Перейти в канал
+              </button>
+            </td>
+          </tr>
+        `;
+
+        if (isFanExpanded) {
+          FAN_REGISTRY.forEach(fReg => {
+            const f = fanAccs[fReg.id];
+            if (!f) return;
+            const isFExp = expandedAccordions.has('all_fan_' + fReg.id);
+            const fCr1 = f.clicks ? (Math.round(f.leads / f.clicks * 1000) / 10) + '%' : (f.leads ? '—' : '0%');
+            const fCr2 = f.leads ? (Math.round(f.won / f.leads * 1000) / 10) + '%' : '0%';
+            const fAvg = f.won ? Math.round(f.rev / f.won) : 0;
+            totalRows++;
+            html += `
+              <tr onclick="toggleAccordion('all_fan_${fReg.id}')" class="bg-indigo-50/40 hover:bg-indigo-100/40 cursor-pointer transition text-xs border-b border-indigo-100 font-bold">
+                <td class="py-2.5 px-4 pl-8 flex items-center space-x-2 text-indigo-900">
+                  <span class="w-4 h-4 rounded bg-indigo-200 text-indigo-800 flex items-center justify-center text-[10px] ${isFExp ? 'rotate-90' : ''}">▶</span>
+                  <span class="font-extrabold">${f.name}</span>
+                </td>
+                <td class="py-2.5 px-4 text-center text-slate-500 font-medium">Фан-аккаунт</td>
+                <td class="py-2.5 px-4 text-center text-slate-400 font-mono text-[10px]">—</td>
+                <td class="py-2.5 px-4 text-center font-bold text-indigo-700">${f.clicks ? f.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                <td class="py-2.5 px-4 text-center font-black text-slate-900">${f.leads.toLocaleString('ru-RU')}</td>
+                <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${fCr1}</td>
+                <td class="py-2.5 px-4 text-center font-black ${f.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${f.won}</td>
+                <td class="py-2.5 px-4 text-center font-semibold ${f.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${fCr2}</td>
+                <td class="py-2.5 px-4 text-right font-black text-slate-900">${f.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-right font-semibold text-slate-600">${fAvg ? fAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                <td class="py-2.5 px-4 text-center">
+                  <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 bg-white rounded border border-indigo-200">
+                    📋 Ссылки
+                  </button>
+                </td>
+              </tr>
+            `;
+
+            if (isFExp) {
+              fReg.platforms.forEach(p => {
+                const pKey = p.name.toLowerCase();
+                const pData = f.platforms[pKey] || { leads: 0, won: 0, rev: 0, clicks: 0 };
+                const pCr1 = pData.clicks ? (Math.round(pData.leads / pData.clicks * 1000) / 10) + '%' : (pData.leads ? '—' : '0%');
+                const pCr2 = pData.leads ? (Math.round(pData.won / pData.leads * 1000) / 10) + '%' : '0%';
+                const pAvg = pData.won ? Math.round(pData.rev / pData.won) : 0;
+                totalRows++;
+                html += `
+                  <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
+                    <td class="py-2 px-4 pl-14 font-medium text-slate-700 flex items-center space-x-1.5">
+                      <span class="text-slate-300 font-mono">└─</span>
+                      <span>${p.icon} ${p.name}</span>
+                    </td>
+                    <td class="py-2 px-4 text-center text-slate-500 text-[10px]">${p.name}</td>
+                    <td class="py-2 px-4 text-center text-slate-400 font-mono text-[10px]">—</td>
+                    <td class="py-2 px-4 text-center font-bold text-indigo-700">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                    <td class="py-2 px-4 text-center font-black ${pData.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${pData.leads.toLocaleString('ru-RU')}</td>
+                    <td class="py-2 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
+                    <td class="py-2 px-4 text-center font-black ${pData.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${pData.won}</td>
+                    <td class="py-2 px-4 text-center font-semibold ${pData.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
+                    <td class="py-2 px-4 text-right font-black ${pData.rev > 0 ? 'text-slate-900' : 'text-slate-400'}">${pData.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2 px-4 text-right font-semibold text-slate-600">${pAvg ? pAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                    <td class="py-2 px-4 text-center">
+                      <button onclick="copyFanPlatformLink('${p.url}')" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 bg-indigo-50 rounded border border-indigo-200">
+                        🔗 Ссылка
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              });
+            }
+          });
+        }
+
+        rowBadge.innerText = 'Показано: ' + totalRows + ' строк (3 канала)';
+        tbody.innerHTML = html;
       }
     }
 
@@ -2155,7 +2487,12 @@ html_template = r'''<!DOCTYPE html>
       }
     }
 
-            function copyOrganikaBaseLink(secKey) {
+            function copyDirectUrl(url) {
+      if (!url) return;
+      navigator.clipboard.writeText(url);
+      alert('✓ Ссылка с UTM-меткой скопирована в буфер обмена:\n' + url);
+    }
+    function copyOrganikaBaseLink(secKey) {
       let url = 'https://janamen1.kz/smm';
       let title = 'SMM / Соцсети';
       if (secKey === 'org_wa') {
@@ -2655,7 +2992,19 @@ html_template = r'''<!DOCTYPE html>
       const modal = document.getElementById('addBloggerModal');
       if (modal) modal.classList.remove('hidden');
       const btnDel = document.getElementById('btnDeleteBloggerModal');
-      if (btnDel) btnDel.classList.add('hidden'); // по умолчанию для создания скрыто
+      if (btnDel) btnDel.classList.add('hidden');
+
+      const mgrSelect = document.getElementById('bloggerManager');
+      const userRole = CURRENT_USER?.role || 'superadmin';
+      const userMgrCode = CURRENT_USER?.manager_code;
+
+      if (mgrSelect && userRole === 'manager' && userMgrCode) {
+        mgrSelect.value = userMgrCode;
+        mgrSelect.disabled = true; // заблокировано для менеджера
+      } else if (mgrSelect) {
+        mgrSelect.disabled = false;
+      }
+
       updateBloggerUtmPreview();
       updateModalCalculatedCost();
     }
@@ -2718,7 +3067,12 @@ html_template = r'''<!DOCTYPE html>
         return;
       }
 
-      const mgr = document.getElementById('bloggerManager').value;
+      let mgr = document.getElementById('bloggerManager').value;
+      const userRole = CURRENT_USER?.role || 'superadmin';
+      const userMgrCode = CURRENT_USER?.manager_code;
+      if (userRole === 'manager' && userMgrCode) {
+        mgr = userMgrCode;
+      }
       const name = (document.getElementById('bloggerName').value || '').trim() || handleRaw;
       const subs = (document.getElementById('bloggerSubs').value || '').trim() || '—';
       const city = (document.getElementById('bloggerCity').value || '').trim() || '—';
@@ -2820,11 +3174,18 @@ html_template = r'''<!DOCTYPE html>
       const badge = document.getElementById('userProfileName');
       const btnManage = document.getElementById('btnUserManage');
       if (badge && CURRENT_USER) {
-        badge.innerText = CURRENT_USER.name || CURRENT_USER.email.split('@')[0];
+        let roleTitle = 'Пользователь';
+        if (CURRENT_USER.role === 'superadmin') roleTitle = '👑 Владелец';
+        else if (CURRENT_USER.role === 'head_marketing') roleTitle = '💼 РОМ';
+        else if (CURRENT_USER.role === 'crm_integrator') roleTitle = '⚙️ CRM';
+        else if (CURRENT_USER.role === 'manager') roleTitle = `🌟 ${CURRENT_USER.manager_code ? CURRENT_USER.manager_code.toUpperCase() : 'Менеджер'}`;
+        else if (CURRENT_USER.role === 'fan') roleTitle = '🎬 Фан-сетка';
+
+        badge.innerHTML = `<span>${CURRENT_USER.name || CURRENT_USER.email.split('@')[0]}</span> <span class="text-[10px] text-slate-400 font-normal">(${roleTitle})</span>`;
       }
       if (btnManage) {
         // Только Superadmin видит кнопку "Доступы"
-        if (CURRENT_USER && CURRENT_USER.role === 'superadmin') {
+        if (CURRENT_USER && (CURRENT_USER.role === 'superadmin' || CURRENT_USER.email === 'k.saidullayev@janamen.kz')) {
           btnManage.classList.remove('hidden');
         } else {
           btnManage.classList.add('hidden');
@@ -2871,6 +3232,15 @@ html_template = r'''<!DOCTYPE html>
       }
     }
 
+    async function quickLoginRole(roleKey) {
+      const emailInput = document.getElementById('authEmail');
+      const passInput = document.getElementById('authPassword');
+      if (emailInput && passInput) {
+        emailInput.value = roleKey;
+        passInput.value = 'janamen2026';
+        await submitAuthForm();
+      }
+    }
     async function submitAuthForm() {
       const email = (document.getElementById('authEmail').value || '').trim();
       const pass = (document.getElementById('authPassword').value || '').trim();
@@ -3022,10 +3392,14 @@ html_template = r'''<!DOCTYPE html>
             <td class="py-2.5 px-3 text-center">
               ${isMaster ? '<span class="font-bold text-amber-700">Супервайзер</span>' : `
                 <select onchange="updateUserRole('${u.id}', this.value)" class="text-xs bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-700">
-                  <option value="manager" ${u.role === 'manager' ? 'selected' : ''}>Менеджер (МПБ)</option>
+                  <option value="superadmin" ${u.role === 'superadmin' ? 'selected' : ''}>Администратор (Владелец)</option>
+                  <option value="head_marketing" ${u.role === 'head_marketing' ? 'selected' : ''}>Руководитель маркетинга (РОМ)</option>
+                  <option value="crm_integrator" ${u.role === 'crm_integrator' ? 'selected' : ''}>CRM-интегратор</option>
+                  <option value="manager_mpb1" ${(u.role === 'manager' && u.manager_code === 'mpb1') || u.role === 'manager_mpb1' ? 'selected' : ''}>Менеджер Анельжан (mpb1)</option>
+                  <option value="manager_mpb2" ${(u.role === 'manager' && u.manager_code === 'mpb2') || u.role === 'manager_mpb2' ? 'selected' : ''}>Менеджер Алина (mpb2)</option>
+                  <option value="manager_mpb3" ${(u.role === 'manager' && u.manager_code === 'mpb3') || u.role === 'manager_mpb3' ? 'selected' : ''}>Менеджер Алуа (mpb3)</option>
+                  <option value="manager_mpb4" ${(u.role === 'manager' && u.manager_code === 'mpb4') || u.role === 'manager_mpb4' ? 'selected' : ''}>Менеджер Дарина (mpb4)</option>
                   <option value="fan" ${u.role === 'fan' ? 'selected' : ''}>Фан-аккаунты</option>
-                  <option value="viewer" ${u.role === 'viewer' ? 'selected' : ''}>Просмотр</option>
-                  <option value="superadmin" ${u.role === 'superadmin' ? 'selected' : ''}>Администратор</option>
                 </select>
               `}
             </td>
