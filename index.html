@@ -390,35 +390,48 @@
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-600 mb-1">💵 Оплата деньгами (гонорар, ₸):</label>
-                <input type="number" id="bloggerPaidCash" min="0" step="1000" placeholder="0" class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500 font-bold text-slate-900">
+                <input type="number" id="bloggerPaidCash" min="0" step="1000" placeholder="0" oninput="updateModalCalculatedCost()" class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500 font-bold text-slate-900">
               </div>
               <div>
                 <label class="block text-[10px] uppercase font-bold text-slate-600 mb-1">🚚 Оплата за доставку (₸):</label>
-                <input type="number" id="bloggerDeliveryCost" min="0" step="100" placeholder="0" class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500 font-bold text-slate-900">
+                <input type="number" id="bloggerDeliveryCost" min="0" step="100" placeholder="0" oninput="updateModalCalculatedCost()" class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl focus:outline-none focus:border-purple-500 font-bold text-slate-900">
               </div>
             </div>
 
-            <!-- Витамины (4 вида продукции) -->
+            <!-- Витамины (4 вида продукции) с фиксированными ценами: 62k / 72k -->
             <div>
-              <label class="block text-[10px] uppercase font-bold text-slate-600 mb-1.5">🎁 Отправлено витаминов блогеру (кол-во, шт.):</label>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-[10px] uppercase font-bold text-slate-600">🎁 Отправлено витаминов блогеру (кол-во, шт.):</label>
+                <span class="text-[10px] text-purple-700 font-bold">Витамины по 62 000 ₸ · Аодзиру 72 000 ₸</span>
+              </div>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                <div class="bg-white p-2 rounded-xl border border-purple-100 text-center">
-                  <div class="text-[10px] font-bold text-slate-600">Мужской</div>
-                  <input type="number" id="barterMan" min="0" max="20" value="0" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1">
+                <div class="bg-white p-2.5 rounded-xl border border-purple-100 text-center shadow-xs">
+                  <div class="text-[10px] font-bold text-slate-700 leading-tight">Мужской</div>
+                  <div class="text-[9px] text-purple-700 font-extrabold">62 000 ₸</div>
+                  <input type="number" id="barterMan" min="0" max="20" value="0" oninput="updateModalCalculatedCost()" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1 text-sm focus:border-purple-500 focus:outline-none">
                 </div>
-                <div class="bg-white p-2 rounded-xl border border-purple-100 text-center">
-                  <div class="text-[10px] font-bold text-slate-600">Женский</div>
-                  <input type="number" id="barterWoman" min="0" max="20" value="0" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1">
+                <div class="bg-white p-2.5 rounded-xl border border-purple-100 text-center shadow-xs">
+                  <div class="text-[10px] font-bold text-slate-700 leading-tight">Женский</div>
+                  <div class="text-[9px] text-purple-700 font-extrabold">62 000 ₸</div>
+                  <input type="number" id="barterWoman" min="0" max="20" value="0" oninput="updateModalCalculatedCost()" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1 text-sm focus:border-purple-500 focus:outline-none">
                 </div>
-                <div class="bg-white p-2 rounded-xl border border-purple-100 text-center">
-                  <div class="text-[10px] font-bold text-slate-600">Омега-3</div>
-                  <input type="number" id="barterOmega" min="0" max="20" value="0" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1">
+                <div class="bg-white p-2.5 rounded-xl border border-purple-100 text-center shadow-xs">
+                  <div class="text-[10px] font-bold text-slate-700 leading-tight">Омега-3</div>
+                  <div class="text-[9px] text-purple-700 font-extrabold">62 000 ₸</div>
+                  <input type="number" id="barterOmega" min="0" max="20" value="0" oninput="updateModalCalculatedCost()" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1 text-sm focus:border-purple-500 focus:outline-none">
                 </div>
-                <div class="bg-white p-2 rounded-xl border border-purple-100 text-center">
-                  <div class="text-[10px] font-bold text-slate-600">Аодзиру</div>
-                  <input type="number" id="barterAojiru" min="0" max="20" value="0" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1">
+                <div class="bg-white p-2.5 rounded-xl border border-purple-100 text-center shadow-xs">
+                  <div class="text-[10px] font-bold text-slate-700 leading-tight">Аодзиру</div>
+                  <div class="text-[9px] text-emerald-700 font-extrabold">72 000 ₸</div>
+                  <input type="number" id="barterAojiru" min="0" max="20" value="0" oninput="updateModalCalculatedCost()" class="w-full text-center mt-1 font-black text-slate-900 border border-slate-200 rounded-lg py-1 text-sm focus:border-purple-500 focus:outline-none">
                 </div>
               </div>
+            </div>
+
+            <!-- Итоговая расчетная себестоимость блогера -->
+            <div class="mt-2 pt-2 border-t border-purple-200/60 flex items-center justify-between text-xs">
+              <span class="text-slate-600 font-bold">Итого себестоимость условий:</span>
+              <span id="modalTotalCalculatedCost" class="font-black text-rose-700 text-sm">0 ₸</span>
             </div>
           </div>
 
@@ -1062,10 +1075,15 @@
         if (currentMainChannel === 'influence' && !isInfluence) continue;
         if (currentMainChannel === 'fan' && !isFan) continue;
 
-        // Поисковый фильтр
+        // Поисковый фильтр (с расширенным поиском по имени блогера и его нику)
         if (textSearch) {
           const tagStr = (l.tags || []).join(' ');
-          const hay = (l.src + ' ' + l.med + ' ' + l.cmp + ' ' + l.cnt + ' ' + l.trm + ' ' + l.path + ' ' + l.name + ' ' + tagStr).toLowerCase();
+          let bloggerFullName = '';
+          const bMatch = bloggerMap[lSrc] || bloggerMap[lCnt] || bloggerMap[lCmp];
+          if (bMatch) {
+            bloggerFullName = (bMatch.n || '') + ' ' + (bMatch.h || '');
+          }
+          const hay = (l.src + ' ' + l.med + ' ' + l.cmp + ' ' + l.cnt + ' ' + l.trm + ' ' + l.path + ' ' + l.name + ' ' + tagStr + ' ' + bloggerFullName).toLowerCase();
           if (!hay.includes(textSearch)) continue;
         }
 
@@ -1251,80 +1269,239 @@
           });
         });
       } else if (currentMainChannel === 'influence') {
-        // 1. Динамическая регистрация блогеров из RAW_CLICKS (клики без лидов)
-        if (Array.isArray(RAW_CLICKS)) {
-          RAW_CLICKS.forEach(c => {
-            const cMed = (c.utm_medium || '').toLowerCase();
-            const cPage = (c.landing_page || '').toLowerCase();
-            const cSrc = (c.utm_source || '').trim();
-            const cCmp = (c.utm_campaign || '').trim();
-            const cBlg = (c.blogger || '').trim();
+        mainTitle.innerText = '🌟 Influence (Инфлюенс-маркетинг): Менеджеры МПБ & Блогеры';
+        badgeTitle.innerText = 'Канал 2';
+        badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-purple-100 text-purple-800';
+        subTitle.innerText = 'Свертка по 4 менеджерам МПБ с разворачиванием до каждого блогера из таблицы Google Sheets (93+) и сделок AmoCRM';
 
-            const isInfClick = cMed.startsWith('mpb') || cPage.includes('influence') || cCmp.includes('ugc') || cCmp.includes('influence');
-            if (!isInfClick) return;
+        thead.innerHTML = `
+          <tr>
+            <th class="py-3 px-4">Менеджер / Блогер</th>
+            <th class="py-3 px-4 text-center">Площадка / Подписчики / Город</th>
+            <th class="py-3 px-4 text-center">Условия / Отправлено</th>
+            <th class="py-3 px-4 text-right cursor-pointer select-none group" onclick="toggleExpenseDetails()" title="Нажмите, чтобы свернуть/развернуть детализацию">
+              <div class="inline-flex items-center space-x-1.5 justify-end">
+                <span class="group-hover:text-purple-700 transition">Расход (₸)</span>
+                <span id="expenseToggleBtn" class="text-[9px] px-1.5 py-0.5 rounded font-black ${showExpenseDetails ? 'bg-purple-600 text-white' : 'bg-purple-100 text-purple-800'}">
+                  ${showExpenseDetails ? '▲ Свернуть' : '▼ Детали'}
+                </span>
+              </div>
+            </th>
+            <th class="py-3 px-4 text-center">Кликов</th>
+            <th class="py-3 px-4 text-center">Всего лидов</th>
+            <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
+            <th class="py-3 px-4 text-center">Оплачено</th>
+            <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
+            <th class="py-3 px-4 text-right">Выручка (₸)</th>
+            <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
+            <th class="py-3 px-4 text-center">Instagram & Ссылка</th>
+          </tr>
+        `;
 
-            let mKey = cMed.startsWith('mpb') ? cMed : 'mpb1';
-            let bKey = cBlg || cSrc;
-            if (!bKey || ['direct', 'instagram', 'tiktok', 'facebook', 'none'].includes(bKey.toLowerCase())) {
-              bKey = cCmp || 'blogger_link';
-            }
+        const mgrs = currentChannelData.influenceManagers || {};
+        let totalRows = 0;
+        let html = '';
 
-            if (bloggerMap[bKey.toLowerCase()]) {
-              const regB = bloggerMap[bKey.toLowerCase()];
-              bKey = regB.h;
-              if (regB.m) mKey = regB.m;
-            }
+        const order = ['mpb1', 'mpb2', 'mpb3', 'mpb4', 'other'];
 
-            if (!influenceManagers[mKey]) mKey = 'other';
-            const mgr = influenceManagers[mKey];
+        order.forEach(mCode => {
+          const m = mgrs[mCode];
+          if (!m) return;
 
-            if (!mgr.bloggers[bKey]) {
-              mgr.bloggers[bKey] = {
-                handle: bKey,
-                name: bKey,
-                manager: mKey,
-                subs: '—',
-                city: '—',
-                profile: `https://instagram.com/${bKey}`,
-                utm: `https://janamen1.kz/influence?utm_source=${bKey}&utm_medium=${mKey}&utm_campaign=ugc_barter&utm_content=reels_stories`,
-                leads: 0,
-                won: 0,
-                rev: 0,
-                clicks: 0,
-                isPreloaded: false
-              };
-            }
+          let bloggersList = Object.values(m.bloggers || {}).sort((a,b) => {
+            if (b.leads !== a.leads) return b.leads - a.leads;
+            if (b.rev !== a.rev) return b.rev - a.rev;
+            return a.name.localeCompare(b.name);
           });
-        }
 
-        // 2. Расчет кликов строго по каждому блогеру
-        clicks = 0;
-        Object.values(influenceManagers).forEach(mgr => {
-          let mClicks = 0;
-          Object.values(mgr.bloggers).forEach(b => {
-            const bHandle = (b.handle || '').toLowerCase();
-            let bClicks = 0;
+          // ФИЛЬТРАЦИЯ БЛОГЕРОВ ПО ПОИСКОВОМУ ЗАПРОСУ
+          if (textSearch) {
+            const mHay = (m.name + ' ' + m.code).toLowerCase();
+            const managerMatches = mHay.includes(textSearch);
 
-            if (Array.isArray(RAW_CLICKS) && RAW_CLICKS.length > 0) {
-              bClicks = RAW_CLICKS.filter(c => {
-                const s = (c.utm_source || '').toLowerCase();
-                const blg = (c.blogger || '').toLowerCase();
-                const cnt = (c.utm_content || '').toLowerCase();
-                const cmp = (c.utm_campaign || '').toLowerCase();
-                return s === bHandle || blg === bHandle || cnt === bHandle || cmp === bHandle;
-              }).length;
+            bloggersList = bloggersList.filter(b => {
+              const bHay = [
+                b.handle || '',
+                b.name || '',
+                b.city || '',
+                b.subs || '',
+                b.manager || ''
+              ].join(' ').toLowerCase();
+              return managerMatches || bHay.includes(textSearch);
+            });
+
+            // Если у менеджера есть совпадения, автоматически раскрываем его список
+            if (bloggersList.length > 0) {
+              expandedAccordions.add(mCode);
+            } else if (!managerMatches) {
+              // Если ни менеджер, ни блогеры не совпали — скрываем менеджера
+              return;
+            }
+          }
+
+          const isExpanded = expandedAccordions.has(mCode);
+          const bCount = bloggersList.length;
+          const activeCount = bloggersList.filter(b => b.leads > 0).length;
+
+          // Расчет расходов команды менеджера
+          let mTotalExpense = 0;
+          bloggersList.forEach(b => {
+            const exp = calculateBloggerExpenses(b);
+            mTotalExpense += exp.totalExpense;
+          });
+
+          const mCr1 = m.clicks ? (Math.round(m.leads / m.clicks * 1000) / 10) + '%' : (m.leads ? '—' : '0%');
+          const mCr2 = m.leads ? (Math.round(m.won / m.leads * 1000) / 10) + '%' : '0%';
+          const mAvg = m.won ? Math.round(m.rev / m.won) : 0;
+
+          let mExpDisplay = '';
+          if (mTotalExpense > 0) {
+            mExpDisplay = `<div class="font-black text-rose-800 text-xs whitespace-nowrap">${mTotalExpense.toLocaleString('ru-RU')} ₸</div>`;
+            if (m.rev > 0) {
+              const romi = Math.round((m.rev - mTotalExpense) / mTotalExpense * 100);
+              mExpDisplay += `<div class="text-[9px] font-black ${romi >= 0 ? 'text-emerald-700' : 'text-rose-600'}">${romi >= 0 ? '+' : ''}${romi}% ROMI</div>`;
+            }
+          } else {
+            mExpDisplay = `<span class="text-slate-400 font-normal">0 ₸</span>`;
+          }
+
+          totalRows++;
+
+          // Строка менеджера (Level 1)
+          html += `
+            <tr onclick="toggleAccordion('${mCode}')" class="bg-purple-50/70 hover:bg-purple-100/70 cursor-pointer transition font-bold border-t-2 border-purple-200">
+              <td class="py-3.5 px-4 text-purple-950 flex items-center space-x-2">
+                <span class="w-5 h-5 rounded-md bg-purple-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
+                  ▶
+                </span>
+                <span class="text-sm font-black">${m.name}</span>
+                <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-purple-200 text-purple-900">
+                  ${bCount} блогеров ${activeCount > 0 ? `(${activeCount} активных)` : ''}
+                </span>
+              </td>
+              <td class="py-3.5 px-4 text-center text-xs text-slate-500 font-medium">Отдел блогеров</td>
+              <td class="py-3.5 px-4 text-center text-[10px] text-purple-800 font-bold">Сводка МПБ</td>
+              <td class="py-3.5 px-4 text-right">${mExpDisplay}</td>
+              <td class="py-3.5 px-4 text-center font-black text-purple-700">${m.clicks ? m.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+              <td class="py-3.5 px-4 text-center font-black text-slate-900">${m.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3.5 px-4 text-center font-bold text-slate-700">${mCr1}</td>
+              <td class="py-3.5 px-4 text-center font-black text-emerald-600">${m.won}</td>
+              <td class="py-3.5 px-4 text-center font-bold ${m.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${mCr2}</td>
+              <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${m.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${mAvg.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="event.stopPropagation(); copyInfluenceManagerLink('${mCode}')" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-200 rounded-lg border border-purple-300 transition">
+                  📋 Ссылка МПБ
+                </button>
+              </td>
+            </tr>
+          `;
+
+          // Дочерние строки блогеров (Level 2)
+          if (isExpanded) {
+            if (bCount === 0) {
+              html += `
+                <tr class="bg-white">
+                  <td colspan="12" class="py-3 px-8 text-xs text-slate-400 italic">У данного менеджера пока нет лидов/блогеров в базе</td>
+                </tr>
+              `;
             } else {
-              bClicks = (CLICK_BY_BLOGGER && CLICK_BY_BLOGGER[b.handle] ? CLICK_BY_BLOGGER[b.handle] : 0) + 
-                        (CLICK_BY_SOURCE && CLICK_BY_SOURCE[b.handle] ? CLICK_BY_SOURCE[b.handle] : 0) + 
-                        (CLICK_BY_CONTENT && CLICK_BY_CONTENT[b.handle] ? CLICK_BY_CONTENT[b.handle] : 0);
-            }
+              bloggersList.forEach(b => {
+                totalRows++;
+                const exp = calculateBloggerExpenses(b);
+                const bCr1 = b.clicks ? (Math.round(b.leads / b.clicks * 1000) / 10) + '%' : (b.leads ? '—' : '0%');
+                const bCr2 = b.leads ? (Math.round(b.won / b.leads * 1000) / 10) + '%' : '0%';
+                const bAvg = b.won ? Math.round(b.rev / b.won) : 0;
+                const isTested = b.handle === 'aishka_karimova';
+                const rowBg = isTested ? 'bg-amber-50/60 hover:bg-amber-100/70' : (b.leads > 0 ? 'bg-emerald-50/30 hover:bg-emerald-100/40' : 'hover:bg-slate-50');
 
-            b.clicks = bClicks;
-            mClicks += bClicks;
-          });
-          mgr.clicks = mClicks;
-          clicks += mClicks;
+                // Форматирование условий сотрудничества
+                const dealBadges = [];
+                if (b.paid_cash > 0) dealBadges.push(`<span class="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">💵 ${Number(b.paid_cash).toLocaleString('ru-RU')} ₸</span>`);
+                const barters = [];
+                if (b.barter_man > 0) barters.push(`${b.barter_man} муж.`);
+                if (b.barter_woman > 0) barters.push(`${b.barter_woman} жен.`);
+                if (b.barter_omega > 0) barters.push(`${b.barter_omega} омега`);
+                if (b.barter_aojiru > 0) barters.push(`${b.barter_aojiru} аодз.`);
+                if (barters.length > 0) dealBadges.push(`<span class="inline-block px-1.5 py-0.5 rounded bg-purple-50 text-purple-900 font-bold border border-purple-200">🎁 ${barters.join(' + ')}</span>`);
+                if (b.delivery_cost > 0) dealBadges.push(`<span class="inline-block px-1.5 py-0.5 rounded bg-blue-50 text-blue-800 font-bold border border-blue-200">🚚 ${Number(b.delivery_cost).toLocaleString('ru-RU')} ₸</span>`);
+
+                const dealHtml = dealBadges.length > 0 ? dealBadges.join('<div class="mt-0.5"></div>') : `<button onclick="event.stopPropagation(); editBloggerExpenses('${b.handle}', '${mCode}')" class="text-[10px] text-purple-600 hover:text-purple-800 underline font-semibold">+ Указать</button>`;
+
+                // Столбец Расход (₸) с детализацией
+                let expHtml = '';
+                if (exp.totalExpense > 0) {
+                  expHtml = `<div class="font-black text-rose-800 whitespace-nowrap text-xs">${exp.totalExpense.toLocaleString('ru-RU')} ₸</div>`;
+                  if (showExpenseDetails) {
+                    const details = [];
+                    if (exp.paidCash > 0) details.push(`💵 гонорар: ${exp.paidCash.toLocaleString('ru-RU')} ₸`);
+                    if (exp.deliveryCost > 0) details.push(`🚚 доставка: ${exp.deliveryCost.toLocaleString('ru-RU')} ₸`);
+                    if (exp.bMan > 0) details.push(`мужской (${exp.bMan}×62k): ${(exp.bMan * 62000).toLocaleString('ru-RU')} ₸`);
+                    if (exp.bWoman > 0) details.push(`женский (${exp.bWoman}×62k): ${(exp.bWoman * 62000).toLocaleString('ru-RU')} ₸`);
+                    if (exp.bOmega > 0) details.push(`омега (${exp.bOmega}×62k): ${(exp.bOmega * 62000).toLocaleString('ru-RU')} ₸`);
+                    if (exp.bAojiru > 0) details.push(`аодзиру (${exp.bAojiru}×72k): ${(exp.bAojiru * 72000).toLocaleString('ru-RU')} ₸`);
+                    expHtml += `
+                      <div class="mt-1 text-[9px] text-slate-600 font-medium bg-slate-50 border border-slate-200 rounded p-1.5 text-right space-y-0.5 shadow-2xs">
+                        ${details.join('<br>')}
+                      </div>
+                    `;
+                  }
+                  if (b.rev > 0) {
+                    const diff = b.rev - exp.totalExpense;
+                    expHtml += `<div class="text-[9px] font-black ${diff >= 0 ? 'text-emerald-700' : 'text-rose-600'} mt-0.5">${diff >= 0 ? '+' : ''}${diff.toLocaleString('ru-RU')} ₸</div>`;
+                  }
+                } else {
+                  expHtml = `<span class="text-slate-300 font-mono">—</span>`;
+                }
+
+                html += `
+                  <tr class="${rowBg} transition text-xs border-b border-slate-100">
+                    <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 flex items-center space-x-2">
+                      <span class="text-slate-300 font-mono">└─</span>
+                      <a href="${b.profile || ('https://instagram.com/' + b.handle)}" target="_blank" class="text-purple-700 hover:text-purple-900 font-black hover:underline flex items-center space-x-1">
+                        <span>📸</span>
+                        <span>@${b.handle}</span>
+                      </a>
+                      ${b.name && b.name !== b.handle ? `<span class="text-slate-500 font-medium text-[11px]">(${b.name})</span>` : ''}
+                      ${isTested ? '<span class="px-1.5 py-0.2 text-[9px] font-black rounded-full bg-amber-200 text-amber-900 animate-pulse">Тестовый лид</span>' : ''}
+                      ${b.leads > 0 && !isTested ? `<span class="px-1.5 py-0.2 text-[9px] font-black rounded-full bg-emerald-100 text-emerald-800">${b.leads} лид.</span>` : ''}
+                    </td>
+                    <td class="py-2.5 px-4 text-center">
+                      <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700">${b.subs || '—'}</span>
+                      ${b.city && b.city !== '—' ? `<span class="text-[10px] text-slate-400 block">${b.city}</span>` : ''}
+                    </td>
+                    <td class="py-2.5 px-4 text-center text-[10px] font-bold text-slate-700 leading-tight">
+                      ${dealHtml}
+                    </td>
+                    <td class="py-2.5 px-4 text-right">
+                      ${expHtml}
+                    </td>
+                    <td class="py-2.5 px-4 text-center font-bold text-purple-700">${b.clicks ? b.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                    <td class="py-2.5 px-4 text-center font-black ${b.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${b.leads.toLocaleString('ru-RU')}</td>
+                    <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${bCr1}</td>
+                    <td class="py-2.5 px-4 text-center font-black ${b.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${b.won}</td>
+                    <td class="py-2.5 px-4 text-center font-semibold ${b.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${bCr2}</td>
+                    <td class="py-2.5 px-4 text-right font-black ${b.rev > 0 ? 'text-slate-900' : 'text-slate-400'} whitespace-nowrap">${b.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2.5 px-4 text-right font-semibold text-slate-600 whitespace-nowrap">${bAvg ? bAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+                    <td class="py-2.5 px-4 text-center">
+                      <div class="flex items-center justify-center space-x-1">
+                        <button onclick="editBloggerExpenses('${b.handle}', '${mCode}')" title="Редактировать условия и витамины" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 hover:text-white bg-purple-50 hover:bg-purple-600 rounded border border-purple-200 transition">
+                          ✏️ Условия
+                        </button>
+                        <button onclick="copyBloggerDirectLink('${b.handle}', '${mCode}')" title="Скопировать трекинг-ссылку блогера" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 hover:text-white bg-purple-50 hover:bg-purple-600 rounded border border-purple-200 transition">
+                          🔗 Ссылка
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              });
+            }
+          }
         });
+
+        rowBadge.innerText = 'Показано: ' + totalRows + ' строк';
+        tbody.innerHTML = html;
       } else if (currentMainChannel === 'fan') {
         clicks = 0;
         Object.keys(fanAccounts).forEach(fKey => {
@@ -1451,15 +1628,31 @@
         } else if (currentMainChannel === 'influence') {
           scopeBadge.innerText = 'Influence';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
-          entityLabel.innerText = 'Блогеров в реестре';
+          entityLabel.innerText = 'Расходы на блогеров';
           let bCount = 0;
           let bActive = 0;
+          let totalInfExpenses = 0;
           Object.values(d.influenceManagers || {}).forEach(m => {
             const bList = Object.values(m.bloggers || {});
             bCount += bList.length;
             bActive += bList.filter(b => b.leads > 0).length;
+            bList.forEach(b => {
+              const exp = calculateBloggerExpenses(b);
+              totalInfExpenses += exp.totalExpense;
+            });
           });
-          entitiesCount.innerText = bCount + ' блогеров' + (bActive ? ` (${bActive} акт.)` : '');
+          entitiesCount.innerText = totalInfExpenses > 0 ? (totalInfExpenses.toLocaleString('ru-RU') + ' ₸') : (bCount + ' блогеров');
+          const entitySub = entitiesCount.nextElementSibling;
+          if (entitySub) {
+            if (totalInfExpenses > 0 && d.rev > 0) {
+              const romi = Math.round((d.rev - totalInfExpenses) / totalInfExpenses * 100);
+              entitySub.innerHTML = `<span class="${romi >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">ROMI: ${romi >= 0 ? '+' : ''}${romi}%</span> (${bCount} блог.)`;
+            } else if (totalInfExpenses > 0) {
+              entitySub.innerText = 'витамины 62k/72k + доставка';
+            } else {
+              entitySub.innerText = `${bActive} с лидами из ${bCount}`;
+            }
+          }
         } else if (currentMainChannel === 'tags') {
           scopeBadge.innerText = 'Теги CRM';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
@@ -1803,6 +1996,13 @@
         FAN_REGISTRY.forEach(fReg => {
           const f = fans[fReg.id];
           if (!f) return;
+
+          if (textSearch) {
+            const fHay = (fReg.name + ' ' + fReg.id + ' ' + fReg.platforms.map(p => p.name + ' ' + p.url + ' ' + p.profile).join(' ')).toLowerCase();
+            if (!fHay.includes(textSearch)) return;
+            expandedAccordions.add(fReg.id);
+          }
+
           const isExpanded = expandedAccordions.has(fReg.id);
           const platformsList = fReg.platforms;
           const pCount = platformsList.length;
@@ -2038,6 +2238,7 @@
       navigator.clipboard.writeText(text);
       alert('✓ Скопированы все UTM-ссылки для ' + f.name + ':\n\n' + text);
     }
+    function copyBloggerDirectLink(b, m, u) { return copyBloggerLinkDirect(b, m, u); }
     function copyBloggerLinkDirect(blogger, manager, customUrl) {
       const url = customUrl || ('https://janamen1.kz/influence?utm_source=' + encodeURIComponent(blogger) + '&utm_medium=' + manager + '&utm_campaign=ugc_barter&utm_content=reels_stories');
       navigator.clipboard.writeText(url);
@@ -2309,12 +2510,124 @@
     }
 
     // ============================================================
+    // ============================================================
+    // ЦЕНЫ НА ВИТАМИНЫ И РАСЧЕТ СЕБЕСТОИМОСТИ БЛОГЕРОВ
+    // ============================================================
+    const VITAMIN_PRICES = {
+      man: 62000,    // Мужской комплекс
+      woman: 62000,  // Женский комплекс
+      omega: 62000,  // Омега-3
+      aojiru: 72000  // Аодзиро (Аодзиру)
+    };
+
+    let showExpenseDetails = false;
+
+    function toggleExpenseDetails() {
+      showExpenseDetails = !showExpenseDetails;
+      renderPortalTables();
+    }
+
+    function calculateBloggerExpenses(b) {
+      const paidCash = Number(b.paid_cash) || 0;
+      const deliveryCost = Number(b.delivery_cost) || 0;
+      const bMan = Number(b.barter_man) || 0;
+      const bWoman = Number(b.barter_woman) || 0;
+      const bOmega = Number(b.barter_omega) || 0;
+      const bAojiru = Number(b.barter_aojiru) || 0;
+
+      const manCost = bMan * VITAMIN_PRICES.man;
+      const womanCost = bWoman * VITAMIN_PRICES.woman;
+      const omegaCost = bOmega * VITAMIN_PRICES.omega;
+      const aojiruCost = bAojiru * VITAMIN_PRICES.aojiru;
+      const vitaminsCost = manCost + womanCost + omegaCost + aojiruCost;
+
+      const totalExpense = paidCash + deliveryCost + vitaminsCost;
+
+      return {
+        paidCash,
+        deliveryCost,
+        bMan, bWoman, bOmega, bAojiru,
+        manCost, womanCost, omegaCost, aojiruCost,
+        vitaminsCost,
+        totalExpense
+      };
+    }
+
+    function updateModalCalculatedCost() {
+      const cash = parseFloat(document.getElementById('bloggerPaidCash')?.value) || 0;
+      const delivery = parseFloat(document.getElementById('bloggerDeliveryCost')?.value) || 0;
+      const bMan = parseInt(document.getElementById('barterMan')?.value) || 0;
+      const bWoman = parseInt(document.getElementById('barterWoman')?.value) || 0;
+      const bOmega = parseInt(document.getElementById('barterOmega')?.value) || 0;
+      const bAojiru = parseInt(document.getElementById('barterAojiru')?.value) || 0;
+
+      const vitCost = (bMan * VITAMIN_PRICES.man) + (bWoman * VITAMIN_PRICES.woman) + (bOmega * VITAMIN_PRICES.omega) + (bAojiru * VITAMIN_PRICES.aojiru);
+      const total = cash + delivery + vitCost;
+
+      const label = document.getElementById('modalTotalCalculatedCost');
+      if (label) {
+        label.innerText = total.toLocaleString('ru-RU') + ' ₸';
+      }
+    }
+
+    function editBloggerExpenses(handle, manager) {
+      openAddBloggerModal();
+      const cleanH = String(handle).replace(/^@/, '').trim().toLowerCase();
+      const hInput = document.getElementById('bloggerHandle');
+      const mInput = document.getElementById('bloggerManager');
+      const nInput = document.getElementById('bloggerName');
+      const sInput = document.getElementById('bloggerSubs');
+      const cInput = document.getElementById('bloggerCity');
+      const cashInput = document.getElementById('bloggerPaidCash');
+      const delInput = document.getElementById('bloggerDeliveryCost');
+      const manInput = document.getElementById('barterMan');
+      const womInput = document.getElementById('barterWoman');
+      const omgInput = document.getElementById('barterOmega');
+      const aojInput = document.getElementById('barterAojiru');
+
+      if (hInput) hInput.value = cleanH;
+      if (mInput) mInput.value = manager || 'mpb1';
+
+      // Поиск существующего блогера в базе
+      const custom = CUSTOM_BLOGGERS.find(b => (b.handle || '').toLowerCase() === cleanH);
+      if (custom) {
+        if (nInput) nInput.value = custom.name || cleanH;
+        if (sInput) sInput.value = custom.subs || '';
+        if (cInput) cInput.value = custom.city || '';
+        if (cashInput) cashInput.value = custom.paid_cash || 0;
+        if (delInput) delInput.value = custom.delivery_cost || 0;
+        if (manInput) manInput.value = custom.barter_man || 0;
+        if (womInput) womInput.value = custom.barter_woman || 0;
+        if (omgInput) omgInput.value = custom.barter_omega || 0;
+        if (aojInput) aojInput.value = custom.barter_aojiru || 0;
+      } else {
+        const reg = (typeof INFLUENCE_REGISTRY !== 'undefined') ? INFLUENCE_REGISTRY.find(b => (b.h || '').toLowerCase() === cleanH) : null;
+        if (reg) {
+          if (nInput) nInput.value = reg.n || cleanH;
+          if (sInput) sInput.value = reg.s || '';
+          if (cInput) cInput.value = reg.c || '';
+        } else {
+          if (nInput) nInput.value = cleanH;
+        }
+        if (cashInput) cashInput.value = 0;
+        if (delInput) delInput.value = 0;
+        if (manInput) manInput.value = 0;
+        if (womInput) womInput.value = 0;
+        if (omgInput) omgInput.value = 0;
+        if (aojInput) aojInput.value = 0;
+      }
+
+      updateBloggerUtmPreview();
+      updateModalCalculatedCost();
+    }
+
     // УПРАВЛЕНИЕ БЛОГЕРАМИ (ДОБАВЛЕНИЕ, ВИТАМИНЫ, УСЛОВИЯ, UTM)
     // ============================================================
     function openAddBloggerModal() {
       const modal = document.getElementById('addBloggerModal');
       if (modal) modal.classList.remove('hidden');
       updateBloggerUtmPreview();
+      updateModalCalculatedCost();
     }
 
     function closeAddBloggerModal() {
