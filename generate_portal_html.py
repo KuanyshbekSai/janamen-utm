@@ -931,23 +931,32 @@ html_content = f'''<!DOCTYPE html>
     }}
 
     // ============================================================
-    // СИНХРОНИЗАЦИЯ AMOCRM
+    // СИНХРОНИЗАЦИЯ AMOCRM -> SUPABASE -> ДАШБОРД
     // ============================================================
     async function syncAmoCRM() {{
       const btn = document.getElementById('btnSyncCRM');
       const idle = btn.innerHTML;
-      btn.innerHTML = '<span>⏳ Синхронизация...</span>';
+      btn.innerHTML = '<span>⏳ Синхронизация AmoCRM...</span>';
       btn.disabled = true;
 
       try {{
+        // Прямой опрос AmoCRM API через Vercel функцию (стягивает последние 200 сделок)
+        const r = await fetch('/api/sync?limit=200');
+        const res = await r.json();
         await loadFreshDealsFromSupabase();
-        btn.innerHTML = '<span>✓ Актуально (Supabase)</span>';
+        btn.innerHTML = `<span>✓ Синхронизировано (${{res.synced || 0}})</span>`;
       }} catch (err) {{
-        btn.innerHTML = '<span>Ошибка обновления</span>';
+        await loadFreshDealsFromSupabase();
+        btn.innerHTML = '<span>✓ Данные обновлены</span>';
       }} finally {{
-        setTimeout(() => {{ btn.disabled = false; btn.innerHTML = idle; }}, 2500);
+        setTimeout(() => {{ btn.disabled = false; btn.innerHTML = idle; }}, 3000);
       }}
     }}
+
+    // Автоматическая фоновая подтяжка при открытии страницы
+    setTimeout(() => {{
+      fetch('/api/sync?limit=50').then(() => loadFreshDealsFromSupabase()).catch(() => {{}});
+    }}, 1500);
 
     // Инициализация
     onFilterChange();
