@@ -174,8 +174,22 @@ export default async function handler(req, res) {
     }
   }
 
-  // 5. УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ
+  // 5. УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ (СТРОГО ДЛЯ ВЛАДЕЛЬЦА КУАНЫШБЕКА)
   if (action === 'delete_user' || req.method === 'DELETE') {
+    const adminEmail = (body.admin_email || req.query.admin_email || '').trim().toLowerCase();
+    const isMaster = adminEmail && (
+      adminEmail === DEFAULT_SUPERADMIN.email ||
+      adminEmail.includes('saidullayev') ||
+      adminEmail === 'admin'
+    );
+
+    if (!isMaster) {
+      return res.status(403).json({
+        ok: false,
+        error: 'Доступ запрещен. Только владелец (Куанышбек Сайдуллаев) может удалять пользователей!'
+      });
+    }
+
     const email = body.email || req.query.email;
     if (!email) return res.status(400).json({ ok: false, error: 'Email required' });
 

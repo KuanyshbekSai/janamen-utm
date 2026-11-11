@@ -92,11 +92,43 @@ export default async function handler(req, res) {
     }
   }
 
-  // 3. УДАЛЕНИЕ БЛОГЕРА
+  // 3. УДАЛЕНИЕ БЛОГЕРА (СТРОГО ТОЛЬКО ДЛЯ ВЛАДЕЛЬЦА КУАНЫШБЕКА)
   if (req.method === 'DELETE') {
     try {
-      const handle = req.query.handle || req.body?.handle;
-      if (!handle) return res.status(400).json({ ok: false, error: 'Handle required' });
+      let body = {};
+      if (typeof req.body === 'string') {
+        try { body = JSON.parse(req.body); } catch(e) {}
+      } else if (req.body) {
+        body = req.body;
+      }
+
+      const adminEmail = (req.query.admin_email || body.admin_email || req.headers['x-admin-email'] || '').trim().toLowerCase();
+      const handle = req.query.handle || body.handle;
+
+      if (!handle) return res.status(400).json({ ok: false, error: 'Никнейм блогера обязателен' });
+
+      // ПРОВЕРКА ПРАВ: только главный владелец (Куанышбек Сайдуллаев) может удалять записи
+      const isMaster = adminEmail && (
+        adminEmail === 'k.saidullayev@janamen.kz' ||
+        adminEmail.includes('saidullayev') ||
+        adminEmail === 'admin'
+      );
+
+      if (!isMaster) {
+        // Проверяем в app_users статус и роль
+        const { data: user } = await supabase
+          .from('app_users')
+          .select('role, status')
+          .eq('email', adminEmail)
+          .single();
+
+        if (!user || user.role !== 'superadmin' || user.status !== 'active') {
+          return res.status(403).json({
+            ok: false,
+            error: 'Доступ запрещен. Только владелец (Куанышбек Сайдуллаев) имеет право удалять записи!'
+          });
+        }
+      }
 
       const cleanHandle = String(handle).replace(/^@/, '').trim().toLowerCase();
       const { error } = await supabase
@@ -105,7 +137,7 @@ export default async function handler(req, res) {
         .eq('handle', cleanHandle);
 
       if (error) {
-        return res.status(200).json({ ok: true, fallback: true, warning: error.message });
+        return res.status(200).json({ ok: true, fallback: true, warning: error.message, deleted: cleanHandle });
       }
 
       return res.status(200).json({ ok: true, deleted: cleanHandle });

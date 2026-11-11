@@ -458,13 +458,20 @@ html_template = r'''<!DOCTYPE html>
           </div>
 
           <!-- Кнопки действий -->
-          <div class="flex items-center justify-end space-x-2.5 pt-2 border-t border-slate-100">
-            <button type="button" onclick="closeAddBloggerModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition">
-              Отмена
-            </button>
-            <button type="submit" id="btnSaveBlogger" class="px-5 py-2.5 text-xs font-black text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow-md shadow-purple-500/20">
-              ✓ Сохранить блогера в базу
-            </button>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+            <div>
+              <button type="button" id="btnDeleteBloggerModal" onclick="deleteCurrentBloggerFromModal()" class="hidden px-3.5 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl border border-rose-200 transition">
+                🗑️ Удалить запись
+              </button>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button type="button" onclick="closeAddBloggerModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition">
+                Отмена
+              </button>
+              <button type="submit" id="btnSaveBlogger" class="px-5 py-2.5 text-xs font-black text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow-md shadow-purple-500/20">
+                ✓ Сохранить блогера в базу
+              </button>
+            </div>
           </div>
         </form>
 
@@ -923,11 +930,16 @@ html_template = r'''<!DOCTYPE html>
         'other': { code: 'other', name: 'Другие / Без менеджера', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} }
       };
 
-      // Предзагрузка блогеров из реестра таблицы Google Sheets (93 блогера)
+      // Предзагрузка блогеров из реестра таблицы Google Sheets (с учетом удаленных владельцем)
+      let deletedBloggersList = [];
+      try {
+        deletedBloggersList = JSON.parse(localStorage.getItem('janamen_deleted_bloggers') || '[]');
+      } catch(e) {}
+
       const bloggerMap = {};
       if (typeof INFLUENCE_REGISTRY !== 'undefined' && Array.isArray(INFLUENCE_REGISTRY)) {
         INFLUENCE_REGISTRY.forEach(b => {
-          if (!b.h) return;
+          if (!b.h || deletedBloggersList.includes(b.h.toLowerCase())) return;
           const hLower = b.h.toLowerCase();
           bloggerMap[hLower] = b;
           if (b.n) bloggerMap[b.n.toLowerCase()] = b;
@@ -954,7 +966,7 @@ html_template = r'''<!DOCTYPE html>
       // Предзагрузка блогеров из базы данных Supabase / сохраненных локально
       if (typeof CUSTOM_BLOGGERS !== 'undefined' && Array.isArray(CUSTOM_BLOGGERS)) {
         CUSTOM_BLOGGERS.forEach(cb => {
-          if (!cb.handle) return;
+          if (!cb.handle || deletedBloggersList.includes(cb.handle.toLowerCase())) return;
           const hLower = cb.handle.toLowerCase().trim();
           const mKey = cb.manager || 'mpb1';
           if (influenceManagers[mKey]) {
@@ -1894,6 +1906,11 @@ html_template = r'''<!DOCTYPE html>
                         <button onclick="copyBloggerDirectLink('${b.handle}', '${mCode}')" title="Скопировать трекинг-ссылку блогера" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 hover:text-white bg-purple-50 hover:bg-purple-600 rounded border border-purple-200 transition">
                           🔗 Ссылка
                         </button>
+                        ${(CURRENT_USER && (CURRENT_USER.role === 'superadmin' || (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin')))) ? `
+                          <button onclick="event.stopPropagation(); deleteBloggerByAdmin('${b.handle}')" title="Удалить блогера (только для владельца)" class="px-2 py-0.5 text-[10px] font-bold text-rose-600 hover:text-white bg-rose-50 hover:bg-rose-600 rounded border border-rose-200 transition">
+                            🗑️
+                          </button>
+                        ` : ''}
                       </div>
                     </td>
                   </tr>
@@ -2557,13 +2574,88 @@ html_template = r'''<!DOCTYPE html>
 
       updateBloggerUtmPreview();
       updateModalCalculatedCost();
+
+      // Показываем кнопку удаления ТОЛЬКО если вошел супер-админ (владелец)
+      const btnDel = document.getElementById('btnDeleteBloggerModal');
+      const isMaster = CURRENT_USER && (
+        CURRENT_USER.role === 'superadmin' ||
+        (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin'))
+      );
+      if (btnDel) {
+        if (isMaster) btnDel.classList.remove('hidden');
+        else btnDel.classList.add('hidden');
+      }
     }
 
     // УПРАВЛЕНИЕ БЛОГЕРАМИ (ДОБАВЛЕНИЕ, ВИТАМИНЫ, УСЛОВИЯ, UTM)
     // ============================================================
+    // ============================================================
+    // УДАЛЕНИЕ ЗАПИСЕЙ БЛОГЕРОВ (СТРОГО ТОЛЬКО ДЛЯ ВЛАДЕЛЬЦА)
+    // ============================================================
+    async function deleteBloggerByAdmin(handle) {
+      const isMaster = CURRENT_USER && (
+        CURRENT_USER.role === 'superadmin' ||
+        (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin'))
+      );
+
+      if (!isMaster) {
+        alert('Доступ запрещен. Только владелец (Куанышбек Сайдуллаев) имеет право удалять записи!');
+        return;
+      }
+
+      const cleanH = String(handle).replace(/^@/, '').trim().toLowerCase();
+      if (!confirm(`Вы действительно хотите безвозвратно удалить блогера @${cleanH} из базы данных?`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/bloggers?handle=${encodeURIComponent(cleanH)}&admin_email=${encodeURIComponent(CURRENT_USER.email)}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            handle: cleanH,
+            admin_email: CURRENT_USER.email
+          })
+        });
+
+        if (res.status === 403) {
+          alert('Доступ запрещен сервером: удалять записи может только владелец.');
+          return;
+        }
+
+        // Фиксируем удаление локально
+        let deletedList = [];
+        try {
+          deletedList = JSON.parse(localStorage.getItem('janamen_deleted_bloggers') || '[]');
+        } catch(e) {}
+        if (!deletedList.includes(cleanH)) {
+          deletedList.push(cleanH);
+          localStorage.setItem('janamen_deleted_bloggers', JSON.stringify(deletedList));
+        }
+
+        // Удаляем из CUSTOM_BLOGGERS
+        CUSTOM_BLOGGERS = CUSTOM_BLOGGERS.filter(b => (b.handle || '').toLowerCase() !== cleanH);
+        localStorage.setItem('janamen_custom_bloggers', JSON.stringify(CUSTOM_BLOGGERS));
+
+        closeAddBloggerModal();
+        onFilterChange();
+        alert(`✓ Блогер @${cleanH} успешно удален из базы.`);
+      } catch (err) {
+        alert('Ошибка при удалении: ' + err.message);
+      }
+    }
+
+    function deleteCurrentBloggerFromModal() {
+      const handle = (document.getElementById('bloggerHandle')?.value || '').trim();
+      if (!handle) return;
+      deleteBloggerByAdmin(handle);
+    }
+
     function openAddBloggerModal() {
       const modal = document.getElementById('addBloggerModal');
       if (modal) modal.classList.remove('hidden');
+      const btnDel = document.getElementById('btnDeleteBloggerModal');
+      if (btnDel) btnDel.classList.add('hidden'); // по умолчанию для создания скрыто
       updateBloggerUtmPreview();
       updateModalCalculatedCost();
     }
