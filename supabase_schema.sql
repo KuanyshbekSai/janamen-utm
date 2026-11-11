@@ -21,6 +21,9 @@ CREATE TABLE IF NOT EXISTS public.bloggers (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Отключение RLS для прямого доступа через API
+ALTER TABLE public.bloggers DISABLE ROW LEVEL SECURITY;
+
 -- ==============================================================================
 -- 2. ТАБЛИЦА ПОЛЬЗОВАТЕЛЕЙ И ДОСТУПОВ (RBAC)
 -- ==============================================================================
@@ -34,7 +37,11 @@ CREATE TABLE IF NOT EXISTS public.app_users (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Отключение RLS для прямого доступа через API
+ALTER TABLE public.app_users DISABLE ROW LEVEL SECURITY;
+
 -- Главный аккаунт владельца (по умолчанию)
 INSERT INTO public.app_users (email, password, name, role, status)
 VALUES ('k.saidullayev@janamen.kz', 'janamen2026', 'Куанышбек Сайдуллаев', 'superadmin', 'active')
 ON CONFLICT (email) DO NOTHING;
+
