@@ -7,6 +7,8 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Supabase JS Client for Realtime & Instant Data -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <script>
     tailwind.config = {
@@ -56,7 +58,7 @@
 
         <!-- КНОПКИ ДЕЙСТВИЙ -->
         <div class="flex items-center space-x-2.5">
-          <span id="liveStatus" class="hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200">● 36 484 сделок AmoCRM (282.9M ₸)</span>
+          <span id="liveStatus" class="hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200">🟢 Supabase Realtime (36.7k сделок)</span>
           <button onclick="syncAmoCRM()" id="btnSyncCRM" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">
             <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span>Синхронизировать AmoCRM</span>
@@ -803,27 +805,143 @@
     }
 
     // ============================================================
+    // SUPABASE REALTIME & ЖИВАЯ ПОДГРУЗКА
+    // ============================================================
+    const SUPABASE_URL = 'https://upeqrwqhdnmccyymugej.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
+    let supabaseClient = null;
+
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.warn('Supabase init error:', e);
+    }
+
+    async function loadFreshDealsFromSupabase() {
+      if (!supabaseClient) return;
+      try {
+        const { data, error } = await supabaseClient
+          .from('deals')
+          .select('id, name, created_at, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term')
+          .order('created_at', { ascending: false })
+          .limit(1000);
+
+        if (error || !data || !data.length) return;
+
+        let addedCount = 0;
+        const existingIds = new Set(ALL_LEADS.map(l => l.id));
+
+        for (const d of data) {
+          if (!existingIds.has(d.id)) {
+            const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
+            const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
+            ALL_LEADS.unshift({
+              id: d.id,
+              ts: ts,
+              won: d.is_won ? 1 : 0,
+              price: d.price || 0,
+              dom: dom,
+              page: d.landing_page || '/',
+              src: d.utm_source || 'direct/none',
+              med: d.utm_medium || 'none',
+              cmp: d.utm_campaign || 'none',
+              cnt: d.utm_content || 'none',
+              trm: d.utm_term || 'none',
+              stId: d.is_won ? 142 : 0,
+              name: d.name || 'Сделка'
+            });
+            existingIds.add(d.id);
+            addedCount++;
+          }
+        }
+
+        if (addedCount > 0) {
+          console.log(`[Supabase] Подгружено ${addedCount} новых сделок в дашборд!`);
+          onFilterChange();
+          const live = document.getElementById('liveStatus');
+          if (live) {
+            live.innerHTML = `🟢 Supabase Realtime (+${addedCount} новых)`;
+          }
+        }
+      } catch (err) {
+        console.warn('Load fresh deals err:', err);
+      }
+    }
+
+    function initRealtime() {
+      if (!supabaseClient) return;
+      supabaseClient
+        .channel('public_deals')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'deals' }, payload => {
+          const d = payload.new;
+          if (!d || !d.id) return;
+
+          const existingIndex = ALL_LEADS.findIndex(l => l.id === d.id);
+          const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
+          const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
+
+          const leadObj = {
+            id: d.id,
+            ts: ts,
+            won: d.is_won ? 1 : 0,
+            price: d.price || 0,
+            dom: dom,
+            page: d.landing_page || '/',
+            src: d.utm_source || 'direct/none',
+            med: d.utm_medium || 'none',
+            cmp: d.utm_campaign || 'none',
+            cnt: d.utm_content || 'none',
+            trm: d.utm_term || 'none',
+            stId: d.is_won ? 142 : 0,
+            name: d.name || 'Сделка'
+          };
+
+          if (existingIndex >= 0) {
+            ALL_LEADS[existingIndex] = leadObj;
+          } else {
+            ALL_LEADS.unshift(leadObj);
+          }
+
+          onFilterChange();
+
+          const live = document.getElementById('liveStatus');
+          if (live) {
+            live.className = "hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-amber-50 text-amber-800 border-amber-300 animate-pulse";
+            live.innerHTML = `⚡ Только что поступил лид: ${d.utm_source || 'direct'}!`;
+            setTimeout(() => {
+              live.className = "hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200";
+              live.innerHTML = `🟢 Supabase Realtime (Живые данные)`;
+            }, 6000);
+          }
+        })
+        .subscribe();
+    }
+
+    // ============================================================
     // СИНХРОНИЗАЦИЯ AMOCRM
     // ============================================================
-    function syncAmoCRM() {
+    async function syncAmoCRM() {
       const btn = document.getElementById('btnSyncCRM');
       const idle = btn.innerHTML;
       btn.innerHTML = '<span>⏳ Синхронизация...</span>';
       btn.disabled = true;
 
-      fetch(GAS_WEBAPP_URL + '?action=sync_amocrm')
-        .then(r => r.json())
-        .then(() => {
-          btn.innerHTML = '<span>✓ Обновлено</span>';
-        })
-        .catch(() => {
-          btn.innerHTML = '<span>Нет связи с Google Script</span>';
-        })
-        .finally(() => setTimeout(() => { btn.disabled = false; btn.innerHTML = idle; }, 2500));
+      try {
+        await loadFreshDealsFromSupabase();
+        btn.innerHTML = '<span>✓ Актуально (Supabase)</span>';
+      } catch (err) {
+        btn.innerHTML = '<span>Ошибка обновления</span>';
+      } finally {
+        setTimeout(() => { btn.disabled = false; btn.innerHTML = idle; }, 2500);
+      }
     }
 
     // Инициализация
     onFilterChange();
+    loadFreshDealsFromSupabase();
+    initRealtime();
   </script>
 </body>
 </html>

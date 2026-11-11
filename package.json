@@ -1,0 +1,9 @@
+{
+  "name": "janamen-utm",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Jana Men — Сквозная Аналитика и UTM-реестр",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1"
+  }
+}
