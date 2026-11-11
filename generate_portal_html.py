@@ -125,8 +125,8 @@ html_template = r'''<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (ПЕРЕСЧИТЫВАЕТСЯ ПОД ВЫБРАННЫЙ РАЗДЕЛ НА ЛЕТУ) -->
-    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (СТАНДАРТНАЯ ДЛЯ ОРГАНИКИ, INFLUENCE, ТЕГОВ) -->
+    <div id="kpiStandardGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
       
       <!-- Лиды -->
       <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
@@ -168,6 +168,52 @@ html_template = r'''<!DOCTYPE html>
 
     </div>
 
+    <!-- 1b. ПОЛОСА 9 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (ТОЧНО КАК В ТАБЛИЦЕ JANA MEN) -->
+    <div id="kpiFanGrid" class="hidden space-y-3">
+      <!-- Верхний ряд: 5 карточек -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Всего лидов (CRM)</div>
+          <div id="fanKpiLeads" class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">0</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 shadow-sm bg-emerald-50/20">
+          <div class="text-[10px] font-black text-emerald-700 uppercase tracking-wider">Оплаченных сделок</div>
+          <div id="fanKpiWon" class="text-2xl sm:text-3xl font-black text-emerald-600 mt-1">0</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-blue-200 shadow-sm bg-blue-50/20">
+          <div class="text-[10px] font-black text-blue-700 uppercase tracking-wider">Общая выручка</div>
+          <div id="fanKpiRevenue" class="text-2xl sm:text-3xl font-black text-blue-800 mt-1">0 ₸</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-rose-200 shadow-sm bg-rose-50/20">
+          <div class="text-[10px] font-black text-rose-700 uppercase tracking-wider">Общий расход</div>
+          <div id="fanKpiSpend" class="text-2xl sm:text-3xl font-black text-rose-800 mt-1">230 000 ₸</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-purple-200 shadow-sm bg-purple-50/20">
+          <div class="text-[10px] font-black text-purple-700 uppercase tracking-wider">Конверсия в оплату</div>
+          <div id="fanKpiCr" class="text-2xl sm:text-3xl font-black text-purple-800 mt-1">0%</div>
+        </div>
+      </div>
+      <!-- Нижний ряд: 4 карточки -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Средний чек</div>
+          <div id="fanKpiAvgCheck" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0 ₸</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-sm bg-amber-50/20">
+          <div class="text-[10px] font-black text-amber-700 uppercase tracking-wider">Общий ROMI (%)</div>
+          <div id="fanKpiRomi" class="text-xl sm:text-2xl font-black text-amber-800 mt-1">0%</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Размечено UTM</div>
+          <div id="fanKpiUtmCount" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-indigo-200 shadow-sm bg-indigo-50/20">
+          <div class="text-[10px] font-black text-indigo-700 uppercase tracking-wider">Доля размеченных</div>
+          <div id="fanKpiUtmPct" class="text-xl sm:text-2xl font-black text-indigo-800 mt-1">100%</div>
+        </div>
+      </div>
+    </div>
+    
     <!-- 2. СВОРАЧИВАЕМЫЙ БЛОК ФИЛЬТРАЦИИ ПО ПЕРИОДУ И ПОИСКА -->
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       
@@ -387,6 +433,10 @@ html_template = r'''<!DOCTYPE html>
       'mpb3': { code: 'mpb3', name: 'Алуа', role: 'Менеджер по блогерам' },
       'mpb4': { code: 'mpb4', name: 'Дарина', role: 'Менеджер по блогерам' }
     };
+
+    // Полный реестр 93 блогеров из таблицы UGC Google Sheets
+    const INFLUENCE_REGISTRY = [{"h": "frolova__kristina", "m": "mpb2", "mgr": "Алина", "n": "Левчук Кристина", "s": "4 582", "c": "Караганда", "p": "https://instagram.com/frolova__kristina?exln=Mnd0OTJlYXBpNXBj", "u": "https://janamen1.kz/influence?utm_source=frolova__kristina&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "asema_kotoraya_alel", "m": "mpb2", "mgr": "Алина", "n": "Акишева Асем", "s": "30,3 тыс", "c": "Караганда", "p": "https://instagram.com/asema_kotoraya_alel?obrf=MThhNWRkcWxnN2FjeQ%3D%3D", "u": "https://janamen1.kz/influence?utm_source=asema_kotoraya_alel&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "akhmoldinaa", "m": "mpb2", "mgr": "Алина", "n": "Ахмолдина Жансая", "s": "14,1 тыс", "c": "Караганда", "p": "https://instagram.com/akhmoldinaa?cplk=c2w2eWowZG5qY2ll", "u": "https://janamen1.kz/influence?utm_source=akhmoldinaa&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "ramazankyzy_dana", "m": "mpb2", "mgr": "Алина", "n": "Жагпарова Данагуль", "s": "12,9 тыс", "c": "Астана", "p": "https://instagram.com/ramazankyzy_dana?exln=eDJqM2NpNGI1d21z", "u": "https://janamen1.kz/influence?utm_source=ramazankyzy_dana&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "meruna_ll", "m": "mpb2", "mgr": "Алина", "n": "Меруна", "s": "17,7 тыс", "c": "Астана", "p": "https://www.instagram.com/meruna_ll?mdxt=MTAwZTVvdnR5ZTdlOQ==", "u": "https://janamen1.kz/influence?utm_source=meruna_ll&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "habataev.maksat", "m": "mpb2", "mgr": "Алина", "n": "Хабатаев Максат", "s": "75,7 тыс", "c": "Астана", "p": "https://www.instagram.com/habataev.maksat?cplk=MWFhZjk2aXFzN2dldg==", "u": "https://janamen1.kz/influence?utm_source=habataev.maksat&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "kazhmuratova_asiya", "m": "mpb2", "mgr": "Алина", "n": "Кажмуратова Асия", "s": "17,2 тыс", "c": "Щучинск", "p": "https://www.instagram.com/kazhmuratova_asiya?vrfl=NzdmdnJmcnhyZmRo&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=kazhmuratova_asiya&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "lukmanovna__", "m": "mpb2", "mgr": "Алина", "n": "Сагындык Онал", "s": "6 647", "c": "Караганда", "p": "https://www.instagram.com/lukmanovna__?cplk=dm5tM3hrbTc5emN0", "u": "https://janamen1.kz/influence?utm_source=lukmanovna__&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "bekzat_tunggysh", "m": "mpb2", "mgr": "Алина", "n": "Тунгышбаева Бекзат", "s": "8 217", "c": "Астана", "p": "https://www.instagram.com/bekzat_tunggysh?obrf=MXEyMTRqZmRkbXY2cQ%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=bekzat_tunggysh&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "zhuldyz_zaynulina", "m": "mpb2", "mgr": "Алина", "n": "Зайнулина Жулдыз", "s": "6 398", "c": "Актобе", "p": "https://www.instagram.com/zhuldyz_zaynulina?xtok=MTZ4Y3BmemlnMzQ2eg%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=zhuldyz_zaynulina&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "dinarakaltore", "m": "mpb2", "mgr": "Алина", "n": "Калторе Динара", "s": "38,4 тыс", "c": "Шымкент", "p": "https://www.instagram.com/dinarakaltore?rpxt=NGx2Y200YTRwendp&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=dinarakaltore&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "bika_mazhenova", "m": "mpb2", "mgr": "Алина", "n": "Маженова Бика", "s": "45,6 тыс", "c": "Астана", "p": "https://www.instagram.com/bika_mazhenova?xtok=YTBlYXgya3V6Mm5z", "u": "https://janamen1.kz/influence?utm_source=bika_mazhenova&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "orunkeeva_kz", "m": "mpb2", "mgr": "Алина", "n": "Нурмыханбет Гульсанат", "s": "21,9 тыс", "c": "Балхаш", "p": "https://www.instagram.com/orunkeeva_kz?vrfl=MTU5eXNxc2hsNmpvcg==", "u": "https://janamen1.kz/influence?utm_source=orunkeeva_kz&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "karima_turs", "m": "mpb2", "mgr": "Алина", "n": "Турсунханова Карима", "s": "40,8 тыс", "c": "Астана", "p": "https://www.instagram.com/karima_turs?srtk=NnZ4cmc0MHVwcXN0&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=karima_turs&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "kuzenbaikyzy___", "m": "mpb2", "mgr": "Алина", "n": "Шерехан Жания", "s": "7 339", "c": "Алматы", "p": "https://www.instagram.com/kuzenbaikyzy___?igsh=dzN5bWpncDF6c3Jr", "u": "https://janamen1.kz/influence?utm_source=kuzenbaikyzy___&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aknur_me", "m": "mpb2", "mgr": "Алина", "n": "Шынболатова Акнур", "s": "37,2 тыс", "c": "Шымкент", "p": "https://instagram.com/aknur_me", "u": "https://janamen1.kz/influence?utm_source=aknur_me&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "dankarti", "m": "mpb2", "mgr": "Алина", "n": "Артыкбай Дана", "s": "12,2 тыс", "c": "Туркестан", "p": "https://www.instagram.com/dankarti?igsh=MWhybXAwbDRhdGExaA%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=dankarti&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "almaznyi__", "m": "mpb2", "mgr": "Алина", "n": "Илесов Алмас", "s": "3 899", "c": "Шымкент", "p": "https://www.instagram.com/almaznyi__?rpxt=MTVzbHNhbTRyajdtbQ==", "u": "https://janamen1.kz/influence?utm_source=almaznyi__&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "sharipova_zhannat", "m": "mpb2", "mgr": "Алина", "n": "Шарипова Жанат", "s": "9 863", "c": "Астана", "p": "https://www.instagram.com/sharipova_zhannat?obrf=MWdtamw5a3l0ODE5eg==", "u": "https://janamen1.kz/influence?utm_source=sharipova_zhannat&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "zar1nka", "m": "mpb3", "mgr": "Алуа", "n": "Касымова Зарина", "s": "9 884", "c": "Алматы", "p": "https://www.instagram.com/zar1nka?dlrf=MXJjNG9xeTN5dHU5", "u": "https://janamen1.kz/influence?utm_source=zar1nka&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels"}, {"h": "kanatkyzyy___", "m": "mpb3", "mgr": "Алуа", "n": "Төлеубек Жаннұр", "s": "12,8 тыс", "c": "Караганда", "p": "https://www.instagram.com/kanatkyzyy___?dlrf=MXNnYTRpZGFndzA0NA%3D%3D", "u": "https://janamen1.kz/influence?utm_source=kanatkyzyy___&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "yrysgul.abdukarimova", "m": "mpb3", "mgr": "Алуа", "n": "Абдукаримова Ирисгул", "s": "32,8 тыс", "c": "Шымкент", "p": "https://instagram.com/yrysgul.abdukarimova?obrf=ZWNsb3R5aXp2emhl", "u": "https://janamen1.kz/influence?utm_source=yrysgul.abdukarimova&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "gulnur_zhumagul", "m": "mpb3", "mgr": "Алуа", "n": "Жумагул Гулнур", "s": "21,9 тыс", "c": "Алматы", "p": "https://www.instagram.com/gulnur_zhumagul?dlrf=MWw1Z2picWsxeDAyNw%3D%3D", "u": "https://janamen1.kz/influence?utm_source=gulnur_zhumagul&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "indira_nyrbekkyzyy", "m": "mpb3", "mgr": "Алуа", "n": "Еркебек Индира", "s": "28,2 тыс", "c": "Алматы", "p": "https://www.instagram.com/indira_nyrbekkyzyy?obrf=YTRvY2xhMHNtYW9w", "u": "https://janamen1.kz/influence?utm_source=indira_nyrbekkyzyy&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aselqyzdan", "m": "mpb3", "mgr": "Алуа", "n": "Рымбаева Асел", "s": "40,6 тыс", "c": "Жанаозен", "p": "https://www.instagram.com/aselqyzdan/", "u": "https://janamen1.kz/influence?utm_source=aselqyzdan&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "anar_aitzhanova_", "m": "mpb3", "mgr": "Алуа", "n": "Айтжанова Анар", "s": "9 059", "c": "Астана", "p": "https://www.instagram.com/anar_aitzhanova_/", "u": "https://janamen1.kz/influence?utm_source=anar_aitzhanova_&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "timon_bmw", "m": "mpb3", "mgr": "Алуа", "n": "Айтжанов Тимур", "s": "5 586", "c": "Астана", "p": "https://www.instagram.com/timon_bmw/", "u": "https://janamen1.kz/influence?utm_source=timon_bmw&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "dr.nazerke_kuatkyzy", "m": "mpb3", "mgr": "Алуа", "n": "Шакенова Назерке", "s": "13,1 тыс", "c": "Астана", "p": "https://www.instagram.com/dr.nazerke_kuatkyzy/", "u": "https://janamen1.kz/influence?utm_source=dr.nazerke_kuatkyzy&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aya_bainiyet", "m": "mpb3", "mgr": "Алуа", "n": "Байниет Аягоз", "s": "33,3 тыс", "c": "Алматы", "p": "https://www.instagram.com/aya_bainiyet/", "u": "https://janamen1.kz/influence?utm_source=aya_bainiyet&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "damirusha__", "m": "mpb2", "mgr": "Алина", "n": "Толепова Дамира", "s": "10,2 тыс", "c": "Актобе", "p": "https://www.instagram.com/damirusha__?igsh=MXFieWg3ZDQxM3M4MQ%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=damirusha__&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "elon.rasulovna", "m": "mpb3", "mgr": "Алуа", "n": "Азиева Эльмира", "s": "14,5 тыс", "c": "Шымкент", "p": "https://www.instagram.com/elon.rasulovna/", "u": "https://janamen1.kz/influence?utm_source=elon.rasulovna&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "sanimka.off", "m": "mpb3", "mgr": "Алуа", "n": "Тузелбай Сымбат", "s": "59,8 тыс", "c": "Алматы", "p": "https://www.instagram.com/sanimka.off/", "u": "https://janamen1.kz/influence?utm_source=sanimka.off&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "_zzhuldyzbaeva", "m": "mpb3", "mgr": "Алуа", "n": "Алимкулова Жансая", "s": "30,1 тыс", "c": "Талгар", "p": "https://www.instagram.com/_zzhuldyzbaeva/", "u": "https://janamen1.kz/influence?utm_source=_zzhuldyzbaeva&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "alua_toltayeva", "m": "mpb3", "mgr": "Алуа", "n": "Төлтаева Алуа", "s": "37,5 тыс", "c": "Шымкент", "p": "https://www.instagram.com/alua_toltayeva/", "u": "https://janamen1.kz/influence?utm_source=alua_toltayeva&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "saule_kuralbaevna", "m": "mpb1", "mgr": "Анельжан", "n": "Сауле", "s": "12 100", "c": "Шымкент", "p": "https://www.instagram.com/saule_kuralbaevna?stkn=MXg1bzZscWkwdTRjag==", "u": "https://janamen1.kz/influence?utm_source=saule_kuralbaevna&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "ainykshaaa", "m": "mpb1", "mgr": "Анельжан", "n": "Айныкша", "s": "12 300", "c": "Шымкент", "p": "https://www.instagram.com/ainykshaaa?stkn=MTZhMXp5am5neHlrbA==", "u": "https://janamen1.kz/influence?utm_source=ainykshaaa&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "asylzat_erbolatovnaa", "m": "mpb1", "mgr": "Анельжан", "n": "Асылзат", "s": "18300", "c": "Астана", "p": "https://www.instagram.com/asylzat_erbolatovnaa?vrfl=ajZrbjY3NHZjazY0", "u": "https://janamen1.kz/influence?utm_source=asylzat_erbolatovnaa&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "arailym_zhak", "m": "mpb1", "mgr": "Анельжан", "n": "Арайлым", "s": "20200", "c": "Астана", "p": "https://www.instagram.com/arailym_zhak?stkn=MTAzcmRqNTFuanJ2bA==", "u": "https://janamen1.kz/influence?utm_source=arailym_zhak&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aliyaestet", "m": "mpb1", "mgr": "Анельжан", "n": "Алия", "s": "1411", "c": "Астана", "p": "https://www.instagram.com/aliyaestet?mdxt=NW55czE4andyZGNq", "u": "https://janamen1.kz/influence?utm_source=aliyaestet&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "madina.dreams", "m": "mpb1", "mgr": "Анельжан", "n": "Мадина", "s": "23700", "c": "Алматы", "p": "https://www.instagram.com/madina.dreams?cplk=a2JwYmE3ZHRhbnQ4", "u": "https://janamen1.kz/influence?utm_source=madina.dreams&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "qura1aikaa", "m": "mpb1", "mgr": "Анельжан", "n": "Куралай", "s": "14500", "c": "Шымкент", "p": "https://www.instagram.com/qura1aikaa?cplk=emIyYWRteWpnbWQ5", "u": "https://janamen1.kz/influence?utm_source=qura1aikaa&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "dr_diana.erlanovna", "m": "mpb1", "mgr": "Анельжан", "n": "Диана", "s": "11000", "c": "Шымкент", "p": "https://www.instagram.com/dr_diana.erlanovna?dlrf=MTcxOW50eXl5OGdqdw==", "u": "https://janamen1.kz/influence?utm_source=dr_diana.erlanovna&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "hayrinis_aa", "m": "mpb1", "mgr": "Анельжан", "n": "Хайринис", "s": "4883", "c": "Алматы", "p": "https://www.instagram.com/hayrinis_aa?vrfl=azUzOHAyOWh4N3E4", "u": "https://janamen1.kz/influence?utm_source=hayrinis_aa&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aknur_ydyrys", "m": "mpb1", "mgr": "Анельжан", "n": "Акнур", "s": "15200", "c": "Алматы", "p": "https://www.instagram.com/aknur_ydyrys?srtk=ODVvdWV4eXNpN3lh", "u": "https://janamen1.kz/influence?utm_source=aknur_ydyrys&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "bota_abdualii", "m": "mpb1", "mgr": "Анельжан", "n": "Бота", "s": "52600", "c": "Астана", "p": "https://www.instagram.com/bota_abdualii?dlrf=MXFzZ3JnY2dodTBsNA==", "u": "https://janamen1.kz/influence?utm_source=bota_abdualii&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "zhansokk__", "m": "mpb1", "mgr": "Анельжан", "n": "Жансая", "s": "8468", "c": "Шымкент", "p": "https://www.instagram.com/zhansokk__?psln=MW9lcHc4MnlwYTh1ag==", "u": "https://janamen1.kz/influence?utm_source=zhansokk__&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "gaukhar_taktarbekova", "m": "mpb1", "mgr": "Анельжан", "n": "Гаухар", "s": "27000", "c": "Тараз", "p": "https://www.instagram.com/gaukhar_taktarbekova", "u": "https://janamen1.kz/influence?utm_source=gaukhar_taktarbekova&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "amirovva_m", "m": "mpb1", "mgr": "Анельжан", "n": "Макпал", "s": "4270", "c": "Астана", "p": "https://www.instagram.com/amirovva_m?rpxt=MTNxZTVjenVlczN4dw==", "u": "https://janamen1.kz/influence?utm_source=amirovva_m&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "araika.mom", "m": "mpb1", "mgr": "Анельжан", "n": "Арай", "s": "13500", "c": "Талдыкорган", "p": "https://www.instagram.com/araika.mom?exln=MWFldWlqdG1reTAzNA==", "u": "https://janamen1.kz/influence?utm_source=araika.mom&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aishka_karimova", "m": "mpb1", "mgr": "Анельжан", "n": "Аиша", "s": "219000", "c": "Астана", "p": "https://www.instagram.com/aishka_karimova?vrfl=bGpzY2cwbXA2ZW5m", "u": "https://janamen1.kz/influence?utm_source=aishka_karimova&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "gulayan.keneshbaeva", "m": "mpb1", "mgr": "Анельжан", "n": "Гулаян", "s": "8690", "c": "Алматы", "p": "https://www.instagram.com/gulayan.keneshbaeva?mdxt=aHF5YWtkNGtndmk3", "u": "https://janamen1.kz/influence?utm_source=gulayan.keneshbaeva&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "maliqa.sultan", "m": "mpb1", "mgr": "Анельжан", "n": "Малика", "s": "2179", "c": "Алматы", "p": "https://www.instagram.com/maliqa.sultan?", "u": "https://janamen1.kz/influence?utm_source=maliqa.sultan&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aizadaalnur", "m": "mpb1", "mgr": "Анельжан", "n": "Айзада", "s": "71400", "c": "Алматы", "p": "https://www.instagram.com/aizadaalnur?xtok=MWU1MGRqNHdhdXhrcg==", "u": "https://janamen1.kz/influence?utm_source=aizadaalnur&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "lyazzka001", "m": "mpb1", "mgr": "Анельжан", "n": "Лязат", "s": "9020", "c": "Алматы", "p": "https://www.instagram.com/lyazzka001?vrfl=MTdpdmdweG82a2txbg==", "u": "https://janamen1.kz/influence?utm_source=lyazzka001&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "adina_tolegenova", "m": "mpb1", "mgr": "Анельжан", "n": "Адина", "s": "6535", "c": "Алматы", "p": "https://www.instagram.com/adina_tolegenova?mdxt=MmxmdXU1anhyNnhs", "u": "https://janamen1.kz/influence?utm_source=adina_tolegenova&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "sitora_sidelnikova", "m": "mpb1", "mgr": "Анельжан", "n": "Ситора", "s": "6 880", "c": "Тараз", "p": "https://www.instagram.com/sitora_sidelnikova?vrfl=MXgyaHNqZmF2ZHJqcw==", "u": "https://janamen1.kz/influence?utm_source=sitora_sidelnikova&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "d.guldanaa", "m": "mpb1", "mgr": "Анельжан", "n": "Гульдана", "s": "1 407", "c": "Астана", "p": "https://www.instagram.com/d.guldanaa?srtk=b2FkMXA3MGRodWIy", "u": "https://janamen1.kz/influence?utm_source=d.guldanaa&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "gauhar_diary", "m": "mpb1", "mgr": "Анельжан", "n": "Гаухар", "s": "9 798", "c": "Алматы", "p": "https://www.instagram.com/gauhar_diary?mdxt=ZHV3dnlvajhteHl6", "u": "https://janamen1.kz/influence?utm_source=gauhar_diary&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "_arailym.14", "m": "mpb2", "mgr": "Алина", "n": "Арайлым", "s": "98,9 тыс", "c": "Балхаш", "p": "https://www.instagram.com/_arailym.14?dlrf=MXhsYnd4bTBxbXp3Ng==", "u": "https://janamen1.kz/influence?utm_source=_arailym.14&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "xamida_iles", "m": "mpb3", "mgr": "Алуа", "n": "Илесова Хамида", "s": "8 280", "c": "Шымкент", "p": "https://www.instagram.com/xamida_iles/", "u": "https://janamen1.kz/influence?utm_source=xamida_iles&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "uais0va", "m": "mpb2", "mgr": "Алина", "n": "Алтынай", "s": "19,6 тыс", "c": "Алмата", "p": "https://www.instagram.com/uais0va?cplk=MTFpdXFjZ2tydHo1MQ==", "u": "https://janamen1.kz/influence?utm_source=uais0va&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aruzhan_zhuzbay", "m": "mpb3", "mgr": "Алуа", "n": "Аружан Жүзбай", "s": "9 590", "c": "Каскелен", "p": "https://www.instagram.com/aruzhan_zhuzbay/", "u": "https://janamen1.kz/influence?utm_source=aruzhan_zhuzbay&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "bibinur.maratova9500nv", "m": "mpb3", "mgr": "Алуа", "n": "Ахметова Бибинур", "s": "8 286", "c": "Алматы", "p": "https://www.instagram.com/bibinur.maratova9500nv/", "u": "https://janamen1.kz/influence?utm_source=bibinur.maratova9500nv&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "armana_fitness_trainer", "m": "mpb3", "mgr": "Алуа", "n": "Хамзина Арман", "s": "61,9 тыс", "c": "Астана", "p": "https://www.instagram.com/armana_fitness_trainer/", "u": "https://janamen1.kz/influence?utm_source=armana_fitness_trainer&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "taubaeva.bayan", "m": "mpb3", "mgr": "Алуа", "n": "Таубай Баян", "s": "41,2 тыс", "c": "Шымкент", "p": "https://www.instagram.com/taubaeva.bayan/", "u": "https://janamen1.kz/influence?utm_source=taubaeva.bayan&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "raushan_ismail", "m": "mpb3", "mgr": "Алуа", "n": "Исмайл Раушан", "s": "20,2 тым", "c": "Рудный", "p": "https://www.instagram.com/raushan_ismail/", "u": "https://janamen1.kz/influence?utm_source=raushan_ismail&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "_ttomika_", "m": "mpb2", "mgr": "Алина", "n": "Абдирашит Тогжан", "s": "41,7 тыс", "c": "Астана", "p": "https://www.instagram.com/_ttomika_?dlrf=MXNvaG55c2FqaXl1aA%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=_ttomika_&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "abbaz.meruert", "m": "mpb2", "mgr": "Алина", "n": "Аббаз Меруерт", "s": "25,4 тыс", "c": "Туркестан", "p": "https://www.instagram.com/abbaz.meruert?mdxt=MXd1cDl1YnMwYXl5MA%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=abbaz.meruert&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "sarsssembaeva", "m": "mpb2", "mgr": "Алина", "n": "Сатыбай Дария", "s": "72 тыс", "c": "Астана", "p": "https://www.instagram.com/sarsssembaeva?obrf=aWFodXdvNDdid3Np", "u": "https://janamen1.kz/influence?utm_source=sarsssembaeva&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "seel.anzh", "m": "mpb1", "mgr": "Анельжан", "n": "seel.anzh", "s": "8 966", "c": "Алматы", "p": "https://www.instagram.com/seel.anzh?xtok=MTJlcGNhcWU3NXY1cQ==", "u": "https://janamen1.kz/influence?utm_source=seel.anzh&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "nazeka.altynbek", "m": "mpb1", "mgr": "Анельжан", "n": "nazeka.altynbek", "s": "4 403", "c": "Алматы", "p": "https://www.instagram.com/nazeka.altynbek?exln=MWUxN25hdjVsaHRxcg==", "u": "https://janamen1.kz/influence?utm_source=nazeka.altynbek&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "kuanysheva.dii", "m": "mpb2", "mgr": "Алина", "n": "Куанышева Дильназ", "s": "74,8 тыс", "c": "Астана", "p": "https://www.instagram.com/kuanysheva.dii?obrf=b3luYzdzczM1Ym15", "u": "https://janamen1.kz/influence?utm_source=kuanysheva.dii&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "anarayerikovna", "m": "mpb2", "mgr": "Алина", "n": "Анара", "s": "7 000", "c": "Астана", "p": "https://www.instagram.com/anarayerikovna?cplk=MWdzbjZwZ2NpMTdydg==", "u": "https://janamen1.kz/influence?utm_source=anarayerikovna&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "askhatovna_g", "m": "mpb3", "mgr": "Алуа", "n": "Гульжаннат Асхатовна", "s": "5 529", "c": "Алматы", "p": "https://www.instagram.com/askhatovna_g/", "u": "https://janamen1.kz/influence?utm_source=askhatovna_g&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aidana_adilkassym", "m": "mpb3", "mgr": "Алуа", "n": "Айдана Адилкасымова", "s": "72,6 тыс", "c": "Астана", "p": "https://www.instagram.com/aidana_adilkassym/", "u": "https://janamen1.kz/influence?utm_source=aidana_adilkassym&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "inabattan01", "m": "mpb2", "mgr": "Алина", "n": "Амантай Инабат", "s": "37,4 тыс", "c": "Астана", "p": "https://www.instagram.com/inabattan01?xtok=OWJibWkzY2tscmR4", "u": "https://janamen1.kz/influence?utm_source=inabattan01&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aminkamn04", "m": "mpb2", "mgr": "Алина", "n": "Манезова Амина", "s": "10,1 тыс", "c": "Караганда", "p": "https://www.instagram.com/aminkamn04?exln=MTNxaHFieHk0aThvbw==", "u": "https://janamen1.kz/influence?utm_source=aminkamn04&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "nazdossanova", "m": "mpb2", "mgr": "Алина", "n": "Карибаева Назерке", "s": "12,8 тыс", "c": "Алмата", "p": "https://www.instagram.com/nazdossanova?srtk=MTRhbzlkN2MxbW5yaw==", "u": "https://janamen1.kz/influence?utm_source=nazdossanova&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "diva_boni", "m": "mpb2", "mgr": "Алина", "n": "Момышева Балнур", "s": "119 тыс", "c": "Алмата", "p": "https://www.instagram.com/diva_boni?rpxt=MWx4ZnFiNTg5dmxwdg==", "u": "https://janamen1.kz/influence?utm_source=diva_boni&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "erke_expert", "m": "mpb2", "mgr": "Алина", "n": "Назерке", "s": "38,8 тыс", "c": "Шымкент", "p": "https://www.instagram.com/erke_expert?xtok=OWw3NXVnNTd0ZXBy&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=erke_expert&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "aiymka.krg", "m": "mpb3", "mgr": "Алуа", "n": "Мурат Айым", "s": "38,9 тыс", "c": "Караганда", "p": "https://www.instagram.com/aiymka.krg/", "u": "https://janamen1.kz/influence?utm_source=aiymka.krg&utm_medium=mpb3&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "alipbayeva.raikhan", "m": "mpb1", "mgr": "Анельжан", "n": "Алипбаева Райхан", "s": "20,4 тыс", "c": "Атырау", "p": "https://www.instagram.com/alipbayeva.raikhan?obrf=MXV4OTd1Y25qd2c1Nw%3D%3D", "u": "https://janamen1.kz/influence?utm_source=alipbayeva.raikhan&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "zainolda_aktan", "m": "mpb2", "mgr": "Алина", "n": "Зайнолда Актан", "s": "71,7 тыс", "c": "Алматы", "p": "https://www.instagram.com/zainolda_aktan?rpxt=MTZ3MmE2anhzMTZ6Nw==", "u": "https://janamen1.kz/influence?utm_source=zainolda_aktan&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "_akbayan_", "m": "mpb2", "mgr": "Алина", "n": "Карымбай Акбаян", "s": "6 257", "c": "Алматы", "p": "https://www.instagram.com/_akbayan_?xtok=MXRjdXd5OHlhZ3ZlaQ%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=_akbayan_&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "mayabassova", "m": "mpb2", "mgr": "Алина", "n": "Кумисай Маябасова", "s": "101 тыс", "c": "Шымкент", "p": "https://www.instagram.com/mayabassova?obrf=eTZjcGUzYzhsNXlu", "u": "https://janamen1.kz/influence?utm_source=mayabassova&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "akmaral_k.k", "m": "mpb2", "mgr": "Алина", "n": "Қабанбаева Ақмарал", "s": "32,1 тыс", "c": "Усть-каменогорск", "p": "https://www.instagram.com/akmaral_k.k?vrfl=aWJuZzVmZWxiMGl0&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=akmaral_k.k&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "kuanyshevna15", "m": "mpb2", "mgr": "Алина", "n": "Жангазинова Малика", "s": "8 780", "c": "Сарань", "p": "https://www.instagram.com/kuanyshevna15?cplk=MWtoenJwMnpydmlleQ==", "u": "https://janamen1.kz/influence?utm_source=kuanyshevna15&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "batyrhanovna.creator", "m": "mpb2", "mgr": "Алина", "n": "Толеу Томирис", "s": "9 568", "c": "Караганда", "p": "https://www.instagram.com/batyrhanovna.creator?psln=N3hiNDl0ajVpdGhp&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=batyrhanovna.creator&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "korkemdiary", "m": "mpb2", "mgr": "Алина", "n": "Әзімханова Көркем", "s": "9 759", "c": "Астана", "p": "https://www.instagram.com/korkemdiary?cplk=NHJodGkzcmJidmw1", "u": "https://janamen1.kz/influence?utm_source=korkemdiary&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "fariza_zhomartovna", "m": "mpb2", "mgr": "Алина", "n": "Мырзабаева Фариза", "s": "", "c": "Астана", "p": "https://www.instagram.com/fariza_zhomartovna?obrf=MTc4NmFkYXRqd2xpbA%3D%3D&utm_source=qr", "u": "https://janamen1.kz/influence?utm_source=fariza_zhomartovna&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=reels_stories"}, {"h": "withlovemika1", "m": "mpb1", "mgr": "Анельжан", "n": "Садыкова Меруерт", "s": "23", "c": "Астана", "p": "https://www.instagram.com/withlovemika1/", "u": "https://janamen1.kz/influence?utm_source=withlovemika1&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "qulbek_galiya", "m": "mpb1", "mgr": "Анельжан", "n": "Қүлбек Ғалия", "s": "", "c": "", "p": "https://instagram.com/qulbek_galiya", "u": "https://janamen1.kz/influence?utm_source=qulbek_galiya&utm_medium=mpb1&utm_campaign=ugc_barter&utm_content=stories"}, {"h": "k.saidullayev", "m": "mpb2", "mgr": "Алина", "n": "Куанышбек Сайдуллаев", "s": "", "c": "", "p": "https://www.instagram.com/k.saidullayev/", "u": "https://janamen1.kz/influence?utm_source=k.saidullayev&utm_medium=mpb2&utm_campaign=ugc_barter&utm_content=stories"}];
+
 
     // 8 Официальных фан-аккаунтов из реестра
     const FAN_REGISTRY = [
@@ -657,7 +707,7 @@ html_template = r'''<!DOCTYPE html>
       let clicks = 0;
 
       // Структуры для каждого режима
-            const organikaSections = {
+      const organikaSections = {
         'org_wa': {
           id: 'org_wa',
           name: '📱 WhatsApp Айтыма Бериковича (77083779828 / iwa-9828)',
@@ -680,6 +730,7 @@ html_template = r'''<!DOCTYPE html>
           items: {}
         }
       };
+
       const influenceManagers = {
         'mpb1': { code: 'mpb1', name: 'Анельжан (mpb1)', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} },
         'mpb2': { code: 'mpb2', name: 'Алина (mpb2)', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} },
@@ -687,6 +738,34 @@ html_template = r'''<!DOCTYPE html>
         'mpb4': { code: 'mpb4', name: 'Дарина (mpb4)', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} },
         'other': { code: 'other', name: 'Другие / Без менеджера', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} }
       };
+
+      // Предзагрузка блогеров из реестра таблицы Google Sheets (93 блогера)
+      const bloggerMap = {};
+      if (typeof INFLUENCE_REGISTRY !== 'undefined' && Array.isArray(INFLUENCE_REGISTRY)) {
+        INFLUENCE_REGISTRY.forEach(b => {
+          if (!b.h) return;
+          const hLower = b.h.toLowerCase();
+          bloggerMap[hLower] = b;
+          if (b.n) bloggerMap[b.n.toLowerCase()] = b;
+          const mKey = b.m || 'mpb1';
+          if (influenceManagers[mKey]) {
+            influenceManagers[mKey].bloggers[b.h] = {
+              handle: b.h,
+              name: b.n || b.h,
+              manager: mKey,
+              subs: b.s || '—',
+              city: b.c || '—',
+              profile: b.p || ('https://instagram.com/' + b.h),
+              utm: b.u || `https://janamen1.kz/influence?utm_source=${b.h}&utm_medium=${mKey}&utm_campaign=ugc_barter&utm_content=reels_stories`,
+              leads: 0,
+              won: 0,
+              rev: 0,
+              clicks: 0,
+              isPreloaded: true
+            };
+          }
+        });
+      }
 
       const fanAccounts = {};
       FAN_REGISTRY.forEach(f => {
@@ -697,6 +776,7 @@ html_template = r'''<!DOCTYPE html>
           won: 0,
           rev: 0,
           clicks: 0,
+          spend: 28750, // 230 000 / 8
           isOfficial: true,
           platforms: {}
         };
@@ -715,9 +795,9 @@ html_template = r'''<!DOCTYPE html>
       });
 
       // Исторические группы
-      fanAccounts['fan_4516'] = { id: 'fan_4516', name: 'Кампания 4516 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
-      fanAccounts['fan_2427'] = { id: 'fan_2427', name: 'Кампания 2427-2431 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
-      fanAccounts['fan_other'] = { id: 'fan_other', name: 'Другие фан-сделки', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
+      fanAccounts['fan_4516'] = { id: 'fan_4516', name: 'Кампания 4516 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, spend: 0, isOfficial: false, platforms: {} };
+      fanAccounts['fan_2427'] = { id: 'fan_2427', name: 'Кампания 2427-2431 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, spend: 0, isOfficial: false, platforms: {} };
+      fanAccounts['fan_other'] = { id: 'fan_other', name: 'Другие фан-сделки', leads: 0, won: 0, rev: 0, clicks: 0, spend: 0, isOfficial: false, platforms: {} };
 
       const allCombos = {};
       const allSources = {};
@@ -739,27 +819,25 @@ html_template = r'''<!DOCTYPE html>
         if (filterDateFrom && l.ts < filterDateFrom) continue;
         if (filterDateTo && l.ts > filterDateTo) continue;
 
-        // Определение принадлежности к каналам
-        const isWa9828 = l.path === '/iwa-9828' || (l.med && l.med.includes('Айтым')) || (l.tags && l.tags.some(t => t.includes('9828') || t.includes('77083779828')));
-        const isSmm = l.path === '/smm' || l.med === 'social' || (l.cmp && l.cmp.toLowerCase().includes('smm')) || (l.src && l.src.toLowerCase().includes('smm'));
-        const isOrganikaSite = l.path === '/organika' || (currentMainChannel === 'organika' && l.path === '/');
-        const isOrganika = isWa9828 || isSmm || isOrganikaSite;
-
-        const isInfluence = l.path === '/influence' || (l.med && l.med.startsWith('mpb')) || (l.cmp && l.cmp.toLowerCase().includes('influence'));
-                const lCmp = (l.cmp || '').toLowerCase();
+        const lCmp = (l.cmp || '').toLowerCase();
         const lCnt = (l.cnt || '').toLowerCase();
         const lMed = (l.med || '').toLowerCase();
         const lSrc = (l.src || '').toLowerCase();
 
+        // Определение каналов
+        const isWa9828 = l.path === '/iwa-9828' || (l.med && l.med.includes('Айтым')) || (l.tags && l.tags.some(t => t.includes('9828') || t.includes('77083779828')));
+        const isSmm = l.path === '/smm' || l.med === 'social' || lCmp.includes('smm') || lSrc.includes('smm');
+        const isOrganikaSite = l.path === '/organika' || (currentMainChannel === 'organika' && l.path === '/');
+        const isOrganika = isWa9828 || isSmm || isOrganikaSite;
+
         let matchedFanId = null;
         for (let fi = 0; fi < FAN_REGISTRY.length; fi++) {
           const f = FAN_REGISTRY[fi];
-          if (lCmp.includes(f.id) || lCnt.includes(f.id)) {
+          if (lCmp.includes(f.id) || lCnt.includes(f.id) || lSrc.includes(f.id)) {
             matchedFanId = f.id;
             break;
           }
         }
-
         if (!matchedFanId) {
           if (lCmp.includes('4516')) matchedFanId = 'fan_4516';
           else if (lCmp.includes('2427') || lCmp.includes('2428') || lCmp.includes('2429') || lCmp.includes('2430') || lCmp.includes('2431')) matchedFanId = 'fan_2427';
@@ -767,8 +845,9 @@ html_template = r'''<!DOCTYPE html>
             matchedFanId = 'fan_other';
           }
         }
-
         const isFan = matchedFanId !== null;
+
+        const isInfluence = !isFan && (l.path === '/influence' || lMed.startsWith('mpb') || lCmp.includes('influence') || (l.src && bloggerMap[lSrc]) || (l.cnt && bloggerMap[lCnt]));
 
         if (isOrganika) countOrganika++;
         if (isInfluence) countInfluence++;
@@ -829,24 +908,61 @@ html_template = r'''<!DOCTYPE html>
           if (l.won) { sec.items[subName].won++; sec.items[subName].rev += l.price; }
         }
 
-        // Агрегация для Influence
+        // Агрегация для Influence (Два источника: Таблица Реестра + AmoCRM)
         if (currentMainChannel === 'influence') {
-          let mKey = (l.med && l.med.startsWith('mpb')) ? l.med : 'other';
+          let mKey = (l.med && l.med.startsWith('mpb')) ? l.med : null;
+          let bKey = null;
+          let regMatch = null;
+
+          // 1. Поиск в реестре по utm_source (в UGC-ссылках имя блогера передается в utm_source!)
+          if (l.src && bloggerMap[lSrc]) {
+            regMatch = bloggerMap[lSrc];
+            bKey = regMatch.h;
+            if (!mKey) mKey = regMatch.m;
+          } else if (l.cnt && bloggerMap[lCnt]) {
+            regMatch = bloggerMap[lCnt];
+            bKey = regMatch.h;
+            if (!mKey) mKey = regMatch.m;
+          } else if (l.cmp && bloggerMap[lCmp]) {
+            regMatch = bloggerMap[lCmp];
+            bKey = regMatch.h;
+            if (!mKey) mKey = regMatch.m;
+          }
+
+          if (!mKey) mKey = (l.med && l.med.startsWith('mpb')) ? l.med : 'other';
           if (!influenceManagers[mKey]) mKey = 'other';
           const mgr = influenceManagers[mKey];
           mgr.leads++;
           if (l.won) { mgr.won++; mgr.rev += l.price; }
 
-          const bKey = (l.cnt && l.cnt !== 'none') ? l.cnt : 'не_указан';
+          if (!bKey) {
+            // Динамический блогер из сделок CRM
+            if (l.src && !['direct', 'instagram', 'tiktok', 'facebook', 'none', 'smm', 'whatsapp', 'influence'].includes(lSrc)) {
+              bKey = l.src;
+            } else if (l.cnt && !['reels_stories', 'stories', 'reels', 'none', 'barter'].includes(lCnt)) {
+              bKey = l.cnt;
+            } else if (l.cmp && !['ugc_barter', 'none', 'leads'].includes(lCmp)) {
+              bKey = l.cmp;
+            } else {
+              bKey = (l.cnt && l.cnt !== 'none') ? l.cnt : ((l.src && l.src !== 'direct') ? l.src : 'не_указан');
+            }
+          }
+
           let b = mgr.bloggers[bKey];
           if (!b) {
             b = mgr.bloggers[bKey] = {
+              handle: bKey,
               name: bKey,
               manager: mKey,
+              subs: '—',
+              city: '—',
+              profile: `https://instagram.com/${bKey}`,
+              utm: `https://janamen1.kz/influence?utm_source=${bKey}&utm_medium=${mKey}&utm_campaign=ugc_barter&utm_content=reels_stories`,
               leads: 0,
               won: 0,
               rev: 0,
-              clicks: 0
+              clicks: 0,
+              isPreloaded: false
             };
           }
           b.leads++;
@@ -863,12 +979,14 @@ html_template = r'''<!DOCTYPE html>
           if (lSrc.includes('tiktok')) pKey = 'tiktok';
           else if (lSrc.includes('instagram') || lSrc.includes('ig')) pKey = 'instagram';
           else if (lSrc.includes('youtube') || lSrc.includes('yt')) pKey = 'youtube';
+          else if (lSrc.includes('facebook') || lSrc.includes('fb')) pKey = 'facebook';
+          else if (lSrc.includes('telegram') || lSrc.includes('tg')) pKey = 'telegram';
           else pKey = l.src || 'other';
 
           if (!fa.platforms[pKey]) {
             fa.platforms[pKey] = {
-              name: pKey,
-              icon: pKey === 'tiktok' ? '🎵' : (pKey === 'instagram' ? '📸' : (pKey === 'youtube' ? '▶️' : '🌐')),
+              name: pKey.charAt(0).toUpperCase() + pKey.slice(1),
+              icon: pKey === 'tiktok' ? '🎵' : (pKey === 'instagram' ? '📸' : (pKey === 'youtube' ? '▶️' : (pKey === 'facebook' ? '👥' : (pKey === 'telegram' ? '✈️' : '🌐')))),
               url: `https://janamen1.kz/fun?utm_source=${pKey}&utm_medium=video&utm_campaign=${matchedFanId}`,
               profile: '',
               leads: 0,
@@ -916,42 +1034,38 @@ html_template = r'''<!DOCTYPE html>
       const bFan = document.getElementById('tabBadgeFan');
       if (bFan) bFan.innerText = countFan + ' лид.';
 
-      // Привязка кликов из CLICK_COUNTS
+      // Привязка кликов
       if (currentMainChannel === 'organika') {
-        const smmClicks = (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_COUNTS['smm'] || 0) + (CLICK_BY_MEDIUM['social'] || 0);
-        organikaSections['org_smm'].clicks = smmClicks;
-        clicks += smmClicks;
-
-        Object.values(organikaSections['org_smm'].items).forEach(item => {
-          item.clicks = (CLICK_COUNTS[item.cnt] || 0) || (item.cnt === 'smm' ? smmClicks : 0);
-        });
-
-        const waClicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_BY_MEDIUM['whatsapp'] || 0);
-        organikaSections['org_wa'].clicks = waClicks;
-        clicks += waClicks;
-
-        const siteClicks = (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
-        organikaSections['org_site'].clicks = siteClicks;
-        clicks += siteClicks;
-      } else if (currentMainChannel === 'influence') {
-        Object.keys(influenceManagers).forEach(mCode => {
-          const mgr = influenceManagers[mCode];
-          let mgrClicks = (CLICK_BY_MEDIUM[mCode] || 0);
-          Object.values(mgr.bloggers).forEach(b => {
-            const bClicks = CLICK_COUNTS[b.name] || 0;
-            b.clicks = bClicks;
-            mgrClicks += bClicks;
+        clicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
+        organikaSections['org_wa'].clicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_COUNTS['iwa-9828'] || 0);
+        organikaSections['org_smm'].clicks = (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_COUNTS['smm'] || 0);
+        organikaSections['org_site'].clicks = (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
+        Object.values(organikaSections).forEach(s => {
+          Object.values(s.items).forEach(item => {
+            item.clicks = CLICK_BY_CONTENT[item.cnt] || CLICK_BY_CAMPAIGN[item.cmp] || 0;
           });
-          mgr.clicks = mgrClicks;
-          clicks += mgrClicks;
+        });
+      } else if (currentMainChannel === 'influence') {
+        clicks = 0;
+        Object.values(influenceManagers).forEach(mgr => {
+          let mClicks = 0;
+          Object.values(mgr.bloggers).forEach(b => {
+            const bClicks = (CLICK_BY_BLOGGER && CLICK_BY_BLOGGER[b.handle] ? CLICK_BY_BLOGGER[b.handle] : 0) + 
+                            (CLICK_BY_SOURCE && CLICK_BY_SOURCE[b.handle] ? CLICK_BY_SOURCE[b.handle] : 0) + 
+                            (CLICK_BY_CONTENT && CLICK_BY_CONTENT[b.handle] ? CLICK_BY_CONTENT[b.handle] : 0);
+            b.clicks = bClicks;
+            mClicks += bClicks;
+          });
+          mgr.clicks = mClicks;
+          clicks += mClicks;
         });
       } else if (currentMainChannel === 'fan') {
+        clicks = 0;
         Object.keys(fanAccounts).forEach(fKey => {
           const fa = fanAccounts[fKey];
           const fClicks = (CLICK_BY_CAMPAIGN[fKey] || 0) + (CLICK_COUNTS[fKey] || 0);
           fa.clicks = fClicks;
           clicks += fClicks;
-
           Object.keys(fa.platforms).forEach(pKey => {
             fa.platforms[pKey].clicks = CLICK_BY_SOURCE[pKey] || 0;
           });
@@ -978,62 +1092,95 @@ html_template = r'''<!DOCTYPE html>
       };
     }
 
-    // ============================================================
-    // ОБНОВЛЕНИЕ KPI КАРТОЧЕК
-    // ============================================================
     function updateKpis() {
       const d = currentChannelData;
-      document.getElementById('kpiTotalLeads').innerText = d.leads.toLocaleString('ru-RU');
-      document.getElementById('kpiWonLeads').innerText = d.won.toLocaleString('ru-RU');
-      document.getElementById('kpiRevenue').innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
-      document.getElementById('kpiAvgCheck').innerText = 'Средний чек: ' + (d.avgCheck || 0).toLocaleString('ru-RU') + ' ₸';
-      document.getElementById('kpiClicks').innerText = d.clicks.toLocaleString('ru-RU');
-      
-      const cr1Pct = d.clicks ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : (d.leads ? '—' : '0%');
-      document.getElementById('kpiCr1').innerText = 'CR1 (Клик ➔ Лид): ' + cr1Pct;
-      
-      const cr2Pct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
-      document.getElementById('kpiCr2').innerText = 'CR2 (Лид ➔ Оплата): ' + cr2Pct;
 
-      const scopeBadge = document.getElementById('kpiScopeBadge');
-      const entityLabel = document.getElementById('kpiEntityLabel');
-      const entitiesCount = document.getElementById('kpiEntitiesCount');
+      if (currentMainChannel === 'fan') {
+        const stdGrid = document.getElementById('kpiStandardGrid');
+        const fanGrid = document.getElementById('kpiFanGrid');
+        if (stdGrid) stdGrid.classList.add('hidden');
+        if (fanGrid) fanGrid.classList.remove('hidden');
 
-      if (currentMainChannel === 'organika') {
-        scopeBadge.innerText = 'Органика';
-        scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800';
-        entityLabel.innerText = 'Связок и точек входа';
-        let subTotal = 0;
-        Object.values(d.organikaSections || {}).forEach(s => subTotal += Object.keys(s.items).length);
-        entitiesCount.innerText = '3 напр. (' + subTotal + ' связок)';
-      } else if (currentMainChannel === 'influence') {
-        scopeBadge.innerText = 'Influence';
-        scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
-        entityLabel.innerText = 'Блогеров в базе';
-        let bCount = 0;
-        Object.values(d.influenceManagers).forEach(m => bCount += Object.keys(m.bloggers).length);
-        entitiesCount.innerText = bCount;
-      } else if (currentMainChannel === 'fan') {
-        scopeBadge.innerText = 'Fan-аккаунты';
-        scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800';
-        entityLabel.innerText = 'Фан-аккаунтов';
-        entitiesCount.innerText = FAN_REGISTRY.length + ' аккаунтов';
-      } else if (currentMainChannel === 'tags') {
-        scopeBadge.innerText = 'Теги CRM';
-        scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
-        entityLabel.innerText = 'Тегов AmoCRM';
-        entitiesCount.innerText = d.allTags.length;
+        const fanLeadsEl = document.getElementById('fanKpiLeads');
+        const fanWonEl = document.getElementById('fanKpiWon');
+        const fanRevEl = document.getElementById('fanKpiRevenue');
+        const fanSpendEl = document.getElementById('fanKpiSpend');
+        const fanCrEl = document.getElementById('fanKpiCr');
+        const fanAvgEl = document.getElementById('fanKpiAvgCheck');
+        const fanRomiEl = document.getElementById('fanKpiRomi');
+        const fanUtmEl = document.getElementById('fanKpiUtmCount');
+        const fanUtmPctEl = document.getElementById('fanKpiUtmPct');
+
+        if (fanLeadsEl) fanLeadsEl.innerText = d.leads.toLocaleString('ru-RU');
+        if (fanWonEl) fanWonEl.innerText = d.won.toLocaleString('ru-RU');
+        if (fanRevEl) fanRevEl.innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
+        
+        const totalSpend = 230000;
+        if (fanSpendEl) fanSpendEl.innerText = totalSpend.toLocaleString('ru-RU') + ' ₸';
+        const crPct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
+        if (fanCrEl) fanCrEl.innerText = crPct;
+        const avg = d.won ? Math.round(d.rev / d.won) : 0;
+        if (fanAvgEl) fanAvgEl.innerText = avg.toLocaleString('ru-RU') + ' ₸';
+        const romi = totalSpend ? Math.round((d.rev - totalSpend) / totalSpend * 100) : 0;
+        if (fanRomiEl) fanRomiEl.innerText = (romi > 0 ? '+' : '') + romi + '%';
+        if (fanUtmEl) fanUtmEl.innerText = d.leads.toLocaleString('ru-RU');
+        if (fanUtmPctEl) fanUtmPctEl.innerText = '100%';
+
       } else {
-        scopeBadge.innerText = 'Все каналы';
-        scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-800';
-        entityLabel.innerText = 'Активных UTM-связок';
-        entitiesCount.innerText = d.allCombos.length;
+        const stdGrid = document.getElementById('kpiStandardGrid');
+        const fanGrid = document.getElementById('kpiFanGrid');
+        if (stdGrid) stdGrid.classList.remove('hidden');
+        if (fanGrid) fanGrid.classList.add('hidden');
+
+        document.getElementById('kpiTotalLeads').innerText = d.leads.toLocaleString('ru-RU');
+        document.getElementById('kpiWonLeads').innerText = d.won.toLocaleString('ru-RU');
+        document.getElementById('kpiRevenue').innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('kpiAvgCheck').innerText = 'Средний чек: ' + (d.avgCheck || 0).toLocaleString('ru-RU') + ' ₸';
+        document.getElementById('kpiClicks').innerText = d.clicks.toLocaleString('ru-RU');
+        
+        const cr1Pct = d.clicks ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : (d.leads ? '—' : '0%');
+        document.getElementById('kpiCr1').innerText = 'CR1 (Клик ➔ Лид): ' + cr1Pct;
+        
+        const cr2Pct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
+        document.getElementById('kpiCr2').innerText = 'CR2 (Лид ➔ Оплата): ' + cr2Pct;
+
+        const scopeBadge = document.getElementById('kpiScopeBadge');
+        const entityLabel = document.getElementById('kpiEntityLabel');
+        const entitiesCount = document.getElementById('kpiEntitiesCount');
+
+        if (currentMainChannel === 'organika') {
+          scopeBadge.innerText = 'Органика';
+          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800';
+          entityLabel.innerText = 'Связок и точек входа';
+          let subTotal = 0;
+          Object.values(d.organikaSections || {}).forEach(s => subTotal += Object.keys(s.items).length);
+          entitiesCount.innerText = '3 напр. (' + subTotal + ' связок)';
+        } else if (currentMainChannel === 'influence') {
+          scopeBadge.innerText = 'Influence';
+          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
+          entityLabel.innerText = 'Блогеров в реестре';
+          let bCount = 0;
+          let bActive = 0;
+          Object.values(d.influenceManagers || {}).forEach(m => {
+            const bList = Object.values(m.bloggers || {});
+            bCount += bList.length;
+            bActive += bList.filter(b => b.leads > 0).length;
+          });
+          entitiesCount.innerText = bCount + ' блогеров' + (bActive ? ` (${bActive} акт.)` : '');
+        } else if (currentMainChannel === 'tags') {
+          scopeBadge.innerText = 'Теги CRM';
+          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
+          entityLabel.innerText = 'Тегов AmoCRM';
+          entitiesCount.innerText = d.allTags.length;
+        } else {
+          scopeBadge.innerText = 'Все каналы';
+          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-800';
+          entityLabel.innerText = 'Активных UTM-связок';
+          entitiesCount.innerText = d.allCombos.length;
+        }
       }
     }
 
-    // ============================================================
-    // УПРАВЛЕНИЕ АККОРДЕОНАМИ (РАЗВЕРНУТЬ / СВЕРНУТЬ)
-    // ============================================================
     function toggleAccordion(id) {
       if (expandedAccordions.has(id)) {
         expandedAccordions.delete(id);
@@ -1045,7 +1192,9 @@ html_template = r'''<!DOCTYPE html>
 
     function expandAllAccordion() {
       Object.keys(currentChannelData.influenceManagers || {}).forEach(k => expandedAccordions.add(k));
-      ['org_wa', 'org_smm', 'org_site'].forEach(k => expandedAccordions.add(k)); FAN_REGISTRY.forEach(f => expandedAccordions.add(f.id)); Object.keys(currentChannelData.fanAccounts || {}).forEach(k => expandedAccordions.add(k));
+      ['org_wa', 'org_smm', 'org_site'].forEach(k => expandedAccordions.add(k));
+      FAN_REGISTRY.forEach(f => expandedAccordions.add(f.id));
+      Object.keys(currentChannelData.fanAccounts || {}).forEach(k => expandedAccordions.add(k));
       renderMainTable();
     }
 
@@ -1190,19 +1339,20 @@ html_template = r'''<!DOCTYPE html>
         mainTitle.innerText = '🌟 Influence (Инфлюенс-маркетинг): Менеджеры МПБ & Блогеры';
         badgeTitle.innerText = 'Канал 2';
         badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-purple-100 text-purple-800';
-        subTitle.innerText = 'Свертка по менеджерам (клики, лиды, продажи) с разворачиванием до каждого блогера';
+        subTitle.innerText = 'Свертка по 4 менеджерам МПБ с разворачиванием до каждого блогера из таблицы Google Sheets (93+) и сделок AmoCRM';
 
         thead.innerHTML = `
           <tr>
-            <th class="py-3 px-4">Менеджер / Блогер (utm_content)</th>
-            <th class="py-3 px-4 text-center">Кликов (Переходов)</th>
-            <th class="py-3 px-4 text-center">Всего заявок (Лидов)</th>
+            <th class="py-3 px-4">Менеджер / Блогер</th>
+            <th class="py-3 px-4 text-center">Площадка / Подписчики / Город</th>
+            <th class="py-3 px-4 text-center">Кликов</th>
+            <th class="py-3 px-4 text-center">Всего лидов</th>
             <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
-            <th class="py-3 px-4 text-center">Оплачено (142)</th>
+            <th class="py-3 px-4 text-center">Оплачено</th>
             <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
             <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
-            <th class="py-3 px-4 text-center">Быстрая ссылка</th>
+            <th class="py-3 px-4 text-center">Instagram & Ссылка</th>
           </tr>
         `;
 
@@ -1210,15 +1360,19 @@ html_template = r'''<!DOCTYPE html>
         let totalRows = 0;
         let html = '';
 
-        // Порядок отображения 4 менеджеров
         const order = ['mpb1', 'mpb2', 'mpb3', 'mpb4', 'other'];
 
         order.forEach(mCode => {
           const m = mgrs[mCode];
           if (!m) return;
           const isExpanded = expandedAccordions.has(mCode);
-          const bloggersList = Object.values(m.bloggers || {}).sort((a,b) => b.rev - a.rev || b.leads - a.leads);
+          const bloggersList = Object.values(m.bloggers || {}).sort((a,b) => {
+            if (b.leads !== a.leads) return b.leads - a.leads;
+            if (b.rev !== a.rev) return b.rev - a.rev;
+            return a.name.localeCompare(b.name);
+          });
           const bCount = bloggersList.length;
+          const activeCount = bloggersList.filter(b => b.leads > 0).length;
 
           const mCr1 = m.clicks ? (Math.round(m.leads / m.clicks * 1000) / 10) + '%' : (m.leads ? '—' : '0%');
           const mCr2 = m.leads ? (Math.round(m.won / m.leads * 1000) / 10) + '%' : '0%';
@@ -1226,18 +1380,19 @@ html_template = r'''<!DOCTYPE html>
 
           totalRows++;
 
-          // Строка Менеджера (Level 1)
+          // Строка менеджера (Level 1)
           html += `
-            <tr onclick="toggleAccordion('${mCode}')" class="bg-purple-50/60 hover:bg-purple-100/60 cursor-pointer transition font-bold border-t-2 border-purple-200">
-              <td class="py-3.5 px-4 text-slate-900 flex items-center space-x-2">
+            <tr onclick="toggleAccordion('${mCode}')" class="bg-purple-50/70 hover:bg-purple-100/70 cursor-pointer transition font-bold border-t-2 border-purple-200">
+              <td class="py-3.5 px-4 text-purple-950 flex items-center space-x-2">
                 <span class="w-5 h-5 rounded-md bg-purple-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
                   ▶
                 </span>
-                <span class="text-sm font-black text-purple-950">${m.name}</span>
+                <span class="text-sm font-black">${m.name}</span>
                 <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-purple-200 text-purple-900">
-                  ${bCount} блогеров
+                  ${bCount} блогеров ${activeCount > 0 ? `(${activeCount} активных)` : ''}
                 </span>
               </td>
+              <td class="py-3.5 px-4 text-center text-xs text-slate-500 font-medium">Отдел блогеров</td>
               <td class="py-3.5 px-4 text-center font-black text-purple-700">${m.clicks ? m.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
               <td class="py-3.5 px-4 text-center font-black text-slate-900">${m.leads.toLocaleString('ru-RU')}</td>
               <td class="py-3.5 px-4 text-center font-bold text-slate-700">${mCr1}</td>
@@ -1246,8 +1401,8 @@ html_template = r'''<!DOCTYPE html>
               <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${m.rev.toLocaleString('ru-RU')} ₸</td>
               <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${mAvg.toLocaleString('ru-RU')} ₸</td>
               <td class="py-3.5 px-4 text-center">
-                <button onclick="event.stopPropagation(); openGenForManager('${mCode}')" class="px-2 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-200 rounded-lg border border-purple-300 transition">
-                  + Ссылка
+                <button onclick="event.stopPropagation(); copyInfluenceManagerLink('${mCode}')" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-200 rounded-lg border border-purple-300 transition">
+                  📋 Ссылка МПБ
                 </button>
               </td>
             </tr>
@@ -1258,7 +1413,7 @@ html_template = r'''<!DOCTYPE html>
             if (bCount === 0) {
               html += `
                 <tr class="bg-white">
-                  <td colspan="9" class="py-3 px-8 text-xs text-slate-400 italic">У данного менеджера пока нет лидов/блогеров за выбранный период</td>
+                  <td colspan="10" class="py-3 px-8 text-xs text-slate-400 italic">У данного менеджера пока нет лидов/блогеров в базе</td>
                 </tr>
               `;
             } else {
@@ -1267,21 +1422,34 @@ html_template = r'''<!DOCTYPE html>
                 const bCr1 = b.clicks ? (Math.round(b.leads / b.clicks * 1000) / 10) + '%' : (b.leads ? '—' : '0%');
                 const bCr2 = b.leads ? (Math.round(b.won / b.leads * 1000) / 10) + '%' : '0%';
                 const bAvg = b.won ? Math.round(b.rev / b.won) : 0;
+                const isTested = b.handle === 'aishka_karimova';
+                const rowBg = isTested ? 'bg-amber-50/60 hover:bg-amber-100/70' : (b.leads > 0 ? 'bg-emerald-50/30 hover:bg-emerald-100/40' : 'hover:bg-slate-50');
+
                 html += `
-                  <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
-                    <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 code-font flex items-center space-x-1.5">
+                  <tr class="${rowBg} transition text-xs border-b border-slate-100">
+                    <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 flex items-center space-x-2">
                       <span class="text-slate-300 font-mono">└─</span>
-                      <span class="text-brand-700 font-bold">@${b.name}</span>
+                      <a href="${b.profile || ('https://instagram.com/' + b.handle)}" target="_blank" class="text-purple-700 hover:text-purple-900 font-black hover:underline flex items-center space-x-1">
+                        <span>📸</span>
+                        <span>@${b.handle}</span>
+                      </a>
+                      ${b.name && b.name !== b.handle ? `<span class="text-slate-500 font-medium text-[11px]">(${b.name})</span>` : ''}
+                      ${isTested ? '<span class="px-1.5 py-0.2 text-[9px] font-black rounded-full bg-amber-200 text-amber-900 animate-pulse">Тестовый лид</span>' : ''}
+                      ${b.leads > 0 && !isTested ? `<span class="px-1.5 py-0.2 text-[9px] font-black rounded-full bg-emerald-100 text-emerald-800">${b.leads} лид.</span>` : ''}
+                    </td>
+                    <td class="py-2.5 px-4 text-center">
+                      <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-slate-100 text-slate-700">${b.subs || '—'}</span>
+                      ${b.city && b.city !== '—' ? `<span class="text-[10px] text-slate-400 block">${b.city}</span>` : ''}
                     </td>
                     <td class="py-2.5 px-4 text-center font-bold text-purple-700">${b.clicks ? b.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
-                    <td class="py-2.5 px-4 text-center font-bold text-slate-800">${b.leads.toLocaleString('ru-RU')}</td>
+                    <td class="py-2.5 px-4 text-center font-black ${b.leads > 0 ? 'text-slate-900 bg-emerald-100/70 rounded' : 'text-slate-400'}">${b.leads.toLocaleString('ru-RU')}</td>
                     <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${bCr1}</td>
                     <td class="py-2.5 px-4 text-center font-black text-emerald-600">${b.won}</td>
                     <td class="py-2.5 px-4 text-center font-bold ${b.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${bCr2}</td>
                     <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${b.rev.toLocaleString('ru-RU')} ₸</td>
                     <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${bAvg.toLocaleString('ru-RU')} ₸</td>
                     <td class="py-2.5 px-4 text-center">
-                      <button onclick="copyBloggerLinkDirect('${b.name}', '${mCode}')" title="Скопировать ссылку" class="px-2 py-0.5 text-[11px] font-bold text-slate-600 hover:text-purple-700 bg-slate-100 hover:bg-purple-100 rounded border border-slate-200 transition">
+                      <button onclick="copyBloggerLinkDirect('${b.handle}', '${mCode}', '${b.utm || ''}')" title="Скопировать готовую UTM-ссылку блогера" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 hover:text-white bg-purple-50 hover:bg-purple-600 rounded-lg border border-purple-200 transition">
                         📋 Ссылка
                       </button>
                     </td>
@@ -1296,22 +1464,27 @@ html_template = r'''<!DOCTYPE html>
         tbody.innerHTML = html;
 
       } else if (currentMainChannel === 'fan') {
-        mainTitle.innerText = '🎬 Fan (Фан-аккаунты сетки): 8 аккаунтов команды & каналы';
+        mainTitle.innerText = '🚀 JANA MEN — СКВОЗНАЯ АНАЛИТИКА ФАН АККАУНТОВ';
         badgeTitle.innerText = 'Канал 3';
         badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-indigo-100 text-indigo-800';
-        subTitle.innerText = 'Свертка по 8 сотрудникам сетки с детализацией по TikTok, Instagram, YouTube, готовыми ссылками и переходами на профили';
+        subTitle.innerText = 'Автоматический расчет по данным сделок AmoCRM и Реестра маркетинговых UTM-меток (без ошибок Google Таблиц)';
 
         thead.innerHTML = `
           <tr>
-            <th class="py-3 px-4">Сотрудник / Площадка</th>
-            <th class="py-3 px-4 text-center">Кликов (Переходов)</th>
-            <th class="py-3 px-4 text-center">Всего заявок (Лидов)</th>
-            <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
-            <th class="py-3 px-4 text-center">Оплачено (142)</th>
-            <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
+            <th class="py-3 px-4">Менеджер / Сотрудник</th>
+            <th class="py-3 px-4 text-center">Источник (utm_source)</th>
+            <th class="py-3 px-4 text-center">Кликов всего</th>
+            <th class="py-3 px-4 text-center">Лидов всего</th>
+            <th class="py-3 px-4 text-center">Оплачено</th>
+            <th class="py-3 px-4 text-center">Конверсия в лиды</th>
+            <th class="py-3 px-4 text-center">Конверсия CR</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
-            <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
-            <th class="py-3 px-4 text-center">UTM-ссылка & Профиль</th>
+            <th class="py-3 px-4 text-right">Средний чек (₸)</th>
+            <th class="py-3 px-4 text-right">Маркетинг бюджет (₸)</th>
+            <th class="py-3 px-4 text-right">CPL (₸)</th>
+            <th class="py-3 px-4 text-right">CAC (₸)</th>
+            <th class="py-3 px-4 text-center">ROMI (%)</th>
+            <th class="py-3 px-4 text-center">UTM & Профиль</th>
           </tr>
         `;
 
@@ -1319,7 +1492,7 @@ html_template = r'''<!DOCTYPE html>
         let totalRows = 0;
         let html = '';
 
-        // Сначала отображаем 8 официальных сотрудников команды
+        // 8 официальных сотрудников команды
         FAN_REGISTRY.forEach(fReg => {
           const f = fans[fReg.id];
           if (!f) return;
@@ -1330,6 +1503,10 @@ html_template = r'''<!DOCTYPE html>
           const fCr1 = f.clicks ? (Math.round(f.leads / f.clicks * 1000) / 10) + '%' : (f.leads ? '—' : '0%');
           const fCr2 = f.leads ? (Math.round(f.won / f.leads * 1000) / 10) + '%' : '0%';
           const fAvg = f.won ? Math.round(f.rev / f.won) : 0;
+          const fSpend = f.spend || 28750;
+          const fCpl = f.leads ? Math.round(fSpend / f.leads) : 0;
+          const fCac = f.won ? Math.round(fSpend / f.won) : 0;
+          const fRomi = fSpend ? Math.round((f.rev - fSpend) / fSpend * 100) : 0;
 
           totalRows++;
 
@@ -1344,15 +1521,19 @@ html_template = r'''<!DOCTYPE html>
                 <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-200 text-indigo-900">
                   ${pCount} площадки
                 </span>
-                ${f.leads === 0 ? '<span class="px-2 py-0.2 text-[9px] font-bold rounded-full bg-slate-200/70 text-slate-600">Готов к трафику</span>' : ''}
               </td>
+              <td class="py-3.5 px-4 text-center text-xs text-slate-500 font-semibold">Все площадки</td>
               <td class="py-3.5 px-4 text-center font-black text-indigo-700">${f.clicks ? f.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
               <td class="py-3.5 px-4 text-center font-black text-slate-900">${f.leads.toLocaleString('ru-RU')}</td>
-              <td class="py-3.5 px-4 text-center font-bold text-slate-700">${fCr1}</td>
               <td class="py-3.5 px-4 text-center font-black text-emerald-600">${f.won}</td>
+              <td class="py-3.5 px-4 text-center font-bold text-slate-700">${fCr1}</td>
               <td class="py-3.5 px-4 text-center font-bold ${f.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${fCr2}</td>
               <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${f.rev.toLocaleString('ru-RU')} ₸</td>
               <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fAvg.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-right font-bold text-rose-700 whitespace-nowrap">${fSpend.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fCpl ? fCpl.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+              <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fCac ? fCac.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
+              <td class="py-3.5 px-4 text-center font-black ${fRomi > 0 ? 'text-emerald-700' : 'text-slate-400'}">${fSpend ? (fRomi > 0 ? '+' : '') + fRomi + '%' : '—'}</td>
               <td class="py-3.5 px-4 text-center">
                 <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2.5 py-1 text-[11px] font-bold text-indigo-700 bg-white hover:bg-indigo-200 rounded-lg border border-indigo-300 transition">
                   📋 Ссылки
@@ -1373,28 +1554,28 @@ html_template = r'''<!DOCTYPE html>
 
               html += `
                 <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
-                  <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 code-font flex items-center space-x-2">
+                  <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 flex items-center space-x-2">
                     <span class="text-slate-300 font-mono">└─</span>
                     <span class="text-base leading-none">${p.icon}</span>
                     <span class="text-slate-900 font-black">${p.name}</span>
-                    ${p.profile && !hasProfile ? '<span class="text-[10px] text-slate-400 font-normal">(' + p.profile + ')</span>' : ''}
                   </td>
-                  <td class="py-2.5 px-4 text-center font-bold text-indigo-700">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                  <td class="py-2.5 px-4 text-center text-xs font-mono text-purple-700 font-bold">${p.name.toLowerCase()}</td>
+                  <td class="py-2.5 px-4 text-center font-bold text-purple-700">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
                   <td class="py-2.5 px-4 text-center font-bold text-slate-800">${pData.leads.toLocaleString('ru-RU')}</td>
-                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
                   <td class="py-2.5 px-4 text-center font-black text-emerald-600">${pData.won}</td>
+                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
                   <td class="py-2.5 px-4 text-center font-bold ${pData.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
                   <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${pData.rev.toLocaleString('ru-RU')} ₸</td>
                   <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${pAvg.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2.5 px-4 text-right text-slate-400">—</td>
+                  <td class="py-2.5 px-4 text-right text-slate-400">—</td>
+                  <td class="py-2.5 px-4 text-right text-slate-400">—</td>
+                  <td class="py-2.5 px-4 text-center text-slate-400">—</td>
                   <td class="py-2.5 px-4 text-center flex items-center justify-center space-x-1.5">
-                    <button onclick="copyFanUtmDirect('${p.url}', '${f.name}', '${p.name}')" title="Скопировать готовую UTM-ссылку" class="px-2 py-0.5 text-[11px] font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 rounded border border-indigo-200 transition">
+                    ${hasProfile ? `<a href="${p.profile}" target="_blank" title="Открыть профиль" class="px-2 py-0.5 text-[10px] font-bold text-slate-600 hover:text-indigo-700 bg-slate-100 hover:bg-indigo-50 rounded border border-slate-200 transition">👤 Профиль</a>` : ''}
+                    <button onclick="copyFanPlatformLink('${p.url}')" title="Скопировать готовую ссылку с меткой" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 hover:text-white bg-indigo-50 hover:bg-indigo-600 rounded border border-indigo-200 transition">
                       📋 UTM
                     </button>
-                    ${hasProfile ? `
-                      <a href="${p.profile}" target="_blank" title="Открыть соцсеть" class="px-2 py-0.5 text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded border border-slate-200 transition">
-                        🔗 Профиль
-                      </a>
-                    ` : ''}
                   </td>
                 </tr>
               `;
@@ -1402,54 +1583,37 @@ html_template = r'''<!DOCTYPE html>
           }
         });
 
-        // Исторические архивные фан-кампании
-        const histKeys = ['fan_4516', 'fan_2427', 'fan_other'];
-        histKeys.forEach(hKey => {
-          const h = fans[hKey];
-          if (!h || h.leads === 0) return;
-          const isExpanded = expandedAccordions.has(hKey);
-          const pList = Object.values(h.platforms || {});
+        // Исторические архивы
+        ['fan_4516', 'fan_2427', 'fan_other'].forEach(arcKey => {
+          const a = fans[arcKey];
+          if (!a || (a.leads === 0 && a.won === 0)) return;
+          const aCr1 = a.clicks ? (Math.round(a.leads / a.clicks * 1000) / 10) + '%' : '—';
+          const aCr2 = a.leads ? (Math.round(a.won / a.leads * 1000) / 10) + '%' : '0%';
+          const aAvg = a.won ? Math.round(a.rev / a.won) : 0;
           totalRows++;
+
           html += `
-            <tr onclick="toggleAccordion('${hKey}')" class="bg-slate-100/70 hover:bg-slate-200/60 cursor-pointer transition font-bold border-t border-slate-200 text-slate-700">
-              <td class="py-3 px-4 flex items-center space-x-2">
-                <span class="w-4 h-4 rounded bg-slate-400 text-white flex items-center justify-center text-[10px] transition-transform ${isExpanded ? 'rotate-90' : ''}">▶</span>
-                <span class="text-xs font-bold text-slate-800">${h.name}</span>
-                <span class="px-1.5 py-0.2 text-[9px] font-semibold rounded bg-slate-200 text-slate-600">Архив</span>
-              </td>
+            <tr class="bg-slate-100/70 hover:bg-slate-200/70 text-xs border-t border-slate-200 font-semibold text-slate-700">
+              <td class="py-3 px-4 font-bold text-slate-800">${a.name}</td>
+              <td class="py-3 px-4 text-center text-slate-400">Архивные UTM</td>
               <td class="py-3 px-4 text-center text-slate-400">—</td>
-              <td class="py-3 px-4 text-center font-bold text-slate-800">${h.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3 px-4 text-center font-bold text-slate-800">${a.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3 px-4 text-center font-black text-emerald-600">${a.won}</td>
               <td class="py-3 px-4 text-center text-slate-400">—</td>
-              <td class="py-3 px-4 text-center font-bold text-emerald-600">${h.won}</td>
-              <td class="py-3 px-4 text-center font-semibold text-slate-600">${h.leads ? (Math.round(h.won/h.leads*1000)/10)+'%' : '0%'}</td>
-              <td class="py-3 px-4 text-right font-bold text-slate-800">${h.rev.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3 px-4 text-right text-slate-600">${(h.won ? Math.round(h.rev/h.won) : 0).toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3 px-4 text-center text-slate-400 text-[10px]">Архивные сделки</td>
+              <td class="py-3 px-4 text-center font-bold ${a.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${aCr2}</td>
+              <td class="py-3 px-4 text-right font-black text-slate-900">${a.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-right text-slate-700">${aAvg.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-right text-slate-400">—</td>
+              <td class="py-3 px-4 text-right text-slate-400">—</td>
+              <td class="py-3 px-4 text-right text-slate-400">—</td>
+              <td class="py-3 px-4 text-center text-slate-400">—</td>
+              <td class="py-3 px-4 text-center text-slate-400 italic">Исторические сделки</td>
             </tr>
           `;
-          if (isExpanded) {
-            pList.forEach(p => {
-              totalRows++;
-              html += `
-                <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100 text-slate-600">
-                  <td class="py-2 px-4 pl-10 code-font">└─ ${p.name}</td>
-                  <td class="py-2 px-4 text-center text-slate-400">—</td>
-                  <td class="py-2 px-4 text-center font-semibold">${p.leads}</td>
-                  <td class="py-2 px-4 text-center text-slate-400">—</td>
-                  <td class="py-2 px-4 text-center font-bold text-emerald-600">${p.won}</td>
-                  <td class="py-2 px-4 text-center">${p.leads ? (Math.round(p.won/p.leads*1000)/10)+'%' : '0%'}</td>
-                  <td class="py-2 px-4 text-right">${p.rev.toLocaleString('ru-RU')} ₸</td>
-                  <td class="py-2 px-4 text-right">${(p.won ? Math.round(p.rev/p.won) : 0).toLocaleString('ru-RU')} ₸</td>
-                  <td class="py-2 px-4 text-center text-slate-300">—</td>
-                </tr>
-              `;
-            });
-          }
         });
 
         rowBadge.innerText = 'Показано: ' + totalRows + ' строк';
         tbody.innerHTML = html;
-
       } else if (currentMainChannel === 'tags') {
         mainTitle.innerText = '🏷️ ТЕГИ AmoCRM: Полный срез всех тегов сделок';
         badgeTitle.innerText = 'Теги CRM';
@@ -1583,11 +1747,10 @@ html_template = r'''<!DOCTYPE html>
       navigator.clipboard.writeText(text);
       alert('✓ Скопированы все UTM-ссылки для ' + f.name + ':\n\n' + text);
     }
-    function copyBloggerLinkDirect(blogger, manager) {
-      const origin = window.location.origin;
-      const url = origin + '/r/' + encodeURIComponent(blogger) + '?m=' + manager + '&p=/influence';
+    function copyBloggerLinkDirect(blogger, manager, customUrl) {
+      const url = customUrl || ('https://janamen1.kz/influence?utm_source=' + encodeURIComponent(blogger) + '&utm_medium=' + manager + '&utm_campaign=ugc_barter&utm_content=reels_stories');
       navigator.clipboard.writeText(url);
-      alert('✓ Ссылка для блогера @' + blogger + ' скопирована:\n' + url);
+      alert('✓ Персональная UTM-ссылка для блогера @' + blogger + ' скопирована:\n' + url);
     }
 
     function openLinkGeneratorModal() {

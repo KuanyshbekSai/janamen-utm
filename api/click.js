@@ -22,12 +22,26 @@ export default async function handler(req, res) {
       payload = req.query || {};
     }
 
-    const blogger = (payload.blogger || payload.utm_content || payload.cnt || '').trim();
     const source = (payload.source || payload.utm_source || payload.src || 'direct').trim();
     const medium = (payload.medium || payload.utm_medium || payload.med || 'none').trim();
     const campaign = (payload.campaign || payload.utm_campaign || payload.cmp || 'none').trim();
     const term = (payload.term || payload.utm_term || payload.trm || 'none').trim();
+    const content = (payload.content || payload.utm_content || payload.cnt || 'none').trim();
     const page = (payload.page || payload.landing_page || '/').trim();
+
+    // Если medium это менеджер (mpb1..mpb4) или source это имя блогера
+    let blogger = (payload.blogger || '').trim();
+    if (!blogger) {
+      if (medium.toLowerCase().startsWith('mpb') && source !== 'direct' && source !== 'instagram' && source !== 'tiktok') {
+        blogger = source;
+      } else if (content && !['none', 'reels_stories', 'stories', 'reels'].includes(content.toLowerCase())) {
+        blogger = content;
+      } else if (campaign && !['none', 'ugc_barter', 'leads'].includes(campaign.toLowerCase())) {
+        blogger = campaign;
+      } else {
+        blogger = source;
+      }
+    }
 
     const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '';
     const ipHash = ip ? crypto.createHash('md5').update(ip).digest('hex').slice(0, 16) : null;
@@ -47,8 +61,8 @@ export default async function handler(req, res) {
         utm_source: source,
         utm_medium: medium,
         utm_campaign: campaign,
-        utm_content: blogger || 'none',
-        utm_term: term || 'none',
+        utm_content: content,
+        utm_term: term,
         landing_page: page,
         blogger: blogger || 'none',
         referrer: referrer,
@@ -58,7 +72,7 @@ export default async function handler(req, res) {
       }])
     });
 
-    return res.status(200).json({ ok: r.ok, timestamp: new Date().toISOString() });
+    return res.status(200).json({ ok: r.ok, blogger: blogger, timestamp: new Date().toISOString() });
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
