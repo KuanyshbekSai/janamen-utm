@@ -130,10 +130,10 @@ html_template = r'''<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (КОМПАКТНЫЙ НИЗКОПРОФИЛЬНЫЙ ВИД) -->
-    <div id="kpiStandardGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5">
+    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (6 КАРТОЧЕК ВКЛЮЧАЯ ОКУПАЕМОСТЬ ROMI) -->
+    <div id="kpiStandardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
       
-      <!-- Лиды -->
+      <!-- 1. Лиды -->
       <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs">
         <div class="flex items-center justify-between">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок (CRM)</span>
@@ -143,32 +143,42 @@ html_template = r'''<!DOCTYPE html>
         <div class="text-[10px] text-slate-400 mt-0.5" id="kpiLeadsPeriod">за выбранный период</div>
       </div>
 
-      <!-- Клики -->
+      <!-- 2. Клики -->
       <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-purple-200 shadow-2xs bg-purple-50/20">
         <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
         <div id="kpiClicks" class="text-lg sm:text-2xl font-black text-purple-800 mt-0.5 leading-tight">0</div>
         <div id="kpiCr1" class="text-[10px] font-bold text-purple-700 mt-0.5">CR1: —</div>
       </div>
 
-      <!-- Оплачено -->
+      <!-- 3. Оплачено -->
       <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
         <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (Статус 142)</div>
         <div id="kpiWonLeads" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">—</div>
         <div id="kpiCr2" class="text-[10px] font-bold text-emerald-700 mt-0.5">CR2: —</div>
       </div>
 
-      <!-- Выручка -->
+      <!-- 4. Выручка -->
       <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
         <div class="text-[10px] font-bold text-brand-700 uppercase tracking-wider">Выручка (₸)</div>
         <div id="kpiRevenue" class="text-lg sm:text-2xl font-black text-brand-700 mt-0.5 leading-tight whitespace-nowrap">—</div>
         <div id="kpiAvgCheck" class="text-[10px] font-medium text-slate-500 mt-0.5">Ср. чек: —</div>
       </div>
 
-      <!-- Расходы / Активные -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs col-span-2 lg:col-span-1">
-        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider" id="kpiEntityLabel">Активных сущностей</div>
-        <div id="kpiEntitiesCount" class="text-lg sm:text-2xl font-black text-slate-800 mt-0.5 leading-tight">—</div>
-        <div class="text-[10px] text-slate-400 mt-0.5" id="kpiEntitySub">в текущей выборке</div>
+      <!-- 5. Расходы на маркетинг (Витамины + доставка + гонорары) -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
+        <div class="text-[10px] font-bold text-rose-700 uppercase tracking-wider" id="kpiExpenseLabel">Расходы маркетинга</div>
+        <div id="kpiExpenses" class="text-lg sm:text-2xl font-black text-rose-800 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
+        <div id="kpiExpensesSub" class="text-[10px] text-rose-600 mt-0.5 font-medium truncate">витамины + доставка</div>
+      </div>
+
+      <!-- 6. Окупаемость канала (ROMI / Payback) -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость (ROMI)</span>
+          <span id="kpiRomiBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
+        </div>
+        <div id="kpiRomi" class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap">—</div>
+        <div id="kpiRomiSub" class="text-[10px] text-emerald-800 mt-0.5 font-bold truncate">возврат инвестиций</div>
       </div>
 
     </div>
@@ -199,17 +209,26 @@ html_template = r'''<!DOCTYPE html>
         <div id="fanKpiWon" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">0</div>
         <div class="text-[10px] text-emerald-600 mt-0.5">успешные</div>
       </div>
-      <!-- 5. CR2 -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
-        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">CR2 (Лид➔Оплата)</div>
-        <div id="fanKpiCr2" class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight">0%</div>
-        <div class="text-[10px] text-emerald-600 mt-0.5">оплата</div>
+      <!-- 4. Выручка -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
+        <div class="text-[10px] font-bold text-brand-700 uppercase tracking-wider">Выручка (₸)</div>
+        <div id="fanKpiRevenue" class="text-lg sm:text-2xl font-black text-brand-700 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
+        <div class="text-[10px] text-slate-500 mt-0.5 font-medium" id="fanKpiAvgCheck">Ср. чек: 0 ₸</div>
       </div>
-      <!-- 6. Выручка -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200 shadow-2xs">
-        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Выручка (₸)</div>
-        <div id="fanKpiRevenue" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
-        <div class="text-[10px] text-slate-400 mt-0.5" id="fanKpiAvgCheck">Ср. чек: 0 ₸</div>
+      <!-- 5. Расходы сетки -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
+        <div class="text-[10px] font-bold text-rose-700 uppercase tracking-wider">Расходы сетки</div>
+        <div class="text-lg sm:text-2xl font-black text-rose-800 mt-0.5 leading-tight">0 ₸</div>
+        <div class="text-[10px] text-rose-600 mt-0.5 font-medium">без прямых расходов</div>
+      </div>
+      <!-- 6. Окупаемость канала (ROMI) -->
+      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость (ROMI)</span>
+          <span class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
+        </div>
+        <div class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap">∞ (Органика)</div>
+        <div class="text-[10px] text-emerald-800 mt-0.5 font-bold">100% чистый доход</div>
       </div>
     </div>
     
@@ -1556,16 +1575,30 @@ html_template = r'''<!DOCTYPE html>
         document.getElementById('kpiCr2').innerText = 'CR2: ' + cr2Pct;
 
         const scopeBadge = document.getElementById('kpiScopeBadge');
-        const entityLabel = document.getElementById('kpiEntityLabel');
-        const entitiesCount = document.getElementById('kpiEntitiesCount');
+        const expenseEl = document.getElementById('kpiExpenses');
+        const expenseSubEl = document.getElementById('kpiExpensesSub');
+        const expenseLabelEl = document.getElementById('kpiExpenseLabel');
+        const romiEl = document.getElementById('kpiRomi');
+        const romiSubEl = document.getElementById('kpiRomiSub');
+        const romiBadgeEl = document.getElementById('kpiRomiBadge');
 
         if (currentMainChannel === 'organika') {
           scopeBadge.innerText = 'Органика SMM';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800';
-          entityLabel.innerText = 'Точек входа (/smm & WA)';
-          entitiesCount.innerText = '6 каналов';
-          const entitySub = document.getElementById('kpiEntitySub');
-          if (entitySub) entitySub.innerText = 'официальные ссылки';
+          
+          if (expenseEl) expenseEl.innerText = '0 ₸';
+          if (expenseSubEl) expenseSubEl.innerText = 'SMM / Соцсети';
+          if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы SMM';
+          
+          if (romiEl) {
+            romiEl.innerText = '∞ (Органика)';
+            romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
+          }
+          if (romiSubEl) romiSubEl.innerText = '100% чистый доход (0 ₸ затрат)';
+          if (romiBadgeEl) {
+            romiBadgeEl.innerText = '100% ЧИСТО';
+            romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
+          }
         } else if (currentMainChannel === 'influence') {
           let bCount = 0;
           let bActive = 0;
@@ -1579,7 +1612,6 @@ html_template = r'''<!DOCTYPE html>
             scopeBadge.innerText = 'Influence';
           }
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
-          entityLabel.innerText = 'Расходы на блогеров';
 
           mgrList.forEach(m => {
             const bList = Object.values(m.bloggers || {});
@@ -1590,28 +1622,87 @@ html_template = r'''<!DOCTYPE html>
               totalInfExpenses += exp.totalExpense;
             });
           });
-          entitiesCount.innerText = totalInfExpenses > 0 ? (totalInfExpenses.toLocaleString('ru-RU') + ' ₸') : (bCount + ' блогеров');
-          const entitySub = document.getElementById('kpiEntitySub');
-          if (entitySub) {
-            if (totalInfExpenses > 0 && displayRev > 0) {
+
+          if (expenseEl) expenseEl.innerText = totalInfExpenses.toLocaleString('ru-RU') + ' ₸';
+          if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы на блогеров';
+          if (expenseSubEl) expenseSubEl.innerText = 'витамины 62k/72k + доставка';
+
+          if (romiEl) {
+            if (totalInfExpenses > 0) {
               const romi = Math.round((displayRev - totalInfExpenses) / totalInfExpenses * 100);
-              entitySub.innerHTML = `<span class="${romi >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">ROMI: ${romi >= 0 ? '+' : ''}${romi}%</span> (${bCount} блог.)`;
-            } else if (totalInfExpenses > 0) {
-              entitySub.innerText = 'витамины 62k/72k + доставка';
+              const mult = (displayRev / totalInfExpenses).toFixed(1);
+              if (romi >= 0) {
+                romiEl.innerText = `+${romi}%`;
+                romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
+                if (romiSubEl) romiSubEl.innerText = `окупаемость: ${mult}x (+${(displayRev - totalInfExpenses).toLocaleString('ru-RU')} ₸)`;
+                if (romiBadgeEl) {
+                  romiBadgeEl.innerText = `${mult}x ВОЗВРАТ`;
+                  romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
+                }
+              } else {
+                romiEl.innerText = `${romi}%`;
+                romiEl.className = 'text-lg sm:text-2xl font-black text-rose-700 mt-0.5 leading-tight whitespace-nowrap';
+                if (romiSubEl) romiSubEl.innerText = `убыток: ${(totalInfExpenses - displayRev).toLocaleString('ru-RU')} ₸ (${mult}x)`;
+                if (romiBadgeEl) {
+                  romiBadgeEl.innerText = 'УБЫТОК';
+                  romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-rose-200 text-rose-900';
+                }
+              }
+            } else if (displayRev > 0) {
+              romiEl.innerText = '∞ (Без затрат)';
+              romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
+              if (romiSubEl) romiSubEl.innerText = '100% чистый доход';
+              if (romiBadgeEl) {
+                romiBadgeEl.innerText = '100% ПЛЮС';
+                romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
+              }
             } else {
-              entitySub.innerText = `${bActive} с лидами из ${bCount}`;
+              romiEl.innerText = '—';
+              romiEl.className = 'text-lg sm:text-2xl font-black text-slate-400 mt-0.5 leading-tight whitespace-nowrap';
+              if (romiSubEl) romiSubEl.innerText = `${bCount} блогеров`;
             }
           }
         } else if (currentMainChannel === 'tags') {
           scopeBadge.innerText = 'Теги CRM';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
-          entityLabel.innerText = 'Тегов AmoCRM';
-          entitiesCount.innerText = d.allTags.length;
+          if (expenseEl) expenseEl.innerText = '—';
+          if (expenseSubEl) expenseSubEl.innerText = `${d.allTags.length} тегов`;
+          if (romiEl) romiEl.innerText = '—';
+          if (romiSubEl) romiSubEl.innerText = 'аналитика тегов';
         } else {
+          // ВСЕ КАНАЛЫ
           scopeBadge.innerText = 'Все каналы';
           scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-800';
-          entityLabel.innerText = 'Активных UTM-связок';
-          entitiesCount.innerText = d.allCombos.length;
+
+          let totalAllExpenses = 0;
+          Object.values(d.influenceManagers || {}).forEach(m => {
+            Object.values(m.bloggers || {}).forEach(b => {
+              const exp = calculateBloggerExpenses(b);
+              totalAllExpenses += exp.totalExpense;
+            });
+          });
+
+          if (expenseEl) expenseEl.innerText = totalAllExpenses.toLocaleString('ru-RU') + ' ₸';
+          if (expenseLabelEl) expenseLabelEl.innerText = 'Общие расходы';
+          if (expenseSubEl) expenseSubEl.innerText = 'маркетинг Influence';
+
+          if (romiEl) {
+            if (totalAllExpenses > 0) {
+              const romi = Math.round((displayRev - totalAllExpenses) / totalAllExpenses * 100);
+              const mult = (displayRev / totalAllExpenses).toFixed(1);
+              romiEl.innerText = `${romi >= 0 ? '+' : ''}${romi}%`;
+              romiEl.className = `text-lg sm:text-2xl font-black ${romi >= 0 ? 'text-emerald-700' : 'text-rose-700'} mt-0.5 leading-tight whitespace-nowrap`;
+              if (romiSubEl) romiSubEl.innerText = `сквозной возврат: ${mult}x (+${(displayRev - totalAllExpenses).toLocaleString('ru-RU')} ₸)`;
+              if (romiBadgeEl) {
+                romiBadgeEl.innerText = `${mult}x ОБЩИЙ`;
+                romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
+              }
+            } else {
+              romiEl.innerText = '∞ (Без расходов)';
+              romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
+              if (romiSubEl) romiSubEl.innerText = '100% маржа';
+            }
+          }
         }
       }
     }
@@ -1748,6 +1839,7 @@ html_template = r'''<!DOCTYPE html>
             <th class="py-3 px-4 text-center">Оплачено</th>
             <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
+            <th class="py-3 px-4 text-center">Окупаемость (ROMI)</th>
             <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
             <th class="py-3 px-4 text-center">Instagram & Ссылка</th>
           </tr>
@@ -1850,6 +1942,13 @@ html_template = r'''<!DOCTYPE html>
               <td class="py-3.5 px-4 text-center font-black text-emerald-600">${m.won}</td>
               <td class="py-3.5 px-4 text-center font-bold ${m.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${mCr2}</td>
               <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${m.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-center font-black whitespace-nowrap">
+                ${mTotalExpense > 0 ? `
+                  <span class="px-2 py-0.5 rounded-full font-black text-xs ${m.rev >= mTotalExpense ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                    ${m.rev >= mTotalExpense ? '+' : ''}${Math.round((m.rev - mTotalExpense) / mTotalExpense * 100)}% (${(m.rev / mTotalExpense).toFixed(1)}x)
+                  </span>
+                ` : (m.rev > 0 ? `<span class="px-2 py-0.5 rounded-full font-bold text-xs bg-emerald-100 text-emerald-800">100% (Без затрат)</span>` : `<span class="text-slate-300 font-semibold">—</span>`)}
+              </td>
               <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${mAvg.toLocaleString('ru-RU')} ₸</td>
               <td class="py-3.5 px-4 text-center">
                 <button onclick="event.stopPropagation(); copyInfluenceManagerLink('${mCode}')" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-200 rounded-lg border border-purple-300 transition">
@@ -1944,6 +2043,14 @@ html_template = r'''<!DOCTYPE html>
                     <td class="py-2.5 px-4 text-center font-black ${b.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${b.won}</td>
                     <td class="py-2.5 px-4 text-center font-semibold ${b.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${bCr2}</td>
                     <td class="py-2.5 px-4 text-right font-black ${b.rev > 0 ? 'text-slate-900' : 'text-slate-400'} whitespace-nowrap">${b.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2.5 px-4 text-center whitespace-nowrap">
+                      ${exp.totalExpense > 0 ? `
+                        <span class="px-1.5 py-0.5 rounded text-[11px] font-black ${b.rev >= exp.totalExpense ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                          ${b.rev >= exp.totalExpense ? '+' : ''}${Math.round((b.rev - exp.totalExpense) / exp.totalExpense * 100)}%
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-medium ml-0.5">${(b.rev / exp.totalExpense).toFixed(1)}x</span>
+                      ` : (b.rev > 0 ? `<span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">100%</span>` : `<span class="text-slate-300 font-semibold">—</span>`)}
+                    </td>
                     <td class="py-2.5 px-4 text-right font-semibold text-slate-600 whitespace-nowrap">${bAvg ? bAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                     <td class="py-2.5 px-4 text-center">
                       <div class="flex items-center justify-center space-x-1">
@@ -2162,6 +2269,7 @@ html_template = r'''<!DOCTYPE html>
             <th class="py-3 px-4 text-center">Оплачено (142)</th>
             <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
+            <th class="py-3 px-4 text-center">Окупаемость (ROMI)</th>
             <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
             <th class="py-3 px-4 text-center">Ссылка / Действие</th>
           </tr>
@@ -2199,6 +2307,9 @@ html_template = r'''<!DOCTYPE html>
             <td class="py-3.5 px-4 text-center font-black text-emerald-600">${orgWon}</td>
             <td class="py-3.5 px-4 text-center font-bold ${orgWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${orgCr2}</td>
             <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${orgRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center font-black">
+              <span class="px-2 py-0.5 text-xs font-black rounded-full bg-emerald-100 text-emerald-800">∞ (Органика 100%)</span>
+            </td>
             <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${orgAvg.toLocaleString('ru-RU')} ₸</td>
             <td class="py-3.5 px-4 text-center">
               <button onclick="event.stopPropagation(); switchMainChannel('organika')" class="px-2.5 py-1 text-[11px] font-bold text-emerald-800 bg-white hover:bg-emerald-100 rounded-lg border border-emerald-300 transition">
@@ -2230,6 +2341,7 @@ html_template = r'''<!DOCTYPE html>
                 <td class="py-2.5 px-4 text-center font-black ${item.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${item.won}</td>
                 <td class="py-2.5 px-4 text-center font-semibold ${item.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${cr2}</td>
                 <td class="py-2.5 px-4 text-right font-black ${item.rev > 0 ? 'text-slate-900' : 'text-slate-400'} whitespace-nowrap">${item.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-center font-medium text-emerald-700 text-xs">100% (Без затрат)</td>
                 <td class="py-2.5 px-4 text-right font-semibold text-slate-600 whitespace-nowrap">${avg ? avg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                 <td class="py-2.5 px-4 text-center">
                   <button onclick="copyDirectUrl('${item.url}')" class="px-2 py-0.5 text-[10px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded border border-emerald-300 transition">
@@ -2276,6 +2388,13 @@ html_template = r'''<!DOCTYPE html>
             <td class="py-3.5 px-4 text-center font-black text-emerald-600">${infWon}</td>
             <td class="py-3.5 px-4 text-center font-bold ${infWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${infCr2}</td>
             <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${infRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center font-black">
+              ${infExpenses > 0 ? `
+                <span class="px-2 py-0.5 text-xs font-black rounded-full ${infRev >= infExpenses ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                  ${infRev >= infExpenses ? '+' : ''}${Math.round((infRev - infExpenses) / infExpenses * 100)}% (${(infRev / infExpenses).toFixed(1)}x)
+                </span>
+              ` : (infRev > 0 ? `<span class="px-2 py-0.5 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800">100%</span>` : `<span class="text-slate-300 font-semibold">—</span>`)}
+            </td>
             <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${infAvg.toLocaleString('ru-RU')} ₸</td>
             <td class="py-3.5 px-4 text-center">
               <button onclick="event.stopPropagation(); switchMainChannel('influence')" class="px-2.5 py-1 text-[11px] font-bold text-purple-700 bg-white hover:bg-purple-100 rounded-lg border border-purple-300 transition">
@@ -2321,6 +2440,13 @@ html_template = r'''<!DOCTYPE html>
                 <td class="py-2.5 px-4 text-center font-black ${m.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${m.won}</td>
                 <td class="py-2.5 px-4 text-center font-semibold ${m.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${mCr2}</td>
                 <td class="py-2.5 px-4 text-right font-black text-slate-900">${m.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-center font-bold whitespace-nowrap">
+                  ${mExp > 0 ? `
+                    <span class="px-1.5 py-0.5 rounded text-[11px] font-black ${m.rev >= mExp ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                      ${m.rev >= mExp ? '+' : ''}${Math.round((m.rev - mExp) / mExp * 100)}% (${(m.rev / mExp).toFixed(1)}x)
+                    </span>
+                  ` : (m.rev > 0 ? `<span class="px-1.5 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">100%</span>` : `<span class="text-slate-300 font-semibold">—</span>`)}
+                </td>
                 <td class="py-2.5 px-4 text-right font-semibold text-slate-600">${mAvg ? mAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                 <td class="py-2.5 px-4 text-center">
                   <button onclick="event.stopPropagation(); copyInfluenceManagerLink('${mCode}')" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 bg-white rounded border border-purple-200">
@@ -2352,6 +2478,14 @@ html_template = r'''<!DOCTYPE html>
                     <td class="py-2 px-4 text-center font-black ${b.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${b.won}</td>
                     <td class="py-2 px-4 text-center font-semibold ${b.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${bCr2}</td>
                     <td class="py-2 px-4 text-right font-black ${b.rev > 0 ? 'text-slate-900' : 'text-slate-400'}">${b.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2 px-4 text-center whitespace-nowrap">
+                      ${exp.totalExpense > 0 ? `
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-black ${b.rev >= exp.totalExpense ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                          ${b.rev >= exp.totalExpense ? '+' : ''}${Math.round((b.rev - exp.totalExpense) / exp.totalExpense * 100)}%
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-medium ml-0.5">${(b.rev / exp.totalExpense).toFixed(1)}x</span>
+                      ` : (b.rev > 0 ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700">100%</span>` : `<span class="text-slate-300 font-semibold">—</span>`)}
+                    </td>
                     <td class="py-2 px-4 text-right font-semibold text-slate-600">${bAvg ? bAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                     <td class="py-2 px-4 text-center">
                       <button onclick="copyBloggerDirectLink('${b.handle}', '${mCode}')" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 bg-purple-50 rounded border border-purple-200">
@@ -2394,6 +2528,9 @@ html_template = r'''<!DOCTYPE html>
             <td class="py-3.5 px-4 text-center font-black text-emerald-600">${fanWon}</td>
             <td class="py-3.5 px-4 text-center font-bold ${fanWon > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${fanCr2}</td>
             <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${fanRev.toLocaleString('ru-RU')} ₸</td>
+            <td class="py-3.5 px-4 text-center font-black">
+              <span class="px-2 py-0.5 text-xs font-black rounded-full bg-emerald-100 text-emerald-800">∞ (Органика 100%)</span>
+            </td>
             <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fanAvg.toLocaleString('ru-RU')} ₸</td>
             <td class="py-3.5 px-4 text-center">
               <button onclick="event.stopPropagation(); switchMainChannel('fan')" class="px-2.5 py-1 text-[11px] font-bold text-indigo-700 bg-white hover:bg-indigo-100 rounded-lg border border-indigo-300 transition">
@@ -2426,6 +2563,7 @@ html_template = r'''<!DOCTYPE html>
                 <td class="py-2.5 px-4 text-center font-black ${f.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${f.won}</td>
                 <td class="py-2.5 px-4 text-center font-semibold ${f.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${fCr2}</td>
                 <td class="py-2.5 px-4 text-right font-black text-slate-900">${f.rev.toLocaleString('ru-RU')} ₸</td>
+                <td class="py-2.5 px-4 text-center font-medium text-emerald-700 text-xs">100% (Без затрат)</td>
                 <td class="py-2.5 px-4 text-right font-semibold text-slate-600">${fAvg ? fAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                 <td class="py-2.5 px-4 text-center">
                   <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 bg-white rounded border border-indigo-200">
@@ -2457,6 +2595,7 @@ html_template = r'''<!DOCTYPE html>
                     <td class="py-2 px-4 text-center font-black ${pData.won > 0 ? 'text-emerald-600' : 'text-slate-400'}">${pData.won}</td>
                     <td class="py-2 px-4 text-center font-semibold ${pData.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
                     <td class="py-2 px-4 text-right font-black ${pData.rev > 0 ? 'text-slate-900' : 'text-slate-400'}">${pData.rev.toLocaleString('ru-RU')} ₸</td>
+                    <td class="py-2 px-4 text-center font-medium text-emerald-700 text-xs">100%</td>
                     <td class="py-2 px-4 text-right font-semibold text-slate-600">${pAvg ? pAvg.toLocaleString('ru-RU') + ' ₸' : '—'}</td>
                     <td class="py-2 px-4 text-center">
                       <button onclick="copyFanPlatformLink('${p.url}')" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 bg-indigo-50 rounded border border-indigo-200">
