@@ -1161,9 +1161,9 @@ html_content = f'''<!DOCTYPE html>
       const origin = window.location.origin;
 
       if (!blogger) {{
-        resInput.value = origin + '/api/go?b=blogger_name&m=' + manager + '&p=' + page;
+        resInput.value = origin + '/r/blogger_name?m=' + manager + '&p=' + page;
       }} else {{
-        resInput.value = origin + '/api/go?b=' + encodeURIComponent(blogger) + '&m=' + manager + '&p=' + page;
+        resInput.value = origin + '/r/' + encodeURIComponent(blogger) + '?m=' + manager + '&p=' + page;
       }}
     }}
 
