@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const url = `${SUPABASE_URL}/rest/v1/clicks?select=utm_content,utm_source,utm_medium,landing_page,created_at&order=created_at.desc&limit=10000`;
+    const url = `${SUPABASE_URL}/rest/v1/clicks?select=utm_content,utm_source,utm_medium,utm_campaign,landing_page,created_at&order=created_at.desc&limit=10000`;
     
     const r = await fetch(url, {
       headers: {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     if (!r.ok) {
       // Таблица еще не создана или пустая
-      return res.status(200).json({ ok: true, clicks: [], total: 0, byContent: {} });
+      return res.status(200).json({ ok: true, clicks: [], total: 0, byContent: {}, byCampaign: {} });
     }
 
     const data = await r.json();
@@ -28,17 +28,20 @@ export default async function handler(req, res) {
     const byMedium = {};
     const byPage = {};
     const bySource = {};
+    const byCampaign = {};
 
     for (const c of (data || [])) {
       const cnt = (c.utm_content || '').trim();
       const med = (c.utm_medium || '').trim();
       const p = (c.landing_page || '').trim();
       const src = (c.utm_source || '').trim();
+      const cmp = (c.utm_campaign || '').trim();
 
       if (cnt && cnt !== 'none') byContent[cnt] = (byContent[cnt] || 0) + 1;
       if (med && med !== 'none') byMedium[med] = (byMedium[med] || 0) + 1;
       if (p && p !== 'none') byPage[p] = (byPage[p] || 0) + 1;
       if (src && src !== 'none') bySource[src] = (bySource[src] || 0) + 1;
+      if (cmp && cmp !== 'none') byCampaign[cmp] = (byCampaign[cmp] || 0) + 1;
     }
 
     return res.status(200).json({
@@ -48,6 +51,7 @@ export default async function handler(req, res) {
       byMedium,
       byPage,
       bySource,
+      byCampaign,
       clicks: data || []
     });
   } catch (err) {

@@ -306,14 +306,27 @@ html_template = r'''<!DOCTYPE html>
 
           <div class="grid grid-cols-2 gap-2">
             <div>
-              <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Менеджер (utm_medium):</label>
+              <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Менеджер / Кампания:</label>
               <select id="genManager" onchange="updateGeneratedLink()" class="w-full px-2.5 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-purple-500 font-bold text-slate-900">
-                <option value="mpb2">Алина (mpb2)</option>
-                <option value="mpb1">Анельжан (mpb1)</option>
-                <option value="mpb3">Алуа (mpb3)</option>
-                <option value="mpb4">Дарина (mpb4)</option>
-                <option value="organic">Органика / SMM</option>
-                <option value="fan">Фан-аккаунты (fan)</option>
+                <optgroup label="🌟 Менеджеры Influence (МПБ)">
+                  <option value="mpb2">Алина (mpb2)</option>
+                  <option value="mpb1">Анельжан (mpb1)</option>
+                  <option value="mpb3">Алуа (mpb3)</option>
+                  <option value="mpb4">Дарина (mpb4)</option>
+                </optgroup>
+                <optgroup label="🎬 8 Фан-аккаунтов">
+                  <option value="bekezhanova_dilnaz">Бекежанова Дильназ (fan)</option>
+                  <option value="doskazhanova_ainagul">Доскажанова Айнагуль (fan)</option>
+                  <option value="kenzhebaeva_aisulu_1">Кенжебаева Айсулу 1 (fan)</option>
+                  <option value="kenzhebaeva_aisulu_2">Кенжебаева Айсулу 2 (fan)</option>
+                  <option value="gaisina_kamila">Гайсина Камила (fan)</option>
+                  <option value="kenzhebaeva_aida">Кенжебаева Аида (fan)</option>
+                  <option value="adina_khaidarova_1">Адина Хайдарова 1 (fan)</option>
+                  <option value="adina_khaidarova_2">Адина Хайдарова 2 (fan)</option>
+                </optgroup>
+                <optgroup label="Органика">
+                  <option value="organic">Органика / SMM</option>
+                </optgroup>
               </select>
             </div>
 
@@ -375,6 +388,81 @@ html_template = r'''<!DOCTYPE html>
       'mpb4': { code: 'mpb4', name: 'Дарина', role: 'Менеджер по блогерам' }
     };
 
+    // 8 Официальных фан-аккаунтов из реестра
+    const FAN_REGISTRY = [
+      {
+        id: 'bekezhanova_dilnaz',
+        name: 'Бекежанова Дильназ',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=bekezhanova_dilnaz', profile: 'https://www.tiktok.com/@janamen_fans?_r=1&_t=ZS-97265Roj4pl' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=bekezhanova_dilnaz', profile: 'https://www.instagram.com/janamen_fans?igsh=MTBrdWd4cHZ2NnBvdw==' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=bekezhanova_dilnaz', profile: 'https://youtube.com/@janamen_fanss?si=gcBCvNEGz3eiZzuY' }
+        ]
+      },
+      {
+        id: 'doskazhanova_ainagul',
+        name: 'Доскажанова Айнагуль',
+        platforms: [
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=doskazhanova_ainagul', profile: 'https://www.instagram.com/janamenfun?igsh=anFyaHZyM21yNDg1' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=doskazhanova_ainagul', profile: 'https://youtube.com/@janamenfun?si=mivEknbjZKm7etIU' }
+        ]
+      },
+      {
+        id: 'kenzhebaeva_aisulu_1',
+        name: 'Кенжебаева Айсулу (1)',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_1', profile: 'https://www.tiktok.com/@janamennfans' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_1', profile: 'https://www.instagram.com/janamen.aitymfan?igsh=MXB2amxyMzZ0ODVyMw==' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_1', profile: 'https://youtube.com/@janamenaitymfan?si=XBChM5eOBOngD0Vy' }
+        ]
+      },
+      {
+        id: 'kenzhebaeva_aisulu_2',
+        name: 'Кенжебаева Айсулу (2)',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_2', profile: 'https://www.tiktok.com/@janamen.edit' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_2', profile: 'https://www.instagram.com/janamen.edit?igsh=MWp6dnFmcW42enQzMQ==' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=kenzhebaeva_aisulu_2', profile: 'https://youtube.com/@janamenedit?si=MQAZq4ijlN6Sml1' }
+        ]
+      },
+      {
+        id: 'gaisina_kamila',
+        name: 'Гайсина Камила',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=gaisina_kamila', profile: 'https://www.tiktok.com/@aitym.fanclub' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=gaisina_kamila', profile: 'https://www.instagram.com/aitym.fanclub?igsh=MTN0aXI4eG03ejF5dw==' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=gaisina_kamila', profile: 'https://youtube.com/@aitymfanclub?si=1Rcj4IJ_6SRLKvxK' }
+        ]
+      },
+      {
+        id: 'kenzhebaeva_aida',
+        name: 'Кенжебаева Аида',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=kenzhebaeva_aida', profile: 'https://www.tiktok.com/@janamennn.fan' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=kenzhebaeva_aida', profile: 'https://www.instagram.com/janamennnfan?igsh=eG5tMTJvcnRtamg1' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=kenzhebaeva_aida', profile: 'https://youtube.com/@janamennnfan?si=sNhTX4xyMPbNtQVQ' }
+        ]
+      },
+      {
+        id: 'adina_khaidarova_1',
+        name: 'Адина Хайдарова (1)',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=adina_khaidarova_1', profile: 'https://www.tiktok.com/@jana.men68' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=adina_khaidarova_1', profile: 'https://www.instagram.com/aitymzhakupovfanacc?igsh=OWdjZXNpaGE3eGJn' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=adina_khaidarova_1', profile: 'https://youtube.com/@janamen-q4x?si=i2KdBr5w2SndINSW' }
+        ]
+      },
+      {
+        id: 'adina_khaidarova_2',
+        name: 'Адина Хайдарова (2)',
+        platforms: [
+          { name: 'TikTok', icon: '🎵', url: 'https://janamen1.kz/fun?utm_source=tiktok&utm_medium=video&utm_campaign=adina_khaidarova_2', profile: 'https://www.tiktok.com/@jana.menfan' },
+          { name: 'Instagram', icon: '📸', url: 'https://janamen1.kz/fun?utm_source=instagram&utm_medium=video&utm_campaign=adina_khaidarova_2', profile: 'https://www.instagram.com/janamen_fan?igsh=Y2w2YXEwbTlnc3ow' },
+          { name: 'YouTube', icon: '▶️', url: 'https://janamen1.kz/fun?utm_source=youtube&utm_medium=video&utm_campaign=adina_khaidarova_2', profile: 'https://youtube.com/channel/UC88OJTRuSzamH0hWRg8qmVQ' }
+        ]
+      }
+    ];
+
     // Состояние фильтров
     let currentMainChannel = 'organika'; // 'organika' | 'influence' | 'fan' | 'all' | 'tags'
     let currentPeriod = 'all';
@@ -384,7 +472,8 @@ html_template = r'''<!DOCTYPE html>
     let currentAllDim = 'combos';
 
     // Состояние развернутых аккордеонов
-    const expandedAccordions = new Set(['mpb1', 'mpb2', 'mpb3', 'mpb4', 'fan1', 'fan2']);
+    const expandedAccordions = new Set(['mpb1', 'mpb2', 'mpb3', 'mpb4', 'bekezhanova_dilnaz', 'doskazhanova_ainagul', 'kenzhebaeva_aisulu_1', 'kenzhebaeva_aisulu_2', 'gaisina_kamila', 'kenzhebaeva_aida', 'adina_khaidarova_1', 'adina_khaidarova_2']);
+    let CLICK_BY_CAMPAIGN = {};
 
     // Данные кликов из Supabase
     let CLICK_COUNTS = {};
@@ -577,17 +666,36 @@ html_template = r'''<!DOCTYPE html>
         'other': { code: 'other', name: 'Другие / Без менеджера', leads: 0, won: 0, rev: 0, clicks: 0, bloggers: {} }
       };
 
-      const fanManagers = {
-        'fan1': { code: 'fan1', name: 'Фан-аккаунт 1 (кампания 4516)', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan2': { code: 'fan2', name: 'Фан-аккаунт 2 (кампания 2427-2431)', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan3': { code: 'fan3', name: 'Фан-аккаунт 3', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan4': { code: 'fan4', name: 'Фан-аккаунт 4', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan5': { code: 'fan5', name: 'Фан-аккаунт 5', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan6': { code: 'fan6', name: 'Фан-аккаунт 6', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan7': { code: 'fan7', name: 'Фан-аккаунт 7', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan8': { code: 'fan8', name: 'Фан-аккаунт 8', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} },
-        'fan_other': { code: 'fan_other', name: 'Другие фан-аккаунты', leads: 0, won: 0, rev: 0, clicks: 0, platforms: {} }
-      };
+      const fanAccounts = {};
+      FAN_REGISTRY.forEach(f => {
+        fanAccounts[f.id] = {
+          id: f.id,
+          name: f.name,
+          leads: 0,
+          won: 0,
+          rev: 0,
+          clicks: 0,
+          isOfficial: true,
+          platforms: {}
+        };
+        f.platforms.forEach(p => {
+          fanAccounts[f.id].platforms[p.name.toLowerCase()] = {
+            name: p.name,
+            icon: p.icon,
+            url: p.url,
+            profile: p.profile,
+            leads: 0,
+            won: 0,
+            rev: 0,
+            clicks: 0
+          };
+        });
+      });
+
+      // Исторические группы
+      fanAccounts['fan_4516'] = { id: 'fan_4516', name: 'Кампания 4516 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
+      fanAccounts['fan_2427'] = { id: 'fan_2427', name: 'Кампания 2427-2431 (Архив)', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
+      fanAccounts['fan_other'] = { id: 'fan_other', name: 'Другие фан-сделки', leads: 0, won: 0, rev: 0, clicks: 0, isOfficial: false, platforms: {} };
 
       const allCombos = {};
       const allSources = {};
@@ -616,7 +724,29 @@ html_template = r'''<!DOCTYPE html>
         const isOrganika = isWa9828 || isSmm || isOrganikaSite;
 
         const isInfluence = l.path === '/influence' || (l.med && l.med.startsWith('mpb')) || (l.cmp && l.cmp.toLowerCase().includes('influence'));
-        const isFan = l.med === 'fan' || l.path.startsWith('/fan') || (l.cmp && l.cmp.toLowerCase().includes('fan')) || (l.src && l.src.toLowerCase().includes('fan'));
+                const lCmp = (l.cmp || '').toLowerCase();
+        const lCnt = (l.cnt || '').toLowerCase();
+        const lMed = (l.med || '').toLowerCase();
+        const lSrc = (l.src || '').toLowerCase();
+
+        let matchedFanId = null;
+        for (let fi = 0; fi < FAN_REGISTRY.length; fi++) {
+          const f = FAN_REGISTRY[fi];
+          if (lCmp.includes(f.id) || lCnt.includes(f.id)) {
+            matchedFanId = f.id;
+            break;
+          }
+        }
+
+        if (!matchedFanId) {
+          if (lCmp.includes('4516')) matchedFanId = 'fan_4516';
+          else if (lCmp.includes('2427') || lCmp.includes('2428') || lCmp.includes('2429') || lCmp.includes('2430') || lCmp.includes('2431')) matchedFanId = 'fan_2427';
+          else if (lMed === 'fan' || lMed === 'video' || l.path === '/fun' || l.path.startsWith('/fan') || lSrc.includes('fan')) {
+            matchedFanId = 'fan_other';
+          }
+        }
+
+        const isFan = matchedFanId !== null;
 
         if (isOrganika) countOrganika++;
         if (isInfluence) countInfluence++;
@@ -700,35 +830,31 @@ html_template = r'''<!DOCTYPE html>
         }
 
         // Агрегация для Fan
-        if (currentMainChannel === 'fan') {
-          let fKey = 'fan_other';
-          if (l.cmp && l.cmp.includes('4516')) fKey = 'fan1';
-          else if (l.cmp && (l.cmp.includes('2427') || l.cmp.includes('2428') || l.cmp.includes('2429') || l.cmp.includes('2430') || l.cmp.includes('2431'))) fKey = 'fan2';
-          else if (l.cmp && l.cmp.includes('fan3')) fKey = 'fan3';
-          else if (l.cmp && l.cmp.includes('fan4')) fKey = 'fan4';
-          else if (l.cmp && l.cmp.includes('fan5')) fKey = 'fan5';
-          else if (l.cmp && l.cmp.includes('fan6')) fKey = 'fan6';
-          else if (l.cmp && l.cmp.includes('fan7')) fKey = 'fan7';
-          else if (l.cmp && l.cmp.includes('fan8')) fKey = 'fan8';
-          
-          const mgr = fanManagers[fKey];
-          mgr.leads++;
-          if (l.won) { mgr.won++; mgr.rev += l.price; }
+        if (currentMainChannel === 'fan' && matchedFanId && fanAccounts[matchedFanId]) {
+          const fa = fanAccounts[matchedFanId];
+          fa.leads++;
+          if (l.won) { fa.won++; fa.rev += l.price; }
 
-          const pKey = (l.src && l.src !== 'none') ? l.src : 'direct';
-          let p = mgr.platforms[pKey];
-          if (!p) {
-            p = mgr.platforms[pKey] = {
+          let pKey = 'other';
+          if (lSrc.includes('tiktok')) pKey = 'tiktok';
+          else if (lSrc.includes('instagram') || lSrc.includes('ig')) pKey = 'instagram';
+          else if (lSrc.includes('youtube') || lSrc.includes('yt')) pKey = 'youtube';
+          else pKey = l.src || 'other';
+
+          if (!fa.platforms[pKey]) {
+            fa.platforms[pKey] = {
               name: pKey,
-              fanAccount: fKey,
+              icon: pKey === 'tiktok' ? '🎵' : (pKey === 'instagram' ? '📸' : (pKey === 'youtube' ? '▶️' : '🌐')),
+              url: `https://janamen1.kz/fun?utm_source=${pKey}&utm_medium=video&utm_campaign=${matchedFanId}`,
+              profile: '',
               leads: 0,
               won: 0,
               rev: 0,
               clicks: 0
             };
           }
-          p.leads++;
-          if (l.won) { p.won++; p.rev += l.price; }
+          fa.platforms[pKey].leads++;
+          if (l.won) { fa.platforms[pKey].won++; fa.platforms[pKey].rev += l.price; }
         }
 
         // Агрегация для Всех каналов & Тегов
@@ -786,8 +912,16 @@ html_template = r'''<!DOCTYPE html>
           clicks += mgrClicks;
         });
       } else if (currentMainChannel === 'fan') {
-        const fanClicks = CLICK_BY_MEDIUM['fan'] || 0;
-        clicks += fanClicks;
+        Object.keys(fanAccounts).forEach(fKey => {
+          const fa = fanAccounts[fKey];
+          const fClicks = (CLICK_BY_CAMPAIGN[fKey] || 0) + (CLICK_COUNTS[fKey] || 0);
+          fa.clicks = fClicks;
+          clicks += fClicks;
+
+          Object.keys(fa.platforms).forEach(pKey => {
+            fa.platforms[pKey].clicks = CLICK_BY_SOURCE[pKey] || 0;
+          });
+        });
       } else {
         clicks = Object.values(CLICK_COUNTS).reduce((a, b) => a + b, 0);
       }
@@ -799,7 +933,7 @@ html_template = r'''<!DOCTYPE html>
         avgCheck: won ? Math.round(rev / won) : 0,
         organikaGroups: Object.values(organikaGroups).sort((a,b) => b.leads - a.leads),
         influenceManagers,
-        fanManagers,
+        fanAccounts,
         allCombos: Object.values(allCombos).sort((a,b) => b.rev - a.rev || b.leads - a.leads),
         allSources: Object.values(allSources).sort((a,b) => b.rev - a.rev || b.leads - a.leads),
         allMediums: Object.values(allMediums).sort((a,b) => b.rev - a.rev || b.leads - a.leads),
@@ -847,7 +981,7 @@ html_template = r'''<!DOCTYPE html>
         scopeBadge.innerText = 'Fan-аккаунты';
         scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800';
         entityLabel.innerText = 'Фан-аккаунтов';
-        entitiesCount.innerText = Object.keys(d.fanManagers).length;
+        entitiesCount.innerText = FAN_REGISTRY.length + ' аккаунтов';
       } else if (currentMainChannel === 'tags') {
         scopeBadge.innerText = 'Теги CRM';
         scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
@@ -875,7 +1009,7 @@ html_template = r'''<!DOCTYPE html>
 
     function expandAllAccordion() {
       Object.keys(currentChannelData.influenceManagers || {}).forEach(k => expandedAccordions.add(k));
-      Object.keys(currentChannelData.fanManagers || {}).forEach(k => expandedAccordions.add(k));
+      FAN_REGISTRY.forEach(f => expandedAccordions.add(f.id)); Object.keys(currentChannelData.fanAccounts || {}).forEach(k => expandedAccordions.add(k));
       renderMainTable();
     }
 
@@ -1056,14 +1190,14 @@ html_template = r'''<!DOCTYPE html>
         tbody.innerHTML = html;
 
       } else if (currentMainChannel === 'fan') {
-        mainTitle.innerText = '🎬 Fan (Фан-аккаунты сетки): Аналитика по аккаунтам & площадкам';
+        mainTitle.innerText = '🎬 Fan (Фан-аккаунты сетки): 8 аккаунтов команды & каналы';
         badgeTitle.innerText = 'Канал 3';
         badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-indigo-100 text-indigo-800';
-        subTitle.innerText = 'Свертка по 8 фан-аккаунтам с детализацией по источникам и площадкам (Instagram, TikTok, FB, etc.)';
+        subTitle.innerText = 'Свертка по 8 сотрудникам сетки с детализацией по TikTok, Instagram, YouTube, готовыми ссылками и переходами на профили';
 
         thead.innerHTML = `
           <tr>
-            <th class="py-3 px-4">Фан-аккаунт / Площадка (utm_source)</th>
+            <th class="py-3 px-4">Сотрудник / Площадка</th>
             <th class="py-3 px-4 text-center">Кликов (Переходов)</th>
             <th class="py-3 px-4 text-center">Всего заявок (Лидов)</th>
             <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
@@ -1071,22 +1205,21 @@ html_template = r'''<!DOCTYPE html>
             <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
             <th class="py-3 px-4 text-right">Выручка (₸)</th>
             <th class="py-3 px-4 text-right">Ср. чек (₸)</th>
+            <th class="py-3 px-4 text-center">UTM-ссылка & Профиль</th>
           </tr>
         `;
 
-        const fans = currentChannelData.fanManagers || {};
+        const fans = currentChannelData.fanAccounts || {};
         let totalRows = 0;
         let html = '';
 
-        Object.keys(fans).forEach(fCode => {
-          const f = fans[fCode];
+        // Сначала отображаем 8 официальных сотрудников команды
+        FAN_REGISTRY.forEach(fReg => {
+          const f = fans[fReg.id];
           if (!f) return;
-          const isExpanded = expandedAccordions.has(fCode);
-          const platformsList = Object.values(f.platforms || {}).sort((a,b) => b.leads - a.leads);
+          const isExpanded = expandedAccordions.has(fReg.id);
+          const platformsList = fReg.platforms;
           const pCount = platformsList.length;
-
-          // Показываем фан-аккаунты с лидами или первые два
-          if (f.leads === 0 && fCode !== 'fan1' && fCode !== 'fan2') return;
 
           const fCr1 = f.clicks ? (Math.round(f.leads / f.clicks * 1000) / 10) + '%' : (f.leads ? '—' : '0%');
           const fCr2 = f.leads ? (Math.round(f.won / f.leads * 1000) / 10) + '%' : '0%';
@@ -1094,17 +1227,18 @@ html_template = r'''<!DOCTYPE html>
 
           totalRows++;
 
-          // Строка Фан-аккаунта (Level 1)
+          // Строка сотрудника (Level 1)
           html += `
-            <tr onclick="toggleAccordion('${fCode}')" class="bg-indigo-50/60 hover:bg-indigo-100/60 cursor-pointer transition font-bold border-t-2 border-indigo-200">
+            <tr onclick="toggleAccordion('${fReg.id}')" class="bg-indigo-50/60 hover:bg-indigo-100/60 cursor-pointer transition font-bold border-t-2 border-indigo-200">
               <td class="py-3.5 px-4 text-slate-900 flex items-center space-x-2">
                 <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
                   ▶
                 </span>
                 <span class="text-sm font-black text-indigo-950">${f.name}</span>
                 <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-200 text-indigo-900">
-                  ${pCount} площадок
+                  ${pCount} площадки
                 </span>
+                ${f.leads === 0 ? '<span class="px-2 py-0.2 text-[9px] font-bold rounded-full bg-slate-200/70 text-slate-600">Готов к трафику</span>' : ''}
               </td>
               <td class="py-3.5 px-4 text-center font-black text-indigo-700">${f.clicks ? f.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
               <td class="py-3.5 px-4 text-center font-black text-slate-900">${f.leads.toLocaleString('ru-RU')}</td>
@@ -1113,40 +1247,97 @@ html_template = r'''<!DOCTYPE html>
               <td class="py-3.5 px-4 text-center font-bold ${f.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${fCr2}</td>
               <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${f.rev.toLocaleString('ru-RU')} ₸</td>
               <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fAvg.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2.5 py-1 text-[11px] font-bold text-indigo-700 bg-white hover:bg-indigo-200 rounded-lg border border-indigo-300 transition">
+                  📋 Ссылки
+                </button>
+              </td>
             </tr>
           `;
 
-          // Дочерние площадки (Level 2)
+          // Дочерние строки площадок (Level 2)
           if (isExpanded) {
-            if (pCount === 0) {
+            platformsList.forEach(p => {
+              totalRows++;
+              const pData = f.platforms[p.name.toLowerCase()] || { leads: 0, won: 0, rev: 0, clicks: 0 };
+              const pCr1 = pData.clicks ? (Math.round(pData.leads / pData.clicks * 1000) / 10) + '%' : (pData.leads ? '—' : '0%');
+              const pCr2 = pData.leads ? (Math.round(pData.won / pData.leads * 1000) / 10) + '%' : '0%';
+              const pAvg = pData.won ? Math.round(pData.rev / pData.won) : 0;
+              const hasProfile = p.profile && p.profile.startsWith('http');
+
               html += `
-                <tr class="bg-white">
-                  <td colspan="8" class="py-3 px-8 text-xs text-slate-400 italic">Пока нет лидов по площадкам</td>
+                <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
+                  <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 code-font flex items-center space-x-2">
+                    <span class="text-slate-300 font-mono">└─</span>
+                    <span class="text-base leading-none">${p.icon}</span>
+                    <span class="text-slate-900 font-black">${p.name}</span>
+                    ${p.profile && !hasProfile ? '<span class="text-[10px] text-slate-400 font-normal">(' + p.profile + ')</span>' : ''}
+                  </td>
+                  <td class="py-2.5 px-4 text-center font-bold text-indigo-700">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                  <td class="py-2.5 px-4 text-center font-bold text-slate-800">${pData.leads.toLocaleString('ru-RU')}</td>
+                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
+                  <td class="py-2.5 px-4 text-center font-black text-emerald-600">${pData.won}</td>
+                  <td class="py-2.5 px-4 text-center font-bold ${pData.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
+                  <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${pData.rev.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${pAvg.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2.5 px-4 text-center flex items-center justify-center space-x-1.5">
+                    <button onclick="copyFanUtmDirect('${p.url}', '${f.name}', '${p.name}')" title="Скопировать готовую UTM-ссылку" class="px-2 py-0.5 text-[11px] font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 rounded border border-indigo-200 transition">
+                      📋 UTM
+                    </button>
+                    ${hasProfile ? `
+                      <a href="${p.profile}" target="_blank" title="Открыть соцсеть" class="px-2 py-0.5 text-[11px] font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded border border-slate-200 transition">
+                        🔗 Профиль
+                      </a>
+                    ` : ''}
+                  </td>
                 </tr>
               `;
-            } else {
-              platformsList.forEach(p => {
-                totalRows++;
-                const pCr1 = p.clicks ? (Math.round(p.leads / p.clicks * 1000) / 10) + '%' : (p.leads ? '—' : '0%');
-                const pCr2 = p.leads ? (Math.round(p.won / p.leads * 1000) / 10) + '%' : '0%';
-                const pAvg = p.won ? Math.round(p.rev / p.won) : 0;
-                html += `
-                  <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
-                    <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 code-font flex items-center space-x-1.5">
-                      <span class="text-slate-300 font-mono">└─</span>
-                      <span class="text-indigo-700 font-bold">${p.name}</span>
-                    </td>
-                    <td class="py-2.5 px-4 text-center font-bold text-indigo-700">${p.clicks ? p.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
-                    <td class="py-2.5 px-4 text-center font-bold text-slate-800">${p.leads.toLocaleString('ru-RU')}</td>
-                    <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
-                    <td class="py-2.5 px-4 text-center font-black text-emerald-600">${p.won}</td>
-                    <td class="py-2.5 px-4 text-center font-bold ${p.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
-                    <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${p.rev.toLocaleString('ru-RU')} ₸</td>
-                    <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${pAvg.toLocaleString('ru-RU')} ₸</td>
-                  </tr>
-                `;
-              });
-            }
+            });
+          }
+        });
+
+        // Исторические архивные фан-кампании
+        const histKeys = ['fan_4516', 'fan_2427', 'fan_other'];
+        histKeys.forEach(hKey => {
+          const h = fans[hKey];
+          if (!h || h.leads === 0) return;
+          const isExpanded = expandedAccordions.has(hKey);
+          const pList = Object.values(h.platforms || {});
+          totalRows++;
+          html += `
+            <tr onclick="toggleAccordion('${hKey}')" class="bg-slate-100/70 hover:bg-slate-200/60 cursor-pointer transition font-bold border-t border-slate-200 text-slate-700">
+              <td class="py-3 px-4 flex items-center space-x-2">
+                <span class="w-4 h-4 rounded bg-slate-400 text-white flex items-center justify-center text-[10px] transition-transform ${isExpanded ? 'rotate-90' : ''}">▶</span>
+                <span class="text-xs font-bold text-slate-800">${h.name}</span>
+                <span class="px-1.5 py-0.2 text-[9px] font-semibold rounded bg-slate-200 text-slate-600">Архив</span>
+              </td>
+              <td class="py-3 px-4 text-center text-slate-400">—</td>
+              <td class="py-3 px-4 text-center font-bold text-slate-800">${h.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3 px-4 text-center text-slate-400">—</td>
+              <td class="py-3 px-4 text-center font-bold text-emerald-600">${h.won}</td>
+              <td class="py-3 px-4 text-center font-semibold text-slate-600">${h.leads ? (Math.round(h.won/h.leads*1000)/10)+'%' : '0%'}</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-800">${h.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-right text-slate-600">${(h.won ? Math.round(h.rev/h.won) : 0).toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-center text-slate-400 text-[10px]">Архивные сделки</td>
+            </tr>
+          `;
+          if (isExpanded) {
+            pList.forEach(p => {
+              totalRows++;
+              html += `
+                <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100 text-slate-600">
+                  <td class="py-2 px-4 pl-10 code-font">└─ ${p.name}</td>
+                  <td class="py-2 px-4 text-center text-slate-400">—</td>
+                  <td class="py-2 px-4 text-center font-semibold">${p.leads}</td>
+                  <td class="py-2 px-4 text-center text-slate-400">—</td>
+                  <td class="py-2 px-4 text-center font-bold text-emerald-600">${p.won}</td>
+                  <td class="py-2 px-4 text-center">${p.leads ? (Math.round(p.won/p.leads*1000)/10)+'%' : '0%'}</td>
+                  <td class="py-2 px-4 text-right">${p.rev.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2 px-4 text-right">${(p.won ? Math.round(p.rev/p.won) : 0).toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2 px-4 text-center text-slate-300">—</td>
+                </tr>
+              `;
+            });
           }
         });
 
@@ -1248,6 +1439,18 @@ html_template = r'''<!DOCTYPE html>
       }
     }
 
+        function copyFanUtmDirect(url, name, platform) {
+      navigator.clipboard.writeText(url);
+      alert('✓ Скопирована UTM-ссылка для ' + name + ' (' + platform + '):\n\n' + url + '\n\nКлики автоматически фиксируются в Supabase, а UTM передаются в AmoCRM!');
+    }
+
+    function copyFanAllLinks(fanId) {
+      const f = FAN_REGISTRY.find(x => x.id === fanId);
+      if (!f) return;
+      const text = f.name + ' — UTM-ссылки:\n' + f.platforms.map(p => p.name + ': ' + p.url).join('\n');
+      navigator.clipboard.writeText(text);
+      alert('✓ Скопированы все UTM-ссылки для ' + f.name + ':\n\n' + text);
+    }
     function copyBloggerLinkDirect(blogger, manager) {
       const origin = window.location.origin;
       const url = origin + '/r/' + encodeURIComponent(blogger) + '?m=' + manager + '&p=/influence';
@@ -1417,6 +1620,7 @@ html_template = r'''<!DOCTYPE html>
           if (res.byMedium) CLICK_BY_MEDIUM = res.byMedium;
           if (res.byPage) CLICK_BY_PAGE = res.byPage;
           if (res.bySource) CLICK_BY_SOURCE = res.bySource;
+          if (res.byCampaign) CLICK_BY_CAMPAIGN = res.byCampaign;
           onFilterChange();
         }
       } catch (e) {
