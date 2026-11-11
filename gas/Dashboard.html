@@ -157,13 +157,17 @@
 
     </div>
 
-    <!-- 1b. ПОЛОСА 9 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (ТОЧНО КАК В ТАБЛИЦЕ JANA MEN) -->
+    <!-- 1b. ПОЛОСА 10 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (ТОЧНО КАК В ТАБЛИЦЕ JANA MEN) -->
     <div id="kpiFanGrid" class="hidden space-y-3">
       <!-- Верхний ряд: 5 карточек -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
           <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Всего лидов (CRM)</div>
           <div id="fanKpiLeads" class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">0</div>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-purple-200 shadow-sm bg-purple-50/20">
+          <div class="text-[10px] font-black text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
+          <div id="fanKpiClicks" class="text-2xl sm:text-3xl font-black text-purple-800 mt-1">0</div>
         </div>
         <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 shadow-sm bg-emerald-50/20">
           <div class="text-[10px] font-black text-emerald-700 uppercase tracking-wider">Оплаченных сделок</div>
@@ -177,13 +181,13 @@
           <div class="text-[10px] font-black text-rose-700 uppercase tracking-wider">Общий расход</div>
           <div id="fanKpiSpend" class="text-2xl sm:text-3xl font-black text-rose-800 mt-1">230 000 ₸</div>
         </div>
+      </div>
+      <!-- Нижний ряд: 5 карточек -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <div class="bg-white p-3.5 rounded-2xl border border-purple-200 shadow-sm bg-purple-50/20">
           <div class="text-[10px] font-black text-purple-700 uppercase tracking-wider">Конверсия в оплату</div>
-          <div id="fanKpiCr" class="text-2xl sm:text-3xl font-black text-purple-800 mt-1">0%</div>
+          <div id="fanKpiCr" class="text-xl sm:text-2xl font-black text-purple-800 mt-1">0%</div>
         </div>
-      </div>
-      <!-- Нижний ряд: 4 карточки -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
           <div class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Средний чек</div>
           <div id="fanKpiAvgCheck" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0 ₸</div>
@@ -515,12 +519,14 @@
     let CLICK_BY_CAMPAIGN = {};
 
     // Данные кликов из Supabase
+    let RAW_CLICKS = [];
     let CLICK_COUNTS = {};
     let CLICK_BY_CONTENT = {};
     let CLICK_BY_MEDIUM = {};
     let CLICK_BY_PAGE = {};
     let CLICK_BY_SOURCE = {};
     let CLICK_BY_BLOGGER = {};
+    let CLICK_BY_CAMPAIGN_SOURCE = {};
 
     // Агрегированные данные текущей выборки
     let currentChannelData = {};
@@ -1027,23 +1033,85 @@
 
       // Привязка кликов
       if (currentMainChannel === 'organika') {
-        clicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
         organikaSections['org_wa'].clicks = (CLICK_BY_PAGE['/iwa-9828'] || 0) + (CLICK_COUNTS['iwa-9828'] || 0);
         organikaSections['org_smm'].clicks = (CLICK_BY_PAGE['/smm'] || 0) + (CLICK_COUNTS['smm'] || 0);
         organikaSections['org_site'].clicks = (CLICK_BY_PAGE['/organika'] || 0) + (CLICK_BY_PAGE['/'] || 0);
+        clicks = organikaSections['org_wa'].clicks + organikaSections['org_smm'].clicks + organikaSections['org_site'].clicks;
+
         Object.values(organikaSections).forEach(s => {
           Object.values(s.items).forEach(item => {
             item.clicks = CLICK_BY_CONTENT[item.cnt] || CLICK_BY_CAMPAIGN[item.cmp] || 0;
           });
         });
       } else if (currentMainChannel === 'influence') {
+        // 1. Динамическая регистрация блогеров из RAW_CLICKS (клики без лидов)
+        if (Array.isArray(RAW_CLICKS)) {
+          RAW_CLICKS.forEach(c => {
+            const cMed = (c.utm_medium || '').toLowerCase();
+            const cPage = (c.landing_page || '').toLowerCase();
+            const cSrc = (c.utm_source || '').trim();
+            const cCmp = (c.utm_campaign || '').trim();
+            const cBlg = (c.blogger || '').trim();
+
+            const isInfClick = cMed.startsWith('mpb') || cPage.includes('influence') || cCmp.includes('ugc') || cCmp.includes('influence');
+            if (!isInfClick) return;
+
+            let mKey = cMed.startsWith('mpb') ? cMed : 'mpb1';
+            let bKey = cBlg || cSrc;
+            if (!bKey || ['direct', 'instagram', 'tiktok', 'facebook', 'none'].includes(bKey.toLowerCase())) {
+              bKey = cCmp || 'blogger_link';
+            }
+
+            if (bloggerMap[bKey.toLowerCase()]) {
+              const regB = bloggerMap[bKey.toLowerCase()];
+              bKey = regB.h;
+              if (regB.m) mKey = regB.m;
+            }
+
+            if (!influenceManagers[mKey]) mKey = 'other';
+            const mgr = influenceManagers[mKey];
+
+            if (!mgr.bloggers[bKey]) {
+              mgr.bloggers[bKey] = {
+                handle: bKey,
+                name: bKey,
+                manager: mKey,
+                subs: '—',
+                city: '—',
+                profile: `https://instagram.com/${bKey}`,
+                utm: `https://janamen1.kz/influence?utm_source=${bKey}&utm_medium=${mKey}&utm_campaign=ugc_barter&utm_content=reels_stories`,
+                leads: 0,
+                won: 0,
+                rev: 0,
+                clicks: 0,
+                isPreloaded: false
+              };
+            }
+          });
+        }
+
+        // 2. Расчет кликов строго по каждому блогеру
         clicks = 0;
         Object.values(influenceManagers).forEach(mgr => {
           let mClicks = 0;
           Object.values(mgr.bloggers).forEach(b => {
-            const bClicks = (CLICK_BY_BLOGGER && CLICK_BY_BLOGGER[b.handle] ? CLICK_BY_BLOGGER[b.handle] : 0) + 
-                            (CLICK_BY_SOURCE && CLICK_BY_SOURCE[b.handle] ? CLICK_BY_SOURCE[b.handle] : 0) + 
-                            (CLICK_BY_CONTENT && CLICK_BY_CONTENT[b.handle] ? CLICK_BY_CONTENT[b.handle] : 0);
+            const bHandle = (b.handle || '').toLowerCase();
+            let bClicks = 0;
+
+            if (Array.isArray(RAW_CLICKS) && RAW_CLICKS.length > 0) {
+              bClicks = RAW_CLICKS.filter(c => {
+                const s = (c.utm_source || '').toLowerCase();
+                const blg = (c.blogger || '').toLowerCase();
+                const cnt = (c.utm_content || '').toLowerCase();
+                const cmp = (c.utm_campaign || '').toLowerCase();
+                return s === bHandle || blg === bHandle || cnt === bHandle || cmp === bHandle;
+              }).length;
+            } else {
+              bClicks = (CLICK_BY_BLOGGER && CLICK_BY_BLOGGER[b.handle] ? CLICK_BY_BLOGGER[b.handle] : 0) + 
+                        (CLICK_BY_SOURCE && CLICK_BY_SOURCE[b.handle] ? CLICK_BY_SOURCE[b.handle] : 0) + 
+                        (CLICK_BY_CONTENT && CLICK_BY_CONTENT[b.handle] ? CLICK_BY_CONTENT[b.handle] : 0);
+            }
+
             b.clicks = bClicks;
             mClicks += bClicks;
           });
@@ -1054,11 +1122,43 @@
         clicks = 0;
         Object.keys(fanAccounts).forEach(fKey => {
           const fa = fanAccounts[fKey];
-          const fClicks = (CLICK_BY_CAMPAIGN[fKey] || 0) + (CLICK_COUNTS[fKey] || 0);
-          fa.clicks = fClicks;
-          clicks += fClicks;
+          const fKeyLower = fKey.toLowerCase();
+
+          // Клики конкретного сотрудника
+          let empClicks = 0;
+          if (Array.isArray(RAW_CLICKS) && RAW_CLICKS.length > 0) {
+            empClicks = RAW_CLICKS.filter(c => {
+              const cmp = (c.utm_campaign || '').toLowerCase();
+              const blg = (c.blogger || '').toLowerCase();
+              return cmp === fKeyLower || blg === fKeyLower;
+            }).length;
+          } else {
+            empClicks = (CLICK_BY_CAMPAIGN[fKey] || 0) + (CLICK_COUNTS[fKey] || 0);
+          }
+
+          fa.clicks = empClicks;
+          clicks += empClicks;
+
+          // Клики по каждой платформе СТРОГО для данного сотрудника
           Object.keys(fa.platforms).forEach(pKey => {
-            fa.platforms[pKey].clicks = CLICK_BY_SOURCE[pKey] || 0;
+            let platClicks = 0;
+            const pKeyLower = pKey.toLowerCase();
+
+            if (Array.isArray(RAW_CLICKS) && RAW_CLICKS.length > 0) {
+              platClicks = RAW_CLICKS.filter(c => {
+                const cmp = (c.utm_campaign || '').toLowerCase();
+                const blg = (c.blogger || '').toLowerCase();
+                const src = (c.utm_source || '').toLowerCase();
+                const isEmp = cmp === fKeyLower || blg === fKeyLower;
+                const isPlat = src.includes(pKeyLower);
+                return isEmp && isPlat;
+              }).length;
+            } else {
+              const comboKey = `${fKeyLower}:::${pKeyLower}`;
+              platClicks = CLICK_BY_CAMPAIGN_SOURCE[comboKey] || 0;
+            }
+
+            fa.platforms[pKey].clicks = platClicks;
           });
         });
       } else {
@@ -1093,6 +1193,7 @@
         if (fanGrid) fanGrid.classList.remove('hidden');
 
         const fanLeadsEl = document.getElementById('fanKpiLeads');
+        const fanClicksEl = document.getElementById('fanKpiClicks');
         const fanWonEl = document.getElementById('fanKpiWon');
         const fanRevEl = document.getElementById('fanKpiRevenue');
         const fanSpendEl = document.getElementById('fanKpiSpend');
@@ -1103,6 +1204,7 @@
         const fanUtmPctEl = document.getElementById('fanKpiUtmPct');
 
         if (fanLeadsEl) fanLeadsEl.innerText = d.leads.toLocaleString('ru-RU');
+        if (fanClicksEl) fanClicksEl.innerText = d.clicks.toLocaleString('ru-RU');
         if (fanWonEl) fanWonEl.innerText = d.won.toLocaleString('ru-RU');
         if (fanRevEl) fanRevEl.innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
         
@@ -1902,6 +2004,8 @@
         const r = await fetch('/api/clicks-summary');
         const res = await r.json();
         if (res) {
+          if (Array.isArray(res.clicks)) RAW_CLICKS = res.clicks;
+          if (res.byCampaignSource) CLICK_BY_CAMPAIGN_SOURCE = res.byCampaignSource;
           if (res.byContent) { CLICK_COUNTS = res.byContent; CLICK_BY_CONTENT = res.byContent; }
           if (res.byMedium) CLICK_BY_MEDIUM = res.byMedium;
           if (res.byPage) CLICK_BY_PAGE = res.byPage;
@@ -1961,6 +2065,46 @@
               live.className = "hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200";
               live.innerHTML = `🟢 Supabase Realtime (Живые данные)`;
             }, 6000);
+          }
+        })
+        .subscribe();
+
+      // Живая подписка на входящие клики
+      supabaseClient
+        .channel('public_clicks')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'clicks' }, payload => {
+          const c = payload.new;
+          if (!c) return;
+          RAW_CLICKS.unshift(c);
+
+          const cnt = (c.utm_content || '').trim();
+          const med = (c.utm_medium || '').trim();
+          const p = (c.landing_page || '').trim();
+          const src = (c.utm_source || '').trim();
+          const cmp = (c.utm_campaign || '').trim();
+          const blg = (c.blogger || '').trim();
+
+          if (cnt && cnt !== 'none') CLICK_BY_CONTENT[cnt] = (CLICK_BY_CONTENT[cnt] || 0) + 1;
+          if (med && med !== 'none') CLICK_BY_MEDIUM[med] = (CLICK_BY_MEDIUM[med] || 0) + 1;
+          if (p && p !== 'none') CLICK_BY_PAGE[p] = (CLICK_BY_PAGE[p] || 0) + 1;
+          if (src && src !== 'none') CLICK_BY_SOURCE[src] = (CLICK_BY_SOURCE[src] || 0) + 1;
+          if (cmp && cmp !== 'none') CLICK_BY_CAMPAIGN[cmp] = (CLICK_BY_CAMPAIGN[cmp] || 0) + 1;
+          if (blg && blg !== 'none') CLICK_BY_BLOGGER[blg] = (CLICK_BY_BLOGGER[blg] || 0) + 1;
+          if (cmp && src && cmp !== 'none' && src !== 'none') {
+            const csKey = `${cmp.toLowerCase()}:::${src.toLowerCase()}`;
+            CLICK_BY_CAMPAIGN_SOURCE[csKey] = (CLICK_BY_CAMPAIGN_SOURCE[csKey] || 0) + 1;
+          }
+
+          onFilterChange();
+
+          const live = document.getElementById('liveStatus');
+          if (live) {
+            live.className = "hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-purple-50 text-purple-800 border-purple-300 animate-pulse";
+            live.innerHTML = `⚡ Клик: ${src} (${p})`;
+            setTimeout(() => {
+              live.className = "hidden sm:inline-flex px-2.5 py-1 text-[11px] font-bold rounded-lg border bg-emerald-50 text-emerald-700 border-emerald-200";
+              live.innerHTML = `🟢 Supabase Realtime (Живые данные)`;
+            }, 5000);
           }
         })
         .subscribe();

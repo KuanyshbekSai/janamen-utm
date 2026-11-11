@@ -30,6 +30,7 @@ export default async function handler(req, res) {
     const bySource = {};
     const byCampaign = {};
     const byBlogger = {};
+    const byCampaignSource = {};
 
     for (const c of (data || [])) {
       const cnt = (c.utm_content || '').trim();
@@ -45,6 +46,11 @@ export default async function handler(req, res) {
       if (src && src !== 'none') bySource[src] = (bySource[src] || 0) + 1;
       if (cmp && cmp !== 'none') byCampaign[cmp] = (byCampaign[cmp] || 0) + 1;
       if (blg && blg !== 'none') byBlogger[blg] = (byBlogger[blg] || 0) + 1;
+
+      if (cmp && src && cmp !== 'none' && src !== 'none') {
+        const csKey = `${cmp.toLowerCase()}:::${src.toLowerCase()}`;
+        byCampaignSource[csKey] = (byCampaignSource[csKey] || 0) + 1;
+      }
     }
 
     return res.status(200).json({
@@ -56,6 +62,7 @@ export default async function handler(req, res) {
       bySource,
       byCampaign,
       byBlogger,
+      byCampaignSource,
       clicks: data || []
     });
   } catch (err) {
