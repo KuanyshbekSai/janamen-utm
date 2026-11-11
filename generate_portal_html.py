@@ -190,6 +190,9 @@ html_content = f'''<!DOCTYPE html>
           <button onclick="filterByPage('/smm')" class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 font-bold transition flex items-center space-x-1 shadow-sm">
             <span>📸 /smm (Соцсети)</span>
           </button>
+          <button onclick="setGranularityDim('tags')" class="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-400 font-black transition flex items-center space-x-1 shadow-sm">
+            <span>🏷️ Срез по Тегам CRM</span>
+          </button>
         </div>
 
         <!-- СТРОКА 3: ДЕТАЛЬНЫЕ ВЫПАДАЮЩИЕ СПИСКИ И ПОИСК -->
@@ -266,8 +269,12 @@ html_content = f'''<!DOCTYPE html>
 
       <!-- КНОПКИ ВЫБОРА СРЕЗА (SUB-TABS) -->
       <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center gap-1.5 overflow-x-auto text-xs">
-        <button onclick="setGranularityDim('combos')" id="dim-btn-combos" class="px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs transition shadow-sm">
+        <button onclick="setGranularityDim('combos')" id="dim-btn-combos" class="px-3.5 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs transition shadow-sm">
           Полные связки (Combo)
+        </button>
+        <button onclick="setGranularityDim('tags')" id="dim-btn-tags" class="px-3.5 py-1.5 rounded-xl bg-amber-100 text-amber-900 hover:bg-amber-200 border-2 border-amber-400 font-black text-xs transition shadow-sm flex items-center space-x-1">
+          <span>🏷️</span>
+          <span>ТЕГИ AmoCRM</span>
         </button>
         <button onclick="setGranularityDim('sources')" id="dim-btn-sources" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition">
           utm_source (Площадки / Блогеры)
@@ -286,9 +293,6 @@ html_content = f'''<!DOCTYPE html>
         </button>
         <button onclick="setGranularityDim('subpages')" id="dim-btn-subpages" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition">
           📄 Посадочные страницы (Subpages)
-        </button>
-        <button onclick="setGranularityDim('tags')" id="dim-btn-tags" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition">
-          🏷️ Теги AmoCRM
         </button>
       </div>
 
@@ -626,7 +630,9 @@ html_content = f'''<!DOCTYPE html>
         const btn = document.getElementById('dim-btn-' + d);
         if (btn) {{
           if (d === dim) {{
-            btn.className = 'px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs transition shadow-sm';
+            btn.className = 'px-3.5 py-1.5 rounded-xl bg-purple-600 text-white font-bold text-xs transition shadow-sm';
+          }} else if (d === 'tags') {{
+            btn.className = 'px-3.5 py-1.5 rounded-xl bg-amber-100 text-amber-900 hover:bg-amber-200 border-2 border-amber-400 font-black text-xs transition shadow-sm flex items-center space-x-1';
           }} else {{
             btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 font-bold text-xs transition';
           }}
