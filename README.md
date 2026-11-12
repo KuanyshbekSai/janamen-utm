@@ -44,3 +44,22 @@
    - Нажмите **«⚡ 2. Синхронизировать сделки из AmoCRM»** — скрипт выгрузит свежие сделки и подтянет все UTM-метки.
    - Нажмите **«⏰ 4. Включить автообновление AmoCRM (каждые 2ч)»** — установится фоновый триггер автоматической синхронизации.
 3. Откройте [Веб-дашборд](https://script.google.com/macros/s/AKfycbwV97KvjNwl_OCWbydMTd7DVFn6mDSRvjj6-z5nhdlQK8v9XliGC6JFW6NHZSY0p3Jz/exec) или встройте его на Tilda через блок `T123`.
+
+---
+
+## 🔐 Доступ и секреты
+
+Переменные окружения Vercel (Project → Settings → Environment Variables):
+
+| Переменная | Назначение |
+|---|---|
+| `SUPABASE_URL` | Адрес проекта Supabase |
+| `SUPABASE_SERVICE_KEY` | Секретный ключ Supabase (только на сервере) |
+| `AUTH_SECRET` | Случайная строка ≥ 32 символов для подписи токенов входа |
+| `AMOCRM_TOKEN` | Токен AmoCRM для `/api/sync` и `/api/webhook` |
+
+- Пароли хранятся в `app_users` только в виде хэша scrypt. Пользователя или новый пароль задаёт скрипт:
+  `node scripts/set-user-password.mjs <email> <роль> [имя] [mpbN]` (читает `.env`, пароль вводится в терминале).
+- Владелец (`superadmin`) управляет доступами в портале: «👥 Доступы».
+- В Google Apps Script токен AmoCRM берётся из «Свойств скрипта» (`AMOCRM_TOKEN`), а не из кода.
+- На таблицах `bloggers` и `app_users` включён RLS (см. `supabase_schema.sql`): публичный ключ портала их не читает.

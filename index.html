@@ -936,18 +936,6 @@
           <button type="button" onclick="switchAuthTab('register')" id="tabAuthRegister" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900">Регистрация</button>
         </div>
 
-        <!-- Быстрый выбор роли для входа -->
-        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-xs">
-          <div class="text-[10px] font-black uppercase text-slate-400 mb-1.5">Быстрый тестовый вход под ролью:</div>
-          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
-            <button type="button" onclick="quickLoginRole('admin')" class="p-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-bold text-left">👑 Куанышбек (Владелец)</button>
-            <button type="button" onclick="quickLoginRole('rom')" class="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 rounded-lg font-bold text-left">💼 РОМ (Маркетинг)</button>
-            <button type="button" onclick="quickLoginRole('crm')" class="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-200 rounded-lg font-bold text-left">⚙️ CRM-интегратор</button>
-            <button type="button" onclick="quickLoginRole('anelzhan')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Анельжан (mpb1)</button>
-            <button type="button" onclick="quickLoginRole('alina')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Алина (mpb2)</button>
-            <button type="button" onclick="quickLoginRole('alua')" class="p-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-lg font-bold text-left">🌟 Алуа (mpb3)</button>
-          </div>
-        </div>
 
         <form id="authForm" onsubmit="event.preventDefault(); submitAuthForm();" class="space-y-3 text-xs font-semibold text-slate-700">
           <div id="authNameField" class="hidden">
@@ -1166,6 +1154,20 @@
 
     // Авторизация и текущий пользователь
     let CURRENT_USER = null;
+    let AUTH_TOKEN = null;
+
+    // fetch с токеном текущего пользователя
+    function authFetch(url, opts = {}) {
+      const headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
+      if (AUTH_TOKEN) headers['Authorization'] = 'Bearer ' + AUTH_TOKEN;
+      return fetch(url, Object.assign({}, opts, { headers }));
+    }
+
+    function escapeHtml(v) {
+      return String(v == null ? '' : v)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
 
     let RAW_CLICKS = [];
     let CLICK_COUNTS = {};
@@ -3148,7 +3150,7 @@
                         <button onclick="copyBloggerDirectLink('${b.handle}', '${mCode}')" title="Скопировать трекинг-ссылку блогера" class="px-2 py-0.5 text-[10px] font-bold text-purple-700 hover:text-white bg-purple-50 hover:bg-purple-600 rounded border border-purple-200 transition">
                           🔗 Ссылка
                         </button>
-                        ${(CURRENT_USER && (CURRENT_USER.role === 'superadmin' || (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin')))) ? `
+                        ${(CURRENT_USER && CURRENT_USER.role === 'superadmin') ? `
                           <button onclick="event.stopPropagation(); deleteBloggerByAdmin('${b.handle}')" title="Удалить блогера (только для владельца)" class="px-2 py-0.5 text-[10px] font-bold text-rose-600 hover:text-white bg-rose-50 hover:bg-rose-600 rounded border border-rose-200 transition">
                             🗑️
                           </button>
@@ -4124,10 +4126,7 @@
 
       // Показываем кнопку удаления ТОЛЬКО если вошел супер-админ (владелец)
       const btnDel = document.getElementById('btnDeleteBloggerModal');
-      const isMaster = CURRENT_USER && (
-        CURRENT_USER.role === 'superadmin' ||
-        (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin'))
-      );
+      const isMaster = CURRENT_USER && CURRENT_USER.role === 'superadmin';
       if (btnDel) {
         if (isMaster) btnDel.classList.remove('hidden');
         else btnDel.classList.add('hidden');
@@ -4140,10 +4139,7 @@
     // УДАЛЕНИЕ ЗАПИСЕЙ БЛОГЕРОВ (СТРОГО ТОЛЬКО ДЛЯ ВЛАДЕЛЬЦА)
     // ============================================================
     async function deleteBloggerByAdmin(handle) {
-      const isMaster = CURRENT_USER && (
-        CURRENT_USER.role === 'superadmin' ||
-        (CURRENT_USER.email && (CURRENT_USER.email.includes('saidullayev') || CURRENT_USER.email === 'admin'))
-      );
+      const isMaster = CURRENT_USER && CURRENT_USER.role === 'superadmin';
 
       if (!isMaster) {
         alert('Доступ запрещен. Только владелец (Куанышбек Сайдуллаев) имеет право удалять записи!');
@@ -4156,17 +4152,14 @@
       }
 
       try {
-        const res = await fetch(`/api/bloggers?handle=${encodeURIComponent(cleanH)}&admin_email=${encodeURIComponent(CURRENT_USER.email)}`, {
+        const res = await authFetch(`/api/bloggers?handle=${encodeURIComponent(cleanH)}`, {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            handle: cleanH,
-            admin_email: CURRENT_USER.email
-          })
+          body: JSON.stringify({ handle: cleanH })
         });
 
-        if (res.status === 403) {
-          alert('Доступ запрещен сервером: удалять записи может только владелец.');
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          alert(errData.error || 'Сервер отклонил удаление. Войдите под аккаунтом владельца.');
           return;
         }
 
@@ -4470,7 +4463,8 @@
         }
 
         // Синхронизируем с Supabase через /api/bloggers
-        const res = await fetch('/api/bloggers');
+        if (!AUTH_TOKEN) return;
+        const res = await authFetch('/api/bloggers');
         if (res.ok) {
           const data = await res.json();
           if (data && data.bloggers && Array.isArray(data.bloggers)) {
@@ -4541,11 +4535,14 @@
 
       // 2. Отправляем в Supabase через /api/bloggers
       try {
-        await fetch('/api/bloggers', {
+        const saveRes = await authFetch('/api/bloggers', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bloggerObj)
         });
+        if (!saveRes.ok) {
+          const errData = await saveRes.json().catch(() => ({}));
+          alert('⚠️ Блогер сохранён только в этом браузере: ' + (errData.error || 'сервер отклонил запрос'));
+        }
       } catch (e) {
         console.warn('API error when saving blogger:', e);
       }
@@ -4571,32 +4568,52 @@
     let authCurrentTab = 'login';
 
     function initAuth() {
-      const savedUser = localStorage.getItem('janamen_auth_user');
-      if (savedUser) {
-        try {
-          CURRENT_USER = JSON.parse(savedUser);
-        } catch(e) {
-          CURRENT_USER = null;
-        }
+      try {
+        AUTH_TOKEN = localStorage.getItem('janamen_auth_token');
+        const savedUser = localStorage.getItem('janamen_auth_user');
+        CURRENT_USER = (AUTH_TOKEN && savedUser) ? JSON.parse(savedUser) : null;
+      } catch(e) {
+        CURRENT_USER = null;
       }
-
-      if (!CURRENT_USER) {
-        // По умолчанию главный аккаунт (владелец / супервайзер)
-        CURRENT_USER = {
-          name: 'Куанышбек Сайдуллаев',
-          email: 'k.saidullayev@janamen.kz',
-          role: 'superadmin',
-          status: 'active'
-        };
-        localStorage.setItem('janamen_auth_user', JSON.stringify(CURRENT_USER));
+      if (!AUTH_TOKEN) {
+        CURRENT_USER = null;
+        localStorage.removeItem('janamen_auth_user');
       }
+      renderUserBadge();
 
+      // Проверяем, что сессия ещё действительна (роль/статус могли измениться)
+      if (AUTH_TOKEN) {
+        authFetch('/api/auth', { method: 'POST', body: JSON.stringify({ action: 'me' }) })
+          .then(r => r.json().then(d => ({ status: r.status, d })))
+          .then(({ status, d }) => {
+            if (d && d.user) {
+              CURRENT_USER = d.user;
+              localStorage.setItem('janamen_auth_user', JSON.stringify(CURRENT_USER));
+              renderUserBadge();
+            } else if (status === 401) {
+              clearSession();
+            }
+          })
+          .catch(() => {});
+      }
+    }
+
+    function clearSession() {
+      AUTH_TOKEN = null;
+      CURRENT_USER = null;
+      localStorage.removeItem('janamen_auth_token');
+      localStorage.removeItem('janamen_auth_user');
       renderUserBadge();
     }
 
     function renderUserBadge() {
       const badge = document.getElementById('userProfileName');
       const btnManage = document.getElementById('btnUserManage');
+      const btnLogout = document.getElementById('btnAuthLogout');
+      if (btnLogout) btnLogout.classList.toggle('hidden', !CURRENT_USER);
+      if (badge && !CURRENT_USER) {
+        badge.innerHTML = '<span>Войти</span>';
+      }
       if (badge && CURRENT_USER) {
         let roleTitle = 'Пользователь';
         if (CURRENT_USER.role === 'superadmin') roleTitle = '👑 Владелец';
@@ -4605,11 +4622,11 @@
         else if (CURRENT_USER.role === 'manager') roleTitle = `🌟 ${CURRENT_USER.manager_code ? CURRENT_USER.manager_code.toUpperCase() : 'Менеджер'}`;
         else if (CURRENT_USER.role === 'fan') roleTitle = '🎬 Фан-сетка';
 
-        badge.innerHTML = `<span>${CURRENT_USER.name || CURRENT_USER.email.split('@')[0]}</span> <span class="text-[10px] text-slate-400 font-normal">(${roleTitle})</span>`;
+        badge.innerHTML = `<span>${escapeHtml(CURRENT_USER.name || CURRENT_USER.email.split('@')[0])}</span> <span class="text-[10px] text-slate-400 font-normal">(${roleTitle})</span>`;
       }
       if (btnManage) {
         // Только Superadmin видит кнопку "Доступы"
-        if (CURRENT_USER && (CURRENT_USER.role === 'superadmin' || CURRENT_USER.email === 'k.saidullayev@janamen.kz')) {
+        if (CURRENT_USER && CURRENT_USER.role === 'superadmin') {
           btnManage.classList.remove('hidden');
         } else {
           btnManage.classList.add('hidden');
@@ -4656,15 +4673,6 @@
       }
     }
 
-    async function quickLoginRole(roleKey) {
-      const emailInput = document.getElementById('authEmail');
-      const passInput = document.getElementById('authPassword');
-      if (emailInput && passInput) {
-        emailInput.value = roleKey;
-        passInput.value = 'janamen2026';
-        await submitAuthForm();
-      }
-    }
     async function submitAuthForm() {
       const email = (document.getElementById('authEmail').value || '').trim();
       const pass = (document.getElementById('authPassword').value || '').trim();
@@ -4695,15 +4703,19 @@
           return;
         }
 
-        if (authCurrentTab === 'register' && data.user.status === 'pending') {
+        if (authCurrentTab === 'register') {
           fb.classList.add('bg-amber-50', 'text-amber-800', 'border', 'border-amber-200');
           fb.innerText = '✓ Регистрация принята! Ожидайте подтверждения от Куанышбека.';
           return;
         }
 
         CURRENT_USER = data.user;
+        AUTH_TOKEN = data.token;
+        localStorage.setItem('janamen_auth_token', AUTH_TOKEN);
         localStorage.setItem('janamen_auth_user', JSON.stringify(CURRENT_USER));
         renderUserBadge();
+        loadCustomBloggers();
+        onFilterChange();
         fb.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200');
         fb.innerText = '✓ Успешно!';
         setTimeout(() => {
@@ -4711,24 +4723,15 @@
         }, 1000);
 
       } catch(err) {
-        // Fallback если локально без API
-        if (email.includes('saidullayev') || email === 'admin') {
-          CURRENT_USER = { name: name || 'Куанышбек Сайдуллаев', email: email, role: 'superadmin', status: 'active' };
-          localStorage.setItem('janamen_auth_user', JSON.stringify(CURRENT_USER));
-          renderUserBadge();
-          closeAuthModal();
-        } else {
-          fb.classList.add('bg-rose-50', 'text-rose-700', 'border', 'border-rose-200');
-          fb.innerText = 'Ошибка сети. Проверьте подключение.';
-        }
+        fb.classList.add('bg-rose-50', 'text-rose-700', 'border', 'border-rose-200');
+        fb.innerText = 'Ошибка сети. Проверьте подключение.';
       }
     }
 
     function handleLogout() {
       if (confirm('Вы уверены, что хотите выйти из профиля?')) {
-        localStorage.removeItem('janamen_auth_user');
-        CURRENT_USER = null;
-        initAuth();
+        clearSession();
+        onFilterChange();
       }
     }
 
@@ -4758,31 +4761,20 @@
       tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-slate-400">Загрузка списка сотрудников...</td></tr>';
 
       try {
-        const res = await fetch('/api/auth', {
+        const res = await authFetch('/api/auth', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'list_users',
-            admin_email: CURRENT_USER.email
-          })
+          body: JSON.stringify({ action: 'list_users' })
         });
         const data = await res.json();
         if ((data.ok || data.success) && Array.isArray(data.users)) {
           ALL_USERS_LIST = data.users;
         } else {
-          ALL_USERS_LIST = [
-            { id: 1, name: 'Куанышбек Сайдуллаев', email: 'k.saidullayev@janamen.kz', role: 'superadmin', status: 'active' },
-            { id: 2, name: 'Анельжан (mpb1)', email: 'mpb1@janamen.kz', role: 'manager', status: 'active' },
-            { id: 3, name: 'Алина (mpb2)', email: 'mpb2@janamen.kz', role: 'manager', status: 'active' },
-            { id: 4, name: 'Алуа (mpb3)', email: 'mpb3@janamen.kz', role: 'manager', status: 'active' },
-            { id: 5, name: 'Дарина (mpb4)', email: 'mpb4@janamen.kz', role: 'manager', status: 'active' }
-          ];
+          tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-rose-500">${escapeHtml(data.error || 'Нет доступа')}</td></tr>`;
+          return;
         }
       } catch (e) {
-        ALL_USERS_LIST = [
-          { id: 1, name: 'Куанышбек Сайдуллаев', email: 'k.saidullayev@janamen.kz', role: 'superadmin', status: 'active' },
-          { id: 2, name: 'Анельжан (mpb1)', email: 'mpb1@janamen.kz', role: 'manager', status: 'active' }
-        ];
+        tbody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-rose-500">Ошибка сети</td></tr>';
+        return;
       }
 
       renderUserManageTable();
@@ -4799,7 +4791,7 @@
 
       let html = '';
       ALL_USERS_LIST.forEach(u => {
-        const isMaster = (u.email === 'k.saidullayev@janamen.kz' || u.role === 'superadmin');
+        const isMaster = (u.id === CURRENT_USER?.id || u.email === CURRENT_USER?.email);
         const statusBadge = u.status === 'active' 
           ? '<span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-700">Активен</span>'
           : (u.status === 'pending'
@@ -4809,13 +4801,13 @@
         html += `
           <tr class="hover:bg-slate-50 transition border-b border-slate-100">
             <td class="py-2.5 px-3 font-bold text-slate-900">
-              ${u.name || 'Без имени'}
-              ${isMaster ? ' <span class="text-[10px] text-amber-600 font-black">👑 Владелец</span>' : ''}
+              ${escapeHtml(u.name || 'Без имени')}
+              ${isMaster ? ' <span class="text-[10px] text-amber-600 font-black">👑 Это вы</span>' : ''}
             </td>
-            <td class="py-2.5 px-3 font-mono text-slate-600">${u.email}</td>
+            <td class="py-2.5 px-3 font-mono text-slate-600">${escapeHtml(u.email)}</td>
             <td class="py-2.5 px-3 text-center">
               ${isMaster ? '<span class="font-bold text-amber-700">Супервайзер</span>' : `
-                <select onchange="updateUserRole('${u.id}', this.value)" class="text-xs bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-700">
+                <select onchange="updateUserRole(${Number(u.id)}, this.value)" class="text-xs bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5 font-bold text-slate-700">
                   <option value="superadmin" ${u.role === 'superadmin' ? 'selected' : ''}>Администратор (Владелец)</option>
                   <option value="head_marketing" ${u.role === 'head_marketing' ? 'selected' : ''}>Руководитель маркетинга (РОМ)</option>
                   <option value="crm_integrator" ${u.role === 'crm_integrator' ? 'selected' : ''}>CRM-интегратор</option>
@@ -4831,15 +4823,15 @@
             <td class="py-2.5 px-3 text-right space-x-1">
               ${!isMaster ? `
                 ${u.status !== 'active' ? `
-                  <button onclick="toggleUserStatus('${u.id}', 'active')" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold rounded text-[11px] border border-emerald-200">
+                  <button onclick="toggleUserStatus(${Number(u.id)}, 'active')" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold rounded text-[11px] border border-emerald-200">
                     Одобрить
                   </button>
                 ` : `
-                  <button onclick="toggleUserStatus('${u.id}', 'blocked')" class="px-2 py-1 bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 font-bold rounded text-[11px] border border-slate-200">
+                  <button onclick="toggleUserStatus(${Number(u.id)}, 'blocked')" class="px-2 py-1 bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 font-bold rounded text-[11px] border border-slate-200">
                     Блок
                   </button>
                 `}
-                <button onclick="deleteUser('${u.id}', '${u.email}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded text-[11px] border border-rose-200">
+                <button onclick="deleteUser(${Number(u.id)})" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded text-[11px] border border-rose-200">
                   Удалить
                 </button>
               ` : '<span class="text-[11px] text-slate-400 font-medium">Главный</span>'}
@@ -4851,6 +4843,21 @@
       tbody.innerHTML = html;
     }
 
+    async function adminAuthAction(payload) {
+      try {
+        const res = await authFetch('/api/auth', { method: 'POST', body: JSON.stringify(payload) });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !(data.ok || data.success)) {
+          alert(data.error || 'Сервер отклонил запрос');
+          return null;
+        }
+        return data;
+      } catch (e) {
+        alert('Ошибка сети: ' + e.message);
+        return null;
+      }
+    }
+
     async function createUserByAdmin() {
       const name = (document.getElementById('newUserName').value || '').trim();
       const email = (document.getElementById('newUserEmail').value || '').trim();
@@ -4860,87 +4867,36 @@
         alert('Укажите email и пароль');
         return;
       }
-
-      try {
-        await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'register',
-            name: name,
-            email: email,
-            password: pass,
-            role: 'manager'
-          })
-        });
-
-        // сразу активируем
-        await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'update_user',
-            admin_email: CURRENT_USER.email,
-            email: email,
-            status: 'active'
-          })
-        });
-
-        document.getElementById('newUserName').value = '';
-        document.getElementById('newUserEmail').value = '';
-        document.getElementById('newUserPassword').value = '';
-        await loadUsersList();
-        alert(`✓ Доступ для ${email} успешно создан!`);
-      } catch (e) {
-        alert('Ошибка при создании пользователя: ' + e.message);
+      if (pass.length < 8) {
+        alert('Пароль должен быть не короче 8 символов');
+        return;
       }
+
+      const data = await adminAuthAction({ action: 'create_user', name, email, password: pass, role: 'manager' });
+      if (!data) return;
+
+      document.getElementById('newUserName').value = '';
+      document.getElementById('newUserEmail').value = '';
+      document.getElementById('newUserPassword').value = '';
+      await loadUsersList();
+      alert(`✓ Доступ для ${email} успешно создан!`);
     }
 
     async function updateUserRole(userId, newRole) {
-      try {
-        await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'update_user',
-            admin_email: CURRENT_USER.email,
-            id: userId,
-            role: newRole
-          })
-        });
-      } catch (e) {}
+      await adminAuthAction({ action: 'update_user', id: userId, role: newRole });
+      await loadUsersList();
     }
 
     async function toggleUserStatus(userId, newStatus) {
-      try {
-        await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'update_user',
-            admin_email: CURRENT_USER.email,
-            id: userId,
-            status: newStatus
-          })
-        });
-        await loadUsersList();
-      } catch (e) {}
+      await adminAuthAction({ action: 'update_user', id: userId, status: newStatus });
+      await loadUsersList();
     }
 
-    async function deleteUser(userId, email) {
-      if (!confirm(`Удалить доступ для сотрудника ${email}?`)) return;
-      try {
-        await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'delete_user',
-            admin_email: CURRENT_USER.email,
-            id: userId
-          })
-        });
-        await loadUsersList();
-      } catch (e) {}
+    async function deleteUser(userId) {
+      const u = ALL_USERS_LIST.find(x => Number(x.id) === Number(userId));
+      if (!confirm(`Удалить доступ для сотрудника ${u ? u.email : userId}?`)) return;
+      await adminAuthAction({ action: 'delete_user', id: userId });
+      await loadUsersList();
     }
 
     async function syncAmoCRM() {
