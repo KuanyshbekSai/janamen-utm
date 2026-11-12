@@ -2,25 +2,36 @@
  * ============================================================
  * SupabaseSync.js — Регулярный запуск синхронизации AmoCRM -> Supabase
  * Сама синхронизация живёт на Vercel (/api/sync), здесь только расписание.
+ *
+ * Работает по курсору: запоминает, до какого момента всё уже синхронизировано,
+ * и каждый запуск продолжает оттуда. Если запуск не успел — следующий доделает.
  * ============================================================
  */
 
 var SUPABASE_SYNC_URL = 'https://janamen-utm.vercel.app/api/sync';
-var SUPABASE_SYNC_EVERY_MIN = 10;   // как часто запускать
-var SUPABASE_SYNC_WINDOW_HOURS = 1; // окно с запасом: пропущенный запуск не теряет сделки
+var SUPABASE_SYNC_EVERY_MIN = 10;          // как часто запускать
+var SUPABASE_SYNC_OVERLAP_SEC = 5 * 60;    // перекрытие, чтобы не потерять сделки на границе
+var SUPABASE_SYNC_RUN_BUDGET_MS = 4 * 60 * 1000; // GAS ограничивает запуск 6 минутами
+var SUPABASE_SYNC_CURSOR_KEY = 'SUPABASE_SYNC_CURSOR';
 
 /**
- * Вызывает /api/sync и догружает остаток, если за один вызов не успело.
- * @param {number=} hours окно в часах (по умолчанию SUPABASE_SYNC_WINDOW_HOURS)
+ * Синхронизирует всё, что изменилось с прошлого запуска.
+ * @param {number=} catchUpHours при первом запуске — сколько часов назад начать
  */
-function syncDealsToSupabase(hours) {
+function syncDealsToSupabase(catchUpHours) {
+  var props = PropertiesService.getScriptProperties();
+  var nowSec = Math.floor(Date.now() / 1000);
+  var stored = Number(props.getProperty(SUPABASE_SYNC_CURSOR_KEY));
   // Триггер передаёт сюда объект события, поэтому число берём только если оно явно задано
-  var h = (typeof hours === 'number' && hours > 0) ? hours : SUPABASE_SYNC_WINDOW_HOURS;
-  var url = SUPABASE_SYNC_URL + '?hours=' + h;
-  var total = 0;
+  var hours = (typeof catchUpHours === 'number' && catchUpHours > 0) ? catchUpHours : 1;
 
-  for (var i = 0; i < 20; i++) {
-    var resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  var from = stored ? stored - SUPABASE_SYNC_OVERLAP_SEC : nowSec - hours * 3600;
+  var t0 = Date.now();
+  var total = 0;
+  var complete = false;
+
+  while (Date.now() - t0 < SUPABASE_SYNC_RUN_BUDGET_MS) {
+    var resp = UrlFetchApp.fetch(SUPABASE_SYNC_URL + '?from=' + from, { muteHttpExceptions: true });
     var code = resp.getResponseCode();
     var body = {};
     try { body = JSON.parse(resp.getContentText()); } catch (e) {}
@@ -29,27 +40,34 @@ function syncDealsToSupabase(hours) {
       throw new Error('Синхронизация Supabase: HTTP ' + code + ' ' + resp.getContentText().slice(0, 300));
     }
     total += body.synced || 0;
-    if (body.complete || !body.next_from) break;
-    url = SUPABASE_SYNC_URL + '?from=' + body.next_from;
+
+    if (body.complete || !body.next_from) { complete = true; break; }
+    from = body.next_from;
+    props.setProperty(SUPABASE_SYNC_CURSOR_KEY, String(from + SUPABASE_SYNC_OVERLAP_SEC)); // прогресс сохраняем сразу
   }
 
-  Logger.log('Supabase: синхронизировано сделок: ' + total);
-  return total;
+  // Всё догнали — следующий запуск начнёт с момента старта этого
+  if (complete) props.setProperty(SUPABASE_SYNC_CURSOR_KEY, String(nowSec));
+
+  Logger.log('Supabase: синхронизировано ' + total + ' сделок, ' + (complete ? 'всё догнали' : 'продолжим в следующий запуск'));
+  return { synced: total, complete: complete };
 }
 
 /**
- * Включает автосинхронизацию с Supabase каждые 10 минут.
+ * Включает автосинхронизацию с Supabase каждые 10 минут и догружает последние сутки.
  */
 function setupSupabaseSyncTrigger() {
   deleteTriggersByHandler_('syncDealsToSupabase');
+  PropertiesService.getScriptProperties().deleteProperty(SUPABASE_SYNC_CURSOR_KEY);
   ScriptApp.newTrigger('syncDealsToSupabase')
     .timeBased()
     .everyMinutes(SUPABASE_SYNC_EVERY_MIN)
     .create();
-  var n = syncDealsToSupabase(72); // сразу догружаем последние 3 дня
+  var res = syncDealsToSupabase(24);
   try {
     SpreadsheetApp.getActiveSpreadsheet().toast(
-      'Портал обновляется каждые ' + SUPABASE_SYNC_EVERY_MIN + ' мин. Догружено сделок: ' + n,
+      'Портал обновляется каждые ' + SUPABASE_SYNC_EVERY_MIN + ' мин. Догружено сделок: ' + res.synced +
+      (res.complete ? '' : ' (остаток догрузится автоматически)'),
       'Автосинхронизация Supabase включена', 8);
   } catch (e) {}
 }
