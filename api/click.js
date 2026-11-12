@@ -72,6 +72,13 @@ export default async function handler(req, res) {
       }])
     });
 
+    const TRANSPARENT_1PX_GIF = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
+    if (req.method === 'GET') {
+      res.setHeader('Content-Type', 'image/gif');
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+      return res.status(200).send(TRANSPARENT_1PX_GIF);
+    }
+
     return res.status(200).json({ ok: r.ok, blogger: blogger, timestamp: new Date().toISOString() });
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });

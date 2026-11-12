@@ -1352,20 +1352,18 @@ html_template = r'''<!DOCTYPE html>
 
           if (p === '/iwa-9828' || src === 'whatsapp' || cmp.includes('wa9828')) {
             organikaItems['wa_9828'].clicks++;
-          } else if (p.includes('/smm')) {
-            if (src === 'chatbot' || med === 'direct_bot' || cmp.includes('bot')) {
-              organikaItems['smm_chatbot'].clicks++;
-            } else if (src === 'youtube' || med === 'channel' || cmp.includes('youtube')) {
-              organikaItems['smm_youtube'].clicks++;
-            } else if (src === 'threads' || med === 'post' || cmp.includes('threads')) {
-              organikaItems['smm_threads'].clicks++;
-            } else if (src === 'tiktok' || cmp.includes('tiktok')) {
-              organikaItems['smm_tiktok'].clicks++;
-            } else if (src === 'instagram' || med === 'bio' || cmp.includes('profile')) {
-              organikaItems['smm_bio'].clicks++;
-            } else {
-              organikaItems['smm_other'].clicks++;
-            }
+          } else if (src === 'youtube' || cmp === 'smm_video' || (p.includes('smm') && (src === 'youtube' || med === 'channel' || cmp.includes('youtube')))) {
+            organikaItems['smm_youtube'].clicks++;
+          } else if (src === 'chatbot' || med === 'direct_bot' || cmp.includes('welcome_bot') || cmp.includes('bot')) {
+            organikaItems['smm_chatbot'].clicks++;
+          } else if (src === 'threads' || med === 'post' || cmp.includes('threads')) {
+            organikaItems['smm_threads'].clicks++;
+          } else if (src === 'tiktok' || cmp.includes('tiktok')) {
+            organikaItems['smm_tiktok'].clicks++;
+          } else if (src === 'instagram' || med === 'bio' || cmp.includes('profile') || (p.includes('smm') && med === 'bio')) {
+            organikaItems['smm_bio'].clicks++;
+          } else if (p.includes('smm')) {
+            organikaItems['smm_other'].clicks++;
           }
         });
       }
@@ -3684,6 +3682,16 @@ html_template = r'''<!DOCTYPE html>
     loadFreshDealsFromSupabase();
     loadClickCounts();
     initRealtime();
+
+    // Автообновление кликов и сделок в реальном времени (каждые 8 сек и при фокусе)
+    setInterval(() => {
+      loadClickCounts();
+      loadFreshDealsFromSupabase();
+    }, 8000);
+    window.addEventListener('focus', () => {
+      loadClickCounts();
+      loadFreshDealsFromSupabase();
+    });
   </script>
 </body>
 </html>'''

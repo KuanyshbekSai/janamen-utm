@@ -1,23 +1,43 @@
-<!-- Jana Men: Фиксация UTM-кликов и переходов v2 -->
+<!-- Jana Men: Надежный трекер UTM-кликов и переходов (v3 Bulletproof) -->
 <script>
 (function() {
   try {
     var p = new URLSearchParams(window.location.search);
-    if (!(window.location.search || document.referrer)) return;
-    var o = {
-      utm_source: p.get('utm_source') || 'direct',
-      utm_medium: p.get('utm_medium') || 'none',
-      utm_campaign: p.get('utm_campaign') || 'none',
-      utm_content: p.get('utm_content') || 'none',
-      utm_term: p.get('utm_term') || 'none',
-      landing_page: window.location.pathname || '/',
-      referrer: document.referrer || 'direct'
-    };
-    var EP = 'https://janamen-utm.vercel.app/api/hit';
-    var q = Object.keys(o).map(function(k){ return k + '=' + encodeURIComponent(o[k]); }).join('&');
-    // 1) пиксель-запрос (GET): не блокируется как fetch/beacon, работает везде
-    var img = new Image(1, 1);
-    img.src = EP + '?' + q + '&_=' + Date.now();
+    var src = p.get('utm_source');
+    var med = p.get('utm_medium');
+    var cmp = p.get('utm_campaign');
+    var cnt = p.get('utm_content');
+    var trm = p.get('utm_term');
+
+    // Фиксируем, если есть UTM или реферер
+    if (src || med || cmp || window.location.search || document.referrer) {
+      var o = {
+        utm_source: src || 'direct',
+        utm_medium: med || 'none',
+        utm_campaign: cmp || 'none',
+        utm_content: cnt || 'none',
+        utm_term: trm || 'none',
+        landing_page: window.location.pathname || '/',
+        referrer: document.referrer || 'direct'
+      };
+
+      var query = Object.keys(o).map(function(k){ return k + '=' + encodeURIComponent(o[k]); }).join('&');
+      var fullUrl = 'https://janamen-utm.vercel.app/api/hit?' + query + '&_=' + Date.now();
+
+      // Метод 1: Невидимый пиксель 1x1 (GET) — не блокируется Brave Shields, AdBlock и Safari
+      var img = new Image(1, 1);
+      img.src = fullUrl;
+
+      // Метод 2: fetch с keepalive и no-cors
+      if (window.fetch) {
+        fetch(fullUrl, { method: 'GET', mode: 'no-cors', keepalive: true }).catch(function(){});
+      }
+
+      // Метод 3: sendBeacon как резервный канал
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('https://janamen-utm.vercel.app/api/click', JSON.stringify(o));
+      }
+    }
   } catch(e) {}
 })();
 </script>
