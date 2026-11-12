@@ -430,7 +430,7 @@ html_template = r'''<!DOCTYPE html>
             <span class="text-base">🎯</span>
             <div>
               <h3 class="text-sm font-extrabold text-slate-900">Установить план по лидам (Точка Б)</h3>
-              <p class="text-[11px] text-slate-500 font-normal">Задайте общий план и настройте ползунками доли каналов</p>
+              <p class="text-[11px] text-slate-500 font-normal">Задайте общий план заявок и автоматическое распределение по каналам</p>
             </div>
           </div>
           <button onclick="closeEditPlanModal()" class="text-slate-400 hover:text-slate-600 font-bold text-base cursor-pointer">✕</button>
@@ -458,7 +458,7 @@ html_template = r'''<!DOCTYPE html>
             </div>
           </div>
 
-          <!-- СМАРТ КНОПКИ АВТО-РАСЧЁТА ("ПУСТЬ САМ РАССЧИТЫВАЕТ") -->
+          <!-- СМАРТ КНОПКИ АВТО-РАСЧЁТА -->
           <div class="bg-indigo-50/70 border border-indigo-100 p-2.5 rounded-xl flex items-center justify-between gap-2">
             <span class="text-[11px] font-bold text-indigo-950 flex items-center space-x-1">
               <span>⚡</span>
@@ -477,69 +477,81 @@ html_template = r'''<!DOCTYPE html>
             </div>
           </div>
 
-          <!-- ПОЛЗУНКИ СОСТАВА ПЛАНА ПО КАНАЛАМ -->
-          <div class="pt-2 border-t border-slate-100 space-y-3">
+          <!-- СОСТАВ ПЛАНА ПО КАНАЛАМ -->
+          <div class="pt-2 border-t border-slate-100 space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Состав плана по каналам (ползунки):</span>
+              <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Распределение по каналам:</span>
               <span id="lblPlanStatus" class="text-[11px] font-bold text-emerald-600">100% распределено</span>
             </div>
 
-            <!-- 1. ОРГАНИКА ПОЛЗУНОК -->
-            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-extrabold text-slate-900 flex items-center space-x-1.5">
-                  <span>🌿</span>
-                  <span>Органика (SMM / WA 9828)</span>
-                </span>
-                <div class="flex items-center space-x-2">
-                  <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanOrganika" step="1" oninput="onChannelInputChange('organika', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
-                    <span class="text-[11px] text-slate-500 font-bold">лидов</span>
-                  </div>
-                  <span id="badgePctOrganika" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">60%</span>
+            <!-- 1. ОРГАНИКА -->
+            <div class="bg-slate-50 px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm">🌿</span>
+                <div>
+                  <div class="font-extrabold text-slate-900 text-xs">Органика</div>
+                  <div class="text-[10px] text-slate-400 font-normal">SMM / Сайт / WA 9828</div>
                 </div>
               </div>
-              <input type="range" id="sliderPlanOrganika" min="0" max="10000" step="1" oninput="onChannelSliderChange('organika', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1">
+                  <input type="number" id="inputPlanOrganika" step="1" oninput="onChannelInputChange('organika', this.value)" class="w-20 px-2 py-1 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded-lg text-right focus:outline-none focus:border-slate-900">
+                  <span class="text-[11px] text-slate-500 font-bold">лидов</span>
+                </div>
+                <span id="badgePctOrganika" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">60%</span>
+              </div>
             </div>
 
-            <!-- 2. ИНФЛЮЕНС ПОЛЗУНОК -->
-            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-extrabold text-slate-900 flex items-center space-x-1.5">
-                  <span>🌟</span>
-                  <span>Инфлюенс (Блогеры UGC)</span>
-                </span>
-                <div class="flex items-center space-x-2">
-                  <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanInfluence" step="1" oninput="onChannelInputChange('influence', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
-                    <span class="text-[11px] text-slate-500 font-bold">лидов</span>
-                  </div>
-                  <span id="badgePctInfluence" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">25%</span>
+            <!-- 2. ИНФЛЮЕНС -->
+            <div class="bg-slate-50 px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm">🌟</span>
+                <div>
+                  <div class="font-extrabold text-slate-900 text-xs">Инфлюенс</div>
+                  <div class="text-[10px] text-slate-400 font-normal">Блогеры UGC & МПБ</div>
                 </div>
               </div>
-              <input type="range" id="sliderPlanInfluence" min="0" max="10000" step="1" oninput="onChannelSliderChange('influence', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1">
+                  <input type="number" id="inputPlanInfluence" step="1" oninput="onChannelInputChange('influence', this.value)" class="w-20 px-2 py-1 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded-lg text-right focus:outline-none focus:border-slate-900">
+                  <span class="text-[11px] text-slate-500 font-bold">лидов</span>
+                </div>
+                <span id="badgePctInfluence" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">25%</span>
+              </div>
             </div>
 
-            <!-- 3. ФАН ПОЛЗУНОК -->
-            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-extrabold text-slate-900 flex items-center space-x-1.5">
-                  <span>🎬</span>
-                  <span>Фан-отдел (Фан-аккаунты)</span>
-                </span>
-                <div class="flex items-center space-x-2">
-                  <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanFan" step="1" oninput="onChannelInputChange('fan', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
-                    <span class="text-[11px] text-slate-500 font-bold">лидов</span>
-                  </div>
-                  <span id="badgePctFan" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">15%</span>
+            <!-- 3. ФАН-ОТДЕЛ -->
+            <div class="bg-slate-50 px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm">🎬</span>
+                <div>
+                  <div class="font-extrabold text-slate-900 text-xs">Фан-отдел</div>
+                  <div class="text-[10px] text-slate-400 font-normal">Сетка фан-аккаунтов</div>
                 </div>
               </div>
-              <input type="range" id="sliderPlanFan" min="0" max="10000" step="1" oninput="onChannelSliderChange('fan', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1">
+                  <input type="number" id="inputPlanFan" step="1" oninput="onChannelInputChange('fan', this.value)" class="w-20 px-2 py-1 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded-lg text-right focus:outline-none focus:border-slate-900">
+                  <span class="text-[11px] text-slate-500 font-bold">лидов</span>
+                </div>
+                <span id="badgePctFan" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">15%</span>
+              </div>
             </div>
 
             <!-- ВИЗУАЛЬНАЯ ПОЛОСА РАСПРЕДЕЛЕНИЯ -->
             <div class="space-y-1.5 pt-1">
+              <div class="w-full h-2.5 rounded-full bg-slate-200 flex overflow-hidden">
+                <div id="barSplitOrganika" class="bg-slate-900 transition-all duration-200" style="width: 60%"></div>
+                <div id="barSplitInfluence" class="bg-slate-600 transition-all duration-200" style="width: 25%"></div>
+                <div id="barSplitFan" class="bg-slate-400 transition-all duration-200" style="width: 15%"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 font-semibold">
+                <span>Итого по каналам: <strong id="lblPlanSum" class="text-slate-900 font-extrabold">10 000</strong></span>
+                <span class="text-slate-400">Точка Б</span>
+              </div>
+            </div>
+
+          </div>
               <div class="w-full h-2.5 rounded-full bg-slate-200 flex overflow-hidden">
                 <div id="barSplitOrganika" class="bg-slate-900 transition-all duration-200" style="width: 60%"></div>
                 <div id="barSplitInfluence" class="bg-slate-600 transition-all duration-200" style="width: 25%"></div>
@@ -1902,27 +1914,13 @@ html_template = r'''<!DOCTYPE html>
       const inf = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.influence) || 0));
       const fan = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.fan) || 0));
 
-      // Sliders max
-      ['Organika', 'Influence', 'Fan'].forEach(ch => {
-        const slider = document.getElementById('sliderPlan' + ch);
-        if (slider) slider.max = total;
-      });
-
-      const sOrg = document.getElementById('sliderPlanOrganika');
-      const sInf = document.getElementById('sliderPlanInfluence');
-      const sFan = document.getElementById('sliderPlanFan');
-
       const iOrg = document.getElementById('inputPlanOrganika');
       const iInf = document.getElementById('inputPlanInfluence');
       const iFan = document.getElementById('inputPlanFan');
 
-      if (sOrg) sOrg.value = org;
-      if (sInf) sInf.value = inf;
-      if (sFan) sFan.value = fan;
-
-      if (iOrg) iOrg.value = org;
-      if (iInf) iInf.value = inf;
-      if (iFan) iFan.value = fan;
+      if (iOrg && document.activeElement !== iOrg) iOrg.value = org;
+      if (iInf && document.activeElement !== iInf) iInf.value = inf;
+      if (iFan && document.activeElement !== iFan) iFan.value = fan;
 
       const pctOrg = total ? Math.round(org / total * 100) : 0;
       const pctInf = total ? Math.round(inf / total * 100) : 0;
