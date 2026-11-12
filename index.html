@@ -3850,53 +3850,96 @@
       console.warn('Supabase init err:', e);
     }
 
+    // Историческая выгрузка в Supabase завершилась до этого момента: всё, что обновлено позже,
+    // изменилось в AmoCRM уже после снимка, вшитого в страницу, и должно его перекрыть.
+    const DEALS_DELTA_SINCE = '2026-11-11T06:00:00Z';
+    const DEALS_PAGE = 1000; // максимум строк Supabase за один запрос
+    const DEAL_SELECT = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
+    let dealsCursor = DEALS_DELTA_SINCE;
+    let dealsLoading = false;
+    let LEAD_INDEX = null;
+
+    function dealToLead(d) {
+      const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
+      const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
+      return {
+        id: d.id,
+        ts: ts,
+        won: d.is_won ? 1 : 0,
+        price: d.price || 0,
+        dom: dom,
+        path: d.landing_page || '/',
+        page: d.landing_page || '/',
+        src: d.utm_source || 'direct/none',
+        med: d.utm_medium || 'none',
+        cmp: d.utm_campaign || 'none',
+        cnt: d.utm_content || 'none',
+        trm: d.utm_term || 'none',
+        status_id: d.status_id || (d.is_won ? 142 : 0),
+        name: d.name || 'Сделка',
+        tags: Array.isArray(d.tags) ? d.tags : []
+      };
+    }
+
+    // Добавляет новую сделку или заменяет устаревшую версию. Возвращает 'added' | 'updated' | null.
+    function upsertLead(d) {
+      if (!LEAD_INDEX) {
+        LEAD_INDEX = new Map();
+        ALL_LEADS.forEach(l => LEAD_INDEX.set(l.id, l));
+      }
+      const fresh = dealToLead(d);
+      const existing = LEAD_INDEX.get(fresh.id);
+      if (existing) {
+        if (existing.won === fresh.won && existing.price === fresh.price && existing.status_id === fresh.status_id &&
+            existing.src === fresh.src && existing.med === fresh.med && existing.cmp === fresh.cmp && existing.cnt === fresh.cnt) {
+          return null;
+        }
+        // Обновляем только то, что меняется в CRM; домен и путь страницы оставляем из снимка
+        existing.won = fresh.won; existing.price = fresh.price; existing.status_id = fresh.status_id;
+        existing.src = fresh.src; existing.med = fresh.med; existing.cmp = fresh.cmp;
+        existing.cnt = fresh.cnt; existing.trm = fresh.trm; existing.name = fresh.name; existing.tags = fresh.tags;
+        return 'updated';
+      }
+      ALL_LEADS.unshift(fresh);
+      LEAD_INDEX.set(fresh.id, fresh);
+      return 'added';
+    }
+
     async function loadFreshDealsFromSupabase() {
-      if (!supabaseClient) return;
+      if (!supabaseClient || dealsLoading) return;
+      dealsLoading = true;
+      let added = 0, updated = 0;
       try {
-        const { data, error } = await supabaseClient
-          .from('deals')
-          .select('id, name, created_at, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags')
-          .order('created_at', { ascending: false })
-          .limit(1000);
+        for (let offset = 0; ; offset += DEALS_PAGE) {
+          const { data, error } = await supabaseClient
+            .from('deals')
+            .select(DEAL_SELECT)
+            .gte('updated_at', dealsCursor)
+            .order('updated_at', { ascending: true })
+            .order('id', { ascending: true })
+            .range(offset, offset + DEALS_PAGE - 1);
 
-        if (error || !data || !data.length) return;
-
-        let addedCount = 0;
-        const existingIds = new Set(ALL_LEADS.map(l => l.id));
-
-        for (const d of data) {
-          if (!existingIds.has(d.id)) {
-            const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
-            const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
-            ALL_LEADS.unshift({
-              id: d.id,
-              ts: ts,
-              won: d.is_won ? 1 : 0,
-              price: d.price || 0,
-              dom: dom,
-              path: d.landing_page || '/',
-              page: d.landing_page || '/',
-              src: d.utm_source || 'direct/none',
-              med: d.utm_medium || 'none',
-              cmp: d.utm_campaign || 'none',
-              cnt: d.utm_content || 'none',
-              trm: d.utm_term || 'none',
-              status_id: d.is_won ? 142 : 0,
-              name: d.name || 'Сделка',
-              tags: Array.isArray(d.tags) ? d.tags : []
-            });
-            existingIds.add(d.id);
-            addedCount++;
+          if (error || !data) break;
+          for (const d of data) {
+            const r = upsertLead(d);
+            if (r === 'added') added++;
+            else if (r === 'updated') updated++;
+          }
+          if (data.length < DEALS_PAGE) {
+            if (data.length) dealsCursor = data[data.length - 1].updated_at;
+            break;
           }
         }
 
-        if (addedCount > 0) {
+        if (added || updated) {
           onFilterChange();
           const live = document.getElementById('liveStatus');
-          if (live) live.innerHTML = `🟢 Supabase Realtime (+${addedCount} новых)`;
+          if (live) live.innerHTML = `🟢 Supabase (+${added} новых, ${updated} обновлено)`;
         }
       } catch (err) {
         console.warn('Load fresh deals err:', err);
+      } finally {
+        dealsLoading = false;
       }
     }
 
@@ -3928,35 +3971,11 @@
           const d = payload.new;
           if (!d || !d.id) return;
 
-          const existingIndex = ALL_LEADS.findIndex(l => l.id === d.id);
-          const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
-          const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
+          if (!upsertLead(d)) return;
 
-          const leadObj = {
-            id: d.id,
-            ts: ts,
-            won: d.is_won ? 1 : 0,
-            price: d.price || 0,
-            dom: dom,
-            path: d.landing_page || '/',
-            page: d.landing_page || '/',
-            src: d.utm_source || 'direct/none',
-            med: d.utm_medium || 'none',
-            cmp: d.utm_campaign || 'none',
-            cnt: d.utm_content || 'none',
-            trm: d.utm_term || 'none',
-            status_id: d.is_won ? 142 : 0,
-            name: d.name || 'Сделка',
-            tags: Array.isArray(d.tags) ? d.tags : []
-          };
-
-          if (existingIndex >= 0) {
-            ALL_LEADS[existingIndex] = leadObj;
-          } else {
-            ALL_LEADS.unshift(leadObj);
-          }
-
-          onFilterChange();
+          // Синхронизация пишет пачками — перерисовываем один раз на пачку
+          clearTimeout(window.__dealsRerender);
+          window.__dealsRerender = setTimeout(onFilterChange, 400);
 
           const live = document.getElementById('liveStatus');
           if (live) {
@@ -4950,7 +4969,7 @@
       btn.disabled = true;
 
       try {
-        const r = await fetch('/api/sync?limit=200');
+        const r = await fetch('/api/sync?hours=24');
         const res = await r.json();
         await loadFreshDealsFromSupabase();
         btn.innerHTML = `<span>✓ Синхронизировано (${res.synced || 0})</span>`;

@@ -15,6 +15,9 @@ function onOpen() {
     .addItem('⏰ 4. Включить автообновление AmoCRM (каждый час)', 'setupHourlyTrigger')
     .addItem('🔄 Полная перезагрузка всей базы AmoCRM', 'fullResync')
     .addItem('🛑 5. Отключить автообновление', 'clearHourlyTriggers')
+    .addSeparator()
+    .addItem('🟢 6. Включить автообновление портала (Supabase, каждые 10 мин)', 'setupSupabaseSyncTrigger')
+    .addItem('⏹ 7. Отключить автообновление портала', 'clearSupabaseSyncTrigger')
     .addToUi();
 }
 
