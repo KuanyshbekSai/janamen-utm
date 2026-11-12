@@ -48,41 +48,41 @@ html_template = r'''<!DOCTYPE html>
 </head>
 <body class="h-full flex flex-col text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
 
-  <!-- ШАПКА ПОРТАЛА (КОМПАКТНАЯ В 1 СТРОКУ) -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm w-full">
+  <!-- ШАПКА ПОРТАЛА (МИНИМАЛИСТИЧНАЯ ЭКЗЕКЬЮТИВ) -->
+  <header class="bg-white border-b border-slate-200/80 sticky top-0 z-40 w-full shadow-2xs">
     <div class="w-full px-4 sm:px-6">
       <div class="flex justify-between items-center h-16">
         
-        <!-- ЛОГОТИП И СТАТУС -->
+        <!-- ЛОГОТИП И НАЗВАНИЕ -->
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20">
+          <div class="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black text-base shadow-xs tracking-tight">
             JM
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-base sm:text-lg font-black tracking-tight text-slate-900 leading-none">Jana Men</h1>
-              <span class="px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-200 rounded-full">Сквозная Аналитика</span>
+              <h1 class="text-base font-extrabold tracking-tight text-slate-900 leading-none">Jana Men</h1>
+              <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 rounded-full">Аналитика</span>
             </div>
-            <p class="text-[11px] text-slate-500 font-medium">Органика · Influence (МПБ) · Fan-аккаунты · Clicks & AmoCRM</p>
+            <p class="text-[11px] text-slate-500 font-medium">Органика · Influence · Fan-отдел · Clicks & AmoCRM</p>
           </div>
         </div>
 
-        <!-- КНОПКИ ДЕЙСТВИЙ (Очищенная шапка) -->
+        <!-- КНОПКИ ДЕЙСТВИЙ (МИНИМАЛИЗМ) -->
         <div class="flex items-center space-x-2 sm:space-x-2.5">
-          <button onclick="openAddBloggerModal()" class="inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-black text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow-xs">
+          <button onclick="openAddBloggerModal()" class="inline-flex items-center space-x-1.5 px-3.5 py-2 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition shadow-2xs cursor-pointer">
             <span>+ Добавить блогера</span>
           </button>
 
           <!-- АВТОРИЗАЦИЯ & ПРОФИЛЬ -->
           <div id="authWidget" class="flex items-center space-x-1.5 pl-2 border-l border-slate-200">
-            <button id="btnUserManage" onclick="openUserManageModal()" class="hidden px-2.5 py-1.5 text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 rounded-lg border border-amber-300 transition" title="Управление доступом сотрудников">
+            <button id="btnUserManage" onclick="openUserManageModal()" class="hidden px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-xl border border-slate-200 transition cursor-pointer" title="Управление доступом сотрудников">
               👥 Доступы
             </button>
-            <div id="userProfileBadge" onclick="openAuthModal()" class="cursor-pointer flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 transition">
+            <div id="userProfileBadge" onclick="openAuthModal()" class="cursor-pointer flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 text-xs font-semibold text-slate-800 transition">
               <span>👤</span>
               <span id="userProfileName">Куанышбек</span>
             </div>
-            <button id="btnAuthLogout" onclick="handleLogout()" class="text-xs text-slate-400 hover:text-rose-600 px-1 font-bold" title="Выйти">
+            <button id="btnAuthLogout" onclick="handleLogout()" class="text-xs text-slate-400 hover:text-slate-700 px-1 font-bold cursor-pointer" title="Выйти">
               ✕
             </button>
           </div>
@@ -95,111 +95,128 @@ html_template = r'''<!DOCTYPE html>
   <!-- ОСНОВНОЙ КОНТЕНТ (СТРОГО ПО ЗАРИСОВКЕ РУКОВОДИТЕЛЯ) -->
   <main class="flex-1 w-full px-3 sm:px-6 py-4 space-y-3.5">
 
-    <!-- 1. СТРОКА ПЕРИОДА (Период | Весь период   Сегодня   Вчера) -->
-    <div class="bg-white rounded-xl border border-slate-200/90 shadow-2xs px-4 py-2 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center space-x-3 overflow-x-auto text-xs scrollbar-none py-0.5">
-        <span class="font-black text-slate-800 uppercase tracking-wider text-xs border-r border-slate-200 pr-3 whitespace-nowrap">Период</span>
-        <div class="flex items-center space-x-1 sm:space-x-1.5">
-          <button onclick="setPeriodPreset('all')" id="period-btn-all" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shadow-xs">
+    <!-- 1. СТРОКА ПЕРИОДА (МИНИМАЛИЗМ: ПЕРИОДЫ ПО МЕСЯЦАМ + ВЫБОР ОТ ДАТЫ И ДО ДАТЫ) -->
+    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Левый блок: Быстрые пресеты периода -->
+      <div class="flex items-center space-x-2 overflow-x-auto text-xs scrollbar-none py-0.5">
+        <span class="font-extrabold text-slate-900 uppercase tracking-wider text-xs border-r border-slate-200 pr-3 whitespace-nowrap">Период</span>
+        <div class="flex items-center space-x-1">
+          <button onclick="setPeriodPreset('all')" id="period-btn-all" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shadow-2xs cursor-pointer">
             Весь период
           </button>
-          <button onclick="setPeriodPreset('today')" id="period-btn-today" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+          <button onclick="setPeriodPreset('today')" id="period-btn-today" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
             Сегодня
           </button>
-          <button onclick="setPeriodPreset('yesterday')" id="period-btn-yesterday" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+          <button onclick="setPeriodPreset('yesterday')" id="period-btn-yesterday" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
             Вчера
           </button>
-          <button onclick="setPeriodPreset('last7')" id="period-btn-last7" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block">
+          <button onclick="setPeriodPreset('last7')" id="period-btn-last7" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block cursor-pointer">
             7 дней
           </button>
-          <button onclick="setPeriodPreset('last30')" id="period-btn-last30" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block">
+          <button onclick="setPeriodPreset('last30')" id="period-btn-last30" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block cursor-pointer">
             30 дней
           </button>
         </div>
-      </div>
 
-      <!-- Поиск & Кастомные даты -->
-      <div class="flex items-center space-x-2">
-        <div class="relative">
-          <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="🔍 Поиск по блогеру, UTM..." class="pl-3 pr-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:bg-white focus:outline-none focus:border-brand-500 w-44 sm:w-60 font-medium">
+        <!-- Быстрые месяцы + Селектор по месяцам -->
+        <div class="flex items-center space-x-1.5 pl-2 border-l border-slate-200">
+          <button onclick="selectMonthPreset('2026-11')" id="period-btn-2026-11" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition cursor-pointer">
+            Ноябрь 2026
+          </button>
+          <button onclick="selectMonthPreset('2026-10')" id="period-btn-2026-10" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition hidden md:inline-block cursor-pointer">
+            Октябрь 2026
+          </button>
+          <select id="monthSelect" onchange="selectMonthPreset(this.value)" class="bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-semibold text-slate-700 hover:border-slate-300 focus:outline-none focus:border-slate-900 cursor-pointer">
+            <option value="">Другие месяцы...</option>
+            <option value="2026-11">Ноябрь 2026</option>
+            <option value="2026-10">Октябрь 2026</option>
+            <option value="2026-09">Сентябрь 2026</option>
+            <option value="2026-08">Август 2026</option>
+            <option value="2026-07">Июль 2026</option>
+            <option value="2026-06">Июнь 2026</option>
+            <option value="2026-05">Май 2026</option>
+            <option value="2026-04">Апрель 2026</option>
+            <option value="2026-03">Март 2026</option>
+            <option value="2026-02">Февраль 2026</option>
+          </select>
         </div>
-        <button onclick="toggleFilters()" id="btnToggleFilters" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded-lg border border-slate-200 hover:bg-slate-100 transition flex items-center space-x-1" title="Настроить точный диапазон дат">
-          <span>📅 Даты</span>
-        </button>
-        <button onclick="resetAllFilters()" class="text-xs font-bold text-slate-400 hover:text-slate-700 px-1.5 py-1 rounded-lg hover:bg-slate-100 transition" title="Сбросить все фильтры">
-          ✕
-        </button>
+      </div>
+
+      <!-- Правый блок: Выбор от даты и до даты + Поиск -->
+      <div class="flex items-center space-x-2 flex-wrap">
+        
+        <!-- Функция выбора от даты и до даты (всегда на виду) -->
+        <div class="flex items-center space-x-1.5 text-xs text-slate-500 font-medium bg-slate-50 px-2.5 py-1 rounded-xl border border-slate-200">
+          <span class="text-slate-400">с</span>
+          <input type="date" id="dateInputFrom" onchange="applyCustomDateRange()" class="bg-white border border-slate-200 rounded px-1.5 py-0.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-slate-900 cursor-pointer">
+          <span class="text-slate-400">по</span>
+          <input type="date" id="dateInputTo" onchange="applyCustomDateRange()" class="bg-white border border-slate-200 rounded px-1.5 py-0.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-slate-900 cursor-pointer">
+          <button onclick="resetAllFilters()" title="Сбросить даты" class="text-slate-400 hover:text-slate-700 font-bold px-1 transition cursor-pointer">✕</button>
+        </div>
+
+        <!-- Поиск -->
+        <div class="relative">
+          <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="🔍 Поиск..." class="pl-3 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 focus:bg-white focus:outline-none focus:border-slate-900 w-36 sm:w-48">
+        </div>
       </div>
     </div>
 
-    <!-- Всплывающий блок точных дат (по клику на Даты) -->
-    <div id="filtersBody" class="hidden bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center space-x-2">
-        <span class="text-slate-500 font-bold">Быстрый месяц:</span>
-        <button onclick="setPeriodPreset('nov2026')" id="period-btn-nov2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Ноябрь 2026</button>
-        <button onclick="setPeriodPreset('oct2026')" id="period-btn-oct2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Октябрь 2026</button>
-      </div>
-      <div class="inline-flex items-center space-x-1.5 ml-auto text-xs font-bold text-slate-700">
-        <span class="text-slate-400 font-normal">с</span>
-        <input type="date" id="dateInputFrom" onchange="applyCustomDateRange()" class="px-2 py-1 text-xs bg-white border border-slate-200 rounded-lg font-medium">
-        <span class="text-slate-400 font-normal">по</span>
-        <input type="date" id="dateInputTo" onchange="applyCustomDateRange()" class="px-2 py-1 text-xs bg-white border border-slate-200 rounded-lg font-medium">
-      </div>
-    </div>
-
-    <!-- 2. БЛОК ОСНОВНЫХ ЦИФР (5 КАРТОЧЕК В ОДИН РЯД ПО ЗАРИСОВКЕ) -->
-    <div id="kpiStandardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
+    <!-- 2. БЛОК ОСНОВНЫХ ЦИФР (5 МИНИМАЛИСТИЧНЫХ БЕЛЫХ КАРТОЧЕК В ОДИН РЯД) -->
+    <div id="kpiStandardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
       
       <!-- 1. Всего заявок -->
-      <div class="bg-white p-3 rounded-xl border border-slate-200/90 shadow-2xs">
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок</span>
-          <span id="kpiScopeBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Органика</span>
+          <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Всего заявок</span>
+          <span id="kpiScopeBadge" class="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Органика</span>
         </div>
-        <div id="kpiTotalLeads" class="text-xl sm:text-2xl font-black text-slate-900 mt-1 leading-tight">—</div>
-        <div class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
-          <span id="kpiLeadsPeriod">за период</span>
-          <span id="kpiClicksInline" class="font-bold text-purple-700">0 кликов</span>
+        <div id="kpiTotalLeads" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1.5 leading-none tracking-tight">—</div>
+        <div class="text-xs text-slate-500 mt-2 flex items-center justify-between">
+          <span id="kpiLeadsPeriod">за выбранный период</span>
+          <span id="kpiClicksInline" class="font-medium text-slate-600">0 переходов</span>
         </div>
       </div>
 
-      <!-- 2. Оплачено / CR % (Объединено по зарисовке) -->
-      <div class="bg-white p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
+      <!-- 2. Оплачено / CR % -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Оплачено</span>
-          <span class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">142</span>
+          <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Оплачено</span>
+          <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Статус 142</span>
         </div>
-        <div id="kpiWonLeads" class="text-xl sm:text-2xl font-black text-emerald-600 mt-1 leading-tight">—</div>
-        <div id="kpiCr2" class="text-[11px] font-bold text-emerald-700 mt-1">CR: 0%</div>
+        <div id="kpiWonLeads" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1.5 leading-none tracking-tight">—</div>
+        <div id="kpiCr2" class="text-xs font-semibold text-slate-700 mt-2">CR: 0% (Лид ➔ Оплата)</div>
       </div>
 
       <!-- 3. Выручка -->
-      <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
-        <div class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Выручка</div>
-        <div id="kpiRevenue" class="text-xl sm:text-2xl font-black text-brand-700 mt-1 leading-tight whitespace-nowrap">—</div>
-        <div id="kpiAvgCheck" class="text-[10px] font-medium text-slate-500 mt-1">Ср. чек: —</div>
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition">
+        <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Выручка</div>
+        <div id="kpiRevenue" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1.5 leading-none tracking-tight whitespace-nowrap">—</div>
+        <div id="kpiAvgCheck" class="text-xs font-medium text-slate-500 mt-2">Ср. чек: —</div>
       </div>
 
-      <!-- 4. Расходы на блогеров -->
-      <div class="bg-white p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
-        <div class="text-[11px] font-bold text-rose-700 uppercase tracking-wider" id="kpiExpenseLabel">Расходы на блогеров</div>
-        <div id="kpiExpenses" class="text-xl sm:text-2xl font-black text-rose-800 mt-1 leading-tight whitespace-nowrap">0 ₸</div>
-        <div id="kpiExpensesSub" class="text-[10px] text-rose-600 mt-1 font-medium truncate">витамины 62k/72k + доставка</div>
-      </div>
-
-      <!-- 5. Окупаемость / ROMI -->
-      <div class="bg-white p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
+      <!-- 4. Расходы -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость</span>
-          <span id="kpiRomiBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
+          <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider" id="kpiExpenseLabel">Расходы</span>
         </div>
-        <div id="kpiRomi" class="text-xl sm:text-2xl font-black text-emerald-700 mt-1 leading-tight whitespace-nowrap">—</div>
-        <div id="kpiRomiSub" class="text-[10px] text-emerald-800 mt-1 font-bold truncate">возврат инвестиций</div>
+        <div id="kpiExpenses" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1.5 leading-none tracking-tight whitespace-nowrap">0 ₸</div>
+        <div id="kpiExpensesSub" class="text-xs text-slate-500 mt-2 truncate">затраты канала</div>
+      </div>
+
+      <!-- 5. Окупаемость -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Окупаемость</span>
+          <span id="kpiRomiBadge" class="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60">ROMI</span>
+        </div>
+        <div id="kpiRomi" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-1.5 leading-none tracking-tight whitespace-nowrap">—</div>
+        <div id="kpiRomiSub" class="text-xs font-medium text-slate-500 mt-2 truncate">возврат инвестиций</div>
       </div>
 
     </div>
 
-    <!-- Hidden compat elements for scripts -->
+    <!-- Совместимость для скриптов -->
     <div class="hidden">
       <span id="kpiClicks">0</span>
       <span id="kpiCr1">CR1: —</span>
@@ -213,19 +230,20 @@ html_template = r'''<!DOCTYPE html>
       <span id="fanKpiAvgCheck">Ср. чек: 0 ₸</span>
       <span id="activeFilterBadge">Весь период</span>
       <span id="toggleFilterText">Фильтры</span>
+      <div id="filtersBody"></div>
     </div>
 
     <!-- 3. БЛОК: ВЫПОЛНЕНИЕ ПЛАНА (ТОЧНО ПО ЗАРИСОВКЕ: План, Факт, шкала Точка А ➔ Точка Б) -->
     <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-4 sm:p-5">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center space-x-2 sm:space-x-3">
-          <span class="text-sm sm:text-base font-black text-slate-900 uppercase tracking-tight">Выполнение плана</span>
+          <span class="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Выполнение плана</span>
           <span class="text-slate-300 font-light text-base">|</span>
-          <span id="planPercentBadge" class="px-2.5 py-0.5 text-xs font-black rounded-full bg-blue-100 text-brand-800">
+          <span id="planPercentBadge" class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-slate-100 text-slate-800">
             0% выполнено
           </span>
         </div>
-        <button onclick="openEditPlanModal()" class="px-3 py-1.5 text-xs font-black text-brand-700 hover:text-white bg-brand-50 hover:bg-brand-600 rounded-xl border border-brand-200 transition shadow-2xs flex items-center space-x-1.5 cursor-pointer">
+        <button onclick="openEditPlanModal()" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-xl border border-slate-200 transition shadow-2xs flex items-center space-x-1.5 cursor-pointer">
           <span>✏️ Изменить план</span>
         </button>
       </div>
@@ -234,66 +252,60 @@ html_template = r'''<!DOCTYPE html>
       <div class="mt-4 space-y-3.5">
         <!-- Полоса ПЛАН -->
         <div>
-          <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
             <span class="flex items-center space-x-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+              <span class="w-2 h-2 rounded-full bg-slate-400"></span>
               <span>План (Цель):</span>
             </span>
-            <span id="planTargetDisplay" class="font-black text-slate-800 text-sm">50 000 000 ₸</span>
+            <span id="planTargetDisplay" class="font-extrabold text-slate-800 text-sm">50 000 000 ₸</span>
           </div>
-          <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
             <div class="h-full bg-slate-300 rounded-full w-full"></div>
           </div>
         </div>
 
         <!-- Полоса ФАКТ -->
         <div>
-          <div class="flex items-center justify-between text-xs font-bold mb-1">
-            <span class="flex items-center space-x-1.5 text-brand-800">
-              <span class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-pulse"></span>
+          <div class="flex items-center justify-between text-xs font-semibold mb-1">
+            <span class="flex items-center space-x-1.5 text-slate-800">
+              <span class="w-2 h-2 rounded-full bg-slate-900"></span>
               <span>Факт (Выручка за период):</span>
             </span>
             <div class="flex items-center space-x-2">
-              <span id="planFactDisplay" class="font-black text-brand-700 text-sm">0 ₸</span>
-              <span id="planFactPercent" class="text-xs font-extrabold text-emerald-600">(0%)</span>
+              <span id="planFactDisplay" class="font-extrabold text-slate-900 text-sm">0 ₸</span>
+              <span id="planFactPercent" class="text-xs font-bold text-slate-600">(0%)</span>
             </div>
           </div>
-          <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden border border-brand-200 p-0.5 shadow-inner">
-            <div id="planFactBar" class="h-full bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-500 rounded-full transition-all duration-700" style="width: 0%;"></div>
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div id="planFactBar" class="h-full bg-slate-900 rounded-full transition-all duration-500" style="width: 0%;"></div>
           </div>
         </div>
 
-        <!-- ШКАЛА С ДЕЛЕНИЯМИ: ТОЧКА А ➔ ТОЧКА Б (СТРЕЛА С ЗАСЕЧКАМИ ИЗ ЗАРИСОВКИ) -->
+        <!-- Шкала от Точки А к Точке Б -->
         <div class="pt-2">
           <div class="relative w-full">
-            <!-- Горизонтальная направляющая линия -->
-            <div class="h-1 bg-slate-300 w-full relative flex items-center justify-between rounded-full">
-              <!-- Засечки -->
-              <div class="w-0.5 h-3.5 bg-slate-500 -mt-1 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-3 bg-slate-400 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
-              <div class="w-0.5 h-3.5 bg-slate-500 -mt-1 rounded-full"></div>
-              <!-- Наконечник стрелки -->
-              <span class="absolute -right-2 text-slate-500 text-xs font-black leading-none select-none">▶</span>
+            <div class="h-1 bg-slate-200 w-full relative flex items-center justify-between rounded-full">
+              <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+              <div class="w-1 h-1 bg-slate-400 rounded-full"></div>
+              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+              <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
             </div>
 
             <!-- Подписи Точка А и Точка Б -->
-            <div class="flex items-center justify-between text-xs font-bold text-slate-600 mt-2.5">
+            <div class="flex items-center justify-between text-xs font-medium text-slate-600 mt-2.5">
               <div class="flex flex-col">
-                <span class="text-[10px] text-slate-400 uppercase font-black">Точка А (Старт)</span>
-                <span class="font-extrabold text-slate-800 text-sm">0 ₸</span>
+                <span class="text-[10px] text-slate-400 uppercase font-bold">Точка А (Старт)</span>
+                <span class="font-extrabold text-slate-800 text-xs sm:text-sm">0 ₸</span>
               </div>
-              <div id="planRemainingDisplay" class="text-center text-xs font-semibold text-slate-500 hidden sm:block">
-                Осталось до цели: <span class="font-extrabold text-slate-800" id="planRemainingVal">—</span>
+              <div id="planRemainingDisplay" class="text-center text-xs text-slate-500">
+                Осталось до цели: <span class="font-bold text-slate-900" id="planRemainingVal">—</span>
               </div>
               <div class="flex flex-col items-end">
-                <span class="text-[10px] text-brand-600 uppercase font-black">Точка Б (Цель)</span>
-                <span class="font-extrabold text-brand-700 text-sm" id="planTargetVal">50 000 000 ₸</span>
+                <span class="text-[10px] text-slate-400 uppercase font-bold">Точка Б (Цель)</span>
+                <span class="font-extrabold text-slate-900 text-xs sm:text-sm" id="planTargetVal">50 000 000 ₸</span>
               </div>
             </div>
           </div>
@@ -302,35 +314,35 @@ html_template = r'''<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 4. ТАБЫ ВЫБОРА КАНАЛОВ (РАСПОЛОЖЕНЫ НАД ТАБЛИЦЕЙ ПО ЗАРИСОВКЕ: Органика | Инфлюенс | Фан) -->
-    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-2 sm:p-2.5">
-      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto text-xs font-bold scrollbar-none">
+    <!-- 4. ТАБЫ ВЫБОРА КАНАЛОВ (МИНИМАЛИСТИЧНЫЙ SEGMENTED CONTROL НАД ТАБЛИЦЕЙ) -->
+    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-1.5">
+      <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 overflow-x-auto scrollbar-none">
         
         <!-- РАЗДЕЛ 1: ОРГАНИКА -->
-        <button onclick="switchMainChannel('organika')" id="main-tab-organika" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap cursor-pointer">
+        <button onclick="switchMainChannel('organika')" id="main-tab-organika" class="px-3.5 py-2 rounded-lg bg-white text-slate-900 font-bold text-xs sm:text-sm flex items-center space-x-2 transition shadow-2xs whitespace-nowrap cursor-pointer">
           <span>🌿 Органика</span>
-          <span id="tabBadgeOrganika" class="px-2 py-0.5 text-[10px] bg-white/20 text-white rounded-full font-black">18.4k</span>
+          <span id="tabBadgeOrganika" class="px-2 py-0.5 text-[10px] bg-slate-900 text-white rounded-full font-bold">18.4k</span>
         </button>
 
         <!-- РАЗДЕЛ 2: ИНФЛЮЕНС -->
-        <button onclick="switchMainChannel('influence')" id="main-tab-influence" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
+        <button onclick="switchMainChannel('influence')" id="main-tab-influence" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
           <span>🌟 Инфлюенс</span>
-          <span id="tabBadgeInfluence" class="px-2 py-0.5 text-[10px] bg-purple-200 text-purple-900 rounded-full font-black">4 мен.</span>
+          <span id="tabBadgeInfluence" class="px-2 py-0.5 text-[10px] bg-slate-200 text-slate-700 rounded-full font-semibold">4 мен.</span>
         </button>
 
         <!-- РАЗДЕЛ 3: ФАН -->
-        <button onclick="switchMainChannel('fan')" id="main-tab-fan" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
-          <span>🎬 Фан</span>
-          <span id="tabBadgeFan" class="px-2 py-0.5 text-[10px] bg-indigo-200 text-indigo-900 rounded-full font-black">8 акк.</span>
+        <button onclick="switchMainChannel('fan')" id="main-tab-fan" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
+          <span>🎬 Фан-отдел</span>
+          <span id="tabBadgeFan" class="px-2 py-0.5 text-[10px] bg-slate-200 text-slate-700 rounded-full font-semibold">8 акк.</span>
         </button>
 
         <!-- ВСЕ КАНАЛЫ (СВОДКА) -->
-        <button onclick="switchMainChannel('all')" id="main-tab-all" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap ml-auto cursor-pointer">
+        <button onclick="switchMainChannel('all')" id="main-tab-all" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 font-semibold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap ml-auto cursor-pointer">
           <span>📊 Все каналы</span>
         </button>
 
         <!-- ТЕГИ AMOCRM -->
-        <button onclick="switchMainChannel('tags')" id="main-tab-tags" class="px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap cursor-pointer">
+        <button onclick="switchMainChannel('tags')" id="main-tab-tags" class="px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 font-semibold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap cursor-pointer">
           <span>🏷️ Теги CRM</span>
         </button>
 
@@ -419,7 +431,45 @@ html_template = r'''<!DOCTYPE html>
     </div>
 
     <!-- 1. МОДАЛЬНОЕ ОКНО: ДОБАВИТЬ БЛОГЕРА & УСЛОВИЯ (ГОНОРАР, ДОСТАВКА, ВИТАМИНЫ) -->
-    <div id="addBloggerModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+      <!-- МОДАЛЬНОЕ ОКНО НАСТРОЙКИ ЗАРПЛАТ FAN-ОТДЕЛА -->
+  <div id="editFanSalariesModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-md w-full p-5 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">Зарплаты Fan-отдела</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Оклады сотрудников для точного расчёта окупаемости (ROMI)</p>
+        </div>
+        <button onclick="closeFanSalariesModal()" class="text-slate-400 hover:text-slate-700 text-lg font-bold p-1 cursor-pointer">✕</button>
+      </div>
+
+      <!-- Быстрая ставка всем -->
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-2">
+        <span class="text-xs font-semibold text-slate-700">Всем одинаково:</span>
+        <div class="flex items-center space-x-1.5">
+          <input type="number" id="inputFlatFanSalary" placeholder="150000" class="w-24 px-2 py-1 text-xs bg-white border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:border-slate-900">
+          <span class="text-xs text-slate-500 font-bold">₸</span>
+          <button onclick="applyFlatFanSalary()" class="px-2.5 py-1 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition cursor-pointer">OK</button>
+        </div>
+      </div>
+
+      <!-- Список сотрудников -->
+      <div id="fanSalariesListContainer" class="max-h-60 overflow-y-auto space-y-2 pr-1 text-xs scrollbar-thin">
+        <!-- Заполняется JS -->
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="text-xs text-slate-600">
+          ФОТ в месяц: <span id="fanTotalSalaryPreview" class="font-extrabold text-slate-900 text-sm">0 ₸</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="closeFanSalariesModal()" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition cursor-pointer">Отмена</button>
+          <button onclick="saveFanSalaries()" class="px-4 py-1.5 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition shadow-xs cursor-pointer">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="addBloggerModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-4">
         
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -826,21 +876,22 @@ html_template = r'''<!DOCTYPE html>
     function switchMainChannel(channel) {
       currentMainChannel = channel;
 
-      // Обновление вкладок
+      // Минималистичное обновление сегментированных вкладок (Apple / Linear style)
       const tabs = ['organika', 'influence', 'fan', 'all', 'tags'];
       tabs.forEach(t => {
         const btn = document.getElementById('main-tab-' + t);
+        const badge = document.getElementById('tabBadge' + t.charAt(0).toUpperCase() + t.slice(1));
         if (!btn) return;
+
+        const isRightAligned = (t === 'all');
+        const mlClass = isRightAligned ? 'ml-auto' : '';
+
         if (t === channel) {
-          if (t === 'organika') btn.className = 'px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap';
-          else if (t === 'influence') btn.className = 'px-4 py-2.5 rounded-xl bg-purple-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap';
-          else if (t === 'fan') btn.className = 'px-4 py-2.5 rounded-xl bg-indigo-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap';
-          else if (t === 'tags') btn.className = 'px-3.5 py-2.5 rounded-xl bg-amber-500 text-white font-black text-xs sm:text-sm flex items-center space-x-1.5 transition shadow-sm whitespace-nowrap';
-          else btn.className = 'px-3.5 py-2.5 rounded-xl bg-slate-900 text-white font-black text-xs sm:text-sm flex items-center space-x-1.5 transition shadow-sm whitespace-nowrap ml-auto';
+          btn.className = `px-3.5 py-2 rounded-lg bg-white text-slate-900 font-bold text-xs sm:text-sm flex items-center space-x-2 transition shadow-2xs whitespace-nowrap cursor-pointer ${mlClass}`;
+          if (badge) badge.className = 'px-2 py-0.5 text-[10px] bg-slate-900 text-white rounded-full font-bold';
         } else {
-          if (t === 'tags') btn.className = 'px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap';
-          else if (t === 'all') btn.className = 'px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap ml-auto';
-          else btn.className = 'px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap';
+          btn.className = `px-3.5 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-white/60 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer ${mlClass}`;
+          if (badge) badge.className = 'px-2 py-0.5 text-[10px] bg-slate-200 text-slate-700 rounded-full font-semibold';
         }
       });
 
@@ -882,8 +933,48 @@ html_template = r'''<!DOCTYPE html>
     }
 
     // ============================================================
-    // ФИЛЬТРАЦИЯ ПО ПЕРИОДУ
+    // ФИЛЬТРАЦИЯ ПО ПЕРИОДУ (БЫСТРЫЕ ДНИ, МЕСЯЦЫ, ОТ ДАТЫ И ДО ДАТЫ)
     // ============================================================
+    function selectMonthPreset(val) {
+      if (!val) {
+        setPeriodPreset('all');
+        return;
+      }
+      const parts = val.split('-');
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10); // 1-12
+      
+      const startDate = new Date(Date.UTC(y, m - 1, 1, 0, 0, 0));
+      const lastDay = new Date(y, m, 0).getDate();
+      const endDate = new Date(Date.UTC(y, m - 1, lastDay, 23, 59, 59));
+
+      filterDateFrom = Math.floor(startDate.getTime() / 1000);
+      filterDateTo = Math.floor(endDate.getTime() / 1000);
+
+      const startIso = `${y}-${String(m).padStart(2, '0')}-01`;
+      const endIso = `${y}-${String(m).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+
+      const inFrom = document.getElementById('dateInputFrom');
+      const inTo = document.getElementById('dateInputTo');
+      if (inFrom) inFrom.value = startIso;
+      if (inTo) inTo.value = endIso;
+
+      const monthSelect = document.getElementById('monthSelect');
+      if (monthSelect) monthSelect.value = val;
+
+      const buttons = document.querySelectorAll('[id^="period-btn-"]');
+      buttons.forEach(b => {
+        if (b.id === 'period-btn-' + val) {
+          b.className = 'px-2.5 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shadow-2xs cursor-pointer';
+        } else {
+          b.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition cursor-pointer';
+        }
+      });
+
+      currentPeriod = 'month_' + val;
+      onFilterChange();
+    }
+
     function setPeriodPreset(preset) {
       currentPeriod = preset;
       const now = new Date();
@@ -892,54 +983,87 @@ html_template = r'''<!DOCTYPE html>
       const buttons = document.querySelectorAll('[id^="period-btn-"]');
       buttons.forEach(b => {
         if (b.id === 'period-btn-' + preset) {
-          b.className = 'px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-sm';
+          b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shadow-2xs cursor-pointer';
         } else {
-          b.className = 'px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+          b.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition cursor-pointer';
         }
       });
+
+      const monthSelect = document.getElementById('monthSelect');
+      if (monthSelect) monthSelect.value = '';
+
+      const inFrom = document.getElementById('dateInputFrom');
+      const inTo = document.getElementById('dateInputTo');
+
+      const fmt = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      };
 
       if (preset === 'all') {
         filterDateFrom = null;
         filterDateTo = null;
+        if (inFrom) inFrom.value = '';
+        if (inTo) inTo.value = '';
       } else if (preset === 'today') {
-        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
         filterDateFrom = Math.floor(start.getTime() / 1000);
         filterDateTo = null;
+        if (inFrom) inFrom.value = fmt(now);
+        if (inTo) inTo.value = fmt(now);
       } else if (preset === 'yesterday') {
-        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-        const end = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        filterDateFrom = Math.floor(start.getTime() / 1000);
-        filterDateTo = Math.floor(end.getTime() / 1000);
+        const yDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 0, 0, 0);
+        const yEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 59, 59);
+        filterDateFrom = Math.floor(yDay.getTime() / 1000);
+        filterDateTo = Math.floor(yEnd.getTime() / 1000);
+        if (inFrom) inFrom.value = fmt(yDay);
+        if (inTo) inTo.value = fmt(yDay);
       } else if (preset === 'last7') {
         filterDateFrom = nowTs - 7 * 86400;
         filterDateTo = null;
+        if (inFrom) inFrom.value = fmt(new Date((nowTs - 7 * 86400) * 1000));
+        if (inTo) inTo.value = fmt(now);
       } else if (preset === 'last30') {
         filterDateFrom = nowTs - 30 * 86400;
         filterDateTo = null;
-      } else if (preset === 'nov2026') {
-        filterDateFrom = Math.floor(new Date('2026-11-01T00:00:00Z').getTime() / 1000);
-        filterDateTo = Math.floor(new Date('2026-12-01T00:00:00Z').getTime() / 1000);
-      } else if (preset === 'oct2026') {
-        filterDateFrom = Math.floor(new Date('2026-10-01T00:00:00Z').getTime() / 1000);
-        filterDateTo = Math.floor(new Date('2026-11-01T00:00:00Z').getTime() / 1000);
+        if (inFrom) inFrom.value = fmt(new Date((nowTs - 30 * 86400) * 1000));
+        if (inTo) inTo.value = fmt(now);
       }
 
       onFilterChange();
     }
 
     function applyCustomDateRange() {
-      const fromVal = document.getElementById('dateInputFrom').value;
-      const toVal = document.getElementById('dateInputTo').value;
+      const fromVal = document.getElementById('dateInputFrom')?.value;
+      const toVal = document.getElementById('dateInputTo')?.value;
       if (!fromVal && !toVal) return;
 
       currentPeriod = 'custom';
-      filterDateFrom = fromVal ? Math.floor(new Date(fromVal + 'T00:00:00Z').getTime() / 1000) : null;
-      filterDateTo = toVal ? Math.floor(new Date(toVal + 'T23:59:59Z').getTime() / 1000) : null;
+      if (fromVal) {
+        const parts = fromVal.split('-');
+        const dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), 0, 0, 0);
+        filterDateFrom = Math.floor(dt.getTime() / 1000);
+      } else {
+        filterDateFrom = null;
+      }
+
+      if (toVal) {
+        const parts = toVal.split('-');
+        const dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), 23, 59, 59);
+        filterDateTo = Math.floor(dt.getTime() / 1000);
+      } else {
+        filterDateTo = null;
+      }
 
       const buttons = document.querySelectorAll('[id^="period-btn-"]');
       buttons.forEach(b => {
-        b.className = 'px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+        b.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition cursor-pointer';
       });
+
+      const monthSelect = document.getElementById('monthSelect');
+      if (monthSelect) monthSelect.value = '';
 
       onFilterChange();
     }
@@ -948,9 +1072,14 @@ html_template = r'''<!DOCTYPE html>
       currentPeriod = 'all';
       filterDateFrom = null;
       filterDateTo = null;
-      document.getElementById('dateInputFrom').value = '';
-      document.getElementById('dateInputTo').value = '';
-      document.getElementById('filterSearchInput').value = '';
+      const inFrom = document.getElementById('dateInputFrom');
+      const inTo = document.getElementById('dateInputTo');
+      if (inFrom) inFrom.value = '';
+      if (inTo) inTo.value = '';
+      const search = document.getElementById('filterSearchInput');
+      if (search) search.value = '';
+      const monthSelect = document.getElementById('monthSelect');
+      if (monthSelect) monthSelect.value = '';
       setPeriodPreset('all');
     }
 
@@ -1643,252 +1772,338 @@ html_template = r'''<!DOCTYPE html>
       }
     }
 
+    // ============================================================
+    // УПРАВЛЕНИЕ ЗАРПЛАТАМИ FAN-ОТДЕЛА (ДЛЯ РАСЧЕТА РАСХОДОВ И ROMI)
+    // ============================================================
+    const DEFAULT_FAN_SALARY = 150000; // 150 000 ₸ / месяц на каждого сотрудника по умолчанию
+
+    function getFanSalariesMap() {
+      try {
+        return JSON.parse(localStorage.getItem('janamen_fan_salaries') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function getFanSalary(fanId) {
+      const map = getFanSalariesMap();
+      if (map[fanId] !== undefined) return Number(map[fanId]);
+      return DEFAULT_FAN_SALARY;
+    }
+
+    function getFanTotalMonthlySalary() {
+      let total = 0;
+      FAN_REGISTRY.forEach(f => {
+        total += getFanSalary(f.id);
+      });
+      return total;
+    }
+
+    function getFanPeriodExpenses() {
+      const monthlyTotal = getFanTotalMonthlySalary();
+      if (!filterDateFrom && !filterDateTo) {
+        return monthlyTotal; // Если весь период, отображаем месячный бюджет ФОТ
+      }
+      if (filterDateFrom && filterDateTo) {
+        const days = Math.max(1, Math.round((filterDateTo - filterDateFrom) / 86400));
+        const months = days / 30.4;
+        return Math.round(monthlyTotal * months);
+      }
+      if (filterDateFrom && !filterDateTo) {
+        const nowTs = Math.floor(Date.now() / 1000);
+        const days = Math.max(1, Math.round((nowTs - filterDateFrom) / 86400));
+        const months = days / 30.4;
+        return Math.round(monthlyTotal * months);
+      }
+      return monthlyTotal;
+    }
+
+    function openFanSalariesModal() {
+      const modal = document.getElementById('editFanSalariesModal');
+      const container = document.getElementById('fanSalariesListContainer');
+      const preview = document.getElementById('fanTotalSalaryPreview');
+      if (!container || !modal) return;
+
+      container.innerHTML = '';
+      let total = 0;
+      FAN_REGISTRY.forEach(f => {
+        const sal = getFanSalary(f.id);
+        total += sal;
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200';
+        row.innerHTML = `
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-700 text-xs">🎬</span>
+            <span class="font-bold text-slate-800 text-xs">${f.name}</span>
+          </div>
+          <div class="flex items-center space-x-1">
+            <input type="number" id="fan_sal_${f.id}" value="${sal}" oninput="recalcFanSalariesPreview()" class="w-24 px-2 py-1 text-xs bg-white border border-slate-200 rounded font-bold text-slate-800 focus:outline-none focus:border-slate-900 text-right">
+            <span class="text-xs text-slate-500 font-bold">₸</span>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      if (preview) preview.innerText = total.toLocaleString('ru-RU') + ' ₸';
+      modal.classList.remove('hidden');
+    }
+
+    function closeFanSalariesModal() {
+      const modal = document.getElementById('editFanSalariesModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function recalcFanSalariesPreview() {
+      let total = 0;
+      FAN_REGISTRY.forEach(f => {
+        const input = document.getElementById('fan_sal_' + f.id);
+        total += Number(input?.value || 0);
+      });
+      const preview = document.getElementById('fanTotalSalaryPreview');
+      if (preview) preview.innerText = total.toLocaleString('ru-RU') + ' ₸';
+    }
+
+    function applyFlatFanSalary() {
+      const flat = Number(document.getElementById('inputFlatFanSalary')?.value);
+      if (!flat || flat <= 0) return;
+      FAN_REGISTRY.forEach(f => {
+        const input = document.getElementById('fan_sal_' + f.id);
+        if (input) input.value = flat;
+      });
+      recalcFanSalariesPreview();
+    }
+
+    function saveFanSalaries() {
+      const map = {};
+      FAN_REGISTRY.forEach(f => {
+        const input = document.getElementById('fan_sal_' + f.id);
+        map[f.id] = Number(input?.value || DEFAULT_FAN_SALARY);
+      });
+      localStorage.setItem('janamen_fan_salaries', JSON.stringify(map));
+      closeFanSalariesModal();
+      updateKpis();
+      renderMainTable();
+    }
+
+    // ============================================================
+    // ОБНОВЛЕНИЕ KPI КАРТОЧЕК
+    // ============================================================
     function updateKpis() {
       const d = currentChannelData;
       const userRole = CURRENT_USER?.role || 'superadmin';
       const userMgrCode = CURRENT_USER?.manager_code;
 
-      if (currentMainChannel === 'fan') {
-        const stdGrid = document.getElementById('kpiStandardGrid');
-        const fanGrid = document.getElementById('kpiFanGrid');
-        if (stdGrid) stdGrid.classList.add('hidden');
-        if (fanGrid) fanGrid.classList.remove('hidden');
+      // Все каналы используют единый чистый ряд из 5 карточек (#kpiStandardGrid)
+      const stdGrid = document.getElementById('kpiStandardGrid');
+      if (stdGrid) stdGrid.classList.remove('hidden');
 
-        const fanLeadsEl = document.getElementById('fanKpiLeads');
-        const fanClicksEl = document.getElementById('fanKpiClicks');
-        const fanCr1El = document.getElementById('fanKpiCr1');
-        const fanWonEl = document.getElementById('fanKpiWon');
-        const fanCr2El = document.getElementById('fanKpiCr2');
-        const fanRevEl = document.getElementById('fanKpiRevenue');
-        const fanAvgEl = document.getElementById('fanKpiAvgCheck');
+      let displayLeads = d.leads;
+      let displayWon = d.won;
+      let displayRev = d.rev;
+      let displayClicks = d.clicks;
+      let displayAvgCheck = displayWon ? Math.round(displayRev / displayWon) : 0;
 
-        if (fanLeadsEl) fanLeadsEl.innerText = d.leads.toLocaleString('ru-RU');
-        if (fanClicksEl) fanClicksEl.innerText = d.clicks.toLocaleString('ru-RU');
-        if (fanWonEl) fanWonEl.innerText = d.won.toLocaleString('ru-RU');
-        if (fanRevEl) fanRevEl.innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
+      // Если вошел конкретный менеджер (например Анельжан mpb1) — изолируем метрики strictly под нее
+      if (currentMainChannel === 'influence' && userRole === 'manager' && userMgrCode) {
+        const myMgr = d.influenceManagers?.[userMgrCode] || { leads: 0, won: 0, rev: 0, clicks: 0 };
+        displayLeads = myMgr.leads;
+        displayWon = myMgr.won;
+        displayRev = myMgr.rev;
+        displayClicks = myMgr.clicks;
+        displayAvgCheck = displayWon ? Math.round(displayRev / displayWon) : 0;
+      }
 
-        const cr1Pct = (d.clicks && d.clicks >= d.leads) ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : (d.clicks ? '—' : '0%');
-        const cr2Pct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
-        if (fanCr1El) fanCr1El.innerText = cr1Pct;
-        if (fanCr2El) fanCr2El.innerText = cr2Pct;
-        const avg = d.won ? Math.round(d.rev / d.won) : 0;
-        if (fanAvgEl) fanAvgEl.innerText = 'Ср. чек: ' + avg.toLocaleString('ru-RU') + ' ₸';
-
-      } else {
-        const stdGrid = document.getElementById('kpiStandardGrid');
-        const fanGrid = document.getElementById('kpiFanGrid');
-        if (stdGrid) stdGrid.classList.remove('hidden');
-        if (fanGrid) fanGrid.classList.add('hidden');
-
-        let displayLeads = d.leads;
-        let displayWon = d.won;
-        let displayRev = d.rev;
-        let displayClicks = d.clicks;
-        let displayAvgCheck = d.avgCheck;
-
-        // Если вошел конкретный менеджер (например Анельжан mpb1) — изолируем метрики strictly под нее
-        if (currentMainChannel === 'influence' && userRole === 'manager' && userMgrCode) {
-          const myMgr = d.influenceManagers?.[userMgrCode] || { leads: 0, won: 0, rev: 0, clicks: 0 };
-          displayLeads = myMgr.leads;
-          displayWon = myMgr.won;
-          displayRev = myMgr.rev;
-          displayClicks = myMgr.clicks;
-          displayAvgCheck = displayWon ? Math.round(displayRev / displayWon) : 0;
-        }
-
-        document.getElementById('kpiTotalLeads').innerText = displayLeads.toLocaleString('ru-RU');
-        document.getElementById('kpiWonLeads').innerText = displayWon.toLocaleString('ru-RU');
-        document.getElementById('kpiRevenue').innerText = displayRev.toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (displayAvgCheck || 0).toLocaleString('ru-RU') + ' ₸';
-        
-        const clicksEl = document.getElementById('kpiClicks');
-        if (clicksEl) clicksEl.innerText = displayClicks.toLocaleString('ru-RU');
-
-        // CR1 рассчитывается корректно: если трекинг кликов запущен недавно и кликов меньше заявок, не показываем заоблачный процент
-        const cr1Pct = (displayClicks && displayClicks >= displayLeads) 
-          ? (Math.round(displayLeads / displayClicks * 1000) / 10) + '%' 
-          : (displayClicks && displayLeads ? '—' : '0%');
-        const cr1El = document.getElementById('kpiCr1');
-        if (cr1El) cr1El.innerText = 'CR1: ' + cr1Pct;
-
-        const inlineClicks = document.getElementById('kpiClicksInline');
-        if (inlineClicks) {
-          if (displayClicks > 0) {
-            if (displayClicks >= displayLeads) {
-              inlineClicks.innerText = `${displayClicks.toLocaleString('ru-RU')} перех. (CR1: ${cr1Pct})`;
-            } else {
-              inlineClicks.innerText = `${displayClicks.toLocaleString('ru-RU')} перех.`;
-            }
-          } else {
-            inlineClicks.innerText = '0 переходов';
-          }
-        }
-        
-        const cr2Pct = displayLeads ? (Math.round(displayWon / displayLeads * 1000) / 10) + '%' : '0%';
-        const cr2El = document.getElementById('kpiCr2');
-        if (cr2El) cr2El.innerText = 'CR: ' + cr2Pct + ' (Лид ➔ Оплата)';
-
-        // Обновляем блок Выполнения Плана (Точка А ➔ Точка Б)
-        updatePlanProgress(displayRev);
-
-        const scopeBadge = document.getElementById('kpiScopeBadge');
-        const expenseEl = document.getElementById('kpiExpenses');
-        const expenseSubEl = document.getElementById('kpiExpensesSub');
-        const expenseLabelEl = document.getElementById('kpiExpenseLabel');
-        const romiEl = document.getElementById('kpiRomi');
-        const romiSubEl = document.getElementById('kpiRomiSub');
-        const romiBadgeEl = document.getElementById('kpiRomiBadge');
-
-        if (currentMainChannel === 'organika') {
-          scopeBadge.innerText = 'Органика SMM';
-          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800';
-          
-          if (expenseEl) expenseEl.innerText = '0 ₸';
-          if (expenseSubEl) expenseSubEl.innerText = 'SMM / Соцсети';
-          if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы SMM';
-          
-          if (romiEl) {
-            romiEl.innerText = '∞ (Органика)';
-            romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
-          }
-          if (romiSubEl) romiSubEl.innerText = '100% чистый доход (0 ₸ затрат)';
-          if (romiBadgeEl) {
-            romiBadgeEl.innerText = '100% ЧИСТО';
-            romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
-          }
-        } else if (currentMainChannel === 'influence') {
-          let bCount = 0;
-          let bActive = 0;
-          let totalInfExpenses = 0;
-
-          let mgrList = Object.values(d.influenceManagers || {});
-          if (userRole === 'manager' && userMgrCode) {
-            mgrList = [d.influenceManagers?.[userMgrCode]].filter(Boolean);
-            scopeBadge.innerText = `Менеджер ${userMgrCode.toUpperCase()}`;
-          } else {
-            scopeBadge.innerText = 'Influence';
-          }
-          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-purple-100 text-purple-800';
-
-          mgrList.forEach(m => {
-            const bList = Object.values(m.bloggers || {});
-            bCount += bList.length;
-            bActive += bList.filter(b => b.leads > 0).length;
-            bList.forEach(b => {
-              const exp = calculateBloggerExpenses(b);
-              totalInfExpenses += exp.totalExpense;
-            });
-          });
-
-          if (expenseEl) expenseEl.innerText = totalInfExpenses.toLocaleString('ru-RU') + ' ₸';
-          if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы на блогеров';
-          if (expenseSubEl) expenseSubEl.innerText = 'витамины 62k/72k + доставка';
-
-          if (romiEl) {
-            if (totalInfExpenses > 0) {
-              const romi = Math.round((displayRev - totalInfExpenses) / totalInfExpenses * 100);
-              const mult = (displayRev / totalInfExpenses).toFixed(1);
-              if (romi >= 0) {
-                romiEl.innerText = `+${romi}%`;
-                romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
-                if (romiSubEl) romiSubEl.innerText = `окупаемость: ${mult}x (+${(displayRev - totalInfExpenses).toLocaleString('ru-RU')} ₸)`;
-                if (romiBadgeEl) {
-                  romiBadgeEl.innerText = `${mult}x ВОЗВРАТ`;
-                  romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
-                }
-              } else {
-                romiEl.innerText = `${romi}%`;
-                romiEl.className = 'text-lg sm:text-2xl font-black text-rose-700 mt-0.5 leading-tight whitespace-nowrap';
-                if (romiSubEl) romiSubEl.innerText = `убыток: ${(totalInfExpenses - displayRev).toLocaleString('ru-RU')} ₸ (${mult}x)`;
-                if (romiBadgeEl) {
-                  romiBadgeEl.innerText = 'УБЫТОК';
-                  romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-rose-200 text-rose-900';
-                }
-              }
-            } else if (displayRev > 0) {
-              romiEl.innerText = '∞ (Без затрат)';
-              romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
-              if (romiSubEl) romiSubEl.innerText = '100% чистый доход';
-              if (romiBadgeEl) {
-                romiBadgeEl.innerText = '100% ПЛЮС';
-                romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
-              }
-            } else {
-              romiEl.innerText = '—';
-              romiEl.className = 'text-lg sm:text-2xl font-black text-slate-400 mt-0.5 leading-tight whitespace-nowrap';
-              if (romiSubEl) romiSubEl.innerText = `${bCount} блогеров`;
-            }
-          }
-        } else if (currentMainChannel === 'tags') {
-          scopeBadge.innerText = 'Теги CRM';
-          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800';
-          if (expenseEl) expenseEl.innerText = '—';
-          if (expenseSubEl) expenseSubEl.innerText = `${d.allTags.length} тегов`;
-          if (romiEl) romiEl.innerText = '—';
-          if (romiSubEl) romiSubEl.innerText = 'аналитика тегов';
+      document.getElementById('kpiTotalLeads').innerText = displayLeads.toLocaleString('ru-RU');
+      document.getElementById('kpiWonLeads').innerText = displayWon.toLocaleString('ru-RU');
+      document.getElementById('kpiRevenue').innerText = displayRev.toLocaleString('ru-RU') + ' ₸';
+      document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (displayAvgCheck || 0).toLocaleString('ru-RU') + ' ₸';
+      
+      const inlineClicks = document.getElementById('kpiClicksInline');
+      if (inlineClicks) {
+        if (displayClicks > 0) {
+          inlineClicks.innerText = `${displayClicks.toLocaleString('ru-RU')} переходов`;
         } else {
-          // ВСЕ КАНАЛЫ
-          scopeBadge.innerText = 'Все каналы';
-          scopeBadge.className = 'text-[9px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-800';
+          inlineClicks.innerText = '0 переходов';
+        }
+      }
+      
+      const cr2Pct = displayLeads ? (Math.round(displayWon / displayLeads * 1000) / 10) + '%' : '0%';
+      const cr2El = document.getElementById('kpiCr2');
+      if (cr2El) cr2El.innerText = 'CR: ' + cr2Pct + ' (Лид ➔ Оплата)';
 
-          let totalAllExpenses = 0;
-          Object.values(d.influenceManagers || {}).forEach(m => {
-            Object.values(m.bloggers || {}).forEach(b => {
-              const exp = calculateBloggerExpenses(b);
-              totalAllExpenses += exp.totalExpense;
-            });
+      // Обновляем блок Выполнения Плана (Точка А ➔ Точка Б)
+      updatePlanProgress(displayRev);
+
+      const scopeBadge = document.getElementById('kpiScopeBadge');
+      const expenseEl = document.getElementById('kpiExpenses');
+      const expenseSubEl = document.getElementById('kpiExpensesSub');
+      const expenseLabelEl = document.getElementById('kpiExpenseLabel');
+      const romiEl = document.getElementById('kpiRomi');
+      const romiSubEl = document.getElementById('kpiRomiSub');
+      const romiBadgeEl = document.getElementById('kpiRomiBadge');
+
+      if (currentMainChannel === 'organika') {
+        if (scopeBadge) {
+          scopeBadge.innerText = 'Органика SMM';
+          scopeBadge.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+        }
+        if (expenseEl) expenseEl.innerText = '0 ₸';
+        if (expenseSubEl) expenseSubEl.innerText = 'SMM / Соцсети (0 ₸ затрат)';
+        if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы SMM';
+        
+        if (romiEl) {
+          romiEl.innerText = '∞ (Органика)';
+          romiEl.className = 'text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-1.5 leading-none tracking-tight whitespace-nowrap';
+        }
+        if (romiSubEl) romiSubEl.innerText = '100% чистый доход (0 ₸ затрат)';
+        if (romiBadgeEl) {
+          romiBadgeEl.innerText = '100% ЧИСТО';
+          romiBadgeEl.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60';
+        }
+
+      } else if (currentMainChannel === 'influence') {
+        let totalInfExpenses = 0;
+        let mgrList = Object.values(d.influenceManagers || {});
+        if (userRole === 'manager' && userMgrCode) {
+          mgrList = [d.influenceManagers?.[userMgrCode]].filter(Boolean);
+          if (scopeBadge) scopeBadge.innerText = `Менеджер ${userMgrCode.toUpperCase()}`;
+        } else {
+          if (scopeBadge) scopeBadge.innerText = 'Influence';
+        }
+        if (scopeBadge) scopeBadge.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+
+        mgrList.forEach(m => {
+          const bList = Object.values(m.bloggers || {});
+          bList.forEach(b => {
+            const manCost = (b.barter_man || 0) * 62000;
+            const womanCost = (b.barter_woman || 0) * 62000;
+            const omegaCost = (b.barter_omega || 0) * 62000;
+            const aojiruCost = (b.barter_aojiru || 0) * 72000;
+            const delCost = b.delivery || 0;
+            const feeCost = b.fee || 0;
+            totalInfExpenses += (manCost + womanCost + omegaCost + aojiruCost + delCost + feeCost);
           });
+        });
 
-          if (expenseEl) expenseEl.innerText = totalAllExpenses.toLocaleString('ru-RU') + ' ₸';
-          if (expenseLabelEl) expenseLabelEl.innerText = 'Общие расходы';
-          if (expenseSubEl) expenseSubEl.innerText = 'маркетинг Influence';
+        if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы на блогеров';
+        if (expenseEl) expenseEl.innerText = totalInfExpenses.toLocaleString('ru-RU') + ' ₸';
+        if (expenseSubEl) expenseSubEl.innerText = 'бартер 62k/72k + доставка + фикс';
 
-          if (romiEl) {
-            if (totalAllExpenses > 0) {
-              const romi = Math.round((displayRev - totalAllExpenses) / totalAllExpenses * 100);
-              const mult = (displayRev / totalAllExpenses).toFixed(1);
-              romiEl.innerText = `${romi >= 0 ? '+' : ''}${romi}%`;
-              romiEl.className = `text-lg sm:text-2xl font-black ${romi >= 0 ? 'text-emerald-700' : 'text-rose-700'} mt-0.5 leading-tight whitespace-nowrap`;
-              if (romiSubEl) romiSubEl.innerText = `сквозной возврат: ${mult}x (+${(displayRev - totalAllExpenses).toLocaleString('ru-RU')} ₸)`;
-              if (romiBadgeEl) {
-                romiBadgeEl.innerText = `${mult}x ОБЩИЙ`;
-                romiBadgeEl.className = 'text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900';
-              }
-            } else {
-              romiEl.innerText = '∞ (Без расходов)';
-              romiEl.className = 'text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap';
-              if (romiSubEl) romiSubEl.innerText = '100% маржа';
+        if (romiEl) {
+          if (totalInfExpenses > 0) {
+            const romiVal = Math.round((displayRev - totalInfExpenses) / totalInfExpenses * 100);
+            const romiMult = (displayRev / totalInfExpenses).toFixed(1) + 'x';
+            romiEl.innerText = (romiVal >= 0 ? '+' : '') + romiVal + '%';
+            romiEl.className = `text-2xl sm:text-3xl font-extrabold ${romiVal >= 0 ? 'text-emerald-600' : 'text-rose-600'} mt-1.5 leading-none tracking-tight whitespace-nowrap`;
+            if (romiSubEl) romiSubEl.innerText = 'Окупаемость ' + romiMult + ' (выручка vs блогеры)';
+            if (romiBadgeEl) {
+              romiBadgeEl.innerText = romiVal >= 0 ? 'ПРИБЫЛЬ' : 'УБЫТОК';
+              romiBadgeEl.className = `text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${romiVal >= 0 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}`;
+            }
+          } else {
+            romiEl.innerText = '—';
+            romiEl.className = 'text-2xl sm:text-3xl font-extrabold text-slate-400 mt-1.5 leading-none tracking-tight whitespace-nowrap';
+            if (romiSubEl) romiSubEl.innerText = 'Нет расходов на блогеров';
+            if (romiBadgeEl) {
+              romiBadgeEl.innerText = 'ROMI';
+              romiBadgeEl.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
             }
           }
         }
+
+      } else if (currentMainChannel === 'fan') {
+        if (scopeBadge) {
+          scopeBadge.innerText = 'Fan-отдел';
+          scopeBadge.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+        }
+
+        const fanPeriodExpenses = getFanPeriodExpenses();
+        if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы на зарплаты';
+        if (expenseEl) expenseEl.innerText = fanPeriodExpenses.toLocaleString('ru-RU') + ' ₸';
+        if (expenseSubEl) expenseSubEl.innerHTML = `${FAN_REGISTRY.length} сотр. • <button onclick="openFanSalariesModal()" class="font-bold underline text-slate-700 hover:text-slate-900 cursor-pointer">✏️ Настроить ЗП</button>`;
+
+        if (romiEl) {
+          if (fanPeriodExpenses > 0) {
+            const romiVal = Math.round((displayRev - fanPeriodExpenses) / fanPeriodExpenses * 100);
+            const romiMult = (displayRev / fanPeriodExpenses).toFixed(1) + 'x';
+            romiEl.innerText = (romiVal >= 0 ? '+' : '') + romiVal + '%';
+            romiEl.className = `text-2xl sm:text-3xl font-extrabold ${romiVal >= 0 ? 'text-emerald-600' : 'text-rose-600'} mt-1.5 leading-none tracking-tight whitespace-nowrap`;
+            if (romiSubEl) romiSubEl.innerText = 'Окупаемость ' + romiMult + ' (выручка vs ФОТ)';
+            if (romiBadgeEl) {
+              romiBadgeEl.innerText = romiVal >= 0 ? 'ПРИБЫЛЬ' : 'УБЫТОК';
+              romiBadgeEl.className = `text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${romiVal >= 0 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}`;
+            }
+          } else {
+            romiEl.innerText = '—';
+            romiEl.className = 'text-2xl sm:text-3xl font-extrabold text-slate-400 mt-1.5 leading-none tracking-tight whitespace-nowrap';
+            if (romiSubEl) romiSubEl.innerText = 'ФОТ не задан';
+            if (romiBadgeEl) {
+              romiBadgeEl.innerText = 'ФОТ';
+              romiBadgeEl.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+            }
+          }
+        }
+
+      } else if (currentMainChannel === 'all') {
+        if (scopeBadge) {
+          scopeBadge.innerText = 'Все каналы';
+          scopeBadge.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+        }
+
+        let totalInfExpenses = 0;
+        Object.values(d.influenceManagers || {}).forEach(m => {
+          Object.values(m.bloggers || {}).forEach(b => {
+            const manCost = (b.barter_man || 0) * 62000;
+            const womanCost = (b.barter_woman || 0) * 62000;
+            const omegaCost = (b.barter_omega || 0) * 62000;
+            const aojiruCost = (b.barter_aojiru || 0) * 72000;
+            const delCost = b.delivery || 0;
+            const feeCost = b.fee || 0;
+            totalInfExpenses += (manCost + womanCost + omegaCost + aojiruCost + delCost + feeCost);
+          });
+        });
+
+        const fanSalaries = getFanPeriodExpenses();
+        const totalExpenses = totalInfExpenses + fanSalaries;
+
+        if (expenseLabelEl) expenseLabelEl.innerText = 'Общие расходы';
+        if (expenseEl) expenseEl.innerText = totalExpenses.toLocaleString('ru-RU') + ' ₸';
+        if (expenseSubEl) expenseSubEl.innerText = 'Блогеры + ФОТ Fan-отдела';
+
+        if (romiEl) {
+          if (totalExpenses > 0) {
+            const romiVal = Math.round((displayRev - totalExpenses) / totalExpenses * 100);
+            const romiMult = (displayRev / totalExpenses).toFixed(1) + 'x';
+            romiEl.innerText = (romiVal >= 0 ? '+' : '') + romiVal + '%';
+            romiEl.className = `text-2xl sm:text-3xl font-extrabold ${romiVal >= 0 ? 'text-emerald-600' : 'text-rose-600'} mt-1.5 leading-none tracking-tight whitespace-nowrap`;
+            if (romiSubEl) romiSubEl.innerText = 'Окупаемость ' + romiMult + ' суммарно';
+            if (romiBadgeEl) {
+              romiBadgeEl.innerText = romiVal >= 0 ? 'ПРИБЫЛЬ' : 'УБЫТОК';
+              romiBadgeEl.className = `text-[9px] font-bold uppercase px-2 py-0.5 rounded-full ${romiVal >= 0 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}`;
+            }
+          } else {
+            romiEl.innerText = '—';
+            romiEl.className = 'text-2xl sm:text-3xl font-extrabold text-slate-400 mt-1.5 leading-none tracking-tight whitespace-nowrap';
+            if (romiSubEl) romiSubEl.innerText = '0 ₸ общих расходов';
+          }
+        }
+
+      } else if (currentMainChannel === 'tags') {
+        if (scopeBadge) {
+          scopeBadge.innerText = 'Теги CRM';
+          scopeBadge.className = 'text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700';
+        }
+        if (expenseLabelEl) expenseLabelEl.innerText = 'Расходы';
+        if (expenseEl) expenseEl.innerText = '0 ₸';
+        if (expenseSubEl) expenseSubEl.innerText = 'Теги без прямых затрат';
+        if (romiEl) {
+          romiEl.innerText = '—';
+          romiEl.className = 'text-2xl sm:text-3xl font-extrabold text-slate-400 mt-1.5 leading-none tracking-tight whitespace-nowrap';
+        }
+        if (romiSubEl) romiSubEl.innerText = 'Маркетинг тегов';
       }
     }
 
-    function toggleAccordion(id) {
-      if (expandedAccordions.has(id)) {
-        expandedAccordions.delete(id);
-      } else {
-        expandedAccordions.add(id);
-      }
-      renderMainTable();
-    }
-
-    function expandAllAccordion() {
-      Object.keys(currentChannelData.influenceManagers || {}).forEach(k => expandedAccordions.add(k));
-      ['org_wa', 'org_smm', 'org_site'].forEach(k => expandedAccordions.add(k));
-      FAN_REGISTRY.forEach(f => expandedAccordions.add(f.id));
-      Object.keys(currentChannelData.fanAccounts || {}).forEach(k => expandedAccordions.add(k));
-      renderMainTable();
-    }
-
-    function collapseAllAccordion() {
-      expandedAccordions.clear();
-      renderMainTable();
-    }
-
-    // ============================================================
-    // ОТРИСОВКА ГЛАВНОЙ ТАБЛИЦЫ
-    // ============================================================
     function renderMainTable() {
       const thead = document.getElementById('mainTableHead');
       const tbody = document.getElementById('mainTableBody');
@@ -2234,23 +2449,23 @@ html_template = r'''<!DOCTYPE html>
         rowBadge.innerText = 'Показано: ' + totalRows + ' строк';
         tbody.innerHTML = html;
       } else if (currentMainChannel === 'fan') {
-        mainTitle.innerText = '🚀 JANA MEN — СКВОЗНАЯ АНАЛИТИКА ФАН АККАУНТОВ';
+        mainTitle.innerText = '🎬 Fan-отдел: Сквозная аналитика & Зарплаты';
         badgeTitle.innerText = 'Канал 3';
-        badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-indigo-100 text-indigo-800';
-        subTitle.innerText = 'Автоматический расчет по данным сделок AmoCRM и Реестра маркетинговых UTM-меток (без ошибок Google Таблиц)';
+        badgeTitle.className = 'px-2 py-0.5 text-[10px] font-bold uppercase rounded-full bg-slate-100 text-slate-700';
+        subTitle.innerText = 'Сотрудники Fan-команды, площадки TikTok / Instagram / YouTube, оклады и расчет окупаемости (ROMI)';
 
         thead.innerHTML = `
-          <tr>
-            <th class="py-3 px-4">Менеджер / Сотрудник</th>
-            <th class="py-3 px-4 text-center">Источник (utm_source)</th>
-            <th class="py-3 px-4 text-center">Кликов всего</th>
-            <th class="py-3 px-4 text-center">Лидов всего</th>
-            <th class="py-3 px-4 text-center">CR1 (Клик➔Лид)</th>
-            <th class="py-3 px-4 text-center">Оплачено (142)</th>
-            <th class="py-3 px-4 text-center">CR2 (Лид➔Оплата)</th>
-            <th class="py-3 px-4 text-right">Выручка (₸)</th>
-            <th class="py-3 px-4 text-right">Средний чек (₸)</th>
-            <th class="py-3 px-4 text-center">UTM & Профиль</th>
+          <tr class="text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80 border-b border-slate-200">
+            <th class="py-3 px-4 text-left">МЕНЕДЖЕР / СОТРУДНИК</th>
+            <th class="py-3 px-4 text-center">ПЛОЩАДКА</th>
+            <th class="py-3 px-4 text-center">КЛИКОВ</th>
+            <th class="py-3 px-4 text-center">ЗАЯВОК</th>
+            <th class="py-3 px-4 text-center">ОПЛАЧЕНО</th>
+            <th class="py-3 px-4 text-center">CR (ЛИД➔ОПЛАТА)</th>
+            <th class="py-3 px-4 text-right">ВЫРУЧКА (₸)</th>
+            <th class="py-3 px-4 text-right">ЗАРПЛАТА (₸)</th>
+            <th class="py-3 px-4 text-center">ОКУПАЕМОСТЬ</th>
+            <th class="py-3 px-4 text-center">UTM & ССЫЛКИ</th>
           </tr>
         `;
 
@@ -2273,68 +2488,79 @@ html_template = r'''<!DOCTYPE html>
           const platformsList = fReg.platforms;
           const pCount = platformsList.length;
 
-          const fCr1 = f.clicks ? (Math.round(f.leads / f.clicks * 1000) / 10) + '%' : (f.leads ? '—' : '0%');
           const fCr2 = f.leads ? (Math.round(f.won / f.leads * 1000) / 10) + '%' : '0%';
-          const fAvg = f.won ? Math.round(f.rev / f.won) : 0;
+          const salary = getFanSalary(fReg.id);
+          
+          let romiBadgeHtml = '<span class="text-slate-400 text-xs">—</span>';
+          if (salary > 0) {
+            if (f.rev > 0) {
+              const rVal = Math.round((f.rev - salary) / salary * 100);
+              const rMult = (f.rev / salary).toFixed(1) + 'x';
+              romiBadgeHtml = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-full ${rVal >= 0 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' : 'bg-rose-50 text-rose-700 border border-rose-200/60'}">${rMult} (${rVal >= 0 ? '+' : ''}${rVal}%)</span>`;
+            } else {
+              romiBadgeHtml = '<span class="text-[11px] font-medium text-slate-400">0x (0 ₸)</span>';
+            }
+          }
 
           totalRows++;
 
           // Строка сотрудника (Level 1)
           html += `
-            <tr onclick="toggleAccordion('${fReg.id}')" class="bg-indigo-50/60 hover:bg-indigo-100/60 cursor-pointer transition font-bold border-t-2 border-indigo-200">
-              <td class="py-3.5 px-4 text-slate-900 flex items-center space-x-2">
-                <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
+            <tr onclick="toggleAccordion('${fReg.id}')" class="bg-slate-50/70 hover:bg-slate-100/70 cursor-pointer transition font-bold border-t border-slate-200">
+              <td class="py-3 px-4 text-slate-900 flex items-center space-x-2">
+                <span class="w-5 h-5 rounded-md bg-slate-200 text-slate-700 flex items-center justify-center text-xs transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}">
                   ▶
                 </span>
-                <span class="text-sm font-black text-indigo-950">${f.name}</span>
-                <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-200 text-indigo-900">
-                  ${pCount} площадки
+                <span class="text-sm font-extrabold text-slate-900">${f.name}</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-slate-200 text-slate-700">
+                  ${pCount} площ.
                 </span>
               </td>
-              <td class="py-3.5 px-4 text-center text-xs text-slate-500 font-semibold">Все площадки</td>
-              <td class="py-3.5 px-4 text-center font-black text-indigo-700">${f.clicks ? f.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
-              <td class="py-3.5 px-4 text-center font-black text-slate-900">${f.leads.toLocaleString('ru-RU')}</td>
-              <td class="py-3.5 px-4 text-center font-bold text-slate-700">${fCr1}</td>
-              <td class="py-3.5 px-4 text-center font-black text-emerald-600">${f.won}</td>
-              <td class="py-3.5 px-4 text-center font-bold ${f.won > 0 ? 'text-emerald-700 bg-emerald-100/70 rounded' : 'text-slate-400'}">${fCr2}</td>
-              <td class="py-3.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${f.rev.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${fAvg.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2.5 py-1 text-[11px] font-bold text-indigo-700 bg-white hover:bg-indigo-200 rounded-lg border border-indigo-300 transition">
+              <td class="py-3 px-4 text-center text-xs text-slate-500 font-semibold">Все площадки</td>
+              <td class="py-3 px-4 text-center font-bold text-slate-700">${f.clicks ? f.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+              <td class="py-3 px-4 text-center font-extrabold text-slate-900">${f.leads.toLocaleString('ru-RU')}</td>
+              <td class="py-3 px-4 text-center font-extrabold text-slate-900">${f.won}</td>
+              <td class="py-3 px-4 text-center font-semibold text-slate-700">${fCr2}</td>
+              <td class="py-3 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">${f.rev.toLocaleString('ru-RU')} ₸</td>
+              <td class="py-3 px-4 text-right font-extrabold text-slate-800 whitespace-nowrap">
+                <span>${salary.toLocaleString('ru-RU')} ₸</span>
+                <button onclick="event.stopPropagation(); openFanSalariesModal()" title="Изменить оклад" class="ml-1 text-[11px] text-slate-400 hover:text-slate-700 cursor-pointer">✏️</button>
+              </td>
+              <td class="py-3 px-4 text-center">${romiBadgeHtml}</td>
+              <td class="py-3 px-4 text-center">
+                <button onclick="event.stopPropagation(); copyFanAllLinks('${fReg.id}')" class="px-2.5 py-1 text-[11px] font-semibold text-slate-700 bg-white hover:bg-slate-100 rounded-lg border border-slate-200 transition shadow-2xs cursor-pointer">
                   📋 Ссылки
                 </button>
               </td>
             </tr>
           `;
 
-          // Дочерние строки площадок (Level 2)
+          // Дочерние площадки
           if (isExpanded) {
             platformsList.forEach(p => {
               totalRows++;
               const pData = f.platforms[p.name.toLowerCase()] || { leads: 0, won: 0, rev: 0, clicks: 0 };
-              const pCr1 = pData.clicks ? (Math.round(pData.leads / pData.clicks * 1000) / 10) + '%' : (pData.leads ? '—' : '0%');
               const pCr2 = pData.leads ? (Math.round(pData.won / pData.leads * 1000) / 10) + '%' : '0%';
-              const pAvg = pData.won ? Math.round(pData.rev / pData.won) : 0;
               const hasProfile = p.profile && p.profile.startsWith('http');
 
               html += `
                 <tr class="hover:bg-slate-50 transition text-xs border-b border-slate-100">
                   <td class="py-2.5 px-4 pl-10 font-bold text-slate-800 flex items-center space-x-2">
                     <span class="text-slate-300 font-mono">└─</span>
-                    <span class="text-base leading-none">${p.icon}</span>
-                    <span class="text-slate-900 font-black">${p.name}</span>
+                    <span class="text-sm leading-none">${p.icon}</span>
+                    <span class="text-slate-800 font-semibold">${p.name}</span>
                   </td>
-                  <td class="py-2.5 px-4 text-center text-xs font-mono text-purple-700 font-bold">${p.name.toLowerCase()}</td>
-                  <td class="py-2.5 px-4 text-center font-bold text-purple-700">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
+                  <td class="py-2.5 px-4 text-center text-xs font-mono text-slate-600 font-medium">${p.name.toLowerCase()}</td>
+                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pData.clicks ? pData.clicks.toLocaleString('ru-RU') : '<span class="text-slate-300">—</span>'}</td>
                   <td class="py-2.5 px-4 text-center font-bold text-slate-800">${pData.leads.toLocaleString('ru-RU')}</td>
-                  <td class="py-2.5 px-4 text-center font-black text-emerald-600">${pData.won}</td>
-                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr1}</td>
-                  <td class="py-2.5 px-4 text-center font-bold ${pData.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${pCr2}</td>
-                  <td class="py-2.5 px-4 text-right font-black text-slate-900 whitespace-nowrap">${pData.rev.toLocaleString('ru-RU')} ₸</td>
-                  <td class="py-2.5 px-4 text-right font-semibold text-slate-700 whitespace-nowrap">${pAvg.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2.5 px-4 text-center font-bold text-slate-900">${pData.won}</td>
+                  <td class="py-2.5 px-4 text-center font-semibold text-slate-600">${pCr2}</td>
+                  <td class="py-2.5 px-4 text-right font-bold text-slate-900 whitespace-nowrap">${pData.rev.toLocaleString('ru-RU')} ₸</td>
+                  <td class="py-2.5 px-4 text-center text-slate-300">—</td>
+                  <td class="py-2.5 px-4 text-center text-slate-300">—</td>
                   <td class="py-2.5 px-4 text-center flex items-center justify-center space-x-1.5">
-                    ${hasProfile ? `<a href="${p.profile}" target="_blank" title="Открыть профиль" class="px-2 py-0.5 text-[10px] font-bold text-slate-600 hover:text-indigo-700 bg-slate-100 hover:bg-indigo-50 rounded border border-slate-200 transition">👤 Профиль</a>` : ''}
-                    <button onclick="copyFanPlatformLink('${p.url}')" title="Скопировать готовую ссылку с меткой" class="px-2 py-0.5 text-[10px] font-bold text-indigo-700 hover:text-white bg-indigo-50 hover:bg-indigo-600 rounded border border-indigo-200 transition">
+                    ${hasProfile ? `<a href="${p.profile}" target="_blank" title="Открыть профиль" class="px-2 py-0.5 text-[10px] font-medium text-slate-600 hover:text-slate-900 bg-white rounded border border-slate-200 transition">👤 Профиль</a>` : ''}
+                    <button onclick="copyFanPlatformLink('${p.url}')" title="Скопировать готовую ссылку с меткой" class="px-2 py-0.5 text-[10px] font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 rounded border border-slate-200 transition shadow-2xs cursor-pointer">
                       📋 UTM
                     </button>
                   </td>
@@ -2343,35 +2569,7 @@ html_template = r'''<!DOCTYPE html>
             });
           }
         });
-
-        // Исторические архивы
-        ['fan_4516', 'fan_2427', 'fan_other'].forEach(arcKey => {
-          const a = fans[arcKey];
-          if (!a || (a.leads === 0 && a.won === 0)) return;
-          const aCr1 = a.clicks ? (Math.round(a.leads / a.clicks * 1000) / 10) + '%' : '—';
-          const aCr2 = a.leads ? (Math.round(a.won / a.leads * 1000) / 10) + '%' : '0%';
-          const aAvg = a.won ? Math.round(a.rev / a.won) : 0;
-          totalRows++;
-
-          html += `
-            <tr class="bg-slate-100/70 hover:bg-slate-200/70 text-xs border-t border-slate-200 font-semibold text-slate-700">
-              <td class="py-3 px-4 font-bold text-slate-800">${a.name}</td>
-              <td class="py-3 px-4 text-center text-slate-400">Архивные UTM</td>
-              <td class="py-3 px-4 text-center text-slate-400">—</td>
-              <td class="py-3 px-4 text-center font-bold text-slate-800">${a.leads.toLocaleString('ru-RU')}</td>
-              <td class="py-3 px-4 text-center font-black text-emerald-600">${a.won}</td>
-              <td class="py-3 px-4 text-center text-slate-400">—</td>
-              <td class="py-3 px-4 text-center font-bold ${a.won > 0 ? 'text-emerald-700' : 'text-slate-400'}">${aCr2}</td>
-              <td class="py-3 px-4 text-right font-black text-slate-900">${a.rev.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3 px-4 text-right text-slate-700">${aAvg.toLocaleString('ru-RU')} ₸</td>
-              <td class="py-3 px-4 text-center text-slate-400 italic">Исторические сделки</td>
-            </tr>
-          `;
-        });
-
-        rowBadge.innerText = 'Показано: ' + totalRows + ' строк';
-        tbody.innerHTML = html;
-      } else if (currentMainChannel === 'tags') {
+} else if (currentMainChannel === 'tags') {
         mainTitle.innerText = '🏷️ ТЕГИ AmoCRM: Полный срез всех тегов сделок';
         badgeTitle.innerText = 'Теги CRM';
         badgeTitle.className = 'px-2 py-0.5 text-[10px] font-black uppercase rounded bg-amber-100 text-amber-900 border border-amber-300';
