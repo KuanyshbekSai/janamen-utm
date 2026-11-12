@@ -3863,7 +3863,7 @@ html_template = r'''<!DOCTYPE html>
 
     // Историческая выгрузка в Supabase завершилась до этого момента: всё, что обновлено позже,
     // изменилось в AmoCRM уже после снимка, вшитого в страницу, и должно его перекрыть.
-    const DEALS_DELTA_SINCE = '2026-11-11T06:00:00Z';
+    const DEALS_DELTA_SINCE = '__DEALS_DELTA_SINCE__';
     const DEALS_PAGE = 1000; // максимум строк Supabase за один запрос
     const DEAL_SELECT = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
     let dealsCursor = DEALS_DELTA_SINCE;
@@ -5014,7 +5014,9 @@ html_template = r'''<!DOCTYPE html>
 </html>'''
 
 # Заменяем плейсхолдер реальным JSON
-final_html = html_template.replace('__LEADS_DICT_JSON__', leads_dict_json)
+# Момент снимка: всё, что обновлено в Supabase позже, портал догружает сам
+deals_delta_since = json.loads(leads_dict_json).get('synced_at') or '2026-11-11T06:00:00Z'
+final_html = html_template.replace('__LEADS_DICT_JSON__', leads_dict_json).replace('__DEALS_DELTA_SINCE__', deals_delta_since)
 
 with open('index.html', 'w', encoding='utf-8') as f:
     f.write(final_html)

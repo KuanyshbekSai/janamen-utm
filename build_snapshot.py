@@ -3,7 +3,77 @@ from collections import defaultdict
 from urllib.parse import unquote_plus
 from datetime import datetime
 
-leads = json.load(open('analyzed_leads.json', encoding='utf-8'))
+import os, sys, time, urllib.request
+from datetime import timezone
+
+# Источник сделок:
+#   python3 build_snapshot.py                 — из старой выгрузки analyzed_leads.json
+#   python3 build_snapshot.py --from-supabase — из таблицы deals в Supabase (актуальные данные)
+SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://upeqrwqhdnmccyymugej.supabase.co')
+# Публичный ключ портала: таблица deals и так читается им из браузера
+SUPABASE_PUBLIC_KEY = os.environ.get('SUPABASE_ANON_KEY', 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi')
+SNAPSHOT_SYNCED_AT = None
+
+
+def _iso_to_unix(s):
+    if not s:
+        return 0
+    return int(datetime.fromisoformat(s.replace('Z', '+00:00')).timestamp())
+
+
+def supabase_row_to_amo(r):
+    """Восстанавливает из строки deals структуру сделки AmoCRM, которую понимает parse_lead()."""
+    def val(v):
+        return '' if v in (None, 'none', 'direct/none') else str(v)
+    cf = []
+    for fid, v in ((849891, val(r.get('referrer'))), (679639, val(r.get('utm_source'))),
+                   (679635, val(r.get('utm_medium'))), (679637, val(r.get('utm_campaign'))),
+                   (679633, val(r.get('utm_content'))), (679641, val(r.get('utm_term')))):
+        if v:
+            cf.append({'field_id': fid, 'values': [{'value': v}]})
+    return {
+        'id': r['id'],
+        'name': r.get('name') or '',
+        'status_id': r.get('status_id') or 0,
+        'price': int(r.get('price') or 0),
+        'created_at': _iso_to_unix(r.get('created_at')),
+        'custom_fields_values': cf,
+        '_embedded': {'tags': [{'name': t} for t in (r.get('tags') or [])]},
+    }
+
+
+def load_from_supabase():
+    global SNAPSHOT_SYNCED_AT
+    # Всё, что изменится после старта выгрузки, портал догрузит сам
+    SNAPSHOT_SYNCED_AT = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    cols = 'id,name,created_at,status_id,price,referrer,utm_source,utm_medium,utm_campaign,utm_content,utm_term,tags'
+    rows, offset = [], 0
+    while True:
+        req = urllib.request.Request(
+            f'{SUPABASE_URL}/rest/v1/deals?select={cols}&order=id',
+            headers={'apikey': SUPABASE_PUBLIC_KEY, 'Authorization': f'Bearer {SUPABASE_PUBLIC_KEY}',
+                     'Range': f'{offset}-{offset + 999}'})
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    page = json.load(resp)
+                break
+            except Exception:
+                if attempt == 2:
+                    raise
+                time.sleep(2)
+        rows += page
+        if len(page) < 1000:
+            break
+        offset += 1000
+    print(f'Supabase: загружено {len(rows)} сделок (снимок на {SNAPSHOT_SYNCED_AT})')
+    return [supabase_row_to_amo(r) for r in rows]
+
+
+if '--from-supabase' in sys.argv:
+    leads = load_from_supabase()
+else:
+    leads = json.load(open('analyzed_leads.json', encoding='utf-8'))
 UNSET = {'', 'none', 'direct/none', 'direct / none', '(none)', '(direct/none)', 'undefined', 'null'}
 
 def agg():
@@ -560,6 +630,8 @@ for item in parsed_leads:
     ])
 
 compact_data = {'strings': strings, 'rows': encoded_rows}
+if SNAPSHOT_SYNCED_AT:
+    compact_data['synced_at'] = SNAPSHOT_SYNCED_AT
 with open('gas/compact_leads_dict.json', 'w', encoding='utf-8') as f:
     json.dump(compact_data, f, ensure_ascii=False)
 
