@@ -23,7 +23,7 @@ def load_env():
 
 load_env()
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://upeqrwqhdnmccyymugej.supabase.co")
 SECRET_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 
 STATUS_WON_ID = 142
@@ -48,7 +48,7 @@ def clean_str(val, default="none"):
     return s if s else default
 
 def main():
-    if not SECRET_KEY or not SUPABASE_URL:
+    if not SECRET_KEY:
         raise ValueError("SUPABASE_SERVICE_KEY не установлен в .env")
 
     print("Чтение analyzed_leads.json...")

@@ -1,7 +1,7 @@
 // Vercel Serverless Function: Webhook от AmoCRM -> Supabase
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
 const AMOCRM_TOKEN = process.env.AMOCRM_TOKEN;
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ status: 'ok', service: 'Jana Men AmoCRM Webhook' });
   }
 
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
+  if (!SUPABASE_KEY) {
     return res.status(500).json({ error: 'SUPABASE_SERVICE_KEY not configured' });
   }
 

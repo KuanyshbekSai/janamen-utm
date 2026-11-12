@@ -21,33 +21,27 @@ CREATE TABLE IF NOT EXISTS public.bloggers (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- Отключение RLS для прямого доступа через API
+ALTER TABLE public.bloggers DISABLE ROW LEVEL SECURITY;
+
 -- ==============================================================================
 -- 2. ТАБЛИЦА ПОЛЬЗОВАТЕЛЕЙ И ДОСТУПОВ (RBAC)
--- Пароли хранятся только в виде scrypt-хэша (формат "scrypt$<salt>$<hash>").
--- Пользователей создаёт scripts/set-user-password.mjs или владелец в портале.
 -- ==============================================================================
 CREATE TABLE IF NOT EXISTS public.app_users (
   id SERIAL PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   name TEXT NOT NULL,
-  role TEXT DEFAULT 'manager',          -- superadmin, head_marketing, crm_integrator, manager, fan, viewer
-  manager_code TEXT,                    -- mpb1..mpb4 для менеджеров блогеров
+  role TEXT DEFAULT 'manager',          -- superadmin, manager, fan, viewer
   status TEXT DEFAULT 'active',         -- active, pending, blocked
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-ALTER TABLE public.app_users ADD COLUMN IF NOT EXISTS manager_code TEXT;
+-- Отключение RLS для прямого доступа через API
+ALTER TABLE public.app_users DISABLE ROW LEVEL SECURITY;
 
--- ==============================================================================
--- 3. ДОСТУП: RLS ВКЛЮЧЕН, ПОЛИТИК ДЛЯ anon НЕТ.
--- Серверные функции Vercel работают через SUPABASE_SERVICE_KEY и обходят RLS.
--- Публичный ключ из портала больше не может читать пароли и бюджеты блогеров.
--- ==============================================================================
-ALTER TABLE public.bloggers ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.app_users ENABLE ROW LEVEL SECURITY;
-REVOKE ALL ON public.bloggers FROM anon, authenticated;
-REVOKE ALL ON public.app_users FROM anon, authenticated;
+-- Главный аккаунт владельца (по умолчанию)
+INSERT INTO public.app_users (email, password, name, role, status)
+VALUES ('k.saidullayev@janamen.kz', 'janamen2026', 'Куанышбек Сайдуллаев', 'superadmin', 'active')
+ON CONFLICT (email) DO NOTHING;
 
--- Старые пароли открытым текстом, опубликованные в коде, сбрасываются:
--- вход с ними заблокирован сервером, задайте новые через scripts/set-user-password.mjs.

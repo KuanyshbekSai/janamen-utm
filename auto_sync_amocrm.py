@@ -16,11 +16,11 @@ from upload_to_supabase import pk, get_domain, clean_str, STATUS_WON_ID, STATUS_
 load_env()
 
 AMOCRM_TOKEN = os.environ.get('AMOCRM_TOKEN')
-SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://upeqrwqhdnmccyymugej.supabase.co')
 SECRET_KEY = os.environ.get('SUPABASE_SERVICE_KEY')
 
 def sync_now(limit=250):
-    if not AMOCRM_TOKEN or not SECRET_KEY or not SUPABASE_URL:
+    if not AMOCRM_TOKEN or not SECRET_KEY:
         print("Ошибка: AMOCRM_TOKEN или SUPABASE_SERVICE_KEY не заданы в .env")
         return 0
 
