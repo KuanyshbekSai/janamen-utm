@@ -92,213 +92,249 @@ html_template = r'''<!DOCTYPE html>
     </div>
   </header>
 
-  <!-- ОСНОВНОЙ КОНТЕНТ (FULL WIDTH НА ВЕСЬ ЭКРАН) -->
-  <main class="flex-1 w-full px-3 sm:px-6 py-4 space-y-4">
+  <!-- ОСНОВНОЙ КОНТЕНТ (СТРОГО ПО ЗАРИСОВКЕ РУКОВОДИТЕЛЯ) -->
+  <main class="flex-1 w-full px-3 sm:px-6 py-4 space-y-3.5">
 
-    <!-- 0. ГЛАВНЫЕ КАНАЛЫ (ПЕРВИЧНЫЕ РАЗДЕЛЫ ВЕРХНЕГО УРОВНЯ) -->
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-2 sm:p-2.5">
+    <!-- 1. СТРОКА ПЕРИОДА (Период | Весь период   Сегодня   Вчера) -->
+    <div class="bg-white rounded-xl border border-slate-200/90 shadow-2xs px-4 py-2 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3 overflow-x-auto text-xs scrollbar-none py-0.5">
+        <span class="font-black text-slate-800 uppercase tracking-wider text-xs border-r border-slate-200 pr-3 whitespace-nowrap">Период</span>
+        <div class="flex items-center space-x-1 sm:space-x-1.5">
+          <button onclick="setPeriodPreset('all')" id="period-btn-all" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-900 text-white shadow-xs">
+            Весь период
+          </button>
+          <button onclick="setPeriodPreset('today')" id="period-btn-today" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+            Сегодня
+          </button>
+          <button onclick="setPeriodPreset('yesterday')" id="period-btn-yesterday" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+            Вчера
+          </button>
+          <button onclick="setPeriodPreset('last7')" id="period-btn-last7" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block">
+            7 дней
+          </button>
+          <button onclick="setPeriodPreset('last30')" id="period-btn-last30" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition hidden sm:inline-block">
+            30 дней
+          </button>
+        </div>
+      </div>
+
+      <!-- Поиск & Кастомные даты -->
+      <div class="flex items-center space-x-2">
+        <div class="relative">
+          <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="🔍 Поиск по блогеру, UTM..." class="pl-3 pr-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:bg-white focus:outline-none focus:border-brand-500 w-44 sm:w-60 font-medium">
+        </div>
+        <button onclick="toggleFilters()" id="btnToggleFilters" class="text-xs font-bold text-slate-600 hover:text-slate-900 px-2.5 py-1 rounded-lg border border-slate-200 hover:bg-slate-100 transition flex items-center space-x-1" title="Настроить точный диапазон дат">
+          <span>📅 Даты</span>
+        </button>
+        <button onclick="resetAllFilters()" class="text-xs font-bold text-slate-400 hover:text-slate-700 px-1.5 py-1 rounded-lg hover:bg-slate-100 transition" title="Сбросить все фильтры">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Всплывающий блок точных дат (по клику на Даты) -->
+    <div id="filtersBody" class="hidden bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="text-slate-500 font-bold">Быстрый месяц:</span>
+        <button onclick="setPeriodPreset('nov2026')" id="period-btn-nov2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Ноябрь 2026</button>
+        <button onclick="setPeriodPreset('oct2026')" id="period-btn-oct2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition">Октябрь 2026</button>
+      </div>
+      <div class="inline-flex items-center space-x-1.5 ml-auto text-xs font-bold text-slate-700">
+        <span class="text-slate-400 font-normal">с</span>
+        <input type="date" id="dateInputFrom" onchange="applyCustomDateRange()" class="px-2 py-1 text-xs bg-white border border-slate-200 rounded-lg font-medium">
+        <span class="text-slate-400 font-normal">по</span>
+        <input type="date" id="dateInputTo" onchange="applyCustomDateRange()" class="px-2 py-1 text-xs bg-white border border-slate-200 rounded-lg font-medium">
+      </div>
+    </div>
+
+    <!-- 2. БЛОК ОСНОВНЫХ ЦИФР (5 КАРТОЧЕК В ОДИН РЯД ПО ЗАРИСОВКЕ) -->
+    <div id="kpiStandardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
+      
+      <!-- 1. Всего заявок -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200/90 shadow-2xs">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок</span>
+          <span id="kpiScopeBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Органика</span>
+        </div>
+        <div id="kpiTotalLeads" class="text-xl sm:text-2xl font-black text-slate-900 mt-1 leading-tight">—</div>
+        <div class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
+          <span id="kpiLeadsPeriod">за период</span>
+          <span id="kpiClicksInline" class="font-bold text-purple-700">0 кликов</span>
+        </div>
+      </div>
+
+      <!-- 2. Оплачено / CR % (Объединено по зарисовке) -->
+      <div class="bg-white p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Оплачено</span>
+          <span class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">142</span>
+        </div>
+        <div id="kpiWonLeads" class="text-xl sm:text-2xl font-black text-emerald-600 mt-1 leading-tight">—</div>
+        <div id="kpiCr2" class="text-[11px] font-bold text-emerald-700 mt-1">CR: 0%</div>
+      </div>
+
+      <!-- 3. Выручка -->
+      <div class="bg-white p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
+        <div class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Выручка</div>
+        <div id="kpiRevenue" class="text-xl sm:text-2xl font-black text-brand-700 mt-1 leading-tight whitespace-nowrap">—</div>
+        <div id="kpiAvgCheck" class="text-[10px] font-medium text-slate-500 mt-1">Ср. чек: —</div>
+      </div>
+
+      <!-- 4. Расходы на блогеров -->
+      <div class="bg-white p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
+        <div class="text-[11px] font-bold text-rose-700 uppercase tracking-wider" id="kpiExpenseLabel">Расходы на блогеров</div>
+        <div id="kpiExpenses" class="text-xl sm:text-2xl font-black text-rose-800 mt-1 leading-tight whitespace-nowrap">0 ₸</div>
+        <div id="kpiExpensesSub" class="text-[10px] text-rose-600 mt-1 font-medium truncate">витамины 62k/72k + доставка</div>
+      </div>
+
+      <!-- 5. Окупаемость / ROMI -->
+      <div class="bg-white p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость</span>
+          <span id="kpiRomiBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
+        </div>
+        <div id="kpiRomi" class="text-xl sm:text-2xl font-black text-emerald-700 mt-1 leading-tight whitespace-nowrap">—</div>
+        <div id="kpiRomiSub" class="text-[10px] text-emerald-800 mt-1 font-bold truncate">возврат инвестиций</div>
+      </div>
+
+    </div>
+
+    <!-- Hidden compat elements for scripts -->
+    <div class="hidden">
+      <span id="kpiClicks">0</span>
+      <span id="kpiCr1">CR1: —</span>
+      <div id="kpiFanGrid"></div>
+      <span id="fanKpiLeads">0</span>
+      <span id="fanKpiClicks">0</span>
+      <span id="fanKpiCr1">0%</span>
+      <span id="fanKpiWon">0</span>
+      <span id="fanKpiCr2">0%</span>
+      <span id="fanKpiRevenue">0 ₸</span>
+      <span id="fanKpiAvgCheck">Ср. чек: 0 ₸</span>
+      <span id="activeFilterBadge">Весь период</span>
+      <span id="toggleFilterText">Фильтры</span>
+    </div>
+
+    <!-- 3. БЛОК: ВЫПОЛНЕНИЕ ПЛАНА (ТОЧНО ПО ЗАРИСОВКЕ: План, Факт, шкала Точка А ➔ Точка Б) -->
+    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-4 sm:p-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <span class="text-sm sm:text-base font-black text-slate-900 uppercase tracking-tight">Выполнение плана</span>
+          <span class="text-slate-300 font-light text-base">|</span>
+          <span id="planPercentBadge" class="px-2.5 py-0.5 text-xs font-black rounded-full bg-blue-100 text-brand-800">
+            0% выполнено
+          </span>
+        </div>
+        <button onclick="openEditPlanModal()" class="px-3 py-1.5 text-xs font-black text-brand-700 hover:text-white bg-brand-50 hover:bg-brand-600 rounded-xl border border-brand-200 transition shadow-2xs flex items-center space-x-1.5 cursor-pointer">
+          <span>✏️ Изменить план</span>
+        </button>
+      </div>
+
+      <!-- Графические полосы План vs Факт -->
+      <div class="mt-4 space-y-3.5">
+        <!-- Полоса ПЛАН -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+              <span>План (Цель):</span>
+            </span>
+            <span id="planTargetDisplay" class="font-black text-slate-800 text-sm">50 000 000 ₸</span>
+          </div>
+          <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div class="h-full bg-slate-300 rounded-full w-full"></div>
+          </div>
+        </div>
+
+        <!-- Полоса ФАКТ -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-bold mb-1">
+            <span class="flex items-center space-x-1.5 text-brand-800">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-pulse"></span>
+              <span>Факт (Выручка за период):</span>
+            </span>
+            <div class="flex items-center space-x-2">
+              <span id="planFactDisplay" class="font-black text-brand-700 text-sm">0 ₸</span>
+              <span id="planFactPercent" class="text-xs font-extrabold text-emerald-600">(0%)</span>
+            </div>
+          </div>
+          <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden border border-brand-200 p-0.5 shadow-inner">
+            <div id="planFactBar" class="h-full bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-500 rounded-full transition-all duration-700" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- ШКАЛА С ДЕЛЕНИЯМИ: ТОЧКА А ➔ ТОЧКА Б (СТРЕЛА С ЗАСЕЧКАМИ ИЗ ЗАРИСОВКИ) -->
+        <div class="pt-2">
+          <div class="relative w-full">
+            <!-- Горизонтальная направляющая линия -->
+            <div class="h-1 bg-slate-300 w-full relative flex items-center justify-between rounded-full">
+              <!-- Засечки -->
+              <div class="w-0.5 h-3.5 bg-slate-500 -mt-1 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-3 bg-slate-400 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-2 bg-slate-300 -mt-0.5 rounded-full"></div>
+              <div class="w-0.5 h-3.5 bg-slate-500 -mt-1 rounded-full"></div>
+              <!-- Наконечник стрелки -->
+              <span class="absolute -right-2 text-slate-500 text-xs font-black leading-none select-none">▶</span>
+            </div>
+
+            <!-- Подписи Точка А и Точка Б -->
+            <div class="flex items-center justify-between text-xs font-bold text-slate-600 mt-2.5">
+              <div class="flex flex-col">
+                <span class="text-[10px] text-slate-400 uppercase font-black">Точка А (Старт)</span>
+                <span class="font-extrabold text-slate-800 text-sm">0 ₸</span>
+              </div>
+              <div id="planRemainingDisplay" class="text-center text-xs font-semibold text-slate-500 hidden sm:block">
+                Осталось до цели: <span class="font-extrabold text-slate-800" id="planRemainingVal">—</span>
+              </div>
+              <div class="flex flex-col items-end">
+                <span class="text-[10px] text-brand-600 uppercase font-black">Точка Б (Цель)</span>
+                <span class="font-extrabold text-brand-700 text-sm" id="planTargetVal">50 000 000 ₸</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. ТАБЫ ВЫБОРА КАНАЛОВ (РАСПОЛОЖЕНЫ НАД ТАБЛИЦЕЙ ПО ЗАРИСОВКЕ: Органика | Инфлюенс | Фан) -->
+    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-2 sm:p-2.5">
       <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto text-xs font-bold scrollbar-none">
         
         <!-- РАЗДЕЛ 1: ОРГАНИКА -->
-        <button onclick="switchMainChannel('organika')" id="main-tab-organika" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap">
-          <span>🌿 1. Органика (/smm + WA Айтыма)</span>
+        <button onclick="switchMainChannel('organika')" id="main-tab-organika" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-black text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm whitespace-nowrap cursor-pointer">
+          <span>🌿 Органика</span>
           <span id="tabBadgeOrganika" class="px-2 py-0.5 text-[10px] bg-white/20 text-white rounded-full font-black">18.4k</span>
         </button>
 
-        <!-- РАЗДЕЛ 2: INFLUENCE (МПБ) -->
-        <button onclick="switchMainChannel('influence')" id="main-tab-influence" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap">
-          <span>🌟 2. Influence (Менеджеры МПБ)</span>
+        <!-- РАЗДЕЛ 2: ИНФЛЮЕНС -->
+        <button onclick="switchMainChannel('influence')" id="main-tab-influence" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
+          <span>🌟 Инфлюенс</span>
           <span id="tabBadgeInfluence" class="px-2 py-0.5 text-[10px] bg-purple-200 text-purple-900 rounded-full font-black">4 мен.</span>
         </button>
 
-        <!-- РАЗДЕЛ 3: FAN (ФАН-АККАУНТЫ) -->
-        <button onclick="switchMainChannel('fan')" id="main-tab-fan" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap">
-          <span>🎬 3. Fan (Фан-аккаунты сетки)</span>
+        <!-- РАЗДЕЛ 3: ФАН -->
+        <button onclick="switchMainChannel('fan')" id="main-tab-fan" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-900 font-black text-xs sm:text-sm flex items-center space-x-2 transition whitespace-nowrap cursor-pointer">
+          <span>🎬 Фан</span>
           <span id="tabBadgeFan" class="px-2 py-0.5 text-[10px] bg-indigo-200 text-indigo-900 rounded-full font-black">8 акк.</span>
         </button>
 
         <!-- ВСЕ КАНАЛЫ (СВОДКА) -->
-        <button onclick="switchMainChannel('all')" id="main-tab-all" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap ml-auto">
-          <span>📊 Все каналы (Сводка)</span>
+        <button onclick="switchMainChannel('all')" id="main-tab-all" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap ml-auto cursor-pointer">
+          <span>📊 Все каналы</span>
         </button>
 
         <!-- ТЕГИ AMOCRM -->
-        <button onclick="switchMainChannel('tags')" id="main-tab-tags" class="px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap">
-          <span>🏷️ ТЕГИ AmoCRM</span>
+        <button onclick="switchMainChannel('tags')" id="main-tab-tags" class="px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-bold text-xs sm:text-sm flex items-center space-x-1.5 transition whitespace-nowrap cursor-pointer">
+          <span>🏷️ Теги CRM</span>
         </button>
 
       </div>
-    </div>
-
-    <!-- 1. ПОЛОСА КЛЮЧЕВЫХ KPI КАРТОЧЕК (6 КАРТОЧЕК ВКЛЮЧАЯ ОКУПАЕМОСТЬ ROMI) -->
-    <div id="kpiStandardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
-      
-      <!-- 1. Лиды -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок (CRM)</span>
-          <span id="kpiScopeBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Органика</span>
-        </div>
-        <div id="kpiTotalLeads" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight">—</div>
-        <div class="text-[10px] text-slate-400 mt-0.5" id="kpiLeadsPeriod">за выбранный период</div>
-      </div>
-
-      <!-- 2. Клики -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-purple-200 shadow-2xs bg-purple-50/20">
-        <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Кликов (Переходов)</div>
-        <div id="kpiClicks" class="text-lg sm:text-2xl font-black text-purple-800 mt-0.5 leading-tight">0</div>
-        <div id="kpiCr1" class="text-[10px] font-bold text-purple-700 mt-0.5">CR1: —</div>
-      </div>
-
-      <!-- 3. Оплачено -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
-        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (Статус 142)</div>
-        <div id="kpiWonLeads" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">—</div>
-        <div id="kpiCr2" class="text-[10px] font-bold text-emerald-700 mt-0.5">CR2: —</div>
-      </div>
-
-      <!-- 4. Выручка -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
-        <div class="text-[10px] font-bold text-brand-700 uppercase tracking-wider">Выручка (₸)</div>
-        <div id="kpiRevenue" class="text-lg sm:text-2xl font-black text-brand-700 mt-0.5 leading-tight whitespace-nowrap">—</div>
-        <div id="kpiAvgCheck" class="text-[10px] font-medium text-slate-500 mt-0.5">Ср. чек: —</div>
-      </div>
-
-      <!-- 5. Расходы на маркетинг (Витамины + доставка + гонорары) -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
-        <div class="text-[10px] font-bold text-rose-700 uppercase tracking-wider" id="kpiExpenseLabel">Расходы маркетинга</div>
-        <div id="kpiExpenses" class="text-lg sm:text-2xl font-black text-rose-800 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
-        <div id="kpiExpensesSub" class="text-[10px] text-rose-600 mt-0.5 font-medium truncate">витамины + доставка</div>
-      </div>
-
-      <!-- 6. Окупаемость канала (ROMI / Payback) -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость (ROMI)</span>
-          <span id="kpiRomiBadge" class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
-        </div>
-        <div id="kpiRomi" class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap">—</div>
-        <div id="kpiRomiSub" class="text-[10px] text-emerald-800 mt-0.5 font-bold truncate">возврат инвестиций</div>
-      </div>
-
-    </div>
-
-    <!-- 1b. ПОЛОСА 6 KPI КАРТОЧЕК ДЛЯ ФАН-АККАУНТОВ (КОМПАКТНЫЙ ВИД) -->
-    <div id="kpiFanGrid" class="hidden grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
-      <!-- 1. Всего лидов -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs">
-        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Всего заявок</div>
-        <div id="fanKpiLeads" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5 leading-tight">0</div>
-        <div class="text-[10px] text-slate-400 mt-0.5">AmoCRM</div>
-      </div>
-      <!-- 2. Кликов -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-purple-200 shadow-2xs bg-purple-50/20">
-        <div class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">Кликов</div>
-        <div id="fanKpiClicks" class="text-lg sm:text-2xl font-black text-purple-800 mt-0.5 leading-tight">0</div>
-        <div class="text-[10px] text-purple-500 mt-0.5">переходы</div>
-      </div>
-      <!-- 3. CR1 -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
-        <div class="text-[10px] font-bold text-blue-700 uppercase tracking-wider">CR1 (Клик➔Лид)</div>
-        <div id="fanKpiCr1" class="text-lg sm:text-2xl font-black text-blue-800 mt-0.5 leading-tight">0%</div>
-        <div class="text-[10px] text-blue-500 mt-0.5">конверсия</div>
-      </div>
-      <!-- 4. Оплачено -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-200 shadow-2xs bg-emerald-50/20">
-        <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Оплачено (142)</div>
-        <div id="fanKpiWon" class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5 leading-tight">0</div>
-        <div class="text-[10px] text-emerald-600 mt-0.5">успешные</div>
-      </div>
-      <!-- 4. Выручка -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-blue-200 shadow-2xs bg-blue-50/20">
-        <div class="text-[10px] font-bold text-brand-700 uppercase tracking-wider">Выручка (₸)</div>
-        <div id="fanKpiRevenue" class="text-lg sm:text-2xl font-black text-brand-700 mt-0.5 leading-tight whitespace-nowrap">0 ₸</div>
-        <div class="text-[10px] text-slate-500 mt-0.5 font-medium" id="fanKpiAvgCheck">Ср. чек: 0 ₸</div>
-      </div>
-      <!-- 5. Расходы сетки -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-rose-200 shadow-2xs bg-rose-50/20">
-        <div class="text-[10px] font-bold text-rose-700 uppercase tracking-wider">Расходы сетки</div>
-        <div class="text-lg sm:text-2xl font-black text-rose-800 mt-0.5 leading-tight">0 ₸</div>
-        <div class="text-[10px] text-rose-600 mt-0.5 font-medium">без прямых расходов</div>
-      </div>
-      <!-- 6. Окупаемость канала (ROMI) -->
-      <div class="bg-white p-2.5 sm:p-3 rounded-xl border border-emerald-300 shadow-2xs bg-emerald-50/30">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Окупаемость (ROMI)</span>
-          <span class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900">ROMI</span>
-        </div>
-        <div class="text-lg sm:text-2xl font-black text-emerald-700 mt-0.5 leading-tight whitespace-nowrap">∞ (Органика)</div>
-        <div class="text-[10px] text-emerald-800 mt-0.5 font-bold">100% чистый доход</div>
-      </div>
-    </div>
-    
-    <!-- 2. СВОРАЧИВАЕМЫЙ БЛОК ФИЛЬТРАЦИИ ПО ПЕРИОДУ И ПОИСКА -->
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-      
-      <!-- ШАПКА ФИЛЬТРОВ: АКТИВНЫЙ БЕЙДЖ + КНОПКА СВЕРНУТЬ/РАЗВЕРНУТЬ -->
-      <div class="px-4 py-2.5 bg-slate-50/70 border-b border-slate-200/80 flex items-center justify-between gap-3">
-        <div class="flex items-center space-x-2 overflow-hidden text-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-black text-slate-800 uppercase tracking-wider whitespace-nowrap">Период:</span>
-          <span id="activeFilterBadge" class="font-bold px-2.5 py-0.5 rounded-lg bg-blue-100 text-brand-800 border border-blue-200 truncate">
-            Весь период · Органика
-          </span>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <button onclick="resetAllFilters()" class="text-xs font-semibold text-slate-500 hover:text-slate-800 px-2 py-1 rounded-lg hover:bg-slate-200/60 transition flex items-center space-x-1">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            <span>Сбросить</span>
-          </button>
-          <button onclick="toggleFilters()" id="btnToggleFilters" class="px-3 py-1 text-xs font-bold rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 transition flex items-center space-x-1.5 shadow-sm">
-            <span id="toggleFilterText">Свернуть фильтры</span>
-            <svg id="toggleFilterIcon" class="w-3.5 h-3.5 text-slate-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- ТЕЛО ФИЛЬТРОВ -->
-      <div id="filtersBody" class="p-4 sm:p-5 space-y-3.5 transition-all">
-        
-        <!-- СТРОКА 1: БЫСТРЫЕ ПЕРИОДЫ -->
-        <div class="flex flex-wrap items-center gap-1.5">
-          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">Быстрый период:</span>
-          <button onclick="setPeriodPreset('all')" id="period-btn-all" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white transition shadow-sm">Весь период</button>
-          <button onclick="setPeriodPreset('today')" id="period-btn-today" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Сегодня (11 ноя)</button>
-          <button onclick="setPeriodPreset('yesterday')" id="period-btn-yesterday" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Вчера (10 ноя)</button>
-          <button onclick="setPeriodPreset('last7')" id="period-btn-last7" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">7 дней</button>
-          <button onclick="setPeriodPreset('last30')" id="period-btn-last30" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">30 дней</button>
-          <button onclick="setPeriodPreset('nov2026')" id="period-btn-nov2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Ноябрь 2026</button>
-          <button onclick="setPeriodPreset('oct2026')" id="period-btn-oct2026" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Октябрь 2026</button>
-
-          <!-- ТОЧНЫЕ ДАТЫ -->
-          <div class="inline-flex items-center space-x-1 ml-auto text-xs">
-            <span class="text-slate-400 text-[11px]">с</span>
-            <input type="date" id="dateInputFrom" onchange="applyCustomDateRange()" class="px-2 py-0.5 text-xs bg-slate-50 border border-slate-200 rounded-lg font-medium">
-            <span class="text-slate-400 text-[11px]">по</span>
-            <input type="date" id="dateInputTo" onchange="applyCustomDateRange()" class="px-2 py-0.5 text-xs bg-slate-50 border border-slate-200 rounded-lg font-medium">
-          </div>
-        </div>
-
-        <!-- СТРОКА 2: ПОИСК ПО ТАБЛИЦЕ -->
-        <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="relative flex-1 max-w-lg">
-            <input type="text" id="filterSearchInput" oninput="onFilterChange()" placeholder="Поиск по блогеру, креативу, кампании, ссылке или тегу..." class="w-full pl-9 pr-4 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-500 font-medium text-slate-800 transition">
-            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          </div>
-          <div id="channelActionButtons" class="flex items-center space-x-2">
-            <!-- Кнопки разворачивания для Influence и Fan -->
-            <button onclick="expandAllAccordion()" id="btnExpandAll" class="px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200">
-              [+] Развернуть всех
-            </button>
-            <button onclick="collapseAllAccordion()" id="btnCollapseAll" class="px-3 py-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200">
-              [-] Свернуть всех
-            </button>
-          </div>
-        </div>
-
-      </div>
-
     </div>
 
     <!-- 3. ГЛАВНАЯ ИНТЕРАКТИВНАЯ ТАБЛИЦА -->
@@ -345,6 +381,41 @@ html_template = r'''<!DOCTYPE html>
         </table>
       </div>
 
+    </div>
+
+    <!-- 0. МОДАЛЬНОЕ ОКНО: ИЗМЕНИТЬ ПЛАН ВЫРУЧКИ (ТОЧКА Б) -->
+    <div id="editPlanModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in duration-200">
+        <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <h3 class="text-sm font-black text-slate-900 flex items-center space-x-2">
+            <span>🎯</span>
+            <span>Установить план по выручке (Точка Б)</span>
+          </h3>
+          <button onclick="closeEditPlanModal()" class="text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer">✕</button>
+        </div>
+        <form onsubmit="event.preventDefault(); savePlanTarget();" class="p-6 space-y-4 text-xs font-semibold text-slate-700">
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-1">Целевая выручка (₸):</label>
+            <input type="number" id="inputPlanTarget" min="100000" step="500000" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-base font-black text-brand-700 focus:bg-white focus:outline-none focus:border-brand-500">
+            <p class="text-[10px] text-slate-400 mt-1">Целевой ориентир для шкалы «Точка А ➔ Точка Б»</p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 pt-1">
+            <button type="button" onclick="setQuickPlan(30000000)" class="py-1.5 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">30 млн ₸</button>
+            <button type="button" onclick="setQuickPlan(50000000)" class="py-1.5 px-2 bg-blue-50 hover:bg-blue-100 text-brand-800 rounded-lg text-xs font-bold transition border border-blue-200 cursor-pointer">50 млн ₸</button>
+            <button type="button" onclick="setQuickPlan(100000000)" class="py-1.5 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">100 млн ₸</button>
+          </div>
+
+          <div class="flex items-center justify-end space-x-2 pt-3 border-t border-slate-100">
+            <button type="button" onclick="closeEditPlanModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+              Отмена
+            </button>
+            <button type="submit" class="px-5 py-2 text-xs font-black text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition shadow-md shadow-brand-500/20 cursor-pointer">
+              ✓ Сохранить план
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- 1. МОДАЛЬНОЕ ОКНО: ДОБАВИТЬ БЛОГЕРА & УСЛОВИЯ (ГОНОРАР, ДОСТАВКА, ВИТАМИНЫ) -->
@@ -1507,6 +1578,71 @@ html_template = r'''<!DOCTYPE html>
       };
     }
 
+
+    // ============================================================
+    // БЛОК: УПРАВЛЕНИЕ ПЛАНОМ ВЫРУЧКИ (ТОЧКА А ➔ ТОЧКА Б)
+    // ============================================================
+    let TARGET_SALES_PLAN = Number(localStorage.getItem('janamen_sales_plan') || 50000000);
+
+    function openEditPlanModal() {
+      const modal = document.getElementById('editPlanModal');
+      const input = document.getElementById('inputPlanTarget');
+      if (input) input.value = TARGET_SALES_PLAN;
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeEditPlanModal() {
+      const modal = document.getElementById('editPlanModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function setQuickPlan(val) {
+      const input = document.getElementById('inputPlanTarget');
+      if (input) input.value = val;
+    }
+
+    function savePlanTarget() {
+      const input = document.getElementById('inputPlanTarget');
+      const val = Number(input?.value);
+      if (val && val > 0) {
+        TARGET_SALES_PLAN = val;
+        localStorage.setItem('janamen_sales_plan', String(val));
+        closeEditPlanModal();
+        updateKpis();
+      }
+    }
+
+    function updatePlanProgress(factRev) {
+      const target = TARGET_SALES_PLAN || 50000000;
+      const fact = Number(factRev) || 0;
+      const pct = Math.round(fact / target * 100);
+      const clampedPct = Math.min(100, Math.max(0, pct));
+
+      const targetDisplay = document.getElementById('planTargetDisplay');
+      const targetVal = document.getElementById('planTargetVal');
+      const factDisplay = document.getElementById('planFactDisplay');
+      const factPercent = document.getElementById('planFactPercent');
+      const factBar = document.getElementById('planFactBar');
+      const badge = document.getElementById('planPercentBadge');
+      const remainingVal = document.getElementById('planRemainingVal');
+
+      if (targetDisplay) targetDisplay.innerText = target.toLocaleString('ru-RU') + ' ₸';
+      if (targetVal) targetVal.innerText = target.toLocaleString('ru-RU') + ' ₸';
+      if (factDisplay) factDisplay.innerText = fact.toLocaleString('ru-RU') + ' ₸';
+      if (factPercent) factPercent.innerText = `(${pct}%)`;
+      if (factBar) factBar.style.width = clampedPct + '%';
+      
+      if (badge) {
+        badge.innerText = `${pct}% выполнено`;
+        badge.className = `px-2.5 py-0.5 text-xs font-black rounded-full ${pct >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-brand-800'}`;
+      }
+
+      if (remainingVal) {
+        const remaining = Math.max(0, target - fact);
+        remainingVal.innerText = remaining > 0 ? (remaining.toLocaleString('ru-RU') + ' ₸') : '🎉 План выполнен!';
+      }
+    }
+
     function updateKpis() {
       const d = currentChannelData;
       const userRole = CURRENT_USER?.role || 'superadmin';
@@ -1531,7 +1667,7 @@ html_template = r'''<!DOCTYPE html>
         if (fanWonEl) fanWonEl.innerText = d.won.toLocaleString('ru-RU');
         if (fanRevEl) fanRevEl.innerText = d.rev.toLocaleString('ru-RU') + ' ₸';
 
-        const cr1Pct = d.clicks ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : '0%';
+        const cr1Pct = (d.clicks && d.clicks >= d.leads) ? (Math.round(d.leads / d.clicks * 1000) / 10) + '%' : (d.clicks ? '—' : '0%');
         const cr2Pct = d.leads ? (Math.round(d.won / d.leads * 1000) / 10) + '%' : '0%';
         if (fanCr1El) fanCr1El.innerText = cr1Pct;
         if (fanCr2El) fanCr2El.innerText = cr2Pct;
@@ -1564,13 +1700,36 @@ html_template = r'''<!DOCTYPE html>
         document.getElementById('kpiWonLeads').innerText = displayWon.toLocaleString('ru-RU');
         document.getElementById('kpiRevenue').innerText = displayRev.toLocaleString('ru-RU') + ' ₸';
         document.getElementById('kpiAvgCheck').innerText = 'Ср. чек: ' + (displayAvgCheck || 0).toLocaleString('ru-RU') + ' ₸';
-        document.getElementById('kpiClicks').innerText = displayClicks.toLocaleString('ru-RU');
         
-        const cr1Pct = displayClicks ? (Math.round(displayLeads / displayClicks * 1000) / 10) + '%' : (displayLeads ? '—' : '0%');
-        document.getElementById('kpiCr1').innerText = 'CR1: ' + cr1Pct;
+        const clicksEl = document.getElementById('kpiClicks');
+        if (clicksEl) clicksEl.innerText = displayClicks.toLocaleString('ru-RU');
+
+        // CR1 рассчитывается корректно: если трекинг кликов запущен недавно и кликов меньше заявок, не показываем заоблачный процент
+        const cr1Pct = (displayClicks && displayClicks >= displayLeads) 
+          ? (Math.round(displayLeads / displayClicks * 1000) / 10) + '%' 
+          : (displayClicks && displayLeads ? '—' : '0%');
+        const cr1El = document.getElementById('kpiCr1');
+        if (cr1El) cr1El.innerText = 'CR1: ' + cr1Pct;
+
+        const inlineClicks = document.getElementById('kpiClicksInline');
+        if (inlineClicks) {
+          if (displayClicks > 0) {
+            if (displayClicks >= displayLeads) {
+              inlineClicks.innerText = `${displayClicks.toLocaleString('ru-RU')} перех. (CR1: ${cr1Pct})`;
+            } else {
+              inlineClicks.innerText = `${displayClicks.toLocaleString('ru-RU')} перех.`;
+            }
+          } else {
+            inlineClicks.innerText = '0 переходов';
+          }
+        }
         
         const cr2Pct = displayLeads ? (Math.round(displayWon / displayLeads * 1000) / 10) + '%' : '0%';
-        document.getElementById('kpiCr2').innerText = 'CR2: ' + cr2Pct;
+        const cr2El = document.getElementById('kpiCr2');
+        if (cr2El) cr2El.innerText = 'CR: ' + cr2Pct + ' (Лид ➔ Оплата)';
+
+        // Обновляем блок Выполнения Плана (Точка А ➔ Точка Б)
+        updatePlanProgress(displayRev);
 
         const scopeBadge = document.getElementById('kpiScopeBadge');
         const expenseEl = document.getElementById('kpiExpenses');
