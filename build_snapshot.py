@@ -13,6 +13,18 @@ SUPABASE_URL = os.environ.get('SUPABASE_URL', 'https://upeqrwqhdnmccyymugej.supa
 # Публичный ключ портала: таблица deals и так читается им из браузера
 SUPABASE_PUBLIC_KEY = os.environ.get('SUPABASE_ANON_KEY', 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi')
 SNAPSHOT_SYNCED_AT = None
+# Портал отдела SMM / Influence / Фан-аккаунтов: только органика, с этой даты
+SNAPSHOT_SINCE = '2026-02-01'
+
+
+def is_organic(r):
+    """Органический лид: тег «Органика…», сайт janamen1.kz или WhatsApp 9828.
+    Платный трафик (janamenhealth.kz, таргет) ведёт отдел performance — его здесь не считаем."""
+    tags = r.get('tags') or []
+    if any('органика' in t.lower() or '9828' in t for t in tags):
+        return True
+    page = re.sub(r'^https?://(www\.)?', '', (r.get('referrer') or '').lower())
+    return page.startswith('janamen1.kz')
 
 
 def _iso_to_unix(s):
@@ -50,7 +62,7 @@ def load_from_supabase():
     rows, offset = [], 0
     while True:
         req = urllib.request.Request(
-            f'{SUPABASE_URL}/rest/v1/deals?select={cols}&order=id',
+            f'{SUPABASE_URL}/rest/v1/deals?select={cols}&created_at=gte.{SNAPSHOT_SINCE}&order=id',
             headers={'apikey': SUPABASE_PUBLIC_KEY, 'Authorization': f'Bearer {SUPABASE_PUBLIC_KEY}',
                      'Range': f'{offset}-{offset + 999}'})
         for attempt in range(3):
@@ -66,8 +78,9 @@ def load_from_supabase():
         if len(page) < 1000:
             break
         offset += 1000
-    print(f'Supabase: загружено {len(rows)} сделок (снимок на {SNAPSHOT_SYNCED_AT})')
-    return [supabase_row_to_amo(r) for r in rows]
+    organic = [r for r in rows if is_organic(r)]
+    print(f'Supabase: {len(rows)} сделок с {SNAPSHOT_SINCE}, органических {len(organic)} (снимок на {SNAPSHOT_SYNCED_AT})')
+    return [supabase_row_to_amo(r) for r in organic]
 
 
 if '--from-supabase' in sys.argv:

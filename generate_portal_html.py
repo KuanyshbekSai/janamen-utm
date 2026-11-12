@@ -3865,7 +3865,16 @@ html_template = r'''<!DOCTYPE html>
     // изменилось в AmoCRM уже после снимка, вшитого в страницу, и должно его перекрыть.
     const DEALS_DELTA_SINCE = '__DEALS_DELTA_SINCE__';
     const DEALS_PAGE = 1000; // максимум строк Supabase за один запрос
-    const DEAL_SELECT = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
+    const DEAL_SELECT = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
+
+    // Портал считает только органику (тот же фильтр, что в build_snapshot.py):
+    // тег «Органика…», сайт janamen1.kz или WhatsApp 9828. Платный трафик ведёт отдел performance.
+    function isOrganicDeal(d) {
+      const tags = Array.isArray(d.tags) ? d.tags : [];
+      if (tags.some(t => String(t).toLowerCase().includes('органика') || String(t).includes('9828'))) return true;
+      const page = String(d.referrer || '').toLowerCase().replace(/^https?:\/\/(www\.)?/, '');
+      return page.startsWith('janamen1.kz');
+    }
     let dealsCursor = DEALS_DELTA_SINCE;
     let dealsLoading = false;
     let LEAD_INDEX = null;
@@ -3949,9 +3958,10 @@ html_template = r'''<!DOCTYPE html>
 
         let maxUpd = since;
         for (const d of fresh) {
+          if (d.updated_at > maxUpd) maxUpd = d.updated_at;
+          if (!isOrganicDeal(d)) continue;
           const r = upsertLead(d);
           if (r === 'added') added++; else if (r === 'updated') updated++;
-          if (d.updated_at > maxUpd) maxUpd = d.updated_at;
         }
         for (const d of sales) {
           if (d.updated_at > maxUpd) maxUpd = d.updated_at;
@@ -4001,7 +4011,7 @@ html_template = r'''<!DOCTYPE html>
           if (!d || !d.id) return;
 
           // Те же правила, что и при загрузке: новые лиды после снимка или продажи по сделкам снимка
-          const isNew = d.created_at && d.created_at > SNAPSHOT_MAX_CREATED;
+          const isNew = d.created_at && d.created_at > SNAPSHOT_MAX_CREATED && isOrganicDeal(d);
           if (!isNew && !(d.is_won && SNAPSHOT_IDS.has(d.id))) return;
           if (!upsertLead(d)) return;
 
