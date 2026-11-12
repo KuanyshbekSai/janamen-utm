@@ -3905,31 +3905,49 @@
       return 'added';
     }
 
+    // Сделки снимка и момент последней сделки в нём
+    const SNAPSHOT_IDS = new Set(COMPACT_PAYLOAD.rows.map(r => r[0]));
+    const SNAPSHOT_MAX_CREATED = new Date(COMPACT_PAYLOAD.rows.reduce((m, r) => Math.max(m, r[1]), 0) * 1000).toISOString();
+
+    async function fetchDealsPaged(build) {
+      const out = [];
+      for (let offset = 0; ; offset += DEALS_PAGE) {
+        const { data, error } = await build()
+          .order('updated_at', { ascending: true })
+          .order('id', { ascending: true })
+          .range(offset, offset + DEALS_PAGE - 1);
+        if (error || !data) break;
+        out.push(...data);
+        if (data.length < DEALS_PAGE) break;
+      }
+      return out;
+    }
+
     async function loadFreshDealsFromSupabase() {
       if (!supabaseClient || dealsLoading) return;
       dealsLoading = true;
       let added = 0, updated = 0;
       try {
-        for (let offset = 0; ; offset += DEALS_PAGE) {
-          const { data, error } = await supabaseClient
-            .from('deals')
-            .select(DEAL_SELECT)
-            .gte('updated_at', dealsCursor)
-            .order('updated_at', { ascending: true })
-            .order('id', { ascending: true })
-            .range(offset, offset + DEALS_PAGE - 1);
+        const since = dealsCursor;
+        // 1) Новые лиды, созданные после снимка, и их изменения
+        const fresh = await fetchDealsPaged(() => supabaseClient.from('deals').select(DEAL_SELECT)
+          .gte('updated_at', since).gt('created_at', SNAPSHOT_MAX_CREATED));
+        // 2) Продажи по сделкам, которые уже есть в снимке (статус сменился на «успешно»)
+        const sales = await fetchDealsPaged(() => supabaseClient.from('deals').select(DEAL_SELECT)
+          .gte('updated_at', since).lte('created_at', SNAPSHOT_MAX_CREATED).eq('is_won', true));
 
-          if (error || !data) break;
-          for (const d of data) {
-            const r = upsertLead(d);
-            if (r === 'added') added++;
-            else if (r === 'updated') updated++;
-          }
-          if (data.length < DEALS_PAGE) {
-            if (data.length) dealsCursor = data[data.length - 1].updated_at;
-            break;
-          }
+        let maxUpd = since;
+        for (const d of fresh) {
+          const r = upsertLead(d);
+          if (r === 'added') added++; else if (r === 'updated') updated++;
+          if (d.updated_at > maxUpd) maxUpd = d.updated_at;
         }
+        for (const d of sales) {
+          if (d.updated_at > maxUpd) maxUpd = d.updated_at;
+          if (!SNAPSHOT_IDS.has(d.id)) continue; // старые сделки вне снимка не подмешиваем
+          if (upsertLead(d) === 'updated') updated++;
+        }
+        dealsCursor = maxUpd;
 
         if (added || updated) {
           onFilterChange();
@@ -3971,6 +3989,9 @@
           const d = payload.new;
           if (!d || !d.id) return;
 
+          // Те же правила, что и при загрузке: новые лиды после снимка или продажи по сделкам снимка
+          const isNew = d.created_at && d.created_at > SNAPSHOT_MAX_CREATED;
+          if (!isNew && !(d.is_won && SNAPSHOT_IDS.has(d.id))) return;
           if (!upsertLead(d)) return;
 
           // Синхронизация пишет пачками — перерисовываем один раз на пачку
