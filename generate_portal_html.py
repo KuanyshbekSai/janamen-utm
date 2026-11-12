@@ -436,27 +436,49 @@ html_template = r'''<!DOCTYPE html>
           <button onclick="closeEditPlanModal()" class="text-slate-400 hover:text-slate-600 font-bold text-base cursor-pointer">✕</button>
         </div>
 
-        <form onsubmit="event.preventDefault(); savePlanTarget();" class="p-5 space-y-4 text-xs font-semibold text-slate-700">
+        <form novalidate onsubmit="event.preventDefault(); savePlanTarget();" class="p-5 space-y-4 text-xs font-semibold text-slate-700">
           
           <!-- ОБЩИЙ ПЛАН -->
           <div>
-            <label class="block text-[11px] uppercase tracking-wider text-slate-500 font-bold mb-1">Общий план лидов (заявок):</label>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-[11px] uppercase tracking-wider text-slate-500 font-bold">Общий план лидов (заявок):</label>
+              <span class="text-[11px] text-slate-400 font-normal">Точка Б компании</span>
+            </div>
             <div class="flex items-center space-x-2">
-              <input type="number" id="inputTotalPlanLeads" min="100" step="100" required oninput="onTotalPlanInput(this.value)" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-lg font-black text-slate-900 focus:bg-white focus:outline-none focus:border-slate-900">
+              <input type="number" id="inputTotalPlanLeads" min="1" step="1" required oninput="onTotalPlanInput(this.value)" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-lg font-black text-slate-900 focus:bg-white focus:outline-none focus:border-slate-900">
               <span class="text-xs font-bold text-slate-500 whitespace-nowrap">заявок</span>
             </div>
             
             <!-- Быстрые кнопки плана -->
             <div class="grid grid-cols-4 gap-1.5 pt-2">
-              <button type="button" onclick="setQuickTotalPlan(5000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">5 000</button>
-              <button type="button" onclick="setQuickTotalPlan(10000)" class="py-1 px-2 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-xs font-bold transition shadow-2xs cursor-pointer">10 000</button>
-              <button type="button" onclick="setQuickTotalPlan(15000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">15 000</button>
-              <button type="button" onclick="setQuickTotalPlan(20000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">20 000</button>
+              <button type="button" id="btnQuickPlan5000" onclick="setQuickTotalPlan(5000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">5 000</button>
+              <button type="button" id="btnQuickPlan10000" onclick="setQuickTotalPlan(10000)" class="py-1 px-2 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-xs font-bold transition shadow-2xs cursor-pointer">10 000</button>
+              <button type="button" id="btnQuickPlan15000" onclick="setQuickTotalPlan(15000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">15 000</button>
+              <button type="button" id="btnQuickPlan20000" onclick="setQuickTotalPlan(20000)" class="py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer">20 000</button>
+            </div>
+          </div>
+
+          <!-- СМАРТ КНОПКИ АВТО-РАСЧЁТА ("ПУСТЬ САМ РАССЧИТЫВАЕТ") -->
+          <div class="bg-indigo-50/70 border border-indigo-100 p-2.5 rounded-xl flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold text-indigo-950 flex items-center space-x-1">
+              <span>⚡</span>
+              <span>Авто-расчёт:</span>
+            </span>
+            <div class="flex items-center space-x-1 sm:space-x-1.5">
+              <button type="button" onclick="autoDistributePlan('fact')" title="Распределить пропорционально реальным лидам из CRM за период" class="px-2.5 py-1 bg-white hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg text-[11px] font-extrabold transition shadow-2xs cursor-pointer">
+                ⚡ По факту CRM
+              </button>
+              <button type="button" onclick="autoDistributePlan('equal')" title="Разделить план поровну между 3 каналами (33% / 33% / 34%)" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-lg text-[11px] font-bold transition shadow-2xs cursor-pointer">
+                ⚖️ Поровну
+              </button>
+              <button type="button" onclick="autoDistributePlan('standard')" title="Рекомендуемый баланс 60% Органика / 25% Инфлюенс / 15% Фан" class="px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-lg text-[11px] font-bold transition shadow-2xs cursor-pointer">
+                🎯 60 / 25 / 15
+              </button>
             </div>
           </div>
 
           <!-- ПОЛЗУНКИ СОСТАВА ПЛАНА ПО КАНАЛАМ -->
-          <div class="pt-3 border-t border-slate-100 space-y-3.5">
+          <div class="pt-2 border-t border-slate-100 space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">Состав плана по каналам (ползунки):</span>
               <span id="lblPlanStatus" class="text-[11px] font-bold text-emerald-600">100% распределено</span>
@@ -471,13 +493,13 @@ html_template = r'''<!DOCTYPE html>
                 </span>
                 <div class="flex items-center space-x-2">
                   <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanOrganika" step="50" oninput="onChannelInputChange('organika', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right">
+                    <input type="number" id="inputPlanOrganika" step="1" oninput="onChannelInputChange('organika', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
                     <span class="text-[11px] text-slate-500 font-bold">лидов</span>
                   </div>
                   <span id="badgePctOrganika" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">60%</span>
                 </div>
               </div>
-              <input type="range" id="sliderPlanOrganika" min="0" max="10000" step="50" oninput="onChannelSliderChange('organika', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <input type="range" id="sliderPlanOrganika" min="0" max="10000" step="1" oninput="onChannelSliderChange('organika', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
             </div>
 
             <!-- 2. ИНФЛЮЕНС ПОЛЗУНОК -->
@@ -489,13 +511,13 @@ html_template = r'''<!DOCTYPE html>
                 </span>
                 <div class="flex items-center space-x-2">
                   <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanInfluence" step="50" oninput="onChannelInputChange('influence', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right">
+                    <input type="number" id="inputPlanInfluence" step="1" oninput="onChannelInputChange('influence', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
                     <span class="text-[11px] text-slate-500 font-bold">лидов</span>
                   </div>
                   <span id="badgePctInfluence" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">25%</span>
                 </div>
               </div>
-              <input type="range" id="sliderPlanInfluence" min="0" max="10000" step="50" oninput="onChannelSliderChange('influence', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <input type="range" id="sliderPlanInfluence" min="0" max="10000" step="1" oninput="onChannelSliderChange('influence', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
             </div>
 
             <!-- 3. ФАН ПОЛЗУНОК -->
@@ -507,13 +529,13 @@ html_template = r'''<!DOCTYPE html>
                 </span>
                 <div class="flex items-center space-x-2">
                   <div class="flex items-center space-x-1">
-                    <input type="number" id="inputPlanFan" step="50" oninput="onChannelInputChange('fan', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right">
+                    <input type="number" id="inputPlanFan" step="1" oninput="onChannelInputChange('fan', this.value)" class="w-20 px-2 py-0.5 text-xs font-extrabold text-slate-900 bg-white border border-slate-200 rounded text-right focus:outline-none focus:border-slate-900">
                     <span class="text-[11px] text-slate-500 font-bold">лидов</span>
                   </div>
                   <span id="badgePctFan" class="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-800">15%</span>
                 </div>
               </div>
-              <input type="range" id="sliderPlanFan" min="0" max="10000" step="50" oninput="onChannelSliderChange('fan', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
+              <input type="range" id="sliderPlanFan" min="0" max="10000" step="1" oninput="onChannelSliderChange('fan', this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900">
             </div>
 
             <!-- ВИЗУАЛЬНАЯ ПОЛОСА РАСПРЕДЕЛЕНИЯ -->
@@ -1848,6 +1870,7 @@ html_template = r'''<!DOCTYPE html>
       const totalInput = document.getElementById('inputTotalPlanLeads');
       if (totalInput) totalInput.value = CURRENT_LEADS_PLAN.total;
       
+      updateQuickPlanButtons(CURRENT_LEADS_PLAN.total);
       syncPlanModalControls();
       if (modal) modal.classList.remove('hidden');
     }
@@ -1857,13 +1880,27 @@ html_template = r'''<!DOCTYPE html>
       if (modal) modal.classList.add('hidden');
     }
 
+    function updateQuickPlanButtons(val) {
+      const current = Number(val);
+      [5000, 10000, 15000, 20000].forEach(n => {
+        const btn = document.getElementById('btnQuickPlan' + n);
+        if (btn) {
+          if (n === current) {
+            btn.className = 'py-1 px-2 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-xs font-bold transition shadow-2xs cursor-pointer';
+          } else {
+            btn.className = 'py-1 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition cursor-pointer';
+          }
+        }
+      });
+    }
+
     function syncPlanModalControls() {
-      const total = Math.max(100, Number(CURRENT_LEADS_PLAN.total) || 10000);
+      const total = Math.max(1, Math.round(Number(CURRENT_LEADS_PLAN.total) || 10000));
       CURRENT_LEADS_PLAN.total = total;
 
-      const org = Math.max(0, Number(CURRENT_LEADS_PLAN.organika) || 0);
-      const inf = Math.max(0, Number(CURRENT_LEADS_PLAN.influence) || 0);
-      const fan = Math.max(0, Number(CURRENT_LEADS_PLAN.fan) || 0);
+      const org = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.organika) || 0));
+      const inf = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.influence) || 0));
+      const fan = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.fan) || 0));
 
       // Sliders max
       ['Organika', 'Influence', 'Fan'].forEach(ch => {
@@ -1923,16 +1960,73 @@ html_template = r'''<!DOCTYPE html>
       }
     }
 
+    // Авто-расчёт плана по разным сценариям ("Пусть сам рассчитывает")
+    function autoDistributePlan(mode) {
+      const total = Math.max(1, Math.round(Number(CURRENT_LEADS_PLAN.total) || 10000));
+      CURRENT_LEADS_PLAN.total = total;
+
+      if (mode === 'fact') {
+        // Расчёт по реальным историческим данным AmoCRM за выбранный период
+        const o = Number(currentChannelData.countOrganika) || 0;
+        const i = Number(currentChannelData.countInfluence) || 0;
+        const f = Number(currentChannelData.countFan) || 0;
+        const sumFact = o + i + f;
+
+        if (sumFact > 0) {
+          const org = Math.round(total * (o / sumFact));
+          const inf = Math.round(total * (i / sumFact));
+          const fan = Math.max(0, total - org - inf);
+          CURRENT_LEADS_PLAN.organika = org;
+          CURRENT_LEADS_PLAN.influence = inf;
+          CURRENT_LEADS_PLAN.fan = fan;
+        } else {
+          // Если за период нет факта, используем рекомендуемый баланс
+          CURRENT_LEADS_PLAN.organika = Math.round(total * 0.60);
+          CURRENT_LEADS_PLAN.influence = Math.round(total * 0.25);
+          CURRENT_LEADS_PLAN.fan = Math.max(0, total - CURRENT_LEADS_PLAN.organika - CURRENT_LEADS_PLAN.influence);
+        }
+      } else if (mode === 'equal') {
+        // 1/3 поровну на каждый канал
+        const third = Math.floor(total / 3);
+        CURRENT_LEADS_PLAN.organika = third;
+        CURRENT_LEADS_PLAN.influence = third;
+        CURRENT_LEADS_PLAN.fan = Math.max(0, total - third * 2);
+      } else {
+        // Стандартный баланс: 60% Органика / 25% Инфлюенс / 15% Фан-отдел
+        const org = Math.round(total * 0.60);
+        const inf = Math.round(total * 0.25);
+        const fan = Math.max(0, total - org - inf);
+        CURRENT_LEADS_PLAN.organika = org;
+        CURRENT_LEADS_PLAN.influence = inf;
+        CURRENT_LEADS_PLAN.fan = fan;
+      }
+
+      syncPlanModalControls();
+    }
+
     function onTotalPlanInput(val) {
-      const newTotal = Math.max(100, Number(val) || 10000);
-      const prevTotal = CURRENT_LEADS_PLAN.total || 10000;
-      const ratio = newTotal / prevTotal;
+      const newTotal = Math.max(1, Math.round(Number(val) || 10000));
+      const curOrg = Number(CURRENT_LEADS_PLAN.organika) || 0;
+      const curInf = Number(CURRENT_LEADS_PLAN.influence) || 0;
+      const curFan = Number(CURRENT_LEADS_PLAN.fan) || 0;
+      const curSum = (curOrg + curInf + curFan) || (CURRENT_LEADS_PLAN.total || 10000);
+
+      let pOrg = 0.60, pInf = 0.25;
+      if (curSum > 0) {
+        pOrg = curOrg / curSum;
+        pInf = curInf / curSum;
+      }
+
+      const org = Math.round(newTotal * pOrg);
+      const inf = Math.round(newTotal * pInf);
+      const fan = Math.max(0, newTotal - org - inf);
 
       CURRENT_LEADS_PLAN.total = newTotal;
-      CURRENT_LEADS_PLAN.organika = Math.round((CURRENT_LEADS_PLAN.organika || 6000) * ratio);
-      CURRENT_LEADS_PLAN.influence = Math.round((CURRENT_LEADS_PLAN.influence || 2500) * ratio);
-      CURRENT_LEADS_PLAN.fan = Math.max(0, newTotal - CURRENT_LEADS_PLAN.organika - CURRENT_LEADS_PLAN.influence);
+      CURRENT_LEADS_PLAN.organika = org;
+      CURRENT_LEADS_PLAN.influence = inf;
+      CURRENT_LEADS_PLAN.fan = fan;
 
+      updateQuickPlanButtons(newTotal);
       syncPlanModalControls();
     }
 
@@ -1940,18 +2034,20 @@ html_template = r'''<!DOCTYPE html>
       const input = document.getElementById('inputTotalPlanLeads');
       if (input) input.value = val;
       onTotalPlanInput(val);
+      updateQuickPlanButtons(val);
     }
 
     function onChannelSliderChange(channel, val) {
-      const newVal = Math.max(0, Math.min(CURRENT_LEADS_PLAN.total, Number(val) || 0));
-      const total = CURRENT_LEADS_PLAN.total;
+      const total = CURRENT_LEADS_PLAN.total || 10000;
+      const newVal = Math.max(0, Math.min(total, Math.round(Number(val) || 0)));
       const remaining = Math.max(0, total - newVal);
 
       if (channel === 'organika') {
         CURRENT_LEADS_PLAN.organika = newVal;
         const otherSum = (CURRENT_LEADS_PLAN.influence || 0) + (CURRENT_LEADS_PLAN.fan || 0);
         if (otherSum > 0) {
-          CURRENT_LEADS_PLAN.influence = Math.round(remaining * (CURRENT_LEADS_PLAN.influence / otherSum));
+          const shareInf = (CURRENT_LEADS_PLAN.influence || 0) / otherSum;
+          CURRENT_LEADS_PLAN.influence = Math.round(remaining * shareInf);
           CURRENT_LEADS_PLAN.fan = Math.max(0, remaining - CURRENT_LEADS_PLAN.influence);
         } else {
           CURRENT_LEADS_PLAN.influence = Math.round(remaining * 0.6);
@@ -1961,7 +2057,8 @@ html_template = r'''<!DOCTYPE html>
         CURRENT_LEADS_PLAN.influence = newVal;
         const otherSum = (CURRENT_LEADS_PLAN.organika || 0) + (CURRENT_LEADS_PLAN.fan || 0);
         if (otherSum > 0) {
-          CURRENT_LEADS_PLAN.organika = Math.round(remaining * (CURRENT_LEADS_PLAN.organika / otherSum));
+          const shareOrg = (CURRENT_LEADS_PLAN.organika || 0) / otherSum;
+          CURRENT_LEADS_PLAN.organika = Math.round(remaining * shareOrg);
           CURRENT_LEADS_PLAN.fan = Math.max(0, remaining - CURRENT_LEADS_PLAN.organika);
         } else {
           CURRENT_LEADS_PLAN.organika = Math.round(remaining * 0.7);
@@ -1971,7 +2068,8 @@ html_template = r'''<!DOCTYPE html>
         CURRENT_LEADS_PLAN.fan = newVal;
         const otherSum = (CURRENT_LEADS_PLAN.organika || 0) + (CURRENT_LEADS_PLAN.influence || 0);
         if (otherSum > 0) {
-          CURRENT_LEADS_PLAN.organika = Math.round(remaining * (CURRENT_LEADS_PLAN.organika / otherSum));
+          const shareOrg = (CURRENT_LEADS_PLAN.organika || 0) / otherSum;
+          CURRENT_LEADS_PLAN.organika = Math.round(remaining * shareOrg);
           CURRENT_LEADS_PLAN.influence = Math.max(0, remaining - CURRENT_LEADS_PLAN.organika);
         } else {
           CURRENT_LEADS_PLAN.organika = Math.round(remaining * 0.7);
@@ -1987,6 +2085,16 @@ html_template = r'''<!DOCTYPE html>
     }
 
     function savePlanTarget() {
+      const total = Math.max(1, Math.round(Number(CURRENT_LEADS_PLAN.total) || 10000));
+      const org = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.organika) || 0));
+      const inf = Math.max(0, Math.round(Number(CURRENT_LEADS_PLAN.influence) || 0));
+      const fan = Math.max(0, total - org - inf);
+
+      CURRENT_LEADS_PLAN.total = total;
+      CURRENT_LEADS_PLAN.organika = org;
+      CURRENT_LEADS_PLAN.influence = inf;
+      CURRENT_LEADS_PLAN.fan = fan;
+
       localStorage.setItem('janamen_leads_plan', JSON.stringify(CURRENT_LEADS_PLAN));
       closeEditPlanModal();
       updateKpis();
