@@ -3,6 +3,7 @@
 // Параметры:
 //   ?hours=2        — окно в часах (по умолчанию 2, максимум 24*31)
 //   ?from=<unix>    — начало окна как unix-время (вместо hours), для догрузки по частям
+//   ?created_from=<unix>[&created_to=<unix>] — догрузка по дате СОЗДАНИЯ (для заполнения пробелов в истории)
 // Вызывается по расписанию из Google Apps Script и кнопкой «Синхронизировать» в портале.
 import { createClient } from '@supabase/supabase-js';
 
@@ -100,9 +101,15 @@ export default async function handler(req, res) {
   const t0 = Date.now();
   const nowSec = Math.floor(t0 / 1000);
 
+  // Режим догрузки по дате создания
+  const byCreated = req.query.created_from && /^\d+$/.test(String(req.query.created_from));
+  const createdTo = req.query.created_to && /^\d+$/.test(String(req.query.created_to)) ? Number(req.query.created_to) : null;
+
   // Начало окна: ?from=<unix> или ?hours=N
   let fromSec;
-  if (req.query.from && /^\d+$/.test(String(req.query.from))) {
+  if (byCreated) {
+    fromSec = Number(req.query.created_from);
+  } else if (req.query.from && /^\d+$/.test(String(req.query.from))) {
     fromSec = Math.max(Number(req.query.from), nowSec - MAX_HOURS * 3600);
   } else {
     const hours = Math.min(Math.max(Number(req.query.hours) || DEFAULT_HOURS, 0.1), MAX_HOURS);
@@ -118,7 +125,9 @@ export default async function handler(req, res) {
     for (let page = 1; ; page++) {
       if (Date.now() - t0 > TIME_BUDGET_MS) break; // не успели — вернём курсор для продолжения
 
-      const url = `${AMO_BASE}/leads?filter[updated_at][from]=${fromSec}&order[updated_at]=asc&limit=${PAGE_SIZE}&page=${page}`;
+      const field = byCreated ? 'created_at' : 'updated_at';
+      let url = `${AMO_BASE}/leads?filter[${field}][from]=${fromSec}&order[${field}]=asc&limit=${PAGE_SIZE}&page=${page}`;
+      if (byCreated && createdTo) url += `&filter[created_at][to]=${createdTo}`;
       const amoRes = await fetch(url, { headers: { 'Authorization': `Bearer ${AMOCRM_TOKEN}` } });
 
       if (amoRes.status === 204) { complete = true; break; } // AmoCRM: больше сделок нет
@@ -135,7 +144,7 @@ export default async function handler(req, res) {
         const { error } = await supabase.from('deals').upsert(rows, { onConflict: 'id' });
         if (error) throw error;
         synced += rows.length;
-        lastUpdatedAt = Math.max(lastUpdatedAt, ...leads.map(l => l.updated_at || 0));
+        lastUpdatedAt = Math.max(lastUpdatedAt, ...leads.map(l => (byCreated ? l.created_at : l.updated_at) || 0));
       }
 
       if (leads.length < PAGE_SIZE || !amoData._links?.next) { complete = true; break; }
@@ -147,7 +156,7 @@ export default async function handler(req, res) {
       pages,
       complete,
       from: new Date(fromSec * 1000).toISOString(),
-      // Если complete=false — вызовите ещё раз с ?from=<next_from>, чтобы догрузить остаток
+      // Если complete=false — вызовите ещё раз с ?from=<next_from> (или ?created_from=<next_from>), чтобы догрузить остаток
       next_from: complete ? null : lastUpdatedAt,
       timestamp: new Date().toISOString()
     });
