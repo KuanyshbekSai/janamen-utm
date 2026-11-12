@@ -2041,6 +2041,51 @@
 
     let CURRENT_LEADS_PLAN = getLeadsPlan();
 
+    // ============================================================
+    // ОБЩИЕ НАСТРОЙКИ (план лидов, зарплаты фан-аккаунтов) — одни на всех, хранятся в Supabase
+    // localStorage остаётся быстрым кэшем
+    // ============================================================
+    const SHARED_SETTINGS = { leads_plan: 'janamen_leads_plan', fan_salaries: 'janamen_fan_salaries' };
+
+    async function pushSharedSetting(key, value) {
+      try {
+        const r = await fetch('/api/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, value })
+        });
+        if (!r.ok) console.warn('Настройка не сохранена на сервере:', key, r.status);
+      } catch (e) {
+        console.warn('Настройка не сохранена на сервере:', key, e);
+      }
+    }
+
+    async function loadSharedSettings() {
+      try {
+        const r = await fetch('/api/settings');
+        const res = await r.json();
+        if (!res || !res.ok) return;
+        const server = res.settings || {};
+        let changed = false;
+        for (const [key, lsKey] of Object.entries(SHARED_SETTINGS)) {
+          if (server[key]) {
+            const next = JSON.stringify(server[key]);
+            if (localStorage.getItem(lsKey) !== next) { localStorage.setItem(lsKey, next); changed = true; }
+          } else {
+            // На сервере ещё пусто — переносим то, что уже было настроено в этом браузере
+            const local = localStorage.getItem(lsKey);
+            if (local) { try { pushSharedSetting(key, JSON.parse(local)); } catch (e) {} }
+          }
+        }
+        if (changed) {
+          CURRENT_LEADS_PLAN = getLeadsPlan();
+          onFilterChange();
+        }
+      } catch (e) {
+        console.warn('Load shared settings err:', e);
+      }
+    }
+
     function openEditPlanModal() {
       const modal = document.getElementById('editPlanModal');
       CURRENT_LEADS_PLAN = getLeadsPlan();
@@ -2260,6 +2305,7 @@
       CURRENT_LEADS_PLAN.fan = fan;
 
       localStorage.setItem('janamen_leads_plan', JSON.stringify(CURRENT_LEADS_PLAN));
+      pushSharedSetting('leads_plan', CURRENT_LEADS_PLAN);
       closeEditPlanModal();
       updateKpis();
     }
@@ -2596,6 +2642,7 @@
         map[f.id] = Number(input?.value || DEFAULT_FAN_SALARY);
       });
       localStorage.setItem('janamen_fan_salaries', JSON.stringify(map));
+      pushSharedSetting('fan_salaries', map);
       closeFanSalariesModal();
       updateKpis();
       renderMainTable();
@@ -3854,7 +3901,8 @@
     // изменилось в AmoCRM уже после снимка, вшитого в страницу, и должно его перекрыть.
     const DEALS_DELTA_SINCE = '2026-11-11T06:00:00Z';
     const DEALS_PAGE = 1000; // максимум строк Supabase за один запрос
-    const DEAL_SELECT = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
+    const DEAL_SELECT_LEGACY = 'id, name, created_at, updated_at, status_id, is_won, price, landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_content, utm_term, tags';
+    let DEAL_SELECT = DEAL_SELECT_LEGACY + ', attr, click_id';
 
     // Портал считает только органику (тот же фильтр, что в build_snapshot.py):
     // тег «Органика…», сайт janamen1.kz или WhatsApp 9828. Платный трафик ведёт отдел performance.
@@ -3870,6 +3918,19 @@
 
     function dealToLead(d) {
       const ts = d.created_at ? Math.floor(new Date(d.created_at).getTime() / 1000) : 0;
+      const a = d.attr && typeof d.attr === 'object' ? d.attr : null;
+      if (a) {
+        // Канал уже определён синхронизацией по тем же правилам, что и снимок
+        return {
+          id: d.id, ts: ts, won: d.is_won ? 1 : 0, price: d.price || 0,
+          dom: a.dom || 'janamen1.kz', path: a.path || '/', page: a.path || '/',
+          src: a.src || 'direct/none', med: a.med || 'none', cmp: a.cmp || 'none',
+          cnt: a.cnt || 'none', trm: a.trm || 'none',
+          status_id: d.status_id || (d.is_won ? 142 : 0),
+          name: d.name || 'Сделка', tags: Array.isArray(d.tags) ? d.tags : [],
+          click_id: d.click_id || null
+        };
+      }
       const dom = (d.landing_page && d.landing_page.includes('health')) ? 'janamenhealth.kz' : 'janamen1.kz';
       return {
         id: d.id,
@@ -3900,13 +3961,16 @@
       const existing = LEAD_INDEX.get(fresh.id);
       if (existing) {
         if (existing.won === fresh.won && existing.price === fresh.price && existing.status_id === fresh.status_id &&
-            existing.src === fresh.src && existing.med === fresh.med && existing.cmp === fresh.cmp && existing.cnt === fresh.cnt) {
+            (!d.attr || (existing.src === fresh.src && existing.med === fresh.med && existing.cmp === fresh.cmp && existing.cnt === fresh.cnt))) {
           return null;
         }
         // Обновляем только то, что меняется в CRM; домен и путь страницы оставляем из снимка
         existing.won = fresh.won; existing.price = fresh.price; existing.status_id = fresh.status_id;
-        existing.src = fresh.src; existing.med = fresh.med; existing.cmp = fresh.cmp;
-        existing.cnt = fresh.cnt; existing.trm = fresh.trm; existing.name = fresh.name; existing.tags = fresh.tags;
+        existing.name = fresh.name; existing.tags = fresh.tags;
+        if (d.attr) {
+          existing.src = fresh.src; existing.med = fresh.med; existing.cmp = fresh.cmp;
+          existing.cnt = fresh.cnt; existing.trm = fresh.trm;
+        }
         return 'updated';
       }
       ALL_LEADS.unshift(fresh);
@@ -3925,6 +3989,11 @@
           .order('updated_at', { ascending: true })
           .order('id', { ascending: true })
           .range(offset, offset + DEALS_PAGE - 1);
+        if (error && DEAL_SELECT !== DEAL_SELECT_LEGACY && /attr|click_id/.test(error.message || '')) {
+          DEAL_SELECT = DEAL_SELECT_LEGACY; // миграция 002 ещё не применена
+          offset -= DEALS_PAGE;
+          continue;
+        }
         if (error || !data) break;
         out.push(...data);
         if (data.length < DEALS_PAGE) break;
@@ -5016,6 +5085,7 @@
     initAuth();
     loadCustomBloggers();
     onFilterChange();
+    loadSharedSettings();
     loadFreshDealsFromSupabase();
     loadClickCounts();
     initRealtime();

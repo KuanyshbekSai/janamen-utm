@@ -6,6 +6,7 @@
 //   ?created_from=<unix>[&created_to=<unix>] — догрузка по дате СОЗДАНИЯ (для заполнения пробелов в истории)
 // Вызывается по расписанию из Google Apps Script и кнопкой «Синхронизировать» в портале.
 import { createClient } from '@supabase/supabase-js';
+import { attribute } from './_lib/attribution.js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
@@ -23,11 +24,20 @@ function cleanStr(val, def = 'none') {
   return s || def;
 }
 
+// Поле сделки AmoCRM со сквозным номером клика (скрытое поле формы Tilda «jm_cid»)
+const CLICK_ID_FIELD_NAMES = ['jm_cid', 'click id', 'click_id', 'id клика', 'номер клика'];
+
 // Превращает сделку AmoCRM в строку таблицы deals (логика разбора UTM без изменений)
-function mapLead(d) {
+// extraBloggers — { handle: 'mpbN' } из таблицы bloggers для атрибуции
+function mapLead(d, extraBloggers = {}) {
   const cf = {};
+  let clickId = null;
   for (const c of (d.custom_fields_values || [])) {
-    if (c.values && c.values.length > 0) cf[c.field_id] = String(c.values[0].value).trim();
+    if (c.values && c.values.length > 0) {
+      cf[c.field_id] = String(c.values[0].value).trim();
+      const nm = String(c.field_name || c.field_code || '').trim().toLowerCase();
+      if (CLICK_ID_FIELD_NAMES.includes(nm)) clickId = cf[c.field_id].slice(0, 64) || null;
+    }
   }
 
   const page = cf[849891] || cf[833007] || '';
@@ -53,6 +63,16 @@ function mapLead(d) {
   let uid = g(833139, 'utm_id') || 'none';
 
   const tags = (d._embedded?.tags || []).map(t => t.name);
+
+  // Канал отдела (блогер / фан-аккаунт / лид-магнит / SMM) — те же правила, что в снимке портала
+  const a = attribute({ page, src, med, cmp, cnt, trm, tags }, extraBloggers);
+  const attr = { src: a.src, med: a.med, cmp: a.cmp, cnt: a.cnt, trm: a.trm, dom: a.dom, path: a.path };
+  if (!clickId) {
+    // номер клика мог прийти и в адресе страницы (?jm_cid=...)
+    const m = /[?&]jm_cid=([A-Za-z0-9_-]{4,64})/.exec(page);
+    if (m) clickId = m[1];
+  }
+
   const isWa = tags.some(t => t.includes('9828')) || page.toLowerCase().includes('iwa-9828') || page.toLowerCase().includes('9828');
 
   let cleanUrl = page.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('?')[0].split('#')[0];
@@ -88,8 +108,31 @@ function mapLead(d) {
     referrer: cleanStr(page, 'none').slice(0, 500),
     city: cleanStr(cf[855175] || cf[679621] || 'none', 'none').slice(0, 100),
     tags: tags.slice(0, 20),
+    attr,
+    click_id: clickId,
     updated_at: new Date().toISOString()
   };
+}
+
+// Пока в базе нет колонок attr / click_id (миграция не применена) — пишем без них
+async function upsertDeals(supabase, rows) {
+  let { error } = await supabase.from('deals').upsert(rows, { onConflict: 'id' });
+  if (error && /attr|click_id/.test(error.message || '')) {
+    const legacy = rows.map(({ attr, click_id, ...r }) => r);
+    ({ error } = await supabase.from('deals').upsert(legacy, { onConflict: 'id' }));
+  }
+  if (error) throw error;
+}
+
+async function loadExtraBloggers(supabase) {
+  try {
+    const { data } = await supabase.from('bloggers').select('handle, manager');
+    const map = {};
+    for (const b of (data || [])) if (b.handle && b.manager) map[String(b.handle).toLowerCase()] = b.manager;
+    return map;
+  } catch (e) {
+    return {};
+  }
 }
 
 export default async function handler(req, res) {
@@ -122,6 +165,7 @@ export default async function handler(req, res) {
   let complete = false;
 
   try {
+    const extraBloggers = await loadExtraBloggers(supabase);
     for (let page = 1; ; page++) {
       if (Date.now() - t0 > TIME_BUDGET_MS) break; // не успели — вернём курсор для продолжения
 
@@ -140,9 +184,8 @@ export default async function handler(req, res) {
       pages++;
 
       if (leads.length) {
-        const rows = leads.map(mapLead);
-        const { error } = await supabase.from('deals').upsert(rows, { onConflict: 'id' });
-        if (error) throw error;
+        const rows = leads.map(l => mapLead(l, extraBloggers));
+        await upsertDeals(supabase, rows);
         synced += rows.length;
         lastUpdatedAt = Math.max(lastUpdatedAt, ...leads.map(l => (byCreated ? l.created_at : l.updated_at) || 0));
       }

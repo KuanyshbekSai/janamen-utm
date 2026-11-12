@@ -1,15 +1,58 @@
-<!-- Jana Men: Надежный трекер UTM-кликов и переходов (v3 Bulletproof) -->
+<!-- Jana Men: трекер UTM-кликов + сквозной номер клика (v4) -->
+<!-- Ставится в блок T123 (или в «HTML-код для HEAD») на страницах janamen1.kz.
+     Чтобы заявка в AmoCRM связалась с кликом, добавьте в форму Tilda «Скрытое поле»
+     с именем переменной jm_cid и сопоставьте его с полем сделки «jm_cid» в интеграции AmoCRM. -->
 <script>
 (function() {
   try {
+    var EP = 'https://janamen-utm.vercel.app/api/hit';
+    var KEY = 'jm_cid';
     var p = new URLSearchParams(window.location.search);
     var src = p.get('utm_source');
     var med = p.get('utm_medium');
     var cmp = p.get('utm_campaign');
     var cnt = p.get('utm_content');
     var trm = p.get('utm_term');
+    var urlCid = p.get('jm_cid');
 
-    // Фиксируем, если есть UTM или реферер
+    function newCid() {
+      var a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var s = '';
+      var rnd = (window.crypto && window.crypto.getRandomValues) ? window.crypto.getRandomValues(new Uint8Array(12)) : null;
+      for (var i = 0; i < 12; i++) s += a.charAt(rnd ? rnd[i] % a.length : Math.floor(Math.random() * a.length));
+      return s;
+    }
+    function readStored() {
+      try { var v = localStorage.getItem(KEY); if (v) return v; } catch (e) {}
+      var m = document.cookie.match(/(?:^|;\s*)jm_cid=([A-Za-z0-9_-]+)/);
+      return m ? m[1] : null;
+    }
+    function store(v) {
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+      document.cookie = 'jm_cid=' + v + '; path=/; max-age=' + (90 * 24 * 3600) + '; SameSite=Lax';
+    }
+
+    // Номер клика: пришёл с короткой ссылки /go → берём его; новый заход с UTM → новый номер;
+    // иначе сохраняем прежний (человек вернулся на сайт позже)
+    var cid, dup = false;
+    if (urlCid && /^[A-Za-z0-9_-]{4,64}$/.test(urlCid)) { cid = urlCid; dup = true; }
+    else if (src || med || cmp || cnt || trm) { cid = newCid(); }
+    else { cid = readStored() || newCid(); }
+    store(cid);
+
+    // Подставляем номер во все поля jm_cid в формах (Tilda дорисовывает формы и попапы позже)
+    function fill() {
+      var inputs = document.querySelectorAll('input[name="jm_cid"], input[name="JM_CID"]');
+      for (var i = 0; i < inputs.length; i++) if (inputs[i].value !== cid) inputs[i].value = cid;
+    }
+    fill();
+    document.addEventListener('DOMContentLoaded', fill);
+    ['focusin', 'mousedown', 'touchstart', 'submit'].forEach(function(ev) { document.addEventListener(ev, fill, true); });
+    if (window.MutationObserver) {
+      new MutationObserver(fill).observe(document.documentElement, { childList: true, subtree: true });
+    }
+
+    // Фиксируем заход, если есть UTM или реферер
     if (src || med || cmp || window.location.search || document.referrer) {
       var o = {
         utm_source: src || 'direct',
@@ -18,25 +61,16 @@
         utm_content: cnt || 'none',
         utm_term: trm || 'none',
         landing_page: window.location.pathname || '/',
-        referrer: document.referrer || 'direct'
+        referrer: document.referrer || 'direct',
+        click_id: cid,
+        dup: dup ? '1' : '0'
       };
-
       var query = Object.keys(o).map(function(k){ return k + '=' + encodeURIComponent(o[k]); }).join('&');
-      var fullUrl = 'https://janamen-utm.vercel.app/api/hit?' + query + '&_=' + Date.now();
+      var fullUrl = EP + '?' + query + '&_=' + Date.now();
 
-      // Метод 1: Невидимый пиксель 1x1 (GET) — не блокируется Brave Shields, AdBlock и Safari
+      // Невидимый пиксель 1x1 — не блокируется Brave Shields, AdBlock и Safari
       var img = new Image(1, 1);
       img.src = fullUrl;
-
-      // Метод 2: fetch с keepalive и no-cors
-      if (window.fetch) {
-        fetch(fullUrl, { method: 'GET', mode: 'no-cors', keepalive: true }).catch(function(){});
-      }
-
-      // Метод 3: sendBeacon как резервный канал
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon('https://janamen-utm.vercel.app/api/click', JSON.stringify(o));
-      }
     }
   } catch(e) {}
 })();

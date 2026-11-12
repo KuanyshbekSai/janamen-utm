@@ -83,7 +83,20 @@ def load_from_supabase():
     return [supabase_row_to_amo(r) for r in organic]
 
 
+def load_extra_bloggers():
+    try:
+        req = urllib.request.Request(f'{SUPABASE_URL}/rest/v1/bloggers?select=handle,manager',
+                                     headers={'apikey': SUPABASE_PUBLIC_KEY, 'Authorization': f'Bearer {SUPABASE_PUBLIC_KEY}'})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return {str(b['handle']).lower(): b['manager'] for b in json.load(resp) if b.get('handle') and b.get('manager')}
+    except Exception as e:
+        print('Блогеры из Supabase не загружены:', e)
+        return {}
+
+
+EXTRA_BLOGGERS = {}
 if '--from-supabase' in sys.argv:
+    EXTRA_BLOGGERS = load_extra_bloggers()
     leads = load_from_supabase()
 else:
     leads = json.load(open('analyzed_leads.json', encoding='utf-8'))
@@ -199,6 +212,18 @@ def parse_lead(d):
         is_blogger = True
         if med in UNSET or med == 'none':
             med = 'mpb3'
+    else:
+        # Блогеры, добавленные в портале (таблица bloggers) — те же правила, что в api/_lib/attribution.js
+        extra_by_mgr = defaultdict(list)
+        for h, m in EXTRA_BLOGGERS.items():
+            if h and len(h) >= 4 and m:
+                extra_by_mgr[m].append(h)
+        for m in sorted(extra_by_mgr):
+            if any(b in blogger_text for b in extra_by_mgr[m]):
+                is_blogger = True
+                if med in UNSET or med == 'none':
+                    med = m
+                break
 
     if is_blogger:
         clean_path = '/influence'

@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { insertClick, cleanClickId } from './_lib/clicks.js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
@@ -48,16 +49,14 @@ export default async function handler(req, res) {
     const userAgent = (req.headers['user-agent'] || '').slice(0, 255);
     const referrer = (payload.referrer || req.headers['referer'] || 'direct').slice(0, 255);
 
-    // Записываем в Supabase REST API
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/clicks`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify([{
+    // Сквозной номер клика: трекер Tilda передаёт его, чтобы связать клик с заявкой в AmoCRM.
+    // dup=1 — клик уже записан короткой ссылкой /go, второй раз не считаем.
+    const clickId = cleanClickId(payload.click_id || payload.jm_cid);
+    const isDup = String(payload.dup || '') === '1';
+
+    let r = { ok: true };
+    if (!isDup) {
+      r = await insertClick(SUPABASE_URL, SUPABASE_KEY, {
         utm_source: source,
         utm_medium: medium,
         utm_campaign: campaign,
@@ -68,9 +67,10 @@ export default async function handler(req, res) {
         referrer: referrer,
         user_agent: userAgent,
         ip_hash: ipHash,
+        click_id: clickId,
         created_at: new Date().toISOString()
-      }])
-    });
+      });
+    }
 
     const TRANSPARENT_1PX_GIF = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
     if (req.method === 'GET') {

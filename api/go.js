@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { insertClick, newClickId } from './_lib/clicks.js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://upeqrwqhdnmccyymugej.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_bhEfs-Ej7u-1_MAytAp-eg_bvEnTuwi';
@@ -33,6 +34,11 @@ export default async function handler(req, res) {
     if (blogger) urlObj.searchParams.set('utm_content', blogger);
     if (term) urlObj.searchParams.set('utm_term', term);
 
+    // Сквозной номер клика: уходит на сайт в ?jm_cid=, трекер Tilda кладёт его в скрытое поле формы,
+    // и заявка в AmoCRM связывается с этим кликом
+    const clickId = newClickId();
+    urlObj.searchParams.set('jm_cid', clickId);
+
     const finalUrl = urlObj.toString();
 
     // Определяем IP и хэшируем его для защиты приватности
@@ -41,28 +47,20 @@ export default async function handler(req, res) {
     const userAgent = (req.headers['user-agent'] || '').slice(0, 255);
     const referrer = (req.headers['referer'] || req.headers['referrer'] || 'direct').slice(0, 255);
 
-    // Записываем клик в Supabase REST API без блокировки
-    fetch(`${SUPABASE_URL}/rest/v1/clicks`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify([{
-        utm_source: source,
-        utm_medium: medium,
-        utm_campaign: campaign,
-        utm_content: blogger || 'none',
-        utm_term: term || 'none',
-        landing_page: urlObj.pathname,
-        blogger: blogger || 'none',
-        referrer: referrer,
-        user_agent: userAgent,
-        ip_hash: ipHash,
-        created_at: new Date().toISOString()
-      }])
+    // Записываем клик (ждём запись: после ответа функция Vercel может быть остановлена)
+    await insertClick(SUPABASE_URL, SUPABASE_KEY, {
+      utm_source: source,
+      utm_medium: medium,
+      utm_campaign: campaign,
+      utm_content: blogger || 'none',
+      utm_term: term || 'none',
+      landing_page: urlObj.pathname,
+      blogger: blogger || 'none',
+      referrer: referrer,
+      user_agent: userAgent,
+      ip_hash: ipHash,
+      click_id: clickId,
+      created_at: new Date().toISOString()
     }).catch(err => console.warn('Click log error:', err.message));
 
     // Мгновенный 307 Temporary Redirect на сайт
