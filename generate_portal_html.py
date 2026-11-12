@@ -233,11 +233,13 @@ html_template = r'''<!DOCTYPE html>
       <div id="filtersBody"></div>
     </div>
 
-    <!-- 3. БЛОК: ВЫПОЛНЕНИЕ ПЛАНА ПО ЗАЯВКАМ (ТОЧНО ПО ЗАРИСОВКЕ РУКОВОДИТЕЛЯ) -->
-    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-4 sm:p-5">
+    <!-- 3. БЛОК: ВЫПОЛНЕНИЕ ПЛАНА ПО ЗАЯВКАМ (ДИНАМИКА ПО КАЖДОМУ ДНЮ: ОТСТАВАНИЕ И ПЕРЕГОНКА) -->
+    <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs p-4 sm:p-5 space-y-4">
+      
+      <!-- Заголовок блока -->
       <div class="flex items-center justify-between pb-3 border-b border-slate-100">
         <div class="flex items-center space-x-2 sm:space-x-3">
-          <span class="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Выполнение плана по заявкам</span>
+          <span class="text-sm font-extrabold text-slate-900 uppercase tracking-tight">Выполнение плана по дням</span>
           <span id="planTitleScope" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">Все каналы</span>
           <span class="text-slate-300 font-light text-base">|</span>
           <span id="planPercentBadge" class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-slate-100 text-slate-800">
@@ -249,80 +251,92 @@ html_template = r'''<!DOCTYPE html>
         </button>
       </div>
 
-      <!-- Графические полосы План vs Факт -->
-      <div class="mt-4 space-y-3.5">
-        <!-- Полоса ПЛАН -->
+      <!-- Две главные шкалы: План по дням vs Реальный факт -->
+      <div class="space-y-3">
+        
+        <!-- 1. ПЛАН НА СЕГОДНЯ (ПО ГРАФИКУ ДНЕЙ) -->
         <div>
           <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
             <span class="flex items-center space-x-1.5">
               <span class="w-2 h-2 rounded-full bg-slate-400"></span>
-              <span>План (Цель):</span>
-            </span>
-            <span id="planTargetDisplay" class="font-extrabold text-slate-800 text-sm">10 000 заявок</span>
-          </div>
-          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-            <div class="h-full bg-slate-300 rounded-full w-full"></div>
-          </div>
-        </div>
-
-        <!-- Полоса ФАКТ -->
-        <div>
-          <div class="flex items-center justify-between text-xs font-semibold mb-1">
-            <span class="flex items-center space-x-1.5 text-slate-800">
-              <span class="w-2 h-2 rounded-full bg-slate-900"></span>
-              <span>Факт (Заявки за период):</span>
+              <span>План по графику на сегодня (День <strong id="planDayIndex" class="text-slate-700">12</strong> из <strong id="planDaysTotal" class="text-slate-700">30</strong>):</span>
             </span>
             <div class="flex items-center space-x-2">
-              <span id="planFactDisplay" class="font-extrabold text-slate-900 text-sm">0 заявок</span>
-              <span id="planFactPercent" class="text-xs font-bold text-slate-600">(0%)</span>
+              <span id="planExpectedDisplay" class="font-bold text-slate-700 text-xs sm:text-sm">2 400 заявок</span>
+              <span id="planExpectedPercent" class="text-xs text-slate-400">(40% срока)</span>
             </div>
           </div>
           <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-            <div id="planFactBar" class="h-full bg-slate-900 rounded-full transition-all duration-500" style="width: 0%;"></div>
+            <div id="planExpectedBar" class="h-full bg-slate-400 rounded-full transition-all duration-500" style="width: 40%;"></div>
           </div>
         </div>
 
-        <!-- Шкала от Точки А к Точке Б -->
-        <div class="pt-2">
-          <div class="relative w-full">
-            <div class="h-1 bg-slate-200 w-full relative flex items-center justify-between rounded-full">
-              <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
-              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
-              <div class="w-1 h-1 bg-slate-400 rounded-full"></div>
-              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
-              <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
-              <div class="w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-            </div>
-
-            <!-- Подписи Точка А и Точка Б -->
-            <div class="flex items-center justify-between text-xs font-medium text-slate-600 mt-2.5">
-              <div class="flex flex-col">
-                <span class="text-[10px] text-slate-400 uppercase font-bold">Точка А (Старт)</span>
-                <span class="font-extrabold text-slate-800 text-xs sm:text-sm">0 заявок</span>
-              </div>
-              <div id="planRemainingDisplay" class="text-center text-xs text-slate-500">
-                Осталось до цели: <span class="font-bold text-slate-900" id="planRemainingVal">—</span>
-              </div>
-              <div class="flex flex-col items-end">
-                <span class="text-[10px] text-slate-400 uppercase font-bold">Точка Б (Цель)</span>
-                <span class="font-extrabold text-slate-900 text-xs sm:text-sm" id="planTargetVal">10 000 заявок</span>
-              </div>
+        <!-- 2. РЕАЛЬНЫЙ ФАКТ ЗАЯВОК (С ИНДИКАТОРОМ ОТСТАВАНИЯ / ПЕРЕГОНКИ) -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold mb-1 flex-wrap gap-1">
+            <span class="flex items-center space-x-1.5 text-slate-900">
+              <span class="w-2 h-2 rounded-full bg-slate-900"></span>
+              <span>Факт заявок за период:</span>
+            </span>
+            <div class="flex items-center space-x-2 flex-wrap">
+              <span id="planFactDisplay" class="font-extrabold text-slate-900 text-xs sm:text-sm">4 078 заявок</span>
+              <span id="planFactPercent" class="text-xs font-bold text-slate-600">(68%)</span>
+              <span id="planPacingBadge" class="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                🚀 Опережение: +1 678 заявок
+              </span>
             </div>
           </div>
-        </div>
-
-        <!-- Состав плана по 3 каналам -->
-        <div class="pt-3 mt-1 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-          <span class="font-medium text-slate-400">Состав выполнения по каналам:</span>
-          <div class="flex items-center space-x-3 text-xs flex-wrap">
-            <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🌿 Органика: <strong id="planOrgStatus" class="text-slate-900 font-extrabold">0 / 6 000</strong></span>
-            <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🌟 Инфлюенс: <strong id="planInfStatus" class="text-slate-900 font-extrabold">0 / 2 500</strong></span>
-            <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🎬 Фан: <strong id="planFanStatus" class="text-slate-900 font-extrabold">0 / 1 500</strong></span>
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div id="planFactBar" class="h-full bg-slate-900 rounded-full transition-all duration-500" style="width: 68%;"></div>
           </div>
         </div>
 
       </div>
+
+      <!-- 3. ИНТЕРАКТИВНАЯ КАЛЕНДАРНАЯ ШКАЛА ПО КАЖДОМУ ДНЮ -->
+      <div class="pt-2 border-t border-slate-100 space-y-2">
+        <div class="flex items-center justify-between text-xs font-medium text-slate-600">
+          <span class="font-bold text-slate-700">Календарная шкала по дням (зеленый = перегонка, желтый = отставание):</span>
+          <span id="pacingTooltipInfo" class="text-xs font-bold text-emerald-700">Наведите на день для деталей</span>
+        </div>
+
+        <!-- Сетка дней месяца -->
+        <div id="daysTimelineGrid" class="flex items-center gap-1 overflow-x-auto py-1.5 scrollbar-thin">
+          <!-- Генерируется JS для дней 1..30 -->
+        </div>
+
+        <!-- Подписи Точка А, темп и Точка Б -->
+        <div class="flex items-center justify-between text-xs font-medium text-slate-600 pt-1">
+          <div class="flex flex-col">
+            <span class="text-[10px] text-slate-400 uppercase font-bold">Точка А (Старт)</span>
+            <span id="planPointADisplay" class="font-extrabold text-slate-800 text-xs sm:text-sm">0 (1 ноя)</span>
+          </div>
+          
+          <div class="text-center text-xs text-slate-500 hidden sm:flex items-center space-x-2">
+            <span>Темп: <strong id="planPaceSpeed" class="text-slate-900 font-extrabold">340/день</strong></span>
+            <span>•</span>
+            <span id="planRemainingDisplay">Осталось: <strong id="planRemainingVal" class="text-slate-900 font-extrabold">1 922</strong></span>
+            <span>•</span>
+            <span>Прогноз: <strong id="planForecastVal" class="text-slate-900 font-extrabold">~9 000 заявок</strong></span>
+          </div>
+
+          <div class="flex flex-col items-end">
+            <span class="text-[10px] text-slate-400 uppercase font-bold">Точка Б (Цель)</span>
+            <span class="font-extrabold text-slate-900 text-xs sm:text-sm" id="planTargetVal">6 000 заявок</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Состав выполнения по 3 каналам -->
+      <div class="pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+        <span class="font-medium text-slate-400">Состав выполнения по каналам:</span>
+        <div class="flex items-center space-x-2 sm:space-x-3 text-xs flex-wrap">
+          <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🌿 Органика: <strong id="planOrgStatus" class="text-slate-900 font-extrabold">0 / 6 000</strong></span>
+          <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🌟 Инфлюенс: <strong id="planInfStatus" class="text-slate-900 font-extrabold">0 / 2 500</strong></span>
+          <span class="bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">🎬 Фан: <strong id="planFanStatus" class="text-slate-900 font-extrabold">0 / 1 500</strong></span>
+        </div>
+      </div>
+
     </div>
 
     <!-- 4. ТАБЫ ВЫБОРА КАНАЛОВ (МИНИМАЛИСТИЧНЫЙ SEGMENTED CONTROL НАД ТАБЛИЦЕЙ) -->
@@ -1983,57 +1997,217 @@ html_template = r'''<!DOCTYPE html>
       const plan = getLeadsPlan();
       
       let target = plan.total || 10000;
-      let fact = d.leads || 0;
       let channelLabel = 'Все каналы';
 
       if (currentMainChannel === 'organika') {
         target = plan.organika || 6000;
-        fact = (d.countOrganika !== undefined) ? d.countOrganika : (d.leads || 0);
         channelLabel = 'Органика SMM';
       } else if (currentMainChannel === 'influence') {
         target = plan.influence || 2500;
-        fact = (d.countInfluence !== undefined) ? d.countInfluence : (d.leads || 0);
         channelLabel = 'Influence (Блогеры)';
       } else if (currentMainChannel === 'fan') {
         target = plan.fan || 1500;
-        fact = (d.countFan !== undefined) ? d.countFan : (d.leads || 0);
         channelLabel = 'Fan-отдел';
       } else {
         target = plan.total || 10000;
-        fact = (d.countOrganika || 0) + (d.countInfluence || 0) + (d.countFan || 0) || d.leads || 0;
         channelLabel = 'Все каналы';
       }
 
-      const pct = target > 0 ? Math.round(fact / target * 100) : 0;
-      const clampedPct = Math.min(100, Math.max(0, pct));
-
-      const targetDisplay = document.getElementById('planTargetDisplay');
-      const targetVal = document.getElementById('planTargetVal');
-      const factDisplay = document.getElementById('planFactDisplay');
-      const factPercent = document.getElementById('planFactPercent');
-      const factBar = document.getElementById('planFactBar');
-      const badge = document.getElementById('planPercentBadge');
-      const remainingVal = document.getElementById('planRemainingVal');
-      const planTitleScope = document.getElementById('planTitleScope');
-
-      if (planTitleScope) planTitleScope.innerText = channelLabel;
-      if (targetDisplay) targetDisplay.innerText = target.toLocaleString('ru-RU') + ' заявок';
-      if (targetVal) targetVal.innerText = target.toLocaleString('ru-RU') + ' заявок';
-      if (factDisplay) factDisplay.innerText = fact.toLocaleString('ru-RU') + ' заявок';
-      if (factPercent) factPercent.innerText = `(${pct}%)`;
-      if (factBar) factBar.style.width = clampedPct + '%';
-
-      if (badge) {
-        badge.innerText = `${pct}% выполнено`;
-        badge.className = `px-2.5 py-0.5 text-xs font-bold rounded-full ${pct >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`;
+      // 1. Определение временных границ периода
+      const now = new Date();
+      let startTs, endTs, totalDays, currentDayIndex, startLabel, endLabel;
+      
+      if (filterDateFrom && filterDateTo) {
+        startTs = filterDateFrom;
+        endTs = filterDateTo;
+        totalDays = Math.max(1, Math.round((endTs - startTs) / 86400));
+        const nowTs = Math.floor(now.getTime() / 1000);
+        if (nowTs >= endTs) currentDayIndex = totalDays;
+        else if (nowTs <= startTs) currentDayIndex = 1;
+        else currentDayIndex = Math.max(1, Math.round((nowTs - startTs) / 86400));
+        startLabel = new Date(startTs * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        endLabel = new Date(endTs * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+      } else if (filterDateFrom && !filterDateTo) {
+        startTs = filterDateFrom;
+        const nowTs = Math.floor(now.getTime() / 1000);
+        totalDays = Math.max(1, Math.round((nowTs - startTs) / 86400));
+        currentDayIndex = totalDays;
+        endTs = nowTs;
+        startLabel = new Date(startTs * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        endLabel = new Date(endTs * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+      } else {
+        // По умолчанию текущий месяц — Ноябрь 2026
+        const y = 2026, m = 11;
+        startTs = Math.floor(new Date(Date.UTC(y, m - 1, 1, 0, 0, 0)).getTime() / 1000);
+        const lastDay = new Date(y, m, 0).getDate(); // 30
+        endTs = Math.floor(new Date(Date.UTC(y, m - 1, lastDay, 23, 59, 59)).getTime() / 1000);
+        totalDays = lastDay;
+        currentDayIndex = Math.min(lastDay, now.getDate() || 12);
+        startLabel = '1 ноя';
+        endLabel = '30 ноя';
       }
 
+      // 2. Расчет ежедневных фактов лидов
+      const dailyFactCounts = new Array(totalDays).fill(0);
+      ALL_LEADS.forEach(l => {
+        if (!l.ts || l.ts < startTs || l.ts > endTs) return;
+        const lCmp = (l.cmp || '').toLowerCase();
+        const lCnt = (l.cnt || '').toLowerCase();
+        const lMed = (l.med || '').toLowerCase();
+        const lSrc = (l.src || '').toLowerCase();
+        const isWa9828 = l.path === '/iwa-9828' || (l.med && l.med.includes('Айтым')) || (l.tags && l.tags.some(t => t.includes('9828') || t.includes('77083779828')));
+        const isSmm = l.path === '/smm' || l.med === 'social' || lCmp.includes('smm') || lSrc.includes('smm');
+        const isOrganika = isWa9828 || isSmm || l.path === '/organika' || l.path === '/';
+
+        let isFan = false;
+        for (let fi = 0; fi < FAN_REGISTRY.length; fi++) {
+          const f = FAN_REGISTRY[fi];
+          if (lCmp.includes(f.id) || lCnt.includes(f.id) || lSrc.includes(f.id)) { isFan = true; break; }
+        }
+        if (!isFan) {
+          if (lCmp.includes('4516') || lCmp.includes('2427') || lMed === 'fan' || lMed === 'video' || l.path === '/fun' || l.path.startsWith('/fan') || lSrc.includes('fan')) {
+            isFan = true;
+          }
+        }
+        const isInfluence = !isFan && (l.path === '/influence' || lMed.startsWith('mpb') || lCmp.includes('influence'));
+
+        if (currentMainChannel === 'organika' && !isOrganika) return;
+        if (currentMainChannel === 'influence' && !isInfluence) return;
+        if (currentMainChannel === 'fan' && !isFan) return;
+
+        const dayOffset = Math.floor((l.ts - startTs) / 86400);
+        if (dayOffset >= 0 && dayOffset < totalDays) {
+          dailyFactCounts[dayOffset]++;
+        }
+      });
+
+      // 3. Формирование кумулятивных рядов
+      let cumFact = 0;
+      const dailyTarget = target / totalDays;
+      const pacingDays = [];
+
+      for (let i = 0; i < totalDays; i++) {
+        cumFact += dailyFactCounts[i];
+        const cumPlan = Math.round((i + 1) * dailyTarget);
+        const dayDelta = cumFact - cumPlan;
+        pacingDays.push({
+          dayIndex: i + 1,
+          factAdded: dailyFactCounts[i],
+          cumFact: cumFact,
+          cumPlan: cumPlan,
+          delta: dayDelta,
+          isAhead: dayDelta >= 0,
+          isFuture: (i + 1) > currentDayIndex
+        });
+      }
+
+      // 4. Метрики плана и факта
+      const expectedPlanToDate = Math.round(currentDayIndex * dailyTarget);
+      const factToDate = (currentDayIndex > 0 && currentDayIndex <= totalDays) ? pacingDays[currentDayIndex - 1].cumFact : cumFact;
+      const pacingPct = Math.round(currentDayIndex / totalDays * 100);
+      const factPct = target > 0 ? Math.round(factToDate / target * 100) : 0;
+      const deltaToDate = factToDate - expectedPlanToDate;
+      const isAheadToDate = deltaToDate >= 0;
+
+      // 5. Отрисовка верхних шкал
+      const planTitleScope = document.getElementById('planTitleScope');
+      if (planTitleScope) planTitleScope.innerText = channelLabel;
+
+      const dayIdxEl = document.getElementById('planDayIndex');
+      const daysTotalEl = document.getElementById('planDaysTotal');
+      if (dayIdxEl) dayIdxEl.innerText = currentDayIndex;
+      if (daysTotalEl) daysTotalEl.innerText = totalDays;
+
+      const planExpDisp = document.getElementById('planExpectedDisplay');
+      const planExpPct = document.getElementById('planExpectedPercent');
+      const planExpBar = document.getElementById('planExpectedBar');
+      if (planExpDisp) planExpDisp.innerText = expectedPlanToDate.toLocaleString('ru-RU') + ' заявок';
+      if (planExpPct) planExpPct.innerText = `(${pacingPct}% срока)`;
+      if (planExpBar) planExpBar.style.width = Math.min(100, Math.max(0, pacingPct)) + '%';
+
+      const factDisp = document.getElementById('planFactDisplay');
+      const factPctEl = document.getElementById('planFactPercent');
+      const factBar = document.getElementById('planFactBar');
+      const pacingBadge = document.getElementById('planPacingBadge');
+      const percentBadge = document.getElementById('planPercentBadge');
+
+      if (factDisp) factDisp.innerText = factToDate.toLocaleString('ru-RU') + ' заявок';
+      if (factPctEl) factPctEl.innerText = `(${factPct}%)`;
+      if (factBar) factBar.style.width = Math.min(100, Math.max(0, factPct)) + '%';
+
+      if (pacingBadge) {
+        if (isAheadToDate) {
+          const aheadPct = expectedPlanToDate > 0 ? Math.round(deltaToDate / expectedPlanToDate * 100) : 0;
+          pacingBadge.innerText = `🚀 Опережение: +${deltaToDate.toLocaleString('ru-RU')} заявок (+${aheadPct}%)`;
+          pacingBadge.className = 'px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200';
+        } else {
+          const lagPct = expectedPlanToDate > 0 ? Math.round(Math.abs(deltaToDate) / expectedPlanToDate * 100) : 0;
+          pacingBadge.innerText = `⚠️ Отставание: ${deltaToDate.toLocaleString('ru-RU')} заявок (-${lagPct}%)`;
+          pacingBadge.className = 'px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-amber-50 text-amber-800 border border-amber-200';
+        }
+      }
+
+      if (percentBadge) {
+        percentBadge.innerText = `${factPct}% выполнено`;
+        percentBadge.className = `px-2.5 py-0.5 text-xs font-bold rounded-full ${factPct >= 100 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-800'}`;
+      }
+
+      // 6. Отрисовка интерактивной сетки дней
+      const grid = document.getElementById('daysTimelineGrid');
+      if (grid) {
+        grid.innerHTML = '';
+        pacingDays.forEach(p => {
+          const isCurrent = (p.dayIndex === currentDayIndex);
+          let bgClass = 'bg-slate-200 text-slate-400';
+          if (!p.isFuture) {
+            bgClass = p.isAhead ? 'bg-emerald-500 hover:bg-emerald-600 text-white' : 'bg-amber-400 hover:bg-amber-500 text-amber-950';
+          }
+          if (isCurrent) {
+            bgClass += ' ring-2 ring-slate-900';
+          }
+
+          const col = document.createElement('div');
+          col.className = 'flex-1 min-w-[20px] max-w-[34px] flex flex-col items-center cursor-pointer group transition';
+          col.title = `День ${p.dayIndex}: Факт ${p.cumFact.toLocaleString('ru-RU')} / План ${p.cumPlan.toLocaleString('ru-RU')} (${p.delta >= 0 ? '+' : ''}${p.delta.toLocaleString('ru-RU')})`;
+          col.onmouseenter = () => {
+            const tip = document.getElementById('pacingTooltipInfo');
+            if (tip) {
+              const statusTxt = p.isFuture ? 'План' : (p.isAhead ? '🚀 Опережение +' + p.delta.toLocaleString('ru-RU') : '⚠️ Отставание ' + p.delta.toLocaleString('ru-RU'));
+              tip.innerHTML = `День ${p.dayIndex}: Факт <strong>${p.cumFact.toLocaleString('ru-RU')}</strong> vs План <strong>${p.cumPlan.toLocaleString('ru-RU')}</strong> (${statusTxt})`;
+            }
+          };
+          col.innerHTML = `
+            <div class="w-full h-6 rounded flex items-center justify-center text-[9px] font-black ${bgClass} transition group-hover:scale-105 shadow-2xs">
+              ${isCurrent ? '📍' : ''}
+            </div>
+            <span class="text-[9px] font-bold ${isCurrent ? 'text-slate-900 font-black' : 'text-slate-400'} mt-1">${p.dayIndex}</span>
+          `;
+          grid.appendChild(col);
+        });
+      }
+
+      // 7. Подписи Точка А и Точка Б, темп и прогноз
+      const pointADisp = document.getElementById('planPointADisplay');
+      const pointBDisp = document.getElementById('planTargetVal');
+      const remainingVal = document.getElementById('planRemainingVal');
+      const paceSpeed = document.getElementById('planPaceSpeed');
+      const forecastVal = document.getElementById('planForecastVal');
+
+      if (pointADisp) pointADisp.innerText = `0 (${startLabel})`;
+      if (pointBDisp) pointBDisp.innerText = `${target.toLocaleString('ru-RU')} заявок (${endLabel})`;
+
+      const remaining = target - factToDate;
       if (remainingVal) {
-        const remaining = target - fact;
         remainingVal.innerText = remaining > 0 ? (remaining.toLocaleString('ru-RU') + ' заявок') : '🎉 План перевыполнен!';
       }
 
-      // Обновляем плашку состава плана по 3 каналам внизу блока плана
+      const dailyRateFact = currentDayIndex > 0 ? Math.round(factToDate / currentDayIndex) : 0;
+      if (paceSpeed) paceSpeed.innerText = `${dailyRateFact.toLocaleString('ru-RU')}/день (план: ${Math.round(dailyTarget).toLocaleString('ru-RU')})`;
+
+      const projected = Math.round(dailyRateFact * totalDays);
+      if (forecastVal) forecastVal.innerText = `~${projected.toLocaleString('ru-RU')} заявок`;
+
+      // 8. Состав выполнения по 3 каналам
       const orgStat = document.getElementById('planOrgStatus');
       const infStat = document.getElementById('planInfStatus');
       const fanStat = document.getElementById('planFanStatus');
