@@ -1,786 +1,80 @@
 {
   "total": {
-    "leads": 36484,
-    "won": 1667,
-    "revenue": 282934601,
-    "cr": 4.6,
-    "avgCheck": 169727
+    "leads": 33685,
+    "won": 1588,
+    "revenue": 267947800,
+    "cr": 4.7,
+    "avgCheck": 168733
   },
   "janamen1": {
-    "leads": 32350,
-    "won": 1561,
-    "revenue": 263031800,
+    "leads": 33061,
+    "won": 1577,
+    "revenue": 265789800,
     "cr": 4.8,
-    "avgCheck": 168502
+    "avgCheck": 168541
   },
   "scopes": {
     "all": {
-      "leads": 36484,
-      "won": 1667,
-      "revenue": 282934601,
-      "cr": 4.6,
-      "avgCheck": 169727,
+      "leads": 33685,
+      "won": 1588,
+      "revenue": 267947800,
+      "cr": 4.7,
+      "avgCheck": 168733,
       "bySource": {
-        "Yuralend": {
-          "leads": 1197,
-          "won": 16,
-          "revenue": 2243000
+        "direct/none": {
+          "leads": 11285,
+          "won": 390,
+          "revenue": 65932800
         },
         "whatsapp": {
-          "leads": 17922,
-          "won": 1065,
-          "revenue": 178938000
-        },
-        "direct/none": {
-          "leads": 13059,
-          "won": 447,
-          "revenue": 77156601
-        },
-        "yuratiktok": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
-        },
-        "Nikita": {
-          "leads": 695,
-          "won": 13,
-          "revenue": 2359000
-        },
-        "Yuratiktok": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Roma2": {
-          "leads": 122,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Roma": {
-          "leads": 141,
-          "won": 1,
-          "revenue": 62000
-        },
-        "NikitaTikTok": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "ig": {
-          "leads": 288,
-          "won": 10,
-          "revenue": 1710000
-        },
-        "nikita": {
-          "leads": 7,
-          "won": 0,
-          "revenue": 0
-        },
-        "fb": {
-          "leads": 6,
-          "won": 1,
-          "revenue": 176000
-        },
-        "yuralend": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "janamenfun": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "janafit_telegram": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "tiktok": {
-          "leads": 222,
-          "won": 9,
-          "revenue": 1851000
-        },
-        "facebook": {
-          "leads": 2725,
-          "won": 104,
-          "revenue": 18263000
-        },
-        "roma2": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "fun1": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "an": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "endorphin": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "bloger": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "instagram": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "aizada_usenqyzy": {
-          "leads": 16,
-          "won": 0,
-          "revenue": 0
-        },
-        "zar1nka": {
-          "leads": 12,
-          "won": 0,
-          "revenue": 0
-        },
-        "claude_test": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "aselqyzdan": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "alua_toltayeva": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "kanatkyzyy___": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "gulnur_zhumagul": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "xamida_iles": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "armana_fitness_trainer": {
-          "leads": 5,
-          "won": 0,
-          "revenue": 0
-        },
-        "google": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "_zzhuldyzbaeva": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "elon.rasulovna": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
+          "leads": 18035,
+          "won": 1067,
+          "revenue": 179114000
         },
         "aitym": {
           "leads": 1,
           "won": 0,
           "revenue": 0
-        }
-      },
-      "byMedium": {
-        "04.04 статика2": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "04,04 JM4 статика": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "Айтым Берикович - органика": {
-          "leads": 18085,
-          "won": 1076,
-          "revenue": 181163000
-        },
-        "none": {
-          "leads": 13107,
-          "won": 447,
-          "revenue": 77067601
-        },
-        "paid": {
-          "leads": 36,
-          "won": 2,
-          "revenue": 475000
-        },
-        "JM yura 1 айтым видео 0966.1 &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads pohudenie7 10.03": {
-          "leads": 30,
-          "won": 1,
-          "revenue": 176000
-        },
-        "JM3 .womens 21 статика": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0966.1": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads retarget 05.12": {
-          "leads": 99,
-          "won": 1,
-          "revenue": 264000
-        },
-        "Leads wide best creo 25.04": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "10,04JM4 статика 4.26": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 0400 M 19.04": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "09.05 JM4 yuraforma видео аудиро &mdash; Копия &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "09.05 womens-yakut видео аудиро ugs &mdash; Копия": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads static1 M 28.04": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "07.05 JM3 womens-yakut статика &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.05 30 women yakut &mdash; Копия": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "fan": {
-          "leads": 90,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Instagram_Stories": {
-          "leads": 138,
-          "won": 1,
-          "revenue": 176000
-        },
-        "poxydeniya": {
-          "leads": 106,
-          "won": 2,
-          "revenue": 352000
-        },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "FB": {
-          "leads": 164,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Leads pohudenie5 11.03": {
-          "leads": 21,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide 24.02": {
-          "leads": 64,
-          "won": 1,
-          "revenue": 176000
-        },
-        "12,03 Indira_ vid 9": {
-          "leads": 84,
-          "won": 2,
-          "revenue": 124000
-        },
-        "Instagram_Feed": {
-          "leads": 51,
-          "won": 1,
-          "revenue": 62000
-        },
-        "JM yura 1 айтым видео  0961": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6186 23.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "TikTok": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide STC1 06.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut &mdash; Копия": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6185 23.05 &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.03 Indira vid 7": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6186 12.03": {
-          "leads": 21,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya4": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6184 10.03": {
-          "leads": 43,
-          "won": 0,
-          "revenue": 0
-        },
-        "Facebook_Mobile_Reels": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya2": {
-          "leads": 18,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Test - Leads pohudenie3 11.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads pohudenie4 11.03": {
-          "leads": 8,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads slav_vid 06.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Instagram_Reels": {
-          "leads": 47,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads pohudenie2 08.03": {
-          "leads": 19,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Facebook_Mobile_Feed": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide WD4692 28.02": {
-          "leads": 15,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Leads pohudenie1 08.03": {
-          "leads": 20,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya6": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya3": {
-          "leads": 7,
-          "won": 0,
-          "revenue": 0
-        },
-        "12,03 Indira_ vid 10": {
-          "leads": 30,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads 6183 11.03": {
-          "leads": 36,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Test - Leads pohudenie6 10.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6207 13.03": {
-          "leads": 14,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6185 10.03": {
-          "leads": 38,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Messages 4516 06.03": {
-          "leads": 35,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Poxydeniya5": {
-          "leads": 15,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide WD4516 22.12": {
-          "leads": 23,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya1": {
-          "leads": 18,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+pohudenie2+08.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads Ramadan 21.02": {
-          "leads": 40,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6205 13.03": {
-          "leads": 8,
-          "won": 1,
-          "revenue": 299000
-        },
-        "leads+6185+10.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Facebook_Stories": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+w+wide+wd4692+28.02": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Threads_Feed": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "poxydeniya1": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "social": {
-          "leads": 275,
-          "won": 9,
-          "revenue": 1411000
-        },
-        "Others": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+retarget+05.12": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 4692 15.03": {
-          "leads": 14,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads WD4502 15.03": {
-          "leads": 10,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+4692+15.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6677": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6673": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "stories": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6668": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "nikita": {
-          "leads": 2620,
-          "won": 100,
-          "revenue": 17369000
-        },
-        "qw": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "yura": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "{{campaign.name}}": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb2": {
-          "leads": 126,
-          "won": 7,
-          "revenue": 1487000
-        },
-        "Форма": {
-          "leads": 38,
-          "won": 0,
-          "revenue": 0
-        },
-        "instagram_stories": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.04 yurakv &mdash; Копия &mdash; Копия": {
-          "leads": 43,
-          "won": 2,
-          "revenue": 325000
-        },
-        "yurakv статика": {
-          "leads": 164,
-          "won": 1,
-          "revenue": 176000
-        },
-        "yurakv статика &mdash; Копия": {
-          "leads": 359,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.04 yurakv": {
-          "leads": 7,
-          "won": 1,
-          "revenue": 176000
-        },
-        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Форма &mdash; Копия": {
-          "leads": 18,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide WD8130 10.04": {
-          "leads": 12,
-          "won": 0,
-          "revenue": 0
-        },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test new land Leads WD2430 28.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "04.04 статика1": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb1": {
-          "leads": 51,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0961": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "instwoman": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "aojiruinst": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "target": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb3": {
-          "leads": 48,
-          "won": 0,
-          "revenue": 0
-        },
-        "alina": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "test": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 3960, 3963, WST8 M 11.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.04 yurakv &mdash; Копия": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Yura": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "yurakv статика — Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide 7319 30.04": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        }
-      }
-    },
-    "janamen1": {
-      "leads": 32350,
-      "won": 1561,
-      "revenue": 263031800,
-      "cr": 4.8,
-      "avgCheck": 168502,
-      "bySource": {
-        "whatsapp": {
-          "leads": 17922,
-          "won": 1065,
-          "revenue": 178938000
-        },
-        "direct/none": {
-          "leads": 10623,
-          "won": 377,
-          "revenue": 63464800
-        },
-        "Nikita": {
-          "leads": 139,
-          "won": 4,
-          "revenue": 766000
-        },
-        "nikita": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
         },
         "janamenfun": {
-          "leads": 3,
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "facebook": {
-          "leads": 2564,
-          "won": 96,
-          "revenue": 16686000
+        "Nikita": {
+          "leads": 53,
+          "won": 2,
+          "revenue": 528000
+        },
+        "tiktok": {
+          "leads": 341,
+          "won": 4,
+          "revenue": 563000
+        },
+        "instagram": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "endorphin": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Roma": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "Roma2": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
         },
         "ig": {
-          "leads": 277,
-          "won": 10,
-          "revenue": 1710000
+          "leads": 294,
+          "won": 14,
+          "revenue": 2414000
         },
         "Yuralend": {
           "leads": 681,
@@ -797,17 +91,12 @@
           "won": 1,
           "revenue": 176000
         },
-        "fun1": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "yuratiktok": {
+        "an": {
           "leads": 3,
           "won": 0,
           "revenue": 0
         },
-        "an": {
+        "yuratiktok": {
           "leads": 3,
           "won": 0,
           "revenue": 0
@@ -817,17 +106,22 @@
           "won": 0,
           "revenue": 0
         },
-        "endorphin": {
+        "facebook": {
+          "leads": 2907,
+          "won": 102,
+          "revenue": 17929000
+        },
+        "fun1": {
           "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "bloger": {
+        "google": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "instagram": {
+        "gulnur_zhumagul": {
           "leads": 2,
           "won": 0,
           "revenue": 0
@@ -842,6 +136,11 @@
           "won": 0,
           "revenue": 0
         },
+        "alua_toltayeva": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
         "claude_test": {
           "leads": 1,
           "won": 0,
@@ -852,23 +151,8 @@
           "won": 0,
           "revenue": 0
         },
-        "alua_toltayeva": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
         "kanatkyzyy___": {
           "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "gulnur_zhumagul": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "tiktok": {
-          "leads": 51,
           "won": 0,
           "revenue": 0
         },
@@ -882,11 +166,6 @@
           "won": 0,
           "revenue": 0
         },
-        "google": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
         "_zzhuldyzbaeva": {
           "leads": 2,
           "won": 0,
@@ -897,97 +176,62 @@
           "won": 0,
           "revenue": 0
         },
-        "Roma": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Roma2": {
+        "k.saidullayev": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "aitym": {
+        "aishka_karimova": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         }
       },
       "byMedium": {
-        "Айтым Берикович - органика": {
-          "leads": 18085,
-          "won": 1076,
-          "revenue": 181163000
-        },
         "none": {
-          "leads": 10521,
-          "won": 370,
-          "revenue": 61977800
+          "leads": 11187,
+          "won": 383,
+          "revenue": 64445800
+        },
+        "Айтым Берикович - органика": {
+          "leads": 18202,
+          "won": 1079,
+          "revenue": 181515000
         },
         "fan": {
-          "leads": 90,
-          "won": 2,
-          "revenue": 238000
-        },
-        "nikita": {
-          "leads": 2449,
-          "won": 90,
-          "revenue": 15339000
-        },
-        "social": {
-          "leads": 271,
-          "won": 9,
-          "revenue": 1411000
-        },
-        "mpb2": {
-          "leads": 126,
-          "won": 7,
-          "revenue": 1487000
-        },
-        "Форма": {
-          "leads": 38,
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "instagram_stories": {
+        "aojiruinst": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "target": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "social": {
+          "leads": 288,
+          "won": 13,
+          "revenue": 2115000
+        },
+        "04.04 статика1": {
           "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "12.04 yurakv &mdash; Копия &mdash; Копия": {
-          "leads": 43,
-          "won": 2,
-          "revenue": 325000
-        },
-        "yurakv статика": {
-          "leads": 164,
-          "won": 1,
-          "revenue": 176000
-        },
-        "yurakv статика &mdash; Копия": {
-          "leads": 359,
+        "Leads W wide 24.02": {
+          "leads": 3,
           "won": 0,
           "revenue": 0
-        },
-        "12.04 yurakv": {
-          "leads": 7,
-          "won": 1,
-          "revenue": 176000
-        },
-        "paid": {
-          "leads": 17,
-          "won": 2,
-          "revenue": 475000
         },
         "Leads retarget 05.12": {
           "leads": 11,
           "won": 1,
           "revenue": 264000
-        },
-        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
         },
         "Форма &mdash; Копия": {
           "leads": 18,
@@ -999,8 +243,13 @@
           "won": 0,
           "revenue": 0
         },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
-          "leads": 3,
+        "Форма": {
+          "leads": 38,
+          "won": 0,
+          "revenue": 0
+        },
+        "instagram_stories": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -1009,37 +258,47 @@
           "won": 0,
           "revenue": 0
         },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
-          "leads": 4,
+        "12.04 yurakv &mdash; Копия": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "Test new land Leads WD2430 28.05": {
+        "paid": {
+          "leads": 17,
+          "won": 2,
+          "revenue": 475000
+        },
+        "12.04 yurakv &mdash; Копия &mdash; Копия": {
+          "leads": 43,
+          "won": 2,
+          "revenue": 325000
+        },
+        "12.04 yurakv": {
+          "leads": 7,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика &mdash; Копия": {
+          "leads": 359,
+          "won": 0,
+          "revenue": 0
+        },
+        "yurakv статика": {
+          "leads": 164,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика — Копия": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "Leads W wide 24.02": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "04.04 статика1": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb1": {
-          "leads": 51,
-          "won": 0,
-          "revenue": 0
-        },
         "JM yura 1 айтым видео 0961": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads W wide 7319 30.04": {
           "leads": 1,
           "won": 0,
           "revenue": 0
@@ -1049,50 +308,40 @@
           "won": 0,
           "revenue": 0
         },
-        "instwoman": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "stories": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "aojiruinst": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "target": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "mpb3": {
-          "leads": 48,
-          "won": 0,
-          "revenue": 0
-        },
-        "alina": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "test": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
         "Leads 3960, 3963, WST8 M 11.05": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "12.04 yurakv &mdash; Копия": {
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
+          "leads": 4,
+          "won": 0,
+          "revenue": 0
+        },
+        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "Test new land Leads WD2430 28.05": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
           "leads": 2,
           "won": 0,
           "revenue": 0
+        },
+        "nikita": {
+          "leads": 3074,
+          "won": 99,
+          "revenue": 16969000
         },
         "Yura": {
           "leads": 1,
@@ -1104,71 +353,71 @@
           "won": 0,
           "revenue": 0
         },
-        "yurakv статика — Копия": {
+        "mpb1": {
+          "leads": 52,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb2": {
+          "leads": 127,
+          "won": 7,
+          "revenue": 1487000
+        },
+        "mpb3": {
+          "leads": 48,
+          "won": 0,
+          "revenue": 0
+        },
+        "test": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "Leads W wide 7319 30.04": {
+        "alina": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         }
       }
     },
-    "aytym_organika": {
-      "leads": 18100,
-      "won": 1077,
-      "revenue": 181342000,
-      "cr": 6.0,
-      "avgCheck": 168377,
+    "janamen1": {
+      "leads": 33061,
+      "won": 1577,
+      "revenue": 265789800,
+      "cr": 4.8,
+      "avgCheck": 168541,
       "bySource": {
+        "direct/none": {
+          "leads": 10665,
+          "won": 379,
+          "revenue": 63774800
+        },
         "whatsapp": {
-          "leads": 17922,
-          "won": 1065,
-          "revenue": 178938000
+          "leads": 18035,
+          "won": 1067,
+          "revenue": 179114000
         },
-        "yuratiktok": {
-          "leads": 5,
-          "won": 0,
-          "revenue": 0
-        },
-        "Yuralend": {
-          "leads": 37,
-          "won": 4,
-          "revenue": 614000
-        },
-        "Yuratiktok": {
+        "aitym": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "facebook": {
-          "leads": 102,
-          "won": 7,
-          "revenue": 1526000
-        },
-        "ig": {
+        "janamenfun": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
         "Nikita": {
-          "leads": 23,
-          "won": 1,
-          "revenue": 264000
-        },
-        "Roma": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
+          "leads": 53,
+          "won": 2,
+          "revenue": 528000
         },
         "tiktok": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
+          "leads": 341,
+          "won": 4,
+          "revenue": 563000
         },
-        "janamenfun": {
+        "instagram": {
           "leads": 1,
           "won": 0,
           "revenue": 0
@@ -1178,71 +427,70 @@
           "won": 0,
           "revenue": 0
         },
+        "Roma": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
         "Roma2": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "aitym": {
-          "leads": 1,
+        "ig": {
+          "leads": 294,
+          "won": 14,
+          "revenue": 2414000
+        },
+        "Yuralend": {
+          "leads": 681,
+          "won": 8,
+          "revenue": 1291000
+        },
+        "roma2": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
-        }
-      },
-      "byMedium": {
-        "Айтым Берикович - органика": {
-          "leads": 18085,
-          "won": 1076,
-          "revenue": 181163000
         },
-        "paid": {
+        "fb": {
           "leads": 5,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0966.1 &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0966.1": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео  0961": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "none": {
-          "leads": 3,
           "won": 1,
-          "revenue": 179000
+          "revenue": 176000
         },
-        "JM yura 1 айтым видео 0961": {
+        "an": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "yuratiktok": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "NikitaTikTok": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "fan": {
+        "facebook": {
+          "leads": 2903,
+          "won": 102,
+          "revenue": 17929000
+        },
+        "fun1": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "google": {
           "leads": 1,
           "won": 0,
           "revenue": 0
-        }
-      }
-    },
-    "influence": {
-      "leads": 231,
-      "won": 7,
-      "revenue": 1487000,
-      "cr": 3.0,
-      "avgCheck": 212429,
-      "bySource": {
-        "direct/none": {
-          "leads": 165,
-          "won": 7,
-          "revenue": 1487000
+        },
+        "gulnur_zhumagul": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
         },
         "aizada_usenqyzy": {
           "leads": 16,
@@ -1254,8 +502,8 @@
           "won": 0,
           "revenue": 0
         },
-        "facebook": {
-          "leads": 3,
+        "alua_toltayeva": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -1269,18 +517,8 @@
           "won": 0,
           "revenue": 0
         },
-        "alua_toltayeva": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
         "kanatkyzyy___": {
           "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "gulnur_zhumagul": {
-          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -1303,21 +541,201 @@
           "leads": 2,
           "won": 0,
           "revenue": 0
-        }
-      },
-      "byMedium": {
-        "mpb2": {
-          "leads": 126,
-          "won": 7,
-          "revenue": 1487000
         },
-        "mpb1": {
-          "leads": 51,
+        "k.saidullayev": {
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
+        "aishka_karimova": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        }
+      },
+      "byMedium": {
+        "none": {
+          "leads": 10563,
+          "won": 372,
+          "revenue": 62287800
+        },
+        "Айтым Берикович - органика": {
+          "leads": 18202,
+          "won": 1079,
+          "revenue": 181515000
+        },
+        "fan": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "aojiruinst": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "target": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "social": {
+          "leads": 288,
+          "won": 13,
+          "revenue": 2115000
+        },
+        "04.04 статика1": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads W wide 24.02": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads retarget 05.12": {
+          "leads": 11,
+          "won": 1,
+          "revenue": 264000
+        },
+        "Форма &mdash; Копия": {
+          "leads": 18,
+          "won": 0,
+          "revenue": 0
+        },
+        "04,04 JM4 статика": {
+          "leads": 5,
+          "won": 0,
+          "revenue": 0
+        },
+        "Форма": {
+          "leads": 38,
+          "won": 0,
+          "revenue": 0
+        },
+        "instagram_stories": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads W wide WD8130 10.04": {
+          "leads": 12,
+          "won": 0,
+          "revenue": 0
+        },
+        "12.04 yurakv &mdash; Копия": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "paid": {
+          "leads": 17,
+          "won": 2,
+          "revenue": 475000
+        },
+        "12.04 yurakv &mdash; Копия &mdash; Копия": {
+          "leads": 43,
+          "won": 2,
+          "revenue": 325000
+        },
+        "12.04 yurakv": {
+          "leads": 7,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика &mdash; Копия": {
+          "leads": 359,
+          "won": 0,
+          "revenue": 0
+        },
+        "yurakv статика": {
+          "leads": 164,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика — Копия": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "JM yura 1 айтым видео 0961": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads W wide 7319 30.04": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "TikTok": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads 3960, 3963, WST8 M 11.05": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
+          "leads": 4,
+          "won": 0,
+          "revenue": 0
+        },
+        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "Test new land Leads WD2430 28.05": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "nikita": {
+          "leads": 3074,
+          "won": 99,
+          "revenue": 16969000
+        },
+        "Yura": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "yura": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb1": {
+          "leads": 52,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb2": {
+          "leads": 127,
+          "won": 7,
+          "revenue": 1487000
+        },
         "mpb3": {
           "leads": 48,
+          "won": 0,
+          "revenue": 0
+        },
+        "test": {
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -1325,8 +743,200 @@
           "leads": 1,
           "won": 0,
           "revenue": 0
+        }
+      }
+    },
+    "aytym_organika": {
+      "leads": 18204,
+      "won": 1079,
+      "revenue": 181515000,
+      "cr": 5.9,
+      "avgCheck": 168225,
+      "bySource": {
+        "whatsapp": {
+          "leads": 18035,
+          "won": 1067,
+          "revenue": 179114000
+        },
+        "aitym": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "janamenfun": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Nikita": {
+          "leads": 23,
+          "won": 1,
+          "revenue": 264000
+        },
+        "tiktok": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "endorphin": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Roma": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "Roma2": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Yuralend": {
+          "leads": 32,
+          "won": 4,
+          "revenue": 614000
+        },
+        "yuratiktok": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "facebook": {
+          "leads": 103,
+          "won": 7,
+          "revenue": 1523000
+        },
+        "ig": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        }
+      },
+      "byMedium": {
+        "Айтым Берикович - органика": {
+          "leads": 18202,
+          "won": 1079,
+          "revenue": 181515000
+        },
+        "fan": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "JM yura 1 айтым видео 0961": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        }
+      }
+    },
+    "influence": {
+      "leads": 233,
+      "won": 7,
+      "revenue": 1487000,
+      "cr": 3.0,
+      "avgCheck": 212429,
+      "bySource": {
+        "direct/none": {
+          "leads": 165,
+          "won": 7,
+          "revenue": 1487000
+        },
+        "gulnur_zhumagul": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "aizada_usenqyzy": {
+          "leads": 16,
+          "won": 0,
+          "revenue": 0
+        },
+        "zar1nka": {
+          "leads": 12,
+          "won": 0,
+          "revenue": 0
+        },
+        "alua_toltayeva": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "claude_test": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "facebook": {
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "aselqyzdan": {
+          "leads": 11,
+          "won": 0,
+          "revenue": 0
+        },
+        "kanatkyzyy___": {
+          "leads": 9,
+          "won": 0,
+          "revenue": 0
+        },
+        "xamida_iles": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "armana_fitness_trainer": {
+          "leads": 5,
+          "won": 0,
+          "revenue": 0
+        },
+        "_zzhuldyzbaeva": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "elon.rasulovna": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "k.saidullayev": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "aishka_karimova": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        }
+      },
+      "byMedium": {
+        "mpb1": {
+          "leads": 52,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb2": {
+          "leads": 127,
+          "won": 7,
+          "revenue": 1487000
+        },
+        "mpb3": {
+          "leads": 48,
+          "won": 0,
+          "revenue": 0
         },
         "test": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "alina": {
           "leads": 1,
           "won": 0,
           "revenue": 0
@@ -1339,266 +949,86 @@
       }
     },
     "fan": {
-      "leads": 90,
-      "won": 2,
-      "revenue": 238000,
-      "cr": 2.2,
-      "avgCheck": 119000,
+      "leads": 1,
+      "won": 0,
+      "revenue": 0,
+      "cr": 0.0,
+      "avgCheck": 0,
       "bySource": {
-        "Nikita": {
-          "leads": 86,
-          "won": 2,
-          "revenue": 238000
-        },
-        "nikita": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
         "janamenfun": {
-          "leads": 3,
+          "leads": 1,
           "won": 0,
           "revenue": 0
         }
       },
       "byMedium": {
         "fan": {
-          "leads": 90,
-          "won": 2,
-          "revenue": 238000
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
         }
       }
     },
     "nikita": {
-      "leads": 3404,
-      "won": 117,
-      "revenue": 20664000,
-      "cr": 3.4,
-      "avgCheck": 176615,
+      "leads": 3202,
+      "won": 105,
+      "revenue": 18433000,
+      "cr": 3.3,
+      "avgCheck": 175552,
       "bySource": {
         "Nikita": {
-          "leads": 695,
-          "won": 13,
-          "revenue": 2359000
+          "leads": 53,
+          "won": 2,
+          "revenue": 528000
         },
         "NikitaTikTok": {
-          "leads": 4,
+          "leads": 1,
           "won": 0,
           "revenue": 0
-        },
-        "nikita": {
-          "leads": 7,
-          "won": 0,
-          "revenue": 0
-        },
-        "tiktok": {
-          "leads": 214,
-          "won": 9,
-          "revenue": 1851000
         },
         "facebook": {
-          "leads": 2484,
-          "won": 95,
-          "revenue": 16454000
+          "leads": 2811,
+          "won": 99,
+          "revenue": 17342000
+        },
+        "tiktok": {
+          "leads": 337,
+          "won": 4,
+          "revenue": 563000
         }
       },
       "byMedium": {
-        "Leads pohudenie7 10.03": {
-          "leads": 30,
-          "won": 1,
-          "revenue": 176000
+        "Айтым Берикович - органика": {
+          "leads": 72,
+          "won": 5,
+          "revenue": 1200000
         },
-        "Leads retarget 05.12": {
-          "leads": 99,
-          "won": 1,
-          "revenue": 264000
-        },
-        "Leads wide best creo 25.04": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 0400 M 19.04": {
+        "target": {
           "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads static1 M 28.04": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "fan": {
-          "leads": 87,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Leads pohudenie5 11.03": {
-          "leads": 21,
           "won": 0,
           "revenue": 0
         },
         "Leads W wide 24.02": {
-          "leads": 64,
+          "leads": 3,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads retarget 05.12": {
+          "leads": 11,
           "won": 1,
-          "revenue": 176000
-        },
-        "Leads WD6186 23.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "TikTok": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide STC1 06.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6185 23.05 &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6186 12.03": {
-          "leads": 21,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6184 10.03": {
-          "leads": 43,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads pohudenie3 11.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads pohudenie4 11.03": {
-          "leads": 8,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads slav_vid 06.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads pohudenie2 08.03": {
-          "leads": 19,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Leads W wide WD4692 28.02": {
-          "leads": 15,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Leads pohudenie1 08.03": {
-          "leads": 20,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads 6183 11.03": {
-          "leads": 36,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Test - Leads pohudenie6 10.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6207 13.03": {
-          "leads": 14,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 6185 10.03": {
-          "leads": 38,
-          "won": 1,
-          "revenue": 176000
-        },
-        "Messages 4516 06.03": {
-          "leads": 35,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Leads W wide WD4516 22.12": {
-          "leads": 23,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+pohudenie2+08.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads Ramadan 21.02": {
-          "leads": 40,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads WD6205 13.03": {
-          "leads": 8,
-          "won": 1,
-          "revenue": 299000
-        },
-        "leads+6185+10.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+w+wide+wd4692+28.02": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+retarget+05.12": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads 4692 15.03": {
-          "leads": 14,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test - Leads WD4502 15.03": {
-          "leads": 10,
-          "won": 0,
-          "revenue": 0
-        },
-        "leads+4692+15.03": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "nikita": {
-          "leads": 2620,
-          "won": 100,
-          "revenue": 17369000
-        },
-        "none": {
-          "leads": 29,
-          "won": 0,
-          "revenue": 0
+          "revenue": 264000
         },
         "Leads W wide WD8130 10.04": {
           "leads": 12,
           "won": 0,
           "revenue": 0
         },
-        "Test new land Leads WD2430 28.05": {
+        "Leads W wide 7319 30.04": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "target": {
+        "TikTok": {
           "leads": 1,
           "won": 0,
           "revenue": 0
@@ -1608,52 +1038,42 @@
           "won": 0,
           "revenue": 0
         },
-        "Leads W wide 7319 30.04": {
+        "Test new land Leads WD2430 28.05": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "Айтым Берикович - органика": {
-          "leads": 72,
-          "won": 5,
-          "revenue": 1200000
+        "nikita": {
+          "leads": 3074,
+          "won": 99,
+          "revenue": 16969000
+        },
+        "none": {
+          "leads": 25,
+          "won": 0,
+          "revenue": 0
         }
       }
     },
     "yura": {
-      "leads": 1399,
-      "won": 20,
-      "revenue": 3199000,
-      "cr": 1.4,
-      "avgCheck": 159950,
+      "leads": 757,
+      "won": 9,
+      "revenue": 1590000,
+      "cr": 1.2,
+      "avgCheck": 176667,
       "bySource": {
         "Yuralend": {
-          "leads": 1197,
-          "won": 16,
-          "revenue": 2243000
-        },
-        "yuratiktok": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
-        },
-        "Yuratiktok": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "yuralend": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "facebook": {
-          "leads": 174,
-          "won": 4,
-          "revenue": 956000
+          "leads": 681,
+          "won": 8,
+          "revenue": 1291000
         },
         "direct/none": {
           "leads": 11,
+          "won": 0,
+          "revenue": 0
+        },
+        "yuratiktok": {
+          "leads": 3,
           "won": 0,
           "revenue": 0
         },
@@ -1666,201 +1086,26 @@
           "leads": 1,
           "won": 0,
           "revenue": 0
+        },
+        "facebook": {
+          "leads": 60,
+          "won": 1,
+          "revenue": 299000
         }
       },
       "byMedium": {
-        "04.04 статика2": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
+        "Айтым Берикович - органика": {
+          "leads": 51,
+          "won": 5,
+          "revenue": 913000
         },
-        "04,04 JM4 статика": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "paid": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0966.1 &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM3 .womens 21 статика": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0966.1": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "10,04JM4 статика 4.26": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "09.05 JM4 yuraforma видео аудиро &mdash; Копия &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "09.05 womens-yakut видео аудиро ugs &mdash; Копия": {
+        "04.04 статика1": {
           "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "07.05 JM3 womens-yakut статика &mdash; Копия": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.05 30 women yakut &mdash; Копия": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "poxydeniya": {
-          "leads": 106,
-          "won": 2,
-          "revenue": 352000
-        },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "FB": {
-          "leads": 164,
-          "won": 2,
-          "revenue": 238000
-        },
-        "12,03 Indira_ vid 9": {
-          "leads": 84,
-          "won": 2,
-          "revenue": 124000
-        },
-        "JM yura 1 айтым видео  0961": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut &mdash; Копия": {
-          "leads": 3,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.03 Indira vid 7": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya4": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya2": {
-          "leads": 18,
-          "won": 2,
-          "revenue": 238000
-        },
-        "Poxydeniya6": {
-          "leads": 11,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya3": {
-          "leads": 7,
-          "won": 0,
-          "revenue": 0
-        },
-        "12,03 Indira_ vid 10": {
-          "leads": 30,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya5": {
-          "leads": 15,
-          "won": 0,
-          "revenue": 0
-        },
-        "Poxydeniya1": {
-          "leads": 18,
-          "won": 0,
-          "revenue": 0
-        },
-        "poxydeniya1": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6677": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6673": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "17.03 JMyura4 креатив 6668": {
-          "leads": 4,
           "won": 0,
           "revenue": 0
         },
         "none": {
-          "leads": 142,
-          "won": 3,
-          "revenue": 657000
-        },
-        "yura": {
-          "leads": 9,
-          "won": 0,
-          "revenue": 0
-        },
-        "{{campaign.name}}": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Форма": {
-          "leads": 38,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.04 yurakv &mdash; Копия &mdash; Копия": {
-          "leads": 43,
-          "won": 2,
-          "revenue": 325000
-        },
-        "yurakv статика": {
-          "leads": 164,
-          "won": 1,
-          "revenue": 176000
-        },
-        "yurakv статика &mdash; Копия": {
-          "leads": 359,
-          "won": 0,
-          "revenue": 0
-        },
-        "12.04 yurakv": {
-          "leads": 7,
-          "won": 1,
-          "revenue": 176000
-        },
-        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
-          "leads": 1,
+          "leads": 30,
           "won": 0,
           "revenue": 0
         },
@@ -1869,13 +1114,43 @@
           "won": 0,
           "revenue": 0
         },
-        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
-          "leads": 4,
+        "04,04 JM4 статика": {
+          "leads": 5,
           "won": 0,
           "revenue": 0
         },
-        "04.04 статика1": {
+        "Форма": {
+          "leads": 38,
+          "won": 0,
+          "revenue": 0
+        },
+        "12.04 yurakv &mdash; Копия": {
           "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "12.04 yurakv &mdash; Копия &mdash; Копия": {
+          "leads": 43,
+          "won": 2,
+          "revenue": 325000
+        },
+        "12.04 yurakv": {
+          "leads": 7,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика &mdash; Копия": {
+          "leads": 359,
+          "won": 0,
+          "revenue": 0
+        },
+        "yurakv статика": {
+          "leads": 164,
+          "won": 1,
+          "revenue": 176000
+        },
+        "yurakv статика — Копия": {
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -1884,17 +1159,27 @@
           "won": 0,
           "revenue": 0
         },
-        "mpb1": {
+        "paid": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme — Копия": {
+          "leads": 4,
+          "won": 0,
+          "revenue": 0
+        },
+        "17.05 30 women yakut &mdash; Копия &mdash; Копия": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "nikita": {
-          "leads": 13,
+        "23,05 статики от ГПТ https://janamenhealth.kz/yakut-forme": {
+          "leads": 3,
           "won": 0,
           "revenue": 0
         },
-        "12.04 yurakv &mdash; Копия": {
+        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
           "leads": 2,
           "won": 0,
           "revenue": 0
@@ -1904,42 +1189,47 @@
           "won": 0,
           "revenue": 0
         },
-        "mpb3": {
+        "yura": {
           "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "yurakv статика — Копия": {
+        "nikita": {
+          "leads": 18,
+          "won": 0,
+          "revenue": 0
+        },
+        "mpb1": {
           "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "Айтым Берикович - органика": {
-          "leads": 51,
-          "won": 5,
-          "revenue": 913000
+        "mpb3": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
         }
       }
     },
     "organika": {
-      "leads": 3863,
+      "leads": 3874,
       "won": 182,
       "revenue": 30071000,
       "cr": 4.7,
       "avgCheck": 165225,
       "bySource": {
         "direct/none": {
-          "leads": 3745,
+          "leads": 3756,
           "won": 182,
           "revenue": 30071000
         },
-        "Nikita": {
-          "leads": 10,
+        "Yuralend": {
+          "leads": 8,
           "won": 0,
           "revenue": 0
         },
-        "Yuralend": {
-          "leads": 8,
+        "Nikita": {
+          "leads": 10,
           "won": 0,
           "revenue": 0
         },
@@ -1948,13 +1238,18 @@
           "won": 0,
           "revenue": 0
         },
+        "NikitaTikTok": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
         "facebook": {
           "leads": 41,
           "won": 0,
           "revenue": 0
         },
-        "NikitaTikTok": {
-          "leads": 1,
+        "gulnur_zhumagul": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -1968,13 +1263,13 @@
           "won": 0,
           "revenue": 0
         },
-        "aselqyzdan": {
-          "leads": 11,
+        "alua_toltayeva": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
-        "alua_toltayeva": {
-          "leads": 2,
+        "aselqyzdan": {
+          "leads": 11,
           "won": 0,
           "revenue": 0
         },
@@ -1982,36 +1277,16 @@
           "leads": 9,
           "won": 0,
           "revenue": 0
-        },
-        "gulnur_zhumagul": {
-          "leads": 2,
-          "won": 0,
-          "revenue": 0
         }
       },
       "byMedium": {
         "none": {
-          "leads": 3666,
+          "leads": 3677,
           "won": 177,
           "revenue": 28942000
         },
-        "Leads retarget 05.12": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
-        },
-        "04,04 JM4 статика": {
+        "04.04 статика1": {
           "leads": 2,
-          "won": 0,
-          "revenue": 0
-        },
-        "Айтым Берикович - органика": {
-          "leads": 6,
-          "won": 0,
-          "revenue": 0
-        },
-        "Test new land Leads WD2430 28.05": {
-          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -2020,17 +1295,37 @@
           "won": 0,
           "revenue": 0
         },
-        "04.04 статика1": {
-          "leads": 2,
+        "Leads retarget 05.12": {
+          "leads": 4,
           "won": 0,
           "revenue": 0
         },
-        "nikita": {
+        "Айтым Берикович - органика": {
           "leads": 6,
           "won": 0,
           "revenue": 0
         },
-        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
+        "JM yura 1 айтым видео 0961": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads W wide 7319 30.04": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "TikTok": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "Leads 3960, 3963, WST8 M 11.05": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "04,04 JM4 статика": {
           "leads": 2,
           "won": 0,
           "revenue": 0
@@ -2040,18 +1335,28 @@
           "won": 0,
           "revenue": 0
         },
+        "Test new land Leads WD2430 28.05": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
+        "25,05 ГПТ https://janamenhealth.kz/womens-yakut": {
+          "leads": 2,
+          "won": 0,
+          "revenue": 0
+        },
+        "nikita": {
+          "leads": 6,
+          "won": 0,
+          "revenue": 0
+        },
+        "yura": {
+          "leads": 1,
+          "won": 0,
+          "revenue": 0
+        },
         "mpb1": {
           "leads": 43,
-          "won": 0,
-          "revenue": 0
-        },
-        "JM yura 1 айтым видео 0961": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "TikTok": {
-          "leads": 1,
           "won": 0,
           "revenue": 0
         },
@@ -2064,70 +1369,45 @@
           "leads": 38,
           "won": 0,
           "revenue": 0
-        },
-        "Leads 3960, 3963, WST8 M 11.05": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "yura": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
-        },
-        "Leads W wide 7319 30.04": {
-          "leads": 1,
-          "won": 0,
-          "revenue": 0
         }
       }
     },
     "tiktok": {
-      "leads": 240,
-      "won": 9,
-      "revenue": 1851000,
-      "cr": 3.8,
-      "avgCheck": 205667,
+      "leads": 345,
+      "won": 4,
+      "revenue": 563000,
+      "cr": 1.2,
+      "avgCheck": 140750,
       "bySource": {
-        "yuratiktok": {
-          "leads": 13,
-          "won": 0,
-          "revenue": 0
+        "tiktok": {
+          "leads": 341,
+          "won": 4,
+          "revenue": 563000
         },
-        "Yuratiktok": {
-          "leads": 1,
+        "yuratiktok": {
+          "leads": 3,
           "won": 0,
           "revenue": 0
         },
         "NikitaTikTok": {
-          "leads": 4,
+          "leads": 1,
           "won": 0,
           "revenue": 0
-        },
-        "tiktok": {
-          "leads": 222,
-          "won": 9,
-          "revenue": 1851000
         }
       },
       "byMedium": {
-        "paid": {
-          "leads": 13,
+        "Айтым Берикович - органика": {
+          "leads": 4,
           "won": 0,
           "revenue": 0
         },
         "TikTok": {
-          "leads": 4,
+          "leads": 1,
           "won": 0,
           "revenue": 0
         },
-        "nikita": {
-          "leads": 214,
-          "won": 9,
-          "revenue": 1851000
-        },
-        "qw": {
-          "leads": 4,
+        "paid": {
+          "leads": 2,
           "won": 0,
           "revenue": 0
         },
@@ -2136,10 +1416,10 @@
           "won": 0,
           "revenue": 0
         },
-        "Айтым Берикович - органика": {
-          "leads": 4,
-          "won": 0,
-          "revenue": 0
+        "nikita": {
+          "leads": 337,
+          "won": 4,
+          "revenue": 563000
         }
       }
     }
@@ -2149,17 +1429,17 @@
       "path": "/iwa-9828",
       "title": "Instagram WhatsApp (iwa-9828)",
       "desc": "Айтым Берикович (+7 708 377-98-28) — переписки и заявки",
-      "leads": 18085,
-      "won": 1076,
+      "leads": 18202,
+      "won": 1079,
       "cr": 5.9,
-      "revenue": 181163000,
-      "avgCheck": 168367
+      "revenue": 181515000,
+      "avgCheck": 168225
     },
     {
       "path": "/organika",
       "title": "Органика (Основная)",
       "desc": "Основная посадочная под органический трафик и посты",
-      "leads": 3692,
+      "leads": 3703,
       "won": 177,
       "cr": 4.8,
       "revenue": 28942000,
@@ -2169,37 +1449,37 @@
       "path": "/inst-men",
       "title": "Instagram Men",
       "desc": "Мужская аудитория из соцсетей",
-      "leads": 1538,
-      "won": 93,
-      "cr": 6.0,
-      "revenue": 15157000,
-      "avgCheck": 162978
+      "leads": 1552,
+      "won": 94,
+      "cr": 6.1,
+      "revenue": 15219000,
+      "avgCheck": 161904
     },
     {
       "path": "/kaspiform",
       "title": "Kaspi-форма",
       "desc": "Быстрый заказ через Kaspi Рассрочку / Red",
-      "leads": 2178,
-      "won": 75,
+      "leads": 2322,
+      "won": 78,
       "cr": 3.4,
-      "revenue": 12629000,
-      "avgCheck": 168387
+      "revenue": 13344000,
+      "avgCheck": 171077
     },
     {
       "path": "/inst-women",
       "title": "Instagram Women",
       "desc": "Женская аудитория из соцсетей",
-      "leads": 1587,
-      "won": 71,
+      "leads": 1604,
+      "won": 72,
       "cr": 4.5,
-      "revenue": 11931800,
-      "avgCheck": 168054
+      "revenue": 12179800,
+      "avgCheck": 169164
     },
     {
       "path": "/lidmagnit",
       "title": "Лид-магниты (все варианты /lidmagnit*)",
       "desc": "Бесплатные материалы, гайды и тесты с любыми приставками",
-      "leads": 3404,
+      "leads": 3400,
       "won": 21,
       "cr": 0.6,
       "revenue": 4108000,
@@ -2216,12 +1496,22 @@
       "avgCheck": 184500
     },
     {
+      "path": "/fun",
+      "title": "Квиз / Воронка (/fun)",
+      "desc": "Интерактивный опрос и подбор программы курса",
+      "leads": 296,
+      "won": 13,
+      "cr": 4.4,
+      "revenue": 2115000,
+      "avgCheck": 162692
+    },
+    {
       "path": "/inst-omega",
       "title": "Омега-3 Inst",
       "desc": "Посадочная под Омега-3 и добавки",
-      "leads": 181,
+      "leads": 182,
       "won": 9,
-      "cr": 5.0,
+      "cr": 4.9,
       "revenue": 1575000,
       "avgCheck": 175000
     },
@@ -2229,21 +1519,11 @@
       "path": "/influence",
       "title": "Инфлюенс / Блогеры (МПБ)",
       "desc": "Интеграции с блогерами через менеджеров (mpb1, mpb2, mpb3)",
-      "leads": 231,
+      "leads": 233,
       "won": 7,
       "cr": 3.0,
       "revenue": 1487000,
       "avgCheck": 212429
-    },
-    {
-      "path": "/fun",
-      "title": "Квиз / Воронка (/fun)",
-      "desc": "Интерактивный опрос и подбор программы курса",
-      "leads": 279,
-      "won": 9,
-      "cr": 3.2,
-      "revenue": 1411000,
-      "avgCheck": 156778
     },
     {
       "path": "/nikitaform",
@@ -2266,6 +1546,16 @@
       "avgCheck": 169250
     },
     {
+      "path": "/kaspiformsps",
+      "title": "Kaspi Спасибо",
+      "desc": "Страница благодарности после формы",
+      "leads": 339,
+      "won": 4,
+      "cr": 1.2,
+      "revenue": 563000,
+      "avgCheck": 140750
+    },
+    {
       "path": "/orlanforma",
       "title": "Орлан форма",
       "desc": "Специальная форма партнеров",
@@ -2276,24 +1566,24 @@
       "avgCheck": 237500
     },
     {
-      "path": "/lp/women",
-      "title": "lp/women",
-      "desc": "Посадочная страница /lp/women",
-      "leads": 53,
+      "path": "/kaspiform/women",
+      "title": "kaspiform/women",
+      "desc": "Посадочная страница /kaspiform/women",
+      "leads": 169,
       "won": 1,
-      "cr": 1.9,
+      "cr": 0.6,
       "revenue": 176000,
       "avgCheck": 176000
     },
     {
-      "path": "/forall",
-      "title": "forall",
-      "desc": "Посадочная страница /forall",
-      "leads": 33,
+      "path": "/kaspiform/men",
+      "title": "kaspiform/men",
+      "desc": "Посадочная страница /kaspiform/men",
+      "leads": 42,
       "won": 1,
-      "cr": 3.0,
-      "revenue": 62000,
-      "avgCheck": 62000
+      "cr": 2.4,
+      "revenue": 176000,
+      "avgCheck": 176000
     },
     {
       "path": "/aojiru-inst",
@@ -2306,60 +1596,10 @@
       "avgCheck": 0
     },
     {
-      "path": "/kaspiformsps",
-      "title": "Kaspi Спасибо",
-      "desc": "Страница благодарности после формы",
-      "leads": 49,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/kaspiform/women",
-      "title": "kaspiform/women",
-      "desc": "Посадочная страница /kaspiform/women",
-      "leads": 16,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
       "path": "/test1",
       "title": "test1",
       "desc": "Посадочная страница /test1",
       "leads": 6,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/kaspiform/men",
-      "title": "kaspiform/men",
-      "desc": "Посадочная страница /kaspiform/men",
-      "leads": 4,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/newmain",
-      "title": "newmain",
-      "desc": "Посадочная страница /newmain",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "path": "/lp/men",
-      "title": "lp/men",
-      "desc": "Посадочная страница /lp/men",
-      "leads": 1,
       "won": 0,
       "cr": 0.0,
       "revenue": 0,
@@ -2378,38 +1618,6 @@
   ],
   "monthly_all": [
     {
-      "month": "2024-12",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2025-08",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2025-10",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2026-01",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
       "month": "2026-02",
       "leads": 985,
       "won": 76,
@@ -2419,201 +1627,185 @@
     },
     {
       "month": "2026-03",
-      "leads": 6187,
-      "won": 118,
-      "cr": 1.9,
-      "revenue": 19301000,
-      "avgCheck": 163568
-    },
-    {
-      "month": "2026-04",
-      "leads": 3568,
-      "won": 97,
-      "cr": 2.7,
-      "revenue": 16817800,
-      "avgCheck": 173379
-    },
-    {
-      "month": "2026-05",
-      "leads": 2610,
-      "won": 146,
-      "cr": 5.6,
-      "revenue": 24120401,
-      "avgCheck": 165208
-    },
-    {
-      "month": "2026-06",
-      "leads": 3478,
-      "won": 168,
-      "cr": 4.8,
-      "revenue": 29154600,
-      "avgCheck": 173539
-    },
-    {
-      "month": "2026-07",
-      "leads": 3060,
-      "won": 270,
-      "cr": 8.8,
-      "revenue": 43492000,
-      "avgCheck": 161081
-    },
-    {
-      "month": "2026-08",
-      "leads": 3776,
-      "won": 246,
-      "cr": 6.5,
-      "revenue": 40198400,
-      "avgCheck": 163408
-    },
-    {
-      "month": "2026-09",
-      "leads": 2898,
-      "won": 145,
-      "cr": 5.0,
-      "revenue": 24849000,
-      "avgCheck": 171372
-    },
-    {
-      "month": "2026-10",
-      "leads": 4669,
-      "won": 183,
-      "cr": 3.9,
-      "revenue": 30797800,
-      "avgCheck": 168294
-    },
-    {
-      "month": "2026-11",
-      "leads": 5248,
-      "won": 218,
-      "cr": 4.2,
-      "revenue": 41377600,
-      "avgCheck": 189806
-    }
-  ],
-  "monthly_janamen1": [
-    {
-      "month": "2024-12",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2025-08",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2025-10",
-      "leads": 1,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2026-01",
-      "leads": 2,
-      "won": 0,
-      "cr": 0.0,
-      "revenue": 0,
-      "avgCheck": 0
-    },
-    {
-      "month": "2026-02",
-      "leads": 985,
-      "won": 76,
-      "cr": 7.7,
-      "revenue": 12826000,
-      "avgCheck": 168763
-    },
-    {
-      "month": "2026-03",
-      "leads": 4545,
-      "won": 94,
+      "leads": 4456,
+      "won": 92,
       "cr": 2.1,
-      "revenue": 15515000,
-      "avgCheck": 165053
+      "revenue": 15277000,
+      "avgCheck": 166054
     },
     {
       "month": "2026-04",
-      "leads": 3543,
-      "won": 97,
+      "leads": 3538,
+      "won": 95,
       "cr": 2.7,
-      "revenue": 16817800,
-      "avgCheck": 173379
+      "revenue": 16579800,
+      "avgCheck": 174524
     },
     {
       "month": "2026-05",
       "leads": 2580,
-      "won": 145,
-      "cr": 5.6,
-      "revenue": 24120400,
-      "avgCheck": 166348
+      "won": 147,
+      "cr": 5.7,
+      "revenue": 24358400,
+      "avgCheck": 165703
     },
     {
       "month": "2026-06",
-      "leads": 3469,
+      "leads": 3462,
       "won": 168,
-      "cr": 4.8,
+      "cr": 4.9,
       "revenue": 29154600,
       "avgCheck": 173539
     },
     {
       "month": "2026-07",
-      "leads": 3059,
-      "won": 270,
-      "cr": 8.8,
-      "revenue": 43492000,
-      "avgCheck": 161081
+      "leads": 3077,
+      "won": 269,
+      "cr": 8.7,
+      "revenue": 43430000,
+      "avgCheck": 161450
     },
     {
       "month": "2026-08",
-      "leads": 3676,
-      "won": 246,
-      "cr": 6.7,
-      "revenue": 40198400,
-      "avgCheck": 163408
+      "leads": 3686,
+      "won": 245,
+      "cr": 6.6,
+      "revenue": 40022400,
+      "avgCheck": 163357
     },
     {
       "month": "2026-09",
-      "leads": 2898,
-      "won": 145,
+      "leads": 2912,
+      "won": 147,
       "cr": 5.0,
-      "revenue": 24849000,
-      "avgCheck": 171372
+      "revenue": 25087000,
+      "avgCheck": 170660
     },
     {
       "month": "2026-10",
-      "leads": 4659,
-      "won": 183,
-      "cr": 3.9,
-      "revenue": 30797800,
-      "avgCheck": 168294
+      "leads": 4887,
+      "won": 181,
+      "cr": 3.7,
+      "revenue": 30269800,
+      "avgCheck": 167236
     },
     {
       "month": "2026-11",
-      "leads": 2931,
-      "won": 137,
-      "cr": 4.7,
-      "revenue": 25260800,
-      "avgCheck": 184385
+      "leads": 4102,
+      "won": 168,
+      "cr": 4.1,
+      "revenue": 30942800,
+      "avgCheck": 184183
+    }
+  ],
+  "monthly_janamen1": [
+    {
+      "month": "2026-02",
+      "leads": 985,
+      "won": 76,
+      "cr": 7.7,
+      "revenue": 12826000,
+      "avgCheck": 168763
+    },
+    {
+      "month": "2026-03",
+      "leads": 4456,
+      "won": 92,
+      "cr": 2.1,
+      "revenue": 15277000,
+      "avgCheck": 166054
+    },
+    {
+      "month": "2026-04",
+      "leads": 3526,
+      "won": 95,
+      "cr": 2.7,
+      "revenue": 16579800,
+      "avgCheck": 174524
+    },
+    {
+      "month": "2026-05",
+      "leads": 2580,
+      "won": 147,
+      "cr": 5.7,
+      "revenue": 24358400,
+      "avgCheck": 165703
+    },
+    {
+      "month": "2026-06",
+      "leads": 3462,
+      "won": 168,
+      "cr": 4.9,
+      "revenue": 29154600,
+      "avgCheck": 173539
+    },
+    {
+      "month": "2026-07",
+      "leads": 3066,
+      "won": 269,
+      "cr": 8.8,
+      "revenue": 43430000,
+      "avgCheck": 161450
+    },
+    {
+      "month": "2026-08",
+      "leads": 3684,
+      "won": 245,
+      "cr": 6.7,
+      "revenue": 40022400,
+      "avgCheck": 163357
+    },
+    {
+      "month": "2026-09",
+      "leads": 2894,
+      "won": 147,
+      "cr": 5.1,
+      "revenue": 25087000,
+      "avgCheck": 170660
+    },
+    {
+      "month": "2026-10",
+      "leads": 4628,
+      "won": 181,
+      "cr": 3.9,
+      "revenue": 30269800,
+      "avgCheck": 167236
+    },
+    {
+      "month": "2026-11",
+      "leads": 3780,
+      "won": 157,
+      "cr": 4.2,
+      "revenue": 28784800,
+      "avgCheck": 183343
     }
   ],
   "recent_deals_janamen1": [
     {
-      "id": 37978797,
-      "name": "Заявка от (Ivankyzy",
+      "id": 36889260,
+      "name": "ЗАЯВКА С САЙТА",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "02.02.2026 02:12",
+      "created_at": 1769980357,
+      "path": "/lidmagnit",
+      "source": "direct/none",
+      "medium": "none",
+      "campaign": "none",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36912474,
+      "name": "Заявка от (Aikera)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "15.04.2026 09:44",
-      "created_at": 1776228287,
+      "date": "03.02.2026 22:06",
+      "created_at": 1770138388,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -2622,30 +1814,382 @@
       "term": "none"
     },
     {
-      "id": 38168321,
-      "name": "Заявка с аузиро",
+      "id": 36919882,
+      "name": "Заявка от (АБК)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "26.04.2026 19:09",
-      "created_at": 1777212551,
-      "path": "/vitamins-inst",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
+      "date": "04.02.2026 14:01",
+      "created_at": 1770195710,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
     {
-      "id": 38390925,
+      "id": 36920206,
+      "name": "Заявка от (Liliya)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "04.02.2026 14:26",
+      "created_at": 1770197201,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36920746,
+      "name": "Заявка от (Владислав)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "04.02.2026 15:03",
+      "created_at": 1770199420,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36924458,
+      "name": "Заявка от (Айгерим)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "04.02.2026 19:41",
+      "created_at": 1770216116,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36925142,
+      "name": "Заявка от (Али строй)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "04.02.2026 20:51",
+      "created_at": 1770220301,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36925682,
+      "name": "Заявка от (Елена Егорова)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "04.02.2026 21:54",
+      "created_at": 1770224083,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36927356,
+      "name": "Заявка от (Индира)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "05.02.2026 01:06",
+      "created_at": 1770235568,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36928280,
+      "name": "Заявка от (Еркош)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "05.02.2026 07:21",
+      "created_at": 1770258101,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 36929558,
+      "name": "Заявка от (sabiramokaeva6)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "05.02.2026 10:42",
+      "created_at": 1770270177,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37023362,
+      "name": "Заявка от (Шухрат)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 12:28",
+      "created_at": 1770881295,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37025626,
+      "name": "Заявка от (А.)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:01",
+      "created_at": 1770890507,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37025762,
+      "name": "Заявка от (",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:12",
+      "created_at": 1770891132,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37025826,
+      "name": "20:00",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:17",
+      "created_at": 1770891466,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37025832,
+      "name": "Заявка от (…)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:18",
+      "created_at": 1770891483,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026044,
+      "name": "Заявка от (PDMBM)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:33",
+      "created_at": 1770892419,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026164,
+      "name": "Заявка от (Juraev 97)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:41",
+      "created_at": 1770892863,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026216,
+      "name": "Заявка от (Zhanna Olegovna)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 15:46",
+      "created_at": 1770893184,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026382,
+      "name": "Заявка от (Ersyn)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:00",
+      "created_at": 1770894042,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026390,
+      "name": "Заявка от (.)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:01",
+      "created_at": 1770894066,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026682,
+      "name": "Заявка от (User)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:15",
+      "created_at": 1770894939,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026684,
+      "name": "Заявка от (Saniya)",
+      "status_id": 83732202,
+      "status_name": "Принят в работу",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:15",
+      "created_at": 1770894946,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026838,
+      "name": "Заявка от (Asyl)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:27",
+      "created_at": 1770895634,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026860,
+      "name": "Заявка от (Марал)",
+      "status_id": 142,
+      "status_name": "Успешно реализовано",
+      "won": true,
+      "price": 176000,
+      "date": "12.02.2026 16:28",
+      "created_at": 1770895717,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37026908,
       "name": "Заявка от (❤️)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "11.05.2026 20:04",
-      "created_at": 1778511841,
+      "date": "12.02.2026 16:31",
+      "created_at": 1770895887,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -2654,62 +2198,190 @@
       "term": "none"
     },
     {
-      "id": 37508037,
-      "name": "ЗАЯВКА С",
+      "id": 37027048,
+      "name": "Заявка от (إلياس)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:44",
+      "created_at": 1770896643,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37027260,
+      "name": "Заявка от (anniideem)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 16:58",
+      "created_at": 1770897486,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37027498,
+      "name": "Заявка от (Алиш)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 17:09",
+      "created_at": 1770898183,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37027654,
+      "name": "Автосделка: Заявка от (Марал)",
+      "status_id": 142,
+      "status_name": "Успешно реализовано",
+      "won": true,
+      "price": 176000,
+      "date": "12.02.2026 17:16",
+      "created_at": 1770898579,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37027674,
+      "name": "Автосделка: Заявка от (Марал)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 176000,
+      "date": "12.02.2026 17:18",
+      "created_at": 1770898717,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37027930,
+      "name": "Заявка от (iM)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 17:33",
+      "created_at": 1770899621,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028056,
+      "name": "Заявка от (",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 17:40",
+      "created_at": 1770900012,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028150,
+      "name": "Заявка от (SSM)",
+      "status_id": 142,
+      "status_name": "Успешно реализовано",
+      "won": true,
+      "price": 176000,
+      "date": "12.02.2026 17:47",
+      "created_at": 1770900435,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028204,
+      "name": "Заявка от (Өмірбек)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 17:50",
+      "created_at": 1770900643,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028346,
+      "name": "Заявка от (T.S.)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 18:02",
+      "created_at": 1770901339,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028406,
+      "name": "Заявка от (Vagif)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 18:07",
+      "created_at": 1770901643,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37028732,
+      "name": "Заявка от (Nureke)",
       "status_id": 83732202,
       "status_name": "Принят в работу",
       "won": false,
       "price": 0,
-      "date": "16.03.2026 21:52",
-      "created_at": 1773679963,
-      "path": "/forall",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "2427, 2429, 2430, 2431, 2428",
-      "content": "2431",
-      "term": "120244027295020655"
-    },
-    {
-      "id": 37508069,
-      "name": "ЗАЯВКА С",
-      "status_id": 83732202,
-      "status_name": "Принят в работу",
-      "won": false,
-      "price": 0,
-      "date": "16.03.2026 21:56",
-      "created_at": 1773680175,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
-    },
-    {
-      "id": 37523701,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "17.03.2026 21:55",
-      "created_at": 1773766529,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37523719,
-      "name": "Заявка от (Гульжан)",
-      "status_id": 83732202,
-      "status_name": "Принят в работу",
-      "won": false,
-      "price": 0,
-      "date": "17.03.2026 21:57",
-      "created_at": 1773766636,
+      "date": "12.02.2026 18:31",
+      "created_at": 1770903064,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -2718,30 +2390,14 @@
       "term": "none"
     },
     {
-      "id": 37461035,
-      "name": "ЗАЯВКА С",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 16:08",
-      "created_at": 1773400099,
-      "path": "/forall",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "2427, 2429, 2430, 2431, 2428",
-      "content": "2431",
-      "term": "120244027295020655"
-    },
-    {
-      "id": 37746095,
-      "name": "Заявка от (Жашоо)",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "31.03.2026 17:20",
-      "created_at": 1774959625,
+      "id": 37028758,
+      "name": "Автосделка: Заявка от (SSM)",
+      "status_id": 142,
+      "status_name": "Успешно реализовано",
+      "won": true,
+      "price": 176000,
+      "date": "12.02.2026 18:33",
+      "created_at": 1770903215,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -2750,606 +2406,14 @@
       "term": "none"
     },
     {
-      "id": 37436033,
-      "name": "Заявка с Лид магнит Питание",
+      "id": 37028986,
+      "name": "Заявка от (Р. М. Ш.)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "12.03.2026 19:31",
-      "created_at": 1773325864,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436127,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:38",
-      "created_at": 1773326284,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436129,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:38",
-      "created_at": 1773326284,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436167,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:40",
-      "created_at": 1773326445,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436219,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:43",
-      "created_at": 1773326603,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436247,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:45",
-      "created_at": 1773326713,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436249,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 19:45",
-      "created_at": 1773326722,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436539,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 20:08",
-      "created_at": 1773328112,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436685,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 20:16",
-      "created_at": 1773328609,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436921,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 20:31",
-      "created_at": 1773329474,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37436969,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 20:35",
-      "created_at": 1773329735,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437011,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 20:40",
-      "created_at": 1773330000,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437363,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:05",
-      "created_at": 1773331529,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437499,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:14",
-      "created_at": 1773332098,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437507,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:15",
-      "created_at": 1773332112,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437651,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:27",
-      "created_at": 1773332871,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437765,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:36",
-      "created_at": 1773333404,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437785,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:37",
-      "created_at": 1773333447,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437809,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:40",
-      "created_at": 1773333625,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437857,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:45",
-      "created_at": 1773333904,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437931,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:54",
-      "created_at": 1773334450,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437939,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:55",
-      "created_at": 1773334509,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37437991,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 21:56",
-      "created_at": 1773334613,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438043,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:02",
-      "created_at": 1773334964,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438155,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:13",
-      "created_at": 1773335620,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438165,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:14",
-      "created_at": 1773335667,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438245,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:23",
-      "created_at": 1773336211,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438289,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:25",
-      "created_at": 1773336319,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438309,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:28",
-      "created_at": 1773336505,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438323,
-      "name": "ЗАЯВКА С",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:30",
-      "created_at": 1773336612,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
-    },
-    {
-      "id": 37438423,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 22:37",
-      "created_at": 1773337064,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37438843,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 23:15",
-      "created_at": 1773339320,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37442915,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 23:20",
-      "created_at": 1773339630,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450289,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 23:38",
-      "created_at": 1773340706,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450297,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "12.03.2026 23:39",
-      "created_at": 1773340766,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450595,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:22",
-      "created_at": 1773343350,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450655,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:33",
-      "created_at": 1773344025,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450671,
-      "name": "Заявка от (Olya)",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:37",
-      "created_at": 1773344240,
+      "date": "12.02.2026 18:50",
+      "created_at": 1770904221,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -3358,446 +2422,14 @@
       "term": "none"
     },
     {
-      "id": 37450691,
-      "name": "Заявка с Лид магнит Питание",
+      "id": 37029012,
+      "name": "Заявка от (Александр)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 00:40",
-      "created_at": 1773344415,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450693,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:40",
-      "created_at": 1773344428,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450709,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:41",
-      "created_at": 1773344508,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450725,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:44",
-      "created_at": 1773344650,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450737,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:46",
-      "created_at": 1773344760,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450761,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:50",
-      "created_at": 1773345036,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450795,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 00:58",
-      "created_at": 1773345524,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450811,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:01",
-      "created_at": 1773345711,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450849,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:09",
-      "created_at": 1773346174,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450873,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:12",
-      "created_at": 1773346373,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450891,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:17",
-      "created_at": 1773346626,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450919,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:22",
-      "created_at": 1773346956,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37450963,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 01:32",
-      "created_at": 1773347543,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451097,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 02:06",
-      "created_at": 1773349619,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451241,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 02:35",
-      "created_at": 1773351341,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451249,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 02:37",
-      "created_at": 1773351442,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451531,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 04:42",
-      "created_at": 1773358958,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451677,
-      "name": "ЗАЯВКА С",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 05:29",
-      "created_at": 1773361779,
-      "path": "/forall",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "2427, 2429, 2430, 2431, 2428",
-      "content": "2431",
-      "term": "120244027295020655"
-    },
-    {
-      "id": 37451753,
-      "name": "ЗАЯВКА С",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 05:53",
-      "created_at": 1773363196,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
-    },
-    {
-      "id": 37451901,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 06:42",
-      "created_at": 1773366127,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451965,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 06:56",
-      "created_at": 1773366963,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37451977,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 07:00",
-      "created_at": 1773367216,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452067,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 07:19",
-      "created_at": 1773368388,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452071,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 07:20",
-      "created_at": 1773368436,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452389,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 08:16",
-      "created_at": 1773371793,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452405,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 08:18",
-      "created_at": 1773371912,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452577,
-      "name": "Заявка с Лид магнит Питание",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 08:43",
-      "created_at": 1773373426,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "content": "none",
-      "term": "none"
-    },
-    {
-      "id": 37452615,
-      "name": "Заявка от (Нұргүл)",
-      "status_id": 143,
-      "status_name": "Закрыто и не реализовано",
-      "won": false,
-      "price": 0,
-      "date": "13.03.2026 08:48",
-      "created_at": 1773373695,
+      "date": "12.02.2026 18:52",
+      "created_at": 1770904339,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -3806,201 +2438,637 @@
       "term": "none"
     },
     {
-      "id": 37452747,
-      "name": "Заявка с Лид магнит Питание",
+      "id": 37029060,
+      "name": "Заявка от (~Saltanat)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 09:03",
-      "created_at": 1773374611,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
+      "date": "12.02.2026 18:55",
+      "created_at": 1770904521,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     },
     {
-      "id": 37452797,
-      "name": "ЗАЯВКА С",
+      "id": 37029094,
+      "name": "Заявка от (d~)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 09:08",
-      "created_at": 1773374916,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
+      "date": "12.02.2026 18:58",
+      "created_at": 1770904713,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
     },
     {
-      "id": 37452875,
-      "name": "ЗАЯВКА С",
+      "id": 37029120,
+      "name": "Заявка от (.)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 09:19",
-      "created_at": 1773375573,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
+      "date": "12.02.2026 19:01",
+      "created_at": 1770904885,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
     },
     {
-      "id": 37452881,
-      "name": "ЗАЯВКА С",
+      "id": 37029180,
+      "name": "Заявка от (Ерхат)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 09:19",
-      "created_at": 1773375588,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "content": "4516",
-      "term": "120244027124480655"
+      "date": "12.02.2026 19:06",
+      "created_at": 1770905201,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
     },
     {
-      "id": 37453267,
-      "name": "Заявка с Лид магнит Питание",
+      "id": 37029198,
+      "name": "Заявка от (Цветочек)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 19:08",
+      "created_at": 1770905311,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029208,
+      "name": "Заявка от (Назира)",
       "status_id": 143,
       "status_name": "Закрыто и не реализовано",
       "won": false,
       "price": 0,
-      "date": "13.03.2026 10:00",
-      "created_at": 1773378001,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
+      "date": "12.02.2026 19:10",
+      "created_at": 1770905415,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029514,
+      "name": "Заявка от (Shakhsanka",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 19:44",
+      "created_at": 1770907493,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029530,
+      "name": "Заявка от (Аида)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 19:48",
+      "created_at": 1770907723,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029638,
+      "name": "Заявка от (",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:01",
+      "created_at": 1770908489,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029830,
+      "name": "Заявка от (Temirlan)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:17",
+      "created_at": 1770909454,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029944,
+      "name": "Заявка от (.)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:28",
+      "created_at": 1770910083,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37029960,
+      "name": "Заявка от (Human)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:29",
+      "created_at": 1770910149,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030030,
+      "name": "Заявка от (Bayan)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:35",
+      "created_at": 1770910509,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030248,
+      "name": "Заявка от (",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 20:55",
+      "created_at": 1770911725,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030500,
+      "name": "Заявка от (KAZAK)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:15",
+      "created_at": 1770912956,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030518,
+      "name": "13\\02",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:18",
+      "created_at": 1770913099,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030544,
+      "name": "Заявка от (Kamshat)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:20",
+      "created_at": 1770913215,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030584,
+      "name": "Заявка от (Шохрух )",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:23",
+      "created_at": 1770913436,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030660,
+      "name": "Заявка от (°)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:30",
+      "created_at": 1770913822,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030784,
+      "name": "Заявка от (Gulzhan Kudaikulova)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:40",
+      "created_at": 1770914418,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37030982,
+      "name": "Заявка от (Хома)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:56",
+      "created_at": 1770915417,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37031022,
+      "name": "Заявка от (Khuanito)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 21:59",
+      "created_at": 1770915573,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37031228,
+      "name": "Заявка от (",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 22:17",
+      "created_at": 1770916645,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37031292,
+      "name": "Заявка от (Mira N)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 22:22",
+      "created_at": 1770916951,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37031496,
+      "name": "Заявка от (Даа)",
+      "status_id": 83732154,
+      "status_name": "Качественный лид",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 22:37",
+      "created_at": 1770917874,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37031888,
+      "name": "Заявка от (…)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 23:13",
+      "created_at": 1770920034,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032090,
+      "name": "20:00",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 23:35",
+      "created_at": 1770921344,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032320,
+      "name": "Заявка от (Айла Ашлянфуу)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "12.02.2026 23:56",
+      "created_at": 1770922605,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032512,
+      "name": "Заявка от (Merlan edikuly)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 00:14",
+      "created_at": 1770923697,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032536,
+      "name": "Заявка от (AraiKa)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 00:18",
+      "created_at": 1770923887,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032614,
+      "name": "Заявка от (Эльмира)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 00:24",
+      "created_at": 1770924279,
+      "path": "/iwa-9828",
+      "source": "aitym",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032732,
+      "name": "Заявка от (Ast__001)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 00:36",
+      "created_at": 1770925015,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032768,
+      "name": "Заявка от (Take)",
+      "status_id": 142,
+      "status_name": "Успешно реализовано",
+      "won": true,
+      "price": 176000,
+      "date": "13.02.2026 00:40",
+      "created_at": 1770925239,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37032770,
+      "name": "Заявка от (Амангельдиевна",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 00:40",
+      "created_at": 1770925246,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37033130,
+      "name": "Заявка от (Almira Sabit)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 01:28",
+      "created_at": 1770928104,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37033586,
+      "name": "Заявка от (.)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 02:31",
+      "created_at": 1770931871,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37033982,
+      "name": "Заявка от (Альф)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 04:36",
+      "created_at": 1770939377,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37034216,
+      "name": "Заявка от (",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 06:38",
+      "created_at": 1770946700,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "content": "none",
+      "term": "none"
+    },
+    {
+      "id": 37034306,
+      "name": "Заявка от (Номер)",
+      "status_id": 143,
+      "status_name": "Закрыто и не реализовано",
+      "won": false,
+      "price": 0,
+      "date": "13.02.2026 07:08",
+      "created_at": 1770948499,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
       "content": "none",
       "term": "none"
     }
   ],
   "recent_won_deals": [
     {
-      "id": 38604301,
-      "name": "Сделка #38604301",
-      "price": 1,
-      "date": "25.05.2026 18:53",
-      "created_at": 1779717227,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 37437137,
-      "name": "ЗАЯВКА С",
+      "id": 37026860,
+      "name": "Заявка от (Марал)",
       "price": 176000,
-      "date": "12.03.2026 20:50",
-      "created_at": 1773330610,
-      "path": "/yakut-form",
-      "source": "Yuralend",
-      "medium": "poxydeniya",
-      "campaign": "ad1",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37437303,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "12.03.2026 21:01",
-      "created_at": 1773331277,
-      "path": "/yakut-form2",
-      "source": "Yuralend",
-      "medium": "12,03 Indira_ vid 9",
-      "campaign": "ad9",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37437675,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "12.03.2026 21:28",
-      "created_at": 1773332927,
-      "path": "/yakut-form",
-      "source": "Yuralend",
-      "medium": "Poxydeniya2",
-      "campaign": "Poxydeniya2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37438091,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "12.03.2026 22:07",
-      "created_at": 1773335234,
-      "path": "/lp/men",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37453795,
-      "name": "ЗАЯВКА С 5-7 кг похудение",
-      "price": 62000,
-      "date": "13.03.2026 10:50",
-      "created_at": 1773381015,
-      "path": "/vitamincomplex",
-      "source": "Roma",
-      "medium": "Instagram_Feed",
-      "campaign": "Group2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37454385,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "13.03.2026 11:35",
-      "created_at": 1773383711,
-      "path": "/lp/men",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37464561,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "13.03.2026 20:32",
-      "created_at": 1773415923,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Leads pohudenie2 08.03",
-      "campaign": "Woman",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37465359,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "13.03.2026 21:38",
-      "created_at": 1773419890,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Leads 6185 10.03",
-      "campaign": "Woman",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37468099,
-      "name": "Заявка от (sayeraibragimova)",
-      "price": 176000,
-      "date": "14.03.2026 05:50",
-      "created_at": 1773449431,
+      "date": "12.02.2026 16:28",
+      "created_at": 1770895717,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -4008,203 +3076,11 @@
       "domain": "janamen1.kz"
     },
     {
-      "id": 37468477,
-      "name": "Заявка с Лид магнит Питание",
-      "price": 352000,
-      "date": "14.03.2026 07:26",
-      "created_at": 1773455217,
-      "path": "/lidmagnit",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "janamen1.kz"
-    },
-    {
-      "id": 37469075,
-      "name": "ЗАЯВКА С",
+      "id": 37027654,
+      "name": "Автосделка: Заявка от (Марал)",
       "price": 176000,
-      "date": "14.03.2026 08:58",
-      "created_at": 1773460728,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Messages 4516 06.03",
-      "campaign": "4516 - Copy 2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37471437,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "14.03.2026 12:50",
-      "created_at": 1773474645,
-      "path": "/yakut-form",
-      "source": "Yuralend",
-      "medium": "Poxydeniya2",
-      "campaign": "Poxydeniya2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37472579,
-      "name": "ЗАЯВКА С",
-      "price": 299000,
-      "date": "14.03.2026 14:26",
-      "created_at": 1773480408,
-      "path": "/lp/men",
-      "source": "Nikita",
-      "medium": "Leads WD6205 13.03",
-      "campaign": "wide - Copy 2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37478855,
-      "name": "ЗАЯВКА С",
-      "price": 299000,
-      "date": "14.03.2026 21:25",
-      "created_at": 1773505556,
-      "path": "/lp/men",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37482953,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "15.03.2026 05:02",
-      "created_at": 1773532964,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Leads W wide WD4692 28.02",
-      "campaign": "Wide",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37484767,
-      "name": "Заявка с 5-7 кг похудение",
-      "price": 176000,
-      "date": "15.03.2026 11:04",
-      "created_at": 1773554654,
-      "path": "/",
-      "source": "Roma2",
-      "medium": "Instagram_Stories",
-      "campaign": "Group1",
-      "domain": "other"
-    },
-    {
-      "id": 37487503,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "15.03.2026 15:34",
-      "created_at": 1773570872,
-      "path": "/forall",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "2427, 2429, 2430, 2431, 2428",
-      "domain": "janamen1.kz"
-    },
-    {
-      "id": 37491799,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "15.03.2026 22:22",
-      "created_at": 1773595368,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Test - Leads 6183 11.03",
-      "campaign": "Woman",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37495241,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "16.03.2026 08:03",
-      "created_at": 1773630213,
-      "path": "/yakut-form",
-      "source": "Yuralend",
-      "medium": "poxydeniya",
-      "campaign": "ad1",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37496817,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "16.03.2026 10:50",
-      "created_at": 1773640217,
-      "path": "/yakut-form2",
-      "source": "Yuralend",
-      "medium": "12,03 Indira_ vid 9",
-      "campaign": "ad9",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37504285,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "16.03.2026 17:01",
-      "created_at": 1773662465,
-      "path": "/lp/men",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37509097,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "16.03.2026 23:20",
-      "created_at": 1773685245,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "fan",
-      "campaign": "4516",
-      "domain": "janamen1.kz"
-    },
-    {
-      "id": 37512393,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "17.03.2026 09:17",
-      "created_at": 1773721066,
-      "path": "/yakut-form2",
-      "source": "Yuralend",
-      "medium": "FB",
-      "campaign": "Indiravid9",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37521851,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "17.03.2026 19:44",
-      "created_at": 1773758664,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Leads W wide 24.02",
-      "campaign": "Reels2",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37521891,
-      "name": "ЗАЯВКА С",
-      "price": 62000,
-      "date": "17.03.2026 19:47",
-      "created_at": 1773758846,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Messages 4516 06.03",
-      "campaign": "4516 - Copy",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37527859,
-      "name": "Заявка от (Marzhan)",
-      "price": 176000,
-      "date": "18.03.2026 09:50",
-      "created_at": 1773809441,
+      "date": "12.02.2026 17:16",
+      "created_at": 1770898579,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -4212,47 +3088,11 @@
       "domain": "janamen1.kz"
     },
     {
-      "id": 37531049,
-      "name": "ЗАЯВКА С",
+      "id": 37028150,
+      "name": "Заявка от (SSM)",
       "price": 176000,
-      "date": "18.03.2026 13:12",
-      "created_at": 1773821576,
-      "path": "/lp/women",
-      "source": "Nikita",
-      "medium": "Leads pohudenie7 10.03",
-      "campaign": "Woman",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 37536371,
-      "name": "Заявка от (Тлек)",
-      "price": 176000,
-      "date": "18.03.2026 16:35",
-      "created_at": 1773833732,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 37540559,
-      "name": "ЗАЯВКА С",
-      "price": 176000,
-      "date": "18.03.2026 18:12",
-      "created_at": 1773839564,
-      "path": "/yakut-form2",
-      "source": "Yuralend",
-      "medium": "FB",
-      "campaign": "Indiravid102",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41063599,
-      "name": "Заявка от (Medya)",
-      "price": 179000,
-      "date": "08.11.2026 17:15",
-      "created_at": 1794140111,
+      "date": "12.02.2026 17:47",
+      "created_at": 1770900435,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -4260,395 +3100,215 @@
       "domain": "janamen1.kz"
     },
     {
-      "id": 41063585,
-      "name": "Facebook №1666420525175970",
-      "price": 179000,
-      "date": "08.11.2026 17:13",
-      "created_at": 1794140035,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37028758,
+      "name": "Автосделка: Заявка от (SSM)",
+      "price": 176000,
+      "date": "12.02.2026 18:33",
+      "created_at": 1770903215,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41063287,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 16:46",
-      "created_at": 1794138403,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
+      "id": 37032768,
+      "name": "Заявка от (Take)",
+      "price": 176000,
+      "date": "13.02.2026 00:40",
+      "created_at": 1770925239,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062811,
-      "name": "Сделка #41062811",
-      "price": 179000,
-      "date": "08.11.2026 16:00",
-      "created_at": 1794135636,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37034860,
+      "name": "Заявка от (Amir.)",
+      "price": 176000,
+      "date": "13.02.2026 08:31",
+      "created_at": 1770953518,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062765,
-      "name": "Сделка #41062765",
-      "price": 179000,
-      "date": "08.11.2026 15:56",
-      "created_at": 1794135375,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37036030,
+      "name": "Заявка от (Nenashev Vitaliy)",
+      "price": 176000,
+      "date": "13.02.2026 10:30",
+      "created_at": 1770960640,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062735,
-      "name": "Facebook №28922537654070600",
-      "price": 299000,
-      "date": "08.11.2026 15:53",
-      "created_at": 1794135223,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37036256,
+      "name": "Автосделка: Заявка от (Nenashev Vit",
+      "price": 176000,
+      "date": "13.02.2026 10:51",
+      "created_at": 1770961873,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062655,
-      "name": "Facebook №1146245857853425",
-      "price": 179000,
-      "date": "08.11.2026 15:48",
-      "created_at": 1794134925,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37036366,
+      "name": "Заявка от (Айгуль Турсуновна)",
+      "price": 264000,
+      "date": "13.02.2026 11:01",
+      "created_at": 1770962466,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062623,
-      "name": "FB реклама - 04.11 каспи жума",
-      "price": 204000,
-      "date": "08.11.2026 15:46",
-      "created_at": 1794134796,
-      "path": "/",
-      "source": "facebook",
-      "medium": "none",
-      "campaign": "04.11 каспи жума",
-      "domain": "other"
+      "id": 37037550,
+      "name": "Автосделка: Заявка от (Take)",
+      "price": 176000,
+      "date": "13.02.2026 12:23",
+      "created_at": 1770967421,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062507,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 15:34",
-      "created_at": 1794134082,
-      "path": "/lp/men",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
+      "id": 37038962,
+      "name": "Автосделка: Заявка от (Айгуль Турсу",
+      "price": 264000,
+      "date": "13.02.2026 13:50",
+      "created_at": 1770972634,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062485,
-      "name": "Сделка #41062485",
-      "price": 179000,
-      "date": "08.11.2026 15:31",
-      "created_at": 1794133903,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37040834,
+      "name": "Заявка от (Nurdaulet Yerezhep)",
+      "price": 62000,
+      "date": "13.02.2026 15:38",
+      "created_at": 1770979129,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062437,
-      "name": "Facebook №1663023968698439",
-      "price": 179000,
-      "date": "08.11.2026 15:26",
-      "created_at": 1794133607,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37044358,
+      "name": "Заявка от (.)",
+      "price": 176000,
+      "date": "13.02.2026 19:45",
+      "created_at": 1770993941,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062413,
-      "name": "Сделка #41062413",
-      "price": 179000,
-      "date": "08.11.2026 15:23",
-      "created_at": 1794133421,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37044498,
+      "name": "Заявка от (Зинаш)",
+      "price": 176000,
+      "date": "13.02.2026 19:58",
+      "created_at": 1770994692,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062333,
-      "name": "Лид из Instagram: @talegen12345",
-      "price": 299000,
-      "date": "08.11.2026 15:22",
-      "created_at": 1794133346,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37044762,
+      "name": "Автосделка: Заявка от (.)",
+      "price": 176000,
+      "date": "13.02.2026 20:17",
+      "created_at": 1770995831,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062331,
-      "name": "Сделка #41062331",
-      "price": 171000,
-      "date": "08.11.2026 15:22",
-      "created_at": 1794133328,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37045170,
+      "name": "Автосделка: Заявка от (Зинаш)",
+      "price": 176000,
+      "date": "13.02.2026 20:54",
+      "created_at": 1770998049,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062327,
-      "name": "Facebook №2531179914035552",
-      "price": 179000,
-      "date": "08.11.2026 15:21",
-      "created_at": 1794133300,
-      "path": "/",
-      "source": "facebook",
-      "medium": "none",
-      "campaign": "Janamen yura 2",
-      "domain": "other"
+      "id": 37049184,
+      "name": "Заявка от (Станислав)",
+      "price": 176000,
+      "date": "14.02.2026 07:31",
+      "created_at": 1771036308,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062321,
-      "name": "FB реклама - 23,08 до после",
-      "price": 179000,
-      "date": "08.11.2026 15:20",
-      "created_at": 1794133242,
-      "path": "/",
-      "source": "facebook",
-      "medium": "none",
-      "campaign": "23,08 до после",
-      "domain": "other"
+      "id": 37051062,
+      "name": "Автосделка: Заявка от (Станислав)",
+      "price": 176000,
+      "date": "14.02.2026 11:14",
+      "created_at": 1771049655,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062269,
-      "name": "FB реклама - facebook",
-      "price": 179000,
-      "date": "08.11.2026 15:14",
-      "created_at": 1794132887,
-      "path": "/",
-      "source": "facebook",
-      "medium": "none",
-      "campaign": "facebook",
-      "domain": "other"
+      "id": 37052388,
+      "name": "Заявка от (Doscar Автосолон Менедже",
+      "price": 176000,
+      "date": "14.02.2026 12:41",
+      "created_at": 1771054898,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062203,
-      "name": "Facebook №2671824529914896",
-      "price": 179000,
-      "date": "08.11.2026 15:09",
-      "created_at": 1794132580,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37053764,
+      "name": "Заявка от (Nursultan Ilyassov)",
+      "price": 176000,
+      "date": "14.02.2026 14:29",
+      "created_at": 1771061371,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41062175,
-      "name": "Facebook №2258065154738613",
-      "price": 299000,
-      "date": "08.11.2026 15:06",
-      "created_at": 1794132410,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41062047,
-      "name": "Facebook №1647123430486827",
-      "price": 179000,
-      "date": "08.11.2026 14:54",
-      "created_at": 1794131684,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41062015,
-      "name": "Facebook №1821158945795682",
+      "id": 37054432,
+      "name": "Заявка от (叶总)",
       "price": 112000,
-      "date": "08.11.2026 14:51",
-      "created_at": 1794131503,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061997,
-      "name": "Facebook №1860158195131554",
-      "price": 179000,
-      "date": "08.11.2026 14:50",
-      "created_at": 1794131439,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061843,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 14:36",
-      "created_at": 1794130574,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41061819,
-      "name": "Сделка #41061819",
-      "price": 204000,
-      "date": "08.11.2026 14:34",
-      "created_at": 1794130443,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061801,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 14:32",
-      "created_at": 1794130372,
-      "path": "/lp/men",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41061741,
-      "name": "Facebook №1819738129178632",
-      "price": 299000,
-      "date": "08.11.2026 14:27",
-      "created_at": 1794130057,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061731,
-      "name": "Facebook №1599972194649589",
-      "price": 179000,
-      "date": "08.11.2026 14:26",
-      "created_at": 1794129999,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061527,
-      "name": "Заявка от (Евгений Зиновьев)",
-      "price": 179000,
-      "date": "08.11.2026 14:07",
-      "created_at": 1794128832,
-      "path": "/",
-      "source": "facebook",
-      "medium": "none",
-      "campaign": "JM Yura 3",
-      "domain": "other"
-    },
-    {
-      "id": 41061475,
-      "name": "Facebook №1460141672746125",
-      "price": 299000,
-      "date": "08.11.2026 14:02",
-      "created_at": 1794128557,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061413,
-      "name": "Facebook №1602455285015668",
-      "price": 299000,
-      "date": "08.11.2026 13:57",
-      "created_at": 1794128252,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061335,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 13:48",
-      "created_at": 1794127720,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41061195,
-      "name": "ЗАЯВКА С",
-      "price": 299000,
-      "date": "08.11.2026 13:34",
-      "created_at": 1794126877,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41061129,
-      "name": "Facebook №2265720450641717",
-      "price": 299000,
-      "date": "08.11.2026 13:29",
-      "created_at": 1794126569,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41061101,
-      "name": "Автосделка: Заявка от (Akbota Kassy",
-      "price": 204000,
-      "date": "08.11.2026 13:27",
-      "created_at": 1794126423,
+      "date": "14.02.2026 15:15",
+      "created_at": 1771064149,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -4656,131 +3316,191 @@
       "domain": "janamen1.kz"
     },
     {
-      "id": 41061083,
-      "name": "Сделка #41061083",
-      "price": 100800,
-      "date": "08.11.2026 13:25",
-      "created_at": 1794126342,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37055364,
+      "name": "Автосделка: Заявка от (Nursultan Il",
+      "price": 176000,
+      "date": "14.02.2026 16:31",
+      "created_at": 1771068676,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41061057,
-      "name": "Facebook №1727987892312228",
-      "price": 179000,
-      "date": "08.11.2026 13:23",
-      "created_at": 1794126213,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
+      "id": 37056684,
+      "name": "Автосделка: Заявка от (Doscar Автос",
+      "price": 176000,
+      "date": "14.02.2026 18:28",
+      "created_at": 1771075732,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     },
     {
-      "id": 41060993,
-      "name": "Заявка с",
+      "id": 37061498,
+      "name": "Заявка от (Imam)",
+      "price": 248000,
+      "date": "15.02.2026 02:18",
+      "created_at": 1771103921,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37063292,
+      "name": "Заявка от (Айдын )",
+      "price": 264000,
+      "date": "15.02.2026 11:33",
+      "created_at": 1771137219,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37063484,
+      "name": "Автосделка: Заявка от (Айдын )",
+      "price": 264000,
+      "date": "15.02.2026 11:57",
+      "created_at": 1771138673,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37063898,
+      "name": "Заявка от (Dimas)",
+      "price": 176000,
+      "date": "15.02.2026 12:23",
+      "created_at": 1771140220,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37064102,
+      "name": "Ермурат Сагит",
+      "price": 112000,
+      "date": "15.02.2026 12:42",
+      "created_at": 1771141337,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37064594,
+      "name": "Автосделка: Ермурат Сагит",
+      "price": 112000,
+      "date": "15.02.2026 13:40",
+      "created_at": 1771144845,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37064658,
+      "name": "Заявка от (Yelzhan)",
+      "price": 176000,
+      "date": "15.02.2026 13:47",
+      "created_at": 1771145222,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37067034,
+      "name": "Автосделка: Заявка от (Yelzhan)",
+      "price": 176000,
+      "date": "15.02.2026 18:08",
+      "created_at": 1771160925,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37067078,
+      "name": "Заявка от (Wollees)",
+      "price": 248000,
+      "date": "15.02.2026 18:15",
+      "created_at": 1771161343,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37069194,
+      "name": "Автосделка: Заявка от (Imam)",
+      "price": 248000,
+      "date": "15.02.2026 20:59",
+      "created_at": 1771171186,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37069314,
+      "name": "Автосделка: Заявка от (Wollees)",
+      "price": 248000,
+      "date": "15.02.2026 21:12",
+      "created_at": 1771171936,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37075900,
+      "name": "Заявка от (Барыс)",
+      "price": 176000,
+      "date": "16.02.2026 12:22",
+      "created_at": 1771226566,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37077256,
+      "name": "Автосделка: Заявка от (Барыс)",
+      "price": 176000,
+      "date": "16.02.2026 13:55",
+      "created_at": 1771232120,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37083126,
+      "name": "Заявка от (",
       "price": 72000,
-      "date": "08.11.2026 13:18",
-      "created_at": 1794125907,
-      "path": "/kaspiform",
-      "source": "facebook",
-      "medium": "nikita",
-      "campaign": "Leads 5442 / kaspiform",
-      "domain": "janamen1.kz"
-    },
-    {
-      "id": 41060919,
-      "name": "Сделка #41060919",
-      "price": 179000,
-      "date": "08.11.2026 13:13",
-      "created_at": 1794125612,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060825,
-      "name": "Сделка #41060825",
-      "price": 179000,
-      "date": "08.11.2026 13:05",
-      "created_at": 1794125155,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060815,
-      "name": "Сделка #41060815",
-      "price": 299000,
-      "date": "08.11.2026 13:05",
-      "created_at": 1794125105,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060767,
-      "name": "Автосделка: 17.06",
-      "price": 179000,
-      "date": "08.11.2026 13:01",
-      "created_at": 1794124865,
-      "path": "/lp/women",
-      "source": "facebook",
-      "medium": "nikita",
-      "campaign": "Leads W wide STC1 15.06",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41060665,
-      "name": "Facebook №1474558737971252",
-      "price": 179000,
-      "date": "08.11.2026 12:51",
-      "created_at": 1794124286,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060561,
-      "name": "Facebook №1453109919480444",
-      "price": 179000,
-      "date": "08.11.2026 12:43",
-      "created_at": 1794123817,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060539,
-      "name": "Сделка #41060539",
-      "price": 179000,
-      "date": "08.11.2026 12:42",
-      "created_at": 1794123759,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060501,
-      "name": "Заявка от (Akbota Kassymova)",
-      "price": 204000,
-      "date": "08.11.2026 12:39",
-      "created_at": 1794123579,
+      "date": "16.02.2026 20:13",
+      "created_at": 1771254792,
       "path": "/iwa-9828",
       "source": "whatsapp",
       "medium": "Айтым Берикович - органика",
@@ -4788,71 +3508,527 @@
       "domain": "janamen1.kz"
     },
     {
-      "id": 41060423,
-      "name": "Facebook №1658356662664247",
-      "price": 179000,
-      "date": "08.11.2026 12:31",
-      "created_at": 1794123093,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060361,
-      "name": "Facebook №2039940966690480",
-      "price": 179000,
-      "date": "08.11.2026 12:26",
-      "created_at": 1794122787,
-      "path": "/",
-      "source": "direct/none",
-      "medium": "none",
-      "campaign": "none",
-      "domain": "other"
-    },
-    {
-      "id": 41060147,
-      "name": "ЗАЯВКА С",
-      "price": 179000,
-      "date": "08.11.2026 12:07",
-      "created_at": 1794121671,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
-    },
-    {
-      "id": 41060027,
-      "name": "Заявка с",
-      "price": 179000,
-      "date": "08.11.2026 11:57",
-      "created_at": 1794121023,
-      "path": "/kaspiform",
-      "source": "facebook",
-      "medium": "nikita",
-      "campaign": "Leads 5442 / kaspiform",
+      "id": 37084211,
+      "name": "Автосделка: Заявка от (",
+      "price": 72000,
+      "date": "16.02.2026 21:49",
+      "created_at": 1771260582,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
       "domain": "janamen1.kz"
     },
     {
-      "id": 41059983,
-      "name": "ЗАЯВКА С",
+      "id": 37089831,
+      "name": "Заявка от (ИП Қазына)",
+      "price": 0,
+      "date": "17.02.2026 11:59",
+      "created_at": 1771311599,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37097919,
+      "name": "Заявка от (Альбина)",
       "price": 299000,
-      "date": "08.11.2026 11:53",
-      "created_at": 1794120786,
-      "path": "/lp/women",
-      "source": "tiktok",
-      "medium": "nikita",
-      "campaign": "Leads M",
-      "domain": "janamenhealth.kz"
+      "date": "17.02.2026 21:04",
+      "created_at": 1771344294,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37098229,
+      "name": "Автосделка: Заявка от (ИП Қазына)",
+      "price": 299000,
+      "date": "17.02.2026 21:35",
+      "created_at": 1771346156,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37102675,
+      "name": "Автосделка: Заявка от (Альбина)",
+      "price": 299000,
+      "date": "18.02.2026 10:35",
+      "created_at": 1771392940,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37104265,
+      "name": "Заявка от (Мадина)",
+      "price": 176000,
+      "date": "18.02.2026 12:46",
+      "created_at": 1771400792,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37104501,
+      "name": "Автосделка: Заявка от (Мадина)",
+      "price": 176000,
+      "date": "18.02.2026 13:02",
+      "created_at": 1771401770,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37113949,
+      "name": "Заявка от (Бека Сейдали)",
+      "price": 112000,
+      "date": "19.02.2026 07:42",
+      "created_at": 1771468973,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37119687,
+      "name": "Заявка от (E)",
+      "price": 176000,
+      "date": "19.02.2026 16:59",
+      "created_at": 1771502390,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37121205,
+      "name": "Заявка от (Diamond)",
+      "price": 176000,
+      "date": "19.02.2026 19:35",
+      "created_at": 1771511727,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37125241,
+      "name": "Автосделка: Заявка от (Diamond)",
+      "price": 176000,
+      "date": "20.02.2026 08:26",
+      "created_at": 1771558007,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37126773,
+      "name": "Заявка от (Ayashop)",
+      "price": 176000,
+      "date": "20.02.2026 11:07",
+      "created_at": 1771567671,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37127559,
+      "name": "Заявка от (Anara)",
+      "price": 72000,
+      "date": "20.02.2026 12:15",
+      "created_at": 1771571750,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37128299,
+      "name": "Заявка от (Marzhan)",
+      "price": 62000,
+      "date": "20.02.2026 13:03",
+      "created_at": 1771574621,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37128483,
+      "name": "Автосделка: Заявка от (Anara)",
+      "price": 72000,
+      "date": "20.02.2026 13:17",
+      "created_at": 1771575431,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37128895,
+      "name": "Заявка от (Rustam)",
+      "price": 176000,
+      "date": "20.02.2026 13:46",
+      "created_at": 1771577197,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37132225,
+      "name": "Заявка от (BoshkeN)",
+      "price": 176000,
+      "date": "20.02.2026 17:19",
+      "created_at": 1771589966,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37132673,
+      "name": "Заявка от (Shyngys Ashirbay)",
+      "price": 176000,
+      "date": "20.02.2026 17:59",
+      "created_at": 1771592370,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37134601,
+      "name": "Автосделка: Заявка от (Shyngys Ashi",
+      "price": 176000,
+      "date": "20.02.2026 20:41",
+      "created_at": 1771602117,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37134675,
+      "name": "Автосделка: Заявка от (Marzhan)",
+      "price": 62000,
+      "date": "20.02.2026 20:55",
+      "created_at": 1771602922,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37140945,
+      "name": "Заявка от (Чат GPT)",
+      "price": 176000,
+      "date": "21.02.2026 11:25",
+      "created_at": 1771655103,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37141477,
+      "name": "Автосделка: Заявка от (Чат GPT)",
+      "price": 176000,
+      "date": "21.02.2026 12:18",
+      "created_at": 1771658295,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37150765,
+      "name": "Заявка от (Дургалов Омар Бинолыевич",
+      "price": 62000,
+      "date": "22.02.2026 11:34",
+      "created_at": 1771742057,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37152509,
+      "name": "Заявка от (",
+      "price": 62000,
+      "date": "22.02.2026 14:27",
+      "created_at": 1771752452,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37152929,
+      "name": "Автосделка: Заявка от (",
+      "price": 62000,
+      "date": "22.02.2026 15:16",
+      "created_at": 1771755391,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37153743,
+      "name": "Заявка от (Bakha)",
+      "price": 299000,
+      "date": "22.02.2026 17:03",
+      "created_at": 1771761819,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37160157,
+      "name": "Заявка от (Aru)",
+      "price": 112000,
+      "date": "23.02.2026 10:37",
+      "created_at": 1771825054,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37160255,
+      "name": "Заявка от (Елнур Дюсенович)",
+      "price": 176000,
+      "date": "23.02.2026 10:54",
+      "created_at": 1771826061,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37165533,
+      "name": "Автосделка: Заявка от (Айгуль)",
+      "price": 176000,
+      "date": "23.02.2026 19:13",
+      "created_at": 1771856004,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37192145,
+      "name": "Автосделка: Заявка от (Алмат)",
+      "price": 176000,
+      "date": "25.02.2026 19:06",
+      "created_at": 1772028373,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37201055,
+      "name": "Автосделка: Заявка от (Aset01)",
+      "price": 62000,
+      "date": "26.02.2026 11:14",
+      "created_at": 1772086478,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37201059,
+      "name": "Автосделка: Заявка от (А)",
+      "price": 176000,
+      "date": "26.02.2026 11:14",
+      "created_at": 1772086478,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37201063,
+      "name": "Автосделка: Заявка от (АБЫЛАЙХАН)",
+      "price": 62000,
+      "date": "26.02.2026 11:14",
+      "created_at": 1772086478,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37203401,
+      "name": "Автосделка: Заявка от (NN)",
+      "price": 264000,
+      "date": "26.02.2026 12:24",
+      "created_at": 1772090693,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37205397,
+      "name": "Автосделка: Заявка от (BR)",
+      "price": 176000,
+      "date": "26.02.2026 13:22",
+      "created_at": 1772094173,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37206247,
+      "name": "Автосделка: Заявка от (Ainura)",
+      "price": 112000,
+      "date": "26.02.2026 13:58",
+      "created_at": 1772096335,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37241875,
+      "name": "Автосделка: Заявка от (Aldiyar)",
+      "price": 176000,
+      "date": "27.02.2026 19:53",
+      "created_at": 1772203987,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37251589,
+      "name": "Автосделка: Заявка от (aldiyaker)",
+      "price": 299000,
+      "date": "28.02.2026 17:37",
+      "created_at": 1772282222,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37253667,
+      "name": "Автосделка: Заявка от (Ерсин)",
+      "price": 171000,
+      "date": "28.02.2026 21:53",
+      "created_at": 1772297587,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37259985,
+      "name": "Заявка от (Saya)",
+      "price": 176000,
+      "date": "01.03.2026 12:54",
+      "created_at": 1772351681,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37262877,
+      "name": "Автосделка: Заявка от (Saya)",
+      "price": 176000,
+      "date": "01.03.2026 14:52",
+      "created_at": 1772358735,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37263811,
+      "name": "Заявка от (S.E.)",
+      "price": 176000,
+      "date": "01.03.2026 15:51",
+      "created_at": 1772362266,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
+    },
+    {
+      "id": 37334069,
+      "name": "Заявка от (Диана",
+      "price": 176000,
+      "date": "05.03.2026 11:15",
+      "created_at": 1772691356,
+      "path": "/iwa-9828",
+      "source": "whatsapp",
+      "medium": "Айтым Берикович - органика",
+      "campaign": "iwa_9828",
+      "domain": "janamen1.kz"
     }
   ],
   "meta": {
-    "generated_at": "2026-11-11T13:02:04.447906",
-    "total_analyzed_leads": 36484,
-    "total_tagged_leads": 23586,
-    "janamen1_leads_count": 32350,
-    "combinations_count": 339
+    "generated_at": "2026-11-13T16:17:38.171467",
+    "total_analyzed_leads": 33685,
+    "total_tagged_leads": 22561,
+    "janamen1_leads_count": 33061,
+    "combinations_count": 352
   }
 }

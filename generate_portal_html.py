@@ -4497,7 +4497,10 @@ html_template = r'''<!DOCTYPE html>
         if (creo) params.set('utm_content', creo);
       }
 
-      const fullUrl = `${baseUrl}?${params.toString()}`;
+      // Ссылка идёт через трекер /go: он записывает клик, добавляет сквозной номер jm_cid
+      // и сразу перенаправляет на страницу. Номер доходит до AmoCRM в адресе страницы — без правок в Tilda.
+      const directUrl = `${baseUrl}?${params.toString()}`;
+      const fullUrl = `https://janamen-utm.vercel.app/go?to=${encodeURIComponent(directUrl)}`;
       const resText = document.getElementById('lmResultUrl');
       if (resText) resText.value = fullUrl;
     }

@@ -8,26 +8,34 @@ export default async function handler(req, res) {
   try {
     const q = req.query || {};
     
-    // Блогер / Креатив
-    const blogger = (q.b || q.blogger || q.utm_content || q.cnt || '').trim();
-    // Менеджер / Канал
-    const medium = (q.m || q.med || q.utm_medium || 'influence').trim();
-    // Площадка / Источник
-    const source = (q.s || q.src || q.utm_source || 'instagram').trim();
-    // Кампания
-    const campaign = (q.c || q.cmp || q.utm_campaign || (blogger ? 'blogger_' + blogger : 'influence')).trim();
-    const term = (q.t || q.trm || q.utm_term || '').trim();
-
-    // Целевая страница
+    // Целевая страница: ?to=<полный адрес> (ссылки лид-магнитов) или ?p=/путь на janamen1.kz
     let target = q.to || q.url || '';
     if (!target) {
       const pagePath = q.p || q.page || '/organika';
       const cleanPath = pagePath.startsWith('/') ? pagePath : '/' + pagePath;
       target = `https://janamen1.kz${cleanPath}`;
     }
+    let urlObj = new URL(target, 'https://janamen1.kz');
+    // Перенаправляем только на свои сайты — иначе ссылку можно использовать для фишинга
+    if (!/(^|\.)janamen(1|health)?\.kz$/i.test(urlObj.hostname)) urlObj = new URL('https://janamen1.kz/organika');
+    const has = (k) => (urlObj.searchParams.get(k) || '').trim();
+
+    // UTM: явный параметр короткой ссылки > уже есть в адресе ?to= > значение по умолчанию
+    const pick = (keys, fromUrl, def) => {
+      for (const k of keys) if (q[k] && String(q[k]).trim()) return String(q[k]).trim();
+      return has(fromUrl) || def;
+    };
+    // Блогер / Креатив
+    const blogger = pick(['b', 'blogger', 'utm_content', 'cnt'], 'utm_content', '');
+    // Менеджер / Канал
+    const medium = pick(['m', 'med', 'utm_medium'], 'utm_medium', 'influence');
+    // Площадка / Источник
+    const source = pick(['s', 'src', 'utm_source'], 'utm_source', 'instagram');
+    // Кампания
+    const campaign = pick(['c', 'cmp', 'utm_campaign'], 'utm_campaign', blogger ? 'blogger_' + blogger : 'influence');
+    const term = pick(['t', 'trm', 'utm_term'], 'utm_term', '');
 
     // Собираем итоговый URL с сохранением UTM для сайта и AmoCRM
-    const urlObj = new URL(target, 'https://janamen1.kz');
     if (source) urlObj.searchParams.set('utm_source', source);
     if (medium) urlObj.searchParams.set('utm_medium', medium);
     if (campaign) urlObj.searchParams.set('utm_campaign', campaign);

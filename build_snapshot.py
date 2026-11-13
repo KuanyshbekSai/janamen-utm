@@ -59,25 +59,25 @@ def load_from_supabase():
     # Всё, что изменится после старта выгрузки, портал догрузит сам
     SNAPSHOT_SYNCED_AT = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     cols = 'id,name,created_at,status_id,price,referrer,utm_source,utm_medium,utm_campaign,utm_content,utm_term,tags'
-    rows, offset = [], 0
+    # Постранично по возрастанию id (keyset): глубокий offset на 100+ тыс. строк Supabase не выдерживает
+    rows, last_id = [], 0
     while True:
         req = urllib.request.Request(
-            f'{SUPABASE_URL}/rest/v1/deals?select={cols}&created_at=gte.{SNAPSHOT_SINCE}&order=id',
-            headers={'apikey': SUPABASE_PUBLIC_KEY, 'Authorization': f'Bearer {SUPABASE_PUBLIC_KEY}',
-                     'Range': f'{offset}-{offset + 999}'})
-        for attempt in range(3):
+            f'{SUPABASE_URL}/rest/v1/deals?select={cols}&created_at=gte.{SNAPSHOT_SINCE}&id=gt.{last_id}&order=id&limit=1000',
+            headers={'apikey': SUPABASE_PUBLIC_KEY, 'Authorization': f'Bearer {SUPABASE_PUBLIC_KEY}'})
+        for attempt in range(4):
             try:
-                with urllib.request.urlopen(req, timeout=60) as resp:
+                with urllib.request.urlopen(req, timeout=90) as resp:
                     page = json.load(resp)
                 break
             except Exception:
-                if attempt == 2:
+                if attempt == 3:
                     raise
-                time.sleep(2)
+                time.sleep(3 * (attempt + 1))
         rows += page
         if len(page) < 1000:
             break
-        offset += 1000
+        last_id = page[-1]['id']
     organic = [r for r in rows if is_organic(r)]
     print(f'Supabase: {len(rows)} сделок с {SNAPSHOT_SINCE}, органических {len(organic)} (снимок на {SNAPSHOT_SYNCED_AT})')
     return [supabase_row_to_amo(r) for r in organic]
