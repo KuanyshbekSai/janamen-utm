@@ -4,6 +4,8 @@
 //   ?hours=2        — окно в часах (по умолчанию 2, максимум 24*31)
 //   ?from=<unix>    — начало окна как unix-время (вместо hours), для догрузки по частям
 //   ?created_from=<unix>[&created_to=<unix>] — догрузка по дате СОЗДАНИЯ (для заполнения пробелов в истории)
+//   ?auto=1         — продолжить с места, где остановился прошлый автозапуск (курсор хранится в app_settings).
+//                     Так вызывает расписание: один короткий вызов, никакого состояния на стороне вызывающего.
 // Вызывается по расписанию из Google Apps Script и кнопкой «Синхронизировать» в портале.
 import { createClient } from '@supabase/supabase-js';
 import { attribute } from './_lib/attribution.js';
@@ -14,7 +16,9 @@ const AMOCRM_TOKEN = process.env.AMOCRM_TOKEN;
 const AMO_BASE = 'https://janamen.amocrm.ru/api/v4';
 
 const PAGE_SIZE = 250;            // максимум AmoCRM за один запрос
-const TIME_BUDGET_MS = 8000;      // запас под ограничение времени функции Vercel
+const TIME_BUDGET_MS = 25000;     // ~2000 сделок за вызов; функция ограничена 60 с (vercel.json)
+const CURSOR_KEY = 'sync_cursor';
+const CURSOR_OVERLAP_SEC = 300;   // перекрытие, чтобы не потерять сделки на границе окна
 const DEFAULT_HOURS = 2;
 const MAX_HOURS = 24 * 31;
 
@@ -148,9 +152,19 @@ export default async function handler(req, res) {
   const byCreated = req.query.created_from && /^\d+$/.test(String(req.query.created_from));
   const createdTo = req.query.created_to && /^\d+$/.test(String(req.query.created_to)) ? Number(req.query.created_to) : null;
 
-  // Начало окна: ?from=<unix> или ?hours=N
+  // Автозапуск: берём курсор, сохранённый прошлым вызовом
+  const auto = String(req.query.auto || '') === '1' && !byCreated;
+  let storedCursor = null;
+  if (auto) {
+    const { data } = await supabase.from('app_settings').select('value').eq('key', CURSOR_KEY).maybeSingle();
+    storedCursor = Number(data?.value?.from) || null;
+  }
+
+  // Начало окна: ?auto=1, ?from=<unix> или ?hours=N
   let fromSec;
-  if (byCreated) {
+  if (auto) {
+    fromSec = storedCursor ? Math.max(storedCursor - CURSOR_OVERLAP_SEC, nowSec - MAX_HOURS * 3600) : nowSec - 3600;
+  } else if (byCreated) {
     fromSec = Number(req.query.created_from);
   } else if (req.query.from && /^\d+$/.test(String(req.query.from))) {
     fromSec = Math.max(Number(req.query.from), nowSec - MAX_HOURS * 3600);
@@ -191,6 +205,14 @@ export default async function handler(req, res) {
       }
 
       if (leads.length < PAGE_SIZE || !amoData._links?.next) { complete = true; break; }
+    }
+
+    if (auto) {
+      // Всё догнали — следующий запуск начнёт с момента старта этого; иначе — с последней обработанной сделки
+      const next = complete ? nowSec : lastUpdatedAt;
+      await supabase.from('app_settings').upsert(
+        { key: CURSOR_KEY, value: { from: next, at: new Date().toISOString(), synced, complete }, updated_at: new Date().toISOString() },
+        { onConflict: 'key' });
     }
 
     return res.status(200).json({

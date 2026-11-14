@@ -10,5 +10,10 @@
       "source": "/r/:b",
       "destination": "/api/go?b=:b"
     }
-  ]
+  ],
+  "functions": {
+    "api/sync.js": {
+      "maxDuration": 60
+    }
+  }
 }
